@@ -18,9 +18,9 @@ akceptacja_wlasciciela: false
 
 ## Checklisty jakości
 
-- [ ] Zadania mają etykiety runnera, wykonawcy, typu i statusu
-- [ ] Zadania z migracją mają `db:migracja`
-- [ ] Zadania mają rozłączne zakresy plików albo jawną zależność
+- [x] Zadania mają etykiety runnera, wykonawcy, typu i statusu
+- [x] Zadania z migracją mają `db:migracja` (brak zadań z migracją: projekt bez bazy)
+- [x] Zadania mają rozłączne zakresy plików albo jawną zależność
 
 ## Checkpoint
 
