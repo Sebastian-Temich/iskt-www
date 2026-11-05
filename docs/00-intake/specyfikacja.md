@@ -63,16 +63,30 @@ Priorytety: musi, powinno, może. Kryteria odnoszą się do designu w `docs/02-d
 
 Jako odwiedzający chcę otworzyć każdą stronę zaprojektowaną w designie, aby poznać firmę i jej ofertę.
 
-- Given materiały designu w `docs/02-design/zrodla/`, when architekt spisuje listę stron, then każda
-  strona z designu ma w `architektura.md` swój adres URL i jest osiągalna z nawigacji albo z linku na
-  innej stronie.
+- Given lista stron v1 (niżej), when architekt opisuje routing, then każda strona ma w
+  `architektura.md` swój adres URL i jest osiągalna z nawigacji albo z linku na innej stronie.
 - Given dowolna strona z listy, when odwiedzający otwiera jej URL, then serwer zwraca 200, a treść
   (nagłówki, teksty, obrazy, przyciski) odpowiada designowi tej strony bez treści zastępczych
   („lorem ipsum”, „TODO”).
-- Given strona z listy, when porównuję ją ze zrzutem designu w szerokości desktop, then układ sekcji,
-  ich kolejność i hierarchia nagłówków są zgodne ze zrzutem.
+- Given strona z listy, when porównuję ją z jej plikiem HTML z designu otwartym w szerokości 1440 px,
+  then układ sekcji, ich kolejność, treść i hierarchia nagłówków są zgodne z designem.
 
-Lista stron jest otwartym pytaniem P1 i zostanie domknięta z materiałów przed architekturą.
+Lista stron v1 (decyzja właściciela z 2026-11-05 w `docs/decyzje.md`; adresy z `sitemap.xml` designu),
+pliki w `docs/02-design/zrodla/Strona firmowa ISKT/`:
+
+| Strona | URL | Plik designu |
+|---|---|---|
+| Strona główna | `/` | `ISKT-standalone.dc.html` |
+| Projekty B+R | `/uslugi/projekty-br/` | `Projekty-BR.dc.html` |
+| ESG | `/uslugi/esg/` | `ESG.dc.html` |
+| AI-transformacja | `/uslugi/ai-transformacja/` | `AI-Transformacja.dc.html` |
+| Oprogramowanie | `/uslugi/oprogramowanie/` | `Oprogramowanie.dc.html` |
+| Interim | `/uslugi/interim/` | `Interim.dc.html` |
+| Startupy | `/startupy/` | `Startupy.dc.html` |
+
+Poza v1: warianty strony głównej (`ISKT Greennovation.html`, `ISKT One Pager.dc.html`,
+`Wariant-A/B/C-*.dc.html`) oraz `Projekty-BR-Ekspercki.dc.html` i `Projekty-BR-Kwalifikator.dc.html`;
+służą najwyżej jako pomocnicze źródło stylu, nie treści.
 
 ### W-02: Wspólny layout i nawigacja (musi)
 
@@ -92,7 +106,11 @@ przechodzić między stronami.
 Jako odwiedzający na telefonie chcę czytelnej strony, aby korzystać z niej bez powiększania.
 
 - Given szerokości 375 px, 768 px i 1440 px, when otwieram dowolną stronę, then nie ma poziomego
-  przewijania strony, a układ odpowiada zrzutom mobile (375 px) i desktop (1440 px) z designu.
+  przewijania strony, a układ płynnie dopasowuje się do szerokości (responsywność według reguł i
+  punktów przełamania z plików HTML i design systemu; zrzutów desktop i mobile nie ma — decyzja
+  właściciela z 2026-11-05).
+- Given szerokość 1440 px, when porównuję stronę z jej plikiem HTML z designu w tej samej szerokości,
+  then wygląd jest zgodny z designem.
 - Given szerokość 375 px, when sprawdzam elementy interaktywne, then każdy ma obszar kliknięcia co
   najmniej 24×24 px.
 - Given tekst podstawowy, when sprawdzam rozmiar czcionki na mobile, then wynosi co najmniej 16 px albo
@@ -255,8 +273,9 @@ Ustalone: styl, treści i układ wynikają wyłącznie z materiałów; nie ma od
 Właściciel dostarcza przez skrzynkę `SH/Skrzynka/iskt-www` (orkiestrator przenosi do
 `docs/02-design/zrodla/`):
 
-- eksport z Claude Design (HTML/CSS lub pakiet projektu);
-- zrzuty każdej strony w widoku desktop i mobile;
+- eksport z Claude Design (HTML/CSS lub pakiet projektu) — dostarczony: `docs/02-design/zrodla/Strona firmowa ISKT/` z design
+  systemem w `_ds/` (tokeny kolorów, typografii, odstępów, czcionek) i zasobami w `assets/`;
+- zrzuty desktop i mobile — nie będą dostarczone; wzorcem są pliki HTML (decyzja właściciela);
 - treści (teksty stron, w tym klauzula informacyjna formularza, jeśli jest w designie);
 - zasoby: logotyp (najlepiej SVG), ikony, zdjęcia i ilustracje w pełnej rozdzielczości, favicon,
   pliki czcionek albo ich nazwy i licencje, obraz Open Graph (lub zgoda na wygenerowanie go z designu).
@@ -285,7 +304,7 @@ Usługi: Vercel Hobby/Pro i Resend Free wystarczają na v1; ewentualny płatny p
 |---|---|---|
 | Auth i RLS, role użytkowników | nie | Brak kont i panelu |
 | Płatności | nie | — |
-| Dane osobowe | tak | Formularz zbiera imię, e-mail i treść. Minimum M i ADR „Dane osobowe w formularzu kontaktowym” w `04-architektura` (wymagany przed planem), powiązany z W-04, W-05 i W-06; ustalenia wejściowe niżej. Testy logów bez PII |
+| Dane osobowe | tak | Formularz zbiera imię, e-mail i treść. Minimum M i ADR-001 `docs/04-architektura/adr/ADR-001-dane-osobowe-w-formularzu-kontaktowym.md` (decyzja właściciela E-001), powiązany z W-04, W-05 i W-06. Testy logów bez PII |
 | AI przetwarzające dane użytkowników | nie | — |
 | Migracje bazy produkcyjnej | nie | Brak bazy |
 | Upload plików, integracje zewnętrzne | tak | Integracja Resend: walidacja wejścia, timeout 10 s, obsługa błędów (W-04), rate limit i honeypot (W-05) |
@@ -294,8 +313,9 @@ Usługi: Vercel Hobby/Pro i Resend Free wystarczają na v1; ewentualny płatny p
 
 ### Ustalenia wejściowe do ADR: dane osobowe w formularzu (W-04, W-05, W-06)
 
-Intake nie pisze ADR (robi to architekt), ale ustala decyzje, które ADR musi potwierdzić albo
-uzasadnić zmianę:
+Decyzje zapisane w ADR-001 (`docs/04-architektura/adr/ADR-001-dane-osobowe-w-formularzu-kontaktowym.md`,
+status „proponowana”; napisany w intake na decyzję właściciela E-001, architekt przyjmuje go albo
+zastępuje nowym ADR):
 
 | Kwestia | Ustalenie |
 |---|---|
@@ -307,7 +327,7 @@ uzasadnić zmianę:
 | Rate limit | Klucz limitu to IP (lub jego skrót) przechowywany tylko na czas okna limitu (W-05) |
 | Retencja | W aplikacji brak; retencja e-maili w skrzynce odbiorcy po stronie właściciela |
 
-ADR musi istnieć i być zaakceptowany w etapie `04-architektura` przed rozpisaniem zadań.
+ADR-001 musi mieć status „zaakceptowana” w etapie `04-architektura` przed rozpisaniem zadań.
 
 ## Szacunek poglądowy
 
@@ -333,9 +353,8 @@ Założenia:
 
 Otwarte pytania:
 
-1. **P1: Jaka jest lista stron v1?** Proponowana odpowiedź: dokładnie strony obecne w eksporcie
-   designu; architekt spisuje je z materiałów z URL-ami, a strony bez zrzutu mobile odwzorowujemy
-   według reguł responsywnych z designu.
+1. **P1: Jaka jest lista stron v1?** Rozstrzygnięte przez właściciela 2026-11-05: 7 stron z tabeli w
+   W-01 (strona główna `ISKT-standalone`, Projekty B+R w wersji podstawowej).
 2. **P2: Skąd treść polityki prywatności i klauzuli przy formularzu?** Proponowana odpowiedź: jeśli nie
    ma jej w designie, właściciel dostarcza tekst; do tego czasu w zadaniu formularza używamy krótkiej
    klauzuli (administrator ISKT, cel: odpowiedź na zapytanie) oznaczonej do akceptacji przy odbiorze.
