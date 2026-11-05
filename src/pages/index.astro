@@ -1,11 +1,17 @@
 ---
+// Strona główna (W-01): D/ISKT-standalone.dc.html — hero, kompetencje, kontakt.
+import ContactSection from '../components/home/ContactSection.astro';
+import HomeHero from '../components/home/HomeHero.astro';
+import ServiceGrid from '../components/home/ServiceGrid.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout
-  title="ISKT Greennovation"
-  description="ISKT Greennovation: innowacje w harmonii z naturą."
+  title="ISKT Greennovation — B+R, ESG, AI i oprogramowanie dla firm | Żory"
+  description="Doradztwo i wdrożenia dla firm: projekty B+R z finansowaniem, raportowanie ESG (VSME, CSRD), wdrożenia AI, oprogramowanie dedykowane, interim management i szkolenia. Żory, Śląsk."
+  header="home"
 >
-  <h1>ISKT Greennovation</h1>
-  <p>Innowacje w harmonii z naturą.</p>
+  <HomeHero />
+  <ServiceGrid />
+  <ContactSection />
 </BaseLayout>

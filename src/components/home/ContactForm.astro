@@ -1,0 +1,54 @@
+---
+// Formularz kontaktowy w wersji statycznej: D/ISKT-standalone.dc.html:165-180 (Card lg, pola DS
+// Input/Textarea, przycisk „Wyślij wiadomość”). Wysyłka, stany i klauzula dochodzą w T6; tu formularz
+// nie ma `action` i nie wysyła danych (method="post" + preventDefault, żeby dane nie trafiły do URL).
+import Button from '../ui/Button.astro';
+import Card from '../ui/Card.astro';
+import Field from '../ui/Field.astro';
+---
+
+<Card padding="lg" class="contact-form">
+  <form class="contact-form__form" method="post" data-contact-form>
+    <Field
+      label="Imię i nazwisko"
+      name="name"
+      placeholder="Jan Kowalski"
+      autocomplete="name"
+      required
+    />
+    <Field
+      label="E-mail"
+      name="email"
+      type="email"
+      placeholder="jan@firma.pl"
+      autocomplete="email"
+      required
+    />
+    <Field
+      label="Wiadomość"
+      name="message"
+      type="textarea"
+      rows={3}
+      placeholder="Opisz swój projekt…"
+      required
+    />
+    <Button type="submit" size="lg" fullWidth iconRight="send">
+      Wyślij wiadomość
+    </Button>
+  </form>
+</Card>
+
+<script>
+  // Do T6 (wysyłka przez fetch) formularz niczego nie wysyła.
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-contact-form]')) {
+    form.addEventListener('submit', (event) => event.preventDefault());
+  }
+</script>
+
+<style>
+  .contact-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+// Kafel kompetencji: D/ISKT-standalone.dc.html:94-101 (ikona, tytuł h3, opis, strzałka). `wide`
+// rozciąga kafel na całą szerokość siatki na tle --surface-subtle (Interim, l. 142).
+import type { Service } from '../../content/site';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  service: Service;
+  wide?: boolean;
+}
+
+const { service, wide = false } = Astro.props;
+const externalAttrs = service.external ? { target: '_blank', rel: 'noopener' } : {};
+---
+
+<a
+  class:list={['service-tile', wide && 'service-tile--wide']}
+  href={service.href}
+  {...externalAttrs}
+>
+  <span class="service-tile__icon">
+    <Icon name={service.icon} size={22} />
+  </span>
+  <div class="service-tile__body">
+    <h3 class="service-tile__title">{service.title}</h3>
+    <p class="service-tile__description">{service.description}</p>
+  </div>
+  <span class="service-tile__arrow">
+    <Icon name="arrow-right" size={20} />
+  </span>
+  {service.external && <span class="visually-hidden">(otwiera się w nowej karcie)</span>}
+</a>
+
+<style>
+  .service-tile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-xs);
+    color: var(--text-primary);
+    transition:
+      transform var(--dur-base) var(--ease-standard),
+      box-shadow var(--dur-base) var(--ease-standard);
+  }
+  .service-tile:hover {
+    color: var(--text-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--green-500);
+  }
+  .service-tile--wide {
+    grid-column: 1 / -1;
+    background: var(--surface-subtle);
+  }
+  .service-tile__icon {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--green-50);
+    color: var(--green-700);
+  }
+  .service-tile__body {
+    flex: 1;
+    min-width: 0;
+  }
+  .service-tile__title {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+  }
+  .service-tile__description {
+    margin: 0.15rem 0 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+  .service-tile__arrow {
+    flex: none;
+    display: inline-flex;
+    color: var(--green-700);
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-tile {
+      transition: none;
+    }
+    .service-tile:hover {
+      transform: none;
+    }
+  }
+</style>

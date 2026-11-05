@@ -1,0 +1,91 @@
+---
+// Sekcja kontaktu: D/ISKT-standalone.dc.html:154-182. Dane firmy z content/site.ts.
+import { company } from '../../content/site';
+import ContactForm from './ContactForm.astro';
+
+const { address, nip, regon } = company;
+---
+
+<section id="kontakt" class="contact" aria-labelledby="kontakt-title">
+  <div class="contact__glow" aria-hidden="true"></div>
+  <div class="contact__inner">
+    <div class="contact__copy">
+      <h2 class="contact__title" id="kontakt-title">
+        Porozmawiajmy o Twoim projekcie
+      </h2>
+      <p class="contact__lead">
+        Napisz w dwóch zdaniach, czego potrzebujesz. Odpowiadamy zwykle w ciągu jednego dnia
+        roboczego.
+      </p>
+      <div class="contact__details">
+        <span>
+          {address.street}, {address.postalCode} {address.city}
+        </span>
+        <span>
+          NIP {nip} · REGON {regon}
+        </span>
+      </div>
+    </div>
+    <ContactForm />
+  </div>
+</section>
+
+<style>
+  .contact {
+    scroll-margin-top: 40px;
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-20) var(--container-pad);
+    background: var(--green-700);
+    color: #fff;
+  }
+  .contact__glow {
+    position: absolute;
+    bottom: -40%;
+    right: -5%;
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(213, 235, 172, 0.22), transparent 65%);
+    pointer-events: none;
+  }
+  .contact__inner {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-12);
+    align-items: center;
+  }
+  .contact__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .contact__title {
+    margin: 0;
+    font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+    line-height: var(--lh-tight);
+    color: #fff;
+    text-wrap: pretty;
+  }
+  .contact__lead {
+    margin: 0;
+    max-width: 460px;
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    color: var(--green-200);
+    text-wrap: pretty;
+  }
+  .contact__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--green-200);
+  }
+</style>

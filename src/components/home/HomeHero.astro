@@ -1,0 +1,126 @@
+---
+// Hero strony głównej: D/ISKT-standalone.dc.html:54-86. Nagłówek z logo i „Umów konsultację”
+// renderuje SiteHeader (wariant home) poza <main>; tu zostaje treść hero pod nim.
+import { Image } from 'astro:assets';
+import logo from '../../assets/iskt-logo.png';
+import { company } from '../../content/site';
+import Badge from '../ui/Badge.astro';
+import Button from '../ui/Button.astro';
+---
+
+<section id="top" class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <Badge tone="lime">{company.slogan}</Badge>
+      <h1 class="hero__title">
+        Technologie przyszłości dla <span class="hero__accent">odpowiedzialnego biznesu</span>
+      </h1>
+      <p class="hero__lead">
+        ISKT Greennovation to zespół ekspertów łączących pasję do innowacji technologicznych.
+        Wspieramy organizacje w transformacji cyfrowej, wdrażaniu rozwiązań AI i strategiach ESG.
+      </p>
+      <div class="hero__actions">
+        <Button href="#kontakt" size="lg" iconRight="arrow-right">
+          Umów rozmowę
+        </Button>
+        <Button href="#kompetencje" size="lg" variant="outline">
+          Zobacz kompetencje
+        </Button>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <Image
+        src={logo}
+        alt=""
+        width={320}
+        densities={[1, 2]}
+        format="webp"
+        loading="eager"
+        decoding="async"
+        class="hero__logo"
+      />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-16) var(--container-pad) var(--space-20);
+    background: var(--gradient-wash);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .hero__glow {
+    position: absolute;
+    top: -30%;
+    left: -10%;
+    width: 640px;
+    height: 640px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(84, 132, 29, 0.16), transparent 62%);
+    pointer-events: none;
+  }
+  .hero__inner {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-10);
+    align-items: center;
+  }
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+  }
+  .hero__title {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tighter);
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+  .hero__accent {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero__lead {
+    margin: 0;
+    max-width: 520px;
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+  .hero__visual {
+    display: flex;
+    justify-content: center;
+  }
+  .hero__visual :global(.hero__logo) {
+    width: min(320px, 78%);
+    height: auto;
+    filter: drop-shadow(0 16px 40px rgba(30, 85, 29, 0.22));
+  }
+
+  @media (max-width: 480px) {
+    .hero__actions {
+      width: 100%;
+    }
+    .hero__actions :global(.btn) {
+      width: 100%;
+      white-space: normal;
+    }
+  }
+</style>
