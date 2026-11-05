@@ -244,7 +244,7 @@ Web (strona statyczna z jednym endpointem serwerowym dla formularza):
 | Konsekwencja | Ustalenie |
 |---|---|
 | Narzędzia testowe | Vitest (walidacja i endpoint formularza, z mockiem Resend), Playwright chromium + webkit (nawigacja, formularz, responsywność 375/768/1440, axe-core), Lighthouse CI na stagingu (mobile i desktop) |
-| Dodatkowe punkty DoD | Każda strona i komponent podpięte do routingu lub layoutu (kryterium w zadaniu albo osobne zadanie); zgodność ze zrzutami desktop i mobile; Lighthouse ≥ 90 w 4 kategoriach na stagingu (DoD QA); wymagania W-xx przywoływane w zadaniach i w raporcie QA |
+| Dodatkowe punkty DoD | Każda strona i komponent podpięte do routingu lub layoutu (kryterium w zadaniu albo osobne zadanie); zgodność z plikami HTML designu w 1440 px i płynna responsywność na 375/768/1440 px (zrzutów brak, decyzja właściciela); Lighthouse ≥ 90 w 4 kategoriach na stagingu (DoD QA); wymagania W-xx przywoływane w zadaniach i w raporcie QA |
 | Ograniczenia runnera | Brak; testy E2E nie wysyłają prawdziwych e-maili (mock Resend albo adres testowy Resend) |
 | Kroki ręczne właściciela | Konto Vercel i projekt, konto Resend i klucz testowy, adres odbiorcy zapytań; domena iskt.pl później (B9a) |
 
@@ -355,8 +355,8 @@ Otwarte pytania:
 
 1. **P1: Jaka jest lista stron v1?** Rozstrzygnięte przez właściciela 2026-11-05: 7 stron z tabeli w
    W-01 (strona główna `ISKT-standalone`, Projekty B+R w wersji podstawowej).
-2. **P2: Skąd treść polityki prywatności i klauzuli przy formularzu?** Proponowana odpowiedź: jeśli nie
-   ma jej w designie, właściciel dostarcza tekst; do tego czasu w zadaniu formularza używamy krótkiej
-   klauzuli (administrator ISKT, cel: odpowiedź na zapytanie) oznaczonej do akceptacji przy odbiorze.
-3. **P3: Stack Astro czy Next.js?** Proponowana odpowiedź: Astro 5 (rekomendacja powyżej), bo
-   najpewniej spełnia Lighthouse ≥ 90 na mobile przy stronie bez CMS.
+2. **P2: Skąd treść polityki prywatności i klauzuli przy formularzu?** Rozstrzygnięte przez właściciela
+   2026-11-05: zadanie formularza dodaje roboczą klauzulę (administrator ISKT, cel: odpowiedź na
+   zapytanie, link do polityki prywatności), oznaczoną do akceptacji przy odbiorze.
+3. **P3: Stack Astro czy Next.js?** Rozstrzygnięte przez właściciela 2026-11-05: Astro 5 + TypeScript.
+   Resend zostaje dostawcą wysyłki e-mail (alternatywa SMTP skrzynki firmowej odrzucona).

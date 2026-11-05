@@ -36,8 +36,8 @@ Stałe dla tego projektu, uzupełnia intake lub zadanie szkieletu:
 
 | Obszar | Wartość |
 |---|---|
-| Typ projektu | (do uzupełnienia) |
-| Framework | (do uzupełnienia) |
+| Typ projektu | Web: strona firmowa, strony statyczne (SSG) + jeden endpoint serverless formularza |
+| Framework | Astro 5 + TypeScript, adapter `@astrojs/vercel`, e-mail przez Resend (SDK `resend`); bez bazy danych |
 | Instalacja | (do uzupełnienia) |
 | Lint | (do uzupełnienia) |
 | Testy | (do uzupełnienia) |
