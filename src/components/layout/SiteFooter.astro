@@ -1,7 +1,9 @@
 ---
 // Jedna stopka wszystkich stron: pełna wersja z D/ESG.dc.html:247-252, dane z content/site.ts,
-// rok z daty buildu. Link do polityki prywatności dodaje T5.
+// rok z daty buildu. Link do polityki prywatności (W-06) na wszystkich stronach.
 import { company } from '../../content/site';
+
+const privacyPath = '/polityka-prywatnosci/';
 
 const year = new Date().getFullYear();
 const { street, postalCode, city } = company.address;
@@ -18,6 +20,7 @@ const { street, postalCode, city } = company.address;
       <a href={`mailto:${company.email}`}>{company.email}</a>
       <a href={company.phoneHref}>{company.phone}</a>
       <span>{company.domain}</span>
+      <a href={privacyPath}>Polityka prywatności</a>
     </p>
   </div>
 </footer>

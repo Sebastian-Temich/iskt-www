@@ -21,12 +21,16 @@
     "@astrojs/sitemap": "^3.7.4",
     "@astrojs/vercel": "^8.2.11",
     "@lucide/astro": "^1.68.0",
+    "@upstash/ratelimit": "^2.2.0",
+    "@upstash/redis": "^1.41.0",
     "astro": "^5.18.2",
+    "resend": "^6.37.0",
     "sharp": "^0.34.5",
     "zod": "^4.6.7"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@astrojs/node": "^9.5.5",
     "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^9.39.5",
     "@playwright/test": "1.61.1",
@@ -36,6 +40,7 @@
     "globals": "^17.14.0",
     "prettier": "^3.9.10",
     "prettier-plugin-astro": "^1.1.2",
+    "subset-font": "^2.9.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.72.1",
     "vitest": "^5.1.0"

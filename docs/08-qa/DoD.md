@@ -1,7 +1,7 @@
 ---
 etap: 08-qa
 status: in-progress
-iteracja: 0
+iteracja: 3
 akceptacja_wlasciciela: false
 ---
 

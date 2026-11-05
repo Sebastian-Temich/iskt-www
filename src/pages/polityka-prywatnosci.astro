@@ -1,0 +1,196 @@
+---
+// Polityka prywatności (W-06, ADR-001). Treść ROBOCZA do akceptacji właściciela przy odbiorze
+// (decyzja P2); układ strony tekstowej z D/ESG.dc.html:59-80 (wąski hero, kontener 900 px).
+// Dane firmy z content/site.ts, meta z content/seo.ts (wpis /polityka-prywatnosci/, poza sitemapą).
+import Breadcrumb from '../components/layout/Breadcrumb.astro';
+import { company, nav } from '../content/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const { street, postalCode, city } = company.address;
+---
+
+<BaseLayout header="page">
+  <section class="privacy-hero">
+    <div class="privacy-hero__inner">
+      <Breadcrumb items={[{ label: 'Start', href: nav.home }, { label: 'Polityka prywatności' }]} />
+      <h1>Polityka prywatności</h1>
+      <p class="privacy-hero__lead">
+        Wyjaśniamy, co dzieje się z danymi, które podajesz w formularzu kontaktowym na stronie{' '}
+        {company.domain}: kto je przetwarza, w jakim celu, komu je przekazujemy i jakie masz prawa.
+      </p>
+    </div>
+  </section>
+
+  <div class="privacy">
+    <div class="privacy__inner">
+      <section aria-labelledby="administrator">
+        <h2 id="administrator">Administrator danych</h2>
+        <p>
+          Administratorem Twoich danych osobowych jest {company.name}, {street}, {postalCode}
+          {city}, NIP {company.nip}, REGON {company.regon}.
+        </p>
+      </section>
+
+      <section aria-labelledby="zakres">
+        <h2 id="zakres">Jakie dane zbieramy</h2>
+        <p>
+          Przez formularz kontaktowy zbieramy tylko dane potrzebne do odpowiedzi: imię, adres e-mail
+          i treść wiadomości. Nie zbieramy zgód marketingowych i nie profilujemy użytkowników.
+        </p>
+      </section>
+
+      <section aria-labelledby="cel">
+        <h2 id="cel">Cel przetwarzania</h2>
+        <p>
+          Dane przetwarzamy wyłącznie w jednym celu: odpowiedź na zapytanie wysłane przez formularz
+          i dalsza korespondencja w tej sprawie.
+        </p>
+      </section>
+
+      <section aria-labelledby="podstawa">
+        <h2 id="podstawa">Podstawa prawna</h2>
+        <p>
+          Podstawą przetwarzania jest podjęcie działań na Twoje żądanie przed ewentualnym zawarciem
+          umowy (art. 6 ust. 1 lit. b RODO), a w zakresie prowadzenia korespondencji — nasz prawnie
+          uzasadniony interes, czyli udzielenie odpowiedzi na zapytanie (art. 6 ust. 1 lit. f RODO).
+          Podanie danych jest dobrowolne, ale bez nich nie możemy odpowiedzieć.
+        </p>
+      </section>
+
+      <section aria-labelledby="odbiorcy">
+        <h2 id="odbiorcy">Odbiorcy danych</h2>
+        <p>
+          Dane z formularza przekazujemy wyłącznie podmiotom, które przetwarzają je w naszym
+          imieniu:
+        </p>
+        <ul>
+          <li>
+            <strong>Vercel</strong> — hosting strony i funkcji obsługującej formularz (region UE);
+          </li>
+          <li>
+            <strong>Resend</strong> — dostarczenie wiadomości z formularza na naszą skrzynkę e-mail.
+          </li>
+        </ul>
+        <p>
+          Nie sprzedajemy danych i nie przekazujemy ich innym podmiotom w celach marketingowych.
+        </p>
+      </section>
+
+      <section aria-labelledby="przechowywanie">
+        <h2 id="przechowywanie">Okres przechowywania</h2>
+        <p>
+          Serwis nie zapisuje zgłoszeń z formularza w bazie danych ani w plikach. Wiadomość trafia
+          e-mailem na naszą skrzynkę i jest tam przechowywana przez czas prowadzenia korespondencji,
+          a potem do upływu okresu przedawnienia ewentualnych roszczeń. Dostawca wysyłki (Resend)
+          przechowuje logi dostarczenia przez krótki okres wynikający z jego ustawień.
+        </p>
+        <p>
+          Aby chronić formularz przed nadużyciami, przez około 10 minut wykorzystujemy adres IP (lub
+          jego skrót) do ograniczenia liczby wysyłek. Logi serwisu nie zawierają Twojego imienia,
+          adresu e-mail, treści wiadomości ani pełnego adresu IP.
+        </p>
+      </section>
+
+      <section aria-labelledby="prawa">
+        <h2 id="prawa">Twoje prawa</h2>
+        <p>Masz prawo do:</p>
+        <ul>
+          <li>dostępu do swoich danych i otrzymania ich kopii;</li>
+          <li>sprostowania danych;</li>
+          <li>usunięcia danych;</li>
+          <li>ograniczenia przetwarzania;</li>
+          <li>przenoszenia danych;</li>
+          <li>sprzeciwu wobec przetwarzania opartego na prawnie uzasadnionym interesie.</li>
+        </ul>
+        <p>
+          Masz też prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych (ul. Stawki 2,
+          00-193 Warszawa), jeśli uznasz, że przetwarzamy dane niezgodnie z prawem.
+        </p>
+      </section>
+
+      <section aria-labelledby="kontakt">
+        <h2 id="kontakt">Kontakt</h2>
+        <p>
+          W sprawach danych osobowych napisz na{' '}
+          <a href={`mailto:${company.email}`}>{company.email}</a>
+          albo zadzwoń: <a href={company.phoneHref}>{company.phone}</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .privacy-hero {
+    padding: var(--space-16) var(--container-pad) var(--space-12);
+    background: var(--gradient-wash);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .privacy-hero__inner,
+  .privacy__inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .privacy-hero__inner {
+    gap: var(--space-6);
+  }
+  h1 {
+    margin: 0;
+    font-size: clamp(2.2rem, 5.2vw, 3.8rem);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tighter);
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+  .privacy-hero__lead {
+    margin: 0;
+    max-width: 680px;
+    font-size: var(--text-xl);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .privacy {
+    padding: var(--space-16) var(--container-pad) var(--space-20);
+    background: var(--surface-page);
+  }
+  .privacy__inner {
+    gap: var(--space-10);
+  }
+  .privacy section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  p,
+  ul {
+    margin: 0;
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    overflow-wrap: anywhere;
+  }
+  ul {
+    padding-left: var(--space-6);
+  }
+  strong {
+    color: var(--text-primary);
+  }
+  /* Link w bloku tekstu odróżniony nie tylko kolorem (WCAG 1.4.1, axe link-in-text-block). */
+  .privacy a {
+    color: var(--text-link);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  .privacy a:hover {
+    color: var(--text-link-hover);
+  }
+</style>

@@ -1,16 +1,16 @@
 ---
-zadania_todo: 8
+zadania_todo: 6
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 4
+zadania_done: 8
 zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `docs/02-design/zrodla/Strona firmowa ISKT/ISKT-standalone.dc.html`, `_ds/…/_ds_bundle.js` (l. 755-845, 1097-1166), `src/layouts/BaseLayout.astro`, `src/components/layout/SiteHeader.astro`, prymitywy `src/components/ui/*`, `src/pages/404.astro`, `e2e/layout.spec.ts`, `playwright.config.ts`, `docs/07-realizacja/T-6.md` (format raportu). Pliki spoza „Zakresu” nie były zmieniane."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Dane kontaktowe w sekcji", "decyzja": "tylko adres i NIP/REGON jak w designie (l. 160-163); e-mail i telefon są w stopce."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "`Field`", "decyzja": "jeden komponent dla Input i Textarea (`type=\"textarea\"`), `*` z `aria-hidden` (wymagalność przekazuje atrybut `required`), `aria-invalid` i komunikat błędu gotowe dla T6."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Kontrolki hero na 375 px", "decyzja": "przyciski na całą szerokość poniżej 480 px (wzorzec z `404.astro`), a kolumny hero i kontaktu `minmax(min(300px, 100%), 1fr)`, żeby nie wymuszać poziomego scrolla."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Logo hero: `loading`", "decyzja": "`eager` zamiast `lazy` z designu, bo jest w pierwszym ekranie na desktopie (LCP); dekoracyjne `alt=\"\"` jak w designie."}]
-ostatnia_synchronizacja: 2026-11-05T16:20:09Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `docs/04-architektura/architektura.md` (CSP), `e2e/smoke.spec.ts`, `e2e/qa/M1-scenariusze.spec.ts`, `playwright.config.ts`, `src/styles/tokens/spacing.css`."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Preloady fontów w `BaseLayout.astro` zostają", "decyzja": "ich usunięcie pogorszyło FCP (2,6 s, wynik 88–89)."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Nowy test w `e2e/qa/QA-M1-1-wydajnosc.spec.ts` (poza „Zakresem”)", "decyzja": "kryteria 1 i 2 potrzebują testu, a `e2e/home.spec.ts` ma zostać bez zmian; nazwa jak `e2e/qa/M1-scenariusze.spec.ts`."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Font zmienny Inter odrzucony", "decyzja": "zmienia kontrakt `@font-face` sprawdzany w `e2e/smoke.spec.ts` (osobna ściana na wagę) i wymagałby zmiany testu spoza zakresu."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "-", "decyzja": "Pełne pliki latin-ext usunięte z `public/fonts/` (nieużywane); nowe pliki mają nazwy `*-latin-ext-pl-*`, żeby nie trafić na stary plik w cache przeglądarki/CDN."}]
+ostatnia_synchronizacja: 2026-11-05T20:17:57Z
 ---
 
 # Status projektu
@@ -27,13 +27,16 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-05T14:12Z (przed pierwszym dispatchem)
-- Kamień: M1 startuje; etapy 00, 04, 05, 06 `done`
-- `shctl doctor`: 0 błędów (uwaga: 3 stare repo testowe do usunięcia, nie dotyczy projektu)
-- Autoryzacja: wiersz „Autoryzacja planu PR #3” w `decyzje.md`; start workerów na sygnał właściciela 2026-11-05 („start”)
-- Zadania właściciela: Vercel (projekt, alias https://iskt-www.vercel.app, zmienne Production+Preview) i Resend (klucz, `.env.local`) gotowe; region fra1 do potwierdzenia; reguła WAF przed QA M2
-- Eskalacje: brak otwartych
-- Następny krok: dispatch #5 (szkielet), do jego zamknięcia nic innego
+- Czas: 2026-11-05T17:30Z (po QA M1)
+- Kamień zakończony: M1 (#5–#8 zamknięte; QA M1 PR #21 scalony na decyzję właściciela E-003/B, werdykt FAIL: 2 × 🟡 → #22 wydajność mobile, #23 CSP). Etap `08-qa` zostaje otwarty do QA ostatniego kamienia
+- Kamień bieżący: M2 (#9 polityka w toku, potem #11 formularz); naprawy QA M1: #23 w toku, #22 w kolejce
+- PR w toku: brak (workery #9 i #23 pracują)
+- Eskalacje: brak otwartych (E-001, E-002, E-003 zamknięte)
+- Wstrzymania: M3 (#10 i dalej) czeka na QA M2
+- `shctl doctor` 2026-11-05T14:12Z: 0 błędów
+- Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md`
+- Zadania właściciela: reguła rate limit w Vercel Firewall przed QA M2 (sprawdzić dostępność na Hobby); O-6 podgląd w walidatorze OG przy odbiorze
+- Następny krok: monitoring #9 i #23, potem dispatch #22 i #11
 
 ## Dziennik etapów
 
@@ -55,6 +58,9 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-05 `06-zadania`: iteracja 3 (FAIL review PR #4)
 - 2026-11-05 `06-zadania`: done
 - 2026-11-05 `08-qa`: in-progress
+- 2026-11-05 `08-qa`: review
+- 2026-11-05 `08-qa`: iteracja 2 (FAIL review PR #21)
+- 2026-11-05 `08-qa`: iteracja 3 (FAIL review PR #21)
 
 ## Otwarte eskalacje
 
