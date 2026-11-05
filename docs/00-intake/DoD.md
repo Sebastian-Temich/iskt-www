@@ -1,6 +1,6 @@
 ---
 etap: 00-intake
-status: in-progress
+status: review
 iteracja: 2
 akceptacja_wlasciciela: true
 ---

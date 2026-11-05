@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `00-intake`: in-progress
+- `00-intake`: review
 
 ## Punkt przekazania
 
