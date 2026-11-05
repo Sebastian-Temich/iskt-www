@@ -18,6 +18,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@astrojs/vercel": "^8.2.11",
     "@lucide/astro": "^1.68.0",
     "astro": "^5.18.2",

@@ -1,0 +1,48 @@
+---
+// Meta strony (W-07, W-08). Wpis z src/content/seo.ts wybierany po ścieżce strony; adresy absolutne
+// z PUBLIC_SITE_URL. Strona bez wpisu (np. 404) dostaje tytuł i opis z propsów oraz `noindex`.
+import { OG_IMAGE, absoluteUrl, findSeoEntry } from '../../content/seo';
+import { company } from '../../content/site';
+import { parsePublicEnv, runtimeEnv } from '../../lib/env';
+import JsonLd from './JsonLd.astro';
+
+interface Props {
+  /** Tytuł strony bez wpisu w seo.ts. */
+  title?: string;
+  /** Opis strony bez wpisu w seo.ts. */
+  description?: string;
+}
+
+const env = parsePublicEnv(runtimeEnv());
+const entry = findSeoEntry(Astro.url.pathname);
+const title = entry?.title ?? Astro.props.title ?? company.brand;
+const description = entry?.description ?? Astro.props.description;
+const canonical = entry ? absoluteUrl(env.siteUrl, entry.path) : undefined;
+const ogImage = absoluteUrl(env.siteUrl, OG_IMAGE.path);
+const noindex = !env.indexable || !entry;
+---
+
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+{noindex && <meta name="robots" content="noindex" />}
+{canonical && <link rel="canonical" href={canonical} />}
+
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pl_PL" />
+<meta property="og:site_name" content={company.brand} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+{canonical && <meta property="og:url" content={canonical} />}
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content={String(OG_IMAGE.width)} />
+<meta property="og:image:height" content={String(OG_IMAGE.height)} />
+<meta property="og:image:alt" content={OG_IMAGE.alt} />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+{entry && <JsonLd data={entry.jsonLd(env.siteUrl)} />}
