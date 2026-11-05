@@ -1,6 +1,6 @@
 ---
 etap: 08-qa
-status: escalated
+status: in-progress
 iteracja: 3
 akceptacja_wlasciciela: false
 ---

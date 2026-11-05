@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `08-qa`: escalated
+- `08-qa`: in-progress
 
 ## Punkt przekazania
 
@@ -62,8 +62,8 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-05 `08-qa`: review
 - 2026-11-05 `08-qa`: iteracja 2 (FAIL review PR #21)
 - 2026-11-05 `08-qa`: iteracja 3 (FAIL review PR #21)
+- 2026-11-05 `08-qa`: in-progress, QA M2 scalone (PR #28); etap otwarty do QA ostatniego kamienia
 
 ## Otwarte eskalacje
 
-- E-006 (08-qa): QA M2: formularz na stagingu i lokalnie zwraca 502. Resend odrzuca wysyłkę (403 validation_error): z nadawcą onboarding@resend.dev można wysyłać tylko na adres właściciela konta Resend, a CONTACT_TO wskazuje inny adres. W-04 i O-3 niespełnione do zmiany konfiguracji; kod działa zgodnie z kryteriami (502 z zachowaniem danych)
-
+(brak)
