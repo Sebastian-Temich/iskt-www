@@ -21,10 +21,14 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `00-intake`: todo (następny)
+- `00-intake`: in-progress
 
 ## Punkt przekazania
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
 (brak)
+
+## Dziennik etapów
+
+- 2026-11-05 `00-intake`: in-progress
