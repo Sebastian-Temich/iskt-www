@@ -1,16 +1,16 @@
 ---
-zadania_todo: 3
+zadania_todo: 2
 zadania_in_progress: 1
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 11
+zadania_done: 12
 zadania_anulowane: 0
-pr_otwarte: 1
+pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "Test „linki wewnętrzne bez 404” sprawdza tylko istniejące strony (`/`, ESG, Interim, Startupy, polityka)", "decyzja": "pozostałe strony usług powstają w innych zadaniach M3."}, {"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "-", "decyzja": "Wyróżnienie we wstępie Startupy w stałej `focus`: inaczej Prettier łamie `</strong>` i kropkę do osobnych linii, co w HTML daje spację przed kropką („miesięcy . Reszta”). Test sprawdza „miesięcy. Reszta jest konsekwencją.”."}, {"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "Cudzysłów w „ustalimy później” (design: `„…\"`)", "decyzja": "typograficzny `„…”`, jak w pozostałych tekstach strony."}, {"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "Siatka ról: `minmax(360px, 1fr)` z designu daje przy 1440 px trzy kolumny (3 + 1)", "decyzja": "zostawione jak w designie; dodane tylko `min(360px, 100%)`, żeby karta nie wychodziła poza ekran 375 px. Test sprawdza jedną kolumnę przy 375 px i więcej niż jedną przy 1440 px."}, {"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "Gdzie umieścić notkę pod tabelą „Modele współpracy” (`D/Interim.dc.html:231`), skoro `ComparisonTable` z T7 nie ma na nią miejsca, a zmiany komponentów T7 są poza zakresem?", "decyzja": "Blok `model-note` w `interim.astro` tuż po tabeli, z tym samym tłem i ujemnym marginesem, który daje odstęp `--space-8` jak `gap` sekcji w designie; treść i wygląd jak w designie."}]
-ostatnia_synchronizacja: 2026-11-05T22:34:16Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `src/pages/uslugi/esg.astro`, `e2e/esg.spec.ts` i `T-10.md` jako wzorzec, komponenty `src/components/service/*`, `src/components/ui/{Badge,Icon,icon-names}`, `src/content/{site,seo}.ts`, `playwright.config.ts`."}, {"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "Kolejność `data-component` na Oprogramowaniu", "decyzja": "dwie karty `product-card` między `scope-list` i `comparison-table`; sekcja nie ma własnego `data-component`, żeby test kolejności był jednoznaczny."}, {"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "Okruszki", "decyzja": "„AI i transformacja cyfrowa” i „Rozwój oprogramowania”, jak w designie (l. 67) i w BreadcrumbList `seo.ts`."}, {"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "Cudzysłowy zamykające w designie są ASCII (`„wdróżmy AI\"`, `„Chcemy zacząć z AI, nie wiemy gdzie\"`)", "decyzja": "użyłem polskiego `”`, jak w `esg.astro`."}, {"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "Sekcja „Nasze autorskie aplikacje” (nagłówek, opis, siatka)", "decyzja": "w `oprogramowanie.astro` z własnym `<style>`, a `ProductCard` to pojedyncza karta. Issue wymaga tylko nowego `ProductCard`, a sekcja występuje na jednej stronie."}]
+ostatnia_synchronizacja: 2026-11-05T22:36:40Z
 ---
 
 # Status projektu

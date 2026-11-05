@@ -35,3 +35,6 @@ Plik wspólny, aktualizuje orkiestrator. Zgłoszenia ⚪ z review i „Drobne uw
 | 2026-11-05 | T-13 | `src/pages/uslugi/esg.astro:56-59` (T7/#10): ten sam wzorzec `</strong>` w osobnej linii daje w HTML spację przed kropką („klimatyczne . Wtedy liczy się…”). Do poprawki osobnym zadaniem. | otwarta |
 | 2026-11-05 | T-13 | `ServiceHero` ma stałe `max-width: 680px` leadu; w `D/Interim.dc.html:70` lead ma 700 px. Różnica 20 px, komponentu T7 nie zmieniałem. | otwarta |
 | 2026-11-05 | T-13 | `ComparisonTable` mógłby mieć opcjonalny slot na notkę pod tabelą (Interim), wtedy blok `model-note` w `interim.astro` byłby zbędny. | otwarta |
+| 2026-11-05 | T-12 | Tło sekcji różni się od designu, bo komponenty z T7 mają stałe tła: na Oprogramowaniu `ProcessTimeline` ma `--surface-subtle` (w designie `--surface-page`, bo poprzedza ją szara tabela), a `ComparisonTable` ma `--surface-page` (w designie `--surface-subtle`). Zmiana wymaga propsu `tone` w komponentach T7, które w tym zadaniu są poza zakresem. | otwarta |
+| 2026-11-05 | T-12 | `ServiceHero` na Oprogramowaniu nie dostaje `note`, bo design go nie ma w hero tej strony. | otwarta |
+| 2026-11-05 | T-12 | `playwright.config.ts` ma stały port i `reuseExistingServer`; przy równoległych workerach na jednej maszynie testy mogą trafić w cudzy serwer. Warto czytać port ze zmiennej środowiskowej. | otwarta |

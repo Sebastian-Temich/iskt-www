@@ -12,9 +12,9 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #9 | Strona polityki prywatności z roboczą treścią | done | 1 | M2 Formularz kontaktowy end-to-end | #25 merged | pass |
 | #10 | Komponenty stron usług i strona ESG | done | 1 | M3 Strony usług | #31 merged | pass |
 | #11 | Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | done | 1 | M2 Formularz kontaktowy end-to-end | #26 merged | pass |
-| #12 | Strony AI-transformacja i Oprogramowanie | in-progress | 1 | M3 Strony usług | #33 open | pass |
+| #12 | Strony AI-transformacja i Oprogramowanie | done | 1 | M3 Strony usług | #33 merged | pass |
 | #13 | Strony Interim i Startupy | done | 1 | M3 Strony usług | #32 merged | pass |
-| #14 | Strona Projekty B+R z FAQ | todo | 0 | M3 Strony usług | - | - |
+| #14 | Strona Projekty B+R z FAQ | in-progress | 1 | M3 Strony usług | - | - |
 | #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | todo | 0 | M4 Jakość i wydanie | - | - |
 | #16 | Dokumentacja wydania (techniczna i produktowa) | todo | 0 | M4 Jakość i wydanie | - | - |
 | #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | done | 2 | M1 Szkielet, layout i strona główna | #27 merged | pass |
