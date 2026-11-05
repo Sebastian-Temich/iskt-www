@@ -17,8 +17,9 @@ const sizes = [
   `(min-width: 712px) min(320px, calc((100vw - 2 * ${pad} - 2.5rem) * 0.39))`,
   `min(320px, calc((100vw - 2 * ${pad}) * 0.78))`,
 ].join(', ');
-// Gęsta drabinka szerokości: przy DPR 1,75–3 nadmiar w audycie uses-responsive-images < 10 KiB.
-const widths = [240, 320, 400, 480, 520, 560, 640];
+// Drabinka co 20 px (240–640): najbliższy większy kandydat jest najwyżej ~8% szerszy niż miejsce na
+// ekranie, więc nadmiar w audycie uses-responsive-images < 10 KiB przy każdym DPR (test e2e QA-M1-1).
+const widths = Array.from({ length: 21 }, (_, i) => 240 + i * 20);
 ---
 
 <section id="top" class="hero">
