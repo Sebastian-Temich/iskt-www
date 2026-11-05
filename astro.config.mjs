@@ -92,17 +92,15 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   adapter: useNodeAdapter ? node({ mode: 'standalone' }) : vercel(),
-  // CSS wbudowany w <style> zamiast plików _astro/*.css: bez zasobów blokujących render (W-10, #22).
-  // Strony są małe (~20 KB CSS przed kompresją), więc brak cache CSS między stronami nie przeważa.
-  build: { inlineStylesheets: 'always' },
+  // CSP bez hashy (vercel.json, #23): style i skrypty zawsze jako pliki w /_astro/, nigdy inline,
+  // więc polityka style-src 'self' nie zależy od treści komponentów. Wbudowany CSS (#22) wymagałby
+  // 'unsafe-inline' albo hashy; W-10 spełnia pomiar Lighthouse z CSS w plikach (QA M2, #29).
+  build: { inlineStylesheets: 'never' },
   integrations: [
     sitemap({ filter: isSitemapPage }),
     seoOutput(),
     ...(useNodeAdapter ? [e2eNodePreview()] : []),
   ],
-  // CSP bez hashy (vercel.json, #23): style i skrypty zawsze jako pliki w /_astro/, nigdy inline,
-  // więc polityka 'self' nie zależy od treści komponentów.
-  build: { inlineStylesheets: 'never' },
   vite: { build: { assetsInlineLimit: 0 } },
   server: { port: 55326 },
 });

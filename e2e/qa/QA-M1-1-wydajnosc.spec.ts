@@ -23,9 +23,19 @@ test.describe('QA-M1-1: wydajność strony głównej', () => {
     await expect(logo).toHaveAttribute('srcset', /\d+w/);
   });
 
-  test('CSS wbudowany: brak arkuszy _astro/*.css blokujących render', async ({ page }) => {
+  // CSS w plikach /_astro/*.css, nie inline: CSP style-src 'self' bez 'unsafe-inline' (#23, #29).
+  test('CSS z plików _astro/*.css tego samego źródła, bez <style> inline', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('link[rel="stylesheet"]')).toHaveCount(0);
+    await expect(page.locator('style')).toHaveCount(0);
+    const hrefs = await page
+      .locator('link[rel="stylesheet"]')
+      .evaluateAll((links: HTMLLinkElement[]) => links.map((link) => link.href));
+    expect(hrefs.length).toBeGreaterThan(0);
+    for (const href of hrefs) {
+      const url = new URL(href);
+      expect(url.origin).toBe(new URL(page.url()).origin);
+      expect(url.pathname).toMatch(/^\/_astro\/[^/]+\.css$/);
+    }
     // Style nadal działają: token koloru z global.css jest ustawiony.
     const primary = await page.evaluate(() =>
       getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim(),
