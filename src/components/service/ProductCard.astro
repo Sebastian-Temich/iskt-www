@@ -1,0 +1,117 @@
+---
+// Karta autorskiej aplikacji: D/Oprogramowanie.dc.html:134-159 (h3 z nazwą i etykietą DS, opis,
+// lista cech z ikoną check, link „Poznaj …” z ikoną strzałki). Siatkę kart i nagłówek sekcji
+// układa strona.
+import { nav } from '../../content/site';
+import Badge from '../ui/Badge.astro';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  name: string;
+  /** Etykieta obok nazwy, np. „faktury za media”. */
+  badge: string;
+  badgeTone?: 'green' | 'lime';
+  description: string;
+  features: string[];
+  ctaLabel: string;
+  ctaHref?: string;
+}
+
+const {
+  name,
+  badge,
+  badgeTone = 'green',
+  description,
+  features,
+  ctaLabel,
+  ctaHref = nav.contact,
+} = Astro.props;
+---
+
+<article class="product-card" data-component="product-card">
+  <div class="product-card__head">
+    <h3 class="product-card__name">{name}</h3>
+    <Badge tone={badgeTone}>{badge}</Badge>
+  </div>
+  <p class="product-card__description">{description}</p>
+  <ul class="product-card__features">
+    {features.map((feature) => (
+      <li>
+        <span class="product-card__check">
+          <Icon name="check" size={18} />
+        </span>
+        {feature}
+      </li>
+    ))}
+  </ul>
+  <a class="product-card__cta" href={ctaHref}>
+    {ctaLabel}
+    <Icon name="arrow-right" size={18} />
+  </a>
+</article>
+
+<style>
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-width: 0;
+    padding: var(--space-8);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-xs);
+  }
+  .product-card__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .product-card__name {
+    margin: 0;
+    font-size: var(--text-xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  .product-card__description {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .product-card__features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .product-card__features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+  .product-card__check {
+    display: inline-flex;
+    flex: none;
+    color: var(--green-600);
+  }
+  .product-card__cta {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.5rem;
+    min-height: 24px;
+    font-weight: var(--fw-semibold);
+    color: var(--green-700);
+  }
+  .product-card__cta:hover {
+    color: var(--text-link-hover);
+  }
+</style>
