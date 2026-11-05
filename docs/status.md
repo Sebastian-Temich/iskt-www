@@ -1,16 +1,16 @@
 ---
-zadania_todo: 7
-zadania_in_progress: 0
+zadania_todo: 5
+zadania_in_progress: 1
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 8
+zadania_done: 9
 zadania_anulowane: 0
-pr_otwarte: 0
-ci_fail: 0
+pr_otwarte: 1
+ci_fail: 1
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `docs/04-architektura/architektura.md` (CSP), `e2e/smoke.spec.ts`, `e2e/qa/M1-scenariusze.spec.ts`, `playwright.config.ts`, `src/styles/tokens/spacing.css`."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Preloady fontów w `BaseLayout.astro` zostają", "decyzja": "ich usunięcie pogorszyło FCP (2,6 s, wynik 88–89)."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Nowy test w `e2e/qa/QA-M1-1-wydajnosc.spec.ts` (poza „Zakresem”)", "decyzja": "kryteria 1 i 2 potrzebują testu, a `e2e/home.spec.ts` ma zostać bez zmian; nazwa jak `e2e/qa/M1-scenariusze.spec.ts`."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Font zmienny Inter odrzucony", "decyzja": "zmienia kontrakt `@font-face` sprawdzany w `e2e/smoke.spec.ts` (osobna ściana na wagę) i wymagałby zmiany testu spoza zakresu."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "-", "decyzja": "Pełne pliki latin-ext usunięte z `public/fonts/` (nieużywane); nowe pliki mają nazwy `*-latin-ext-pl-*`, żeby nie trafić na stary plik w cache przeglądarki/CDN."}]
-ostatnia_synchronizacja: 2026-11-05T21:12:47Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-29", "pytanie": "Co sprawdza test QA-M1-1 zamiast braku arkuszy?", "decyzja": "brak `<style>` inline i arkusze wyłącznie z `/_astro/` tego samego źródła, bo to warunek zgodności z CSP i odwrotność poprzedniego założenia; sprawdzenie tokenu koloru zostaje."}, {"data": "2026-11-05", "zrodlo": "T-29", "pytanie": "CSS wbudowany (`'always'`, T-22) czy CSS w plikach (`'never'`, T-23)?", "decyzja": "`'never'`: CSP `style-src 'self'` bez `'unsafe-inline'` jest wymaganiem architektury, a wbudowany CSS wymagałby `'unsafe-inline'` albo hashy generowanych przy każdej zmianie stylów. W-10 jest spełnione również z CSS w plikach (Lighthouse mobile QA M2: 98, 99, 96)."}, {"data": "2026-11-05", "zrodlo": "wlasciciel", "pytanie": "E-006: wysyłka e-maila na stagingu (W-04, O-3) sprawdzana przy odbiorze końcowym, nie w QA M2", "decyzja": "kto: właściciel 2026-11-05, E-006 opcja C; na co: kontynuacja M3 mimo niedziałającej wysyłki przez Resend (403: CONTACT_TO inny niż adres konta Resend); zakres: konfiguracja CONTACT_TO/Resend do poprawy przez właściciela przed odbiorem; do kiedy: odbiór zlecenia (etap wydanie); ryzyko: ścieżka W-04 niesprawdzona do końca. Cofnięcie: polecenie właściciela: opcja A albo B z E-006 i ponowny test O-3 przez QA"}, {"data": "2026-11-05", "zrodlo": "qa", "pytanie": "Pomiar reguły WAF żądaniami z niepoprawnym ciałem (400) zamiast honeypota (200)", "decyzja": "błąd cytowania w pętli; reguła liczy żądania przed funkcją, w dwóch oknach dokładnie 5 przeszło, 6. → 429; żaden e-mail nie został wysłany. Cofnięcie: powtórka O-5 przez właściciela przy odbiorze"}, {"data": "2026-11-05", "zrodlo": "qa", "pytanie": "Test „CSS wbudowany” (e2e/qa/QA-M1-1-wydajnosc.spec.ts:26) bez test.fixme w PR QA M2", "decyzja": "QA nie zmienia plików spoza e2e/qa/MN-*, a zmiana uruchomiłaby lint; naprawa QA-M2-1 (#29) obejmuje ten test. Cofnięcie: #29 przed zadaniami M3"}]
+ostatnia_synchronizacja: 2026-11-05T21:49:33Z
 ---
 
 # Status projektu
