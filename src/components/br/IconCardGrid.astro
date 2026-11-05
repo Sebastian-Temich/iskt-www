@@ -1,0 +1,93 @@
+---
+// „Zakres wsparcia”: D/Projekty-BR.dc.html:72-108 — nagłówek sekcji i siatka kart z ikoną Lucide
+// w zielonym kwadracie, tytułem h3 i opisem.
+import Icon from '../ui/Icon.astro';
+import type { IconName } from '../ui/icons';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+export interface IconCard {
+  icon: IconName;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  subtitle?: string;
+  items: IconCard[];
+}
+
+const { eyebrow, heading, subtitle, items } = Astro.props;
+---
+
+<section class="icon-cards" data-component="icon-card-grid">
+  <div class="icon-cards__inner">
+    <SectionHeading eyebrow={eyebrow} title={heading} subtitle={subtitle} align="left" />
+    <ul class="icon-cards__grid">
+      {items.map((item) => (
+        <li class="icon-cards__card">
+          <span class="icon-cards__icon">
+            <Icon name={item.icon} size={22} />
+          </span>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .icon-cards {
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-page);
+  }
+  .icon-cards__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+  .icon-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr));
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .icon-cards__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-xs);
+  }
+  .icon-cards__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--green-50);
+    color: var(--green-700);
+  }
+  h3 {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
+  }
+  p {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+// Karta programu finansowania: D/Projekty-BR.dc.html:147-174 — tytuł h3 z miękkim Badge rodzaju
+// programu i opis. Siatkę kart i nagłówek sekcji „Programy” składa strona.
+import Badge from '../ui/Badge.astro';
+
+interface Props {
+  title: string;
+  badge: string;
+  tone: 'green' | 'neutral' | 'info' | 'lime';
+  text: string;
+}
+
+const { title, badge, tone, text } = Astro.props;
+---
+
+<li class="program-card" data-component="program-card">
+  <div class="program-card__head">
+    <h3>{title}</h3>
+    <Badge tone={tone}>{badge}</Badge>
+  </div>
+  <p>{text}</p>
+</li>
+
+<style>
+  .program-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-xs);
+  }
+  .program-card__head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  h3 {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
+  }
+  p {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+</style>

@@ -1,0 +1,113 @@
+---
+// Hero strony B+R: D/Projekty-BR.dc.html:44-70 (pełny kontener, poświata, okruszki, Badge
+// „Kompetencja · B+R”, h1 z fragmentem w gradiencie marki, lead i dwa przyciski lg). Okruszki
+// trafiają do slotu `breadcrumb` (komponent Breadcrumb), jak w ServiceHero.
+import Badge from '../ui/Badge.astro';
+import Button from '../ui/Button.astro';
+
+export interface HeroLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  badge: string;
+  titleBefore?: string;
+  titleHighlight: string;
+  titleAfter?: string;
+  lead: string;
+  cta: HeroLink;
+  secondary?: HeroLink;
+}
+
+const { badge, titleBefore, titleHighlight, titleAfter, lead, cta, secondary } = Astro.props;
+---
+
+<section class="br-hero" data-component="br-hero">
+  <div class="br-hero__glow" aria-hidden="true"></div>
+  <div class="br-hero__inner">
+    <slot name="breadcrumb" />
+    <div class="br-hero__content">
+      <Badge tone="lime">{badge}</Badge>
+      <h1 class="br-hero__title">
+        {titleBefore && <>{titleBefore} </>}
+        <span class="br-hero__highlight">{titleHighlight}</span>
+        {titleAfter && <> {titleAfter}</>}
+      </h1>
+      <p class="br-hero__lead">{lead}</p>
+      <div class="br-hero__actions">
+        <Button href={cta.href} size="lg" iconRight="arrow-right">
+          {cta.label}
+        </Button>
+        {secondary && (
+          <Button href={secondary.href} size="lg" variant="outline">
+            {secondary.label}
+          </Button>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .br-hero {
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-12) var(--container-pad) var(--space-16);
+    background: var(--gradient-wash);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .br-hero__glow {
+    position: absolute;
+    top: -35%;
+    right: -8%;
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--x-glow-1), transparent 62%);
+    pointer-events: none;
+  }
+  .br-hero__inner {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .br-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: flex-start;
+    max-width: 720px;
+    margin-top: var(--space-10);
+  }
+  .br-hero__title {
+    margin: 0;
+    font-size: var(--x-h1-br);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tighter);
+    line-height: var(--x-h1-br-lh);
+    text-wrap: balance;
+  }
+  .br-hero__highlight {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .br-hero__lead {
+    margin: 0;
+    max-width: 540px;
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .br-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+  .br-hero__actions :global(.btn) {
+    white-space: normal;
+  }
+</style>
