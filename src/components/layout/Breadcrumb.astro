@@ -1,0 +1,74 @@
+---
+// Ścieżka (D/ESG.dc.html:62-68). Ostatnia pozycja to bieżąca strona z aria-current="page"
+// (architektura, „Rozstrzygnięcia luk designu”: nawigacja).
+export interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+const lastIndex = items.length - 1;
+---
+
+<nav class="breadcrumb" aria-label="Ścieżka">
+  <ol>
+    {items.map((item, index) => (
+      <li>
+        {index === lastIndex ? (
+          item.href ? (
+            <a class="current" href={item.href} aria-current="page">
+              {item.label}
+            </a>
+          ) : (
+            <span class="current" aria-current="page">
+              {item.label}
+            </span>
+          )
+        ) : (
+          <a href={item.href}>{item.label}</a>
+        )}
+        {index !== lastIndex && (
+          <span class="sep" aria-hidden="true">
+            /
+          </span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  a {
+    color: var(--text-link);
+  }
+  a:hover {
+    color: var(--text-link-hover);
+  }
+  .current,
+  a.current,
+  a.current:hover {
+    color: var(--text-primary);
+    font-weight: var(--fw-semibold);
+    text-decoration: none;
+  }
+</style>

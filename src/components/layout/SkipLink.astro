@@ -1,0 +1,34 @@
+---
+// Link „Przejdź do treści” (W-11): pierwszy element fokusowalny, widoczny tylko przy fokusie.
+interface Props {
+  target?: string;
+}
+
+const { target = 'tresc' } = Astro.props;
+---
+
+<a class="skip-link" href={`#${target}`}>
+  Przejdź do treści
+</a>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-2);
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    border-radius: var(--radius-md);
+    background: var(--green-700);
+    color: #fff;
+    font-weight: var(--fw-semibold);
+    font-size: var(--text-sm);
+    box-shadow: var(--shadow-md);
+    transform: translateY(calc(-100% - var(--space-4)));
+  }
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    transform: none;
+    color: #fff;
+  }
+</style>

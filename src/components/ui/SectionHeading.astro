@@ -1,0 +1,102 @@
+---
+// Nagłówek sekcji DS (DS/_ds_bundle.js:240): eyebrow z belką, tytuł i podtytuł.
+interface Props {
+  title: string;
+  eyebrow?: string;
+  subtitle?: string;
+  align?: 'center' | 'left';
+  onDark?: boolean;
+  /** Poziom nagłówka; domyślnie h2 jak w DS, h1 dla jedynego nagłówka strony (np. 404). */
+  as?: 'h1' | 'h2';
+  id?: string;
+  class?: string;
+}
+
+const {
+  title,
+  eyebrow,
+  subtitle,
+  align = 'center',
+  onDark = false,
+  as: Heading = 'h2',
+  id,
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'section-heading',
+    `section-heading--${align}`,
+    onDark && 'section-heading--dark',
+    className,
+  ]}
+>
+  {eyebrow && (
+    <span class="eyebrow">
+      <span class="eyebrow__bar" aria-hidden="true" />
+      {eyebrow}
+    </span>
+  )}
+  <Heading class="title" id={id}>
+    {title}
+  </Heading>
+  {subtitle && <p class="subtitle">{subtitle}</p>}
+</div>
+
+<style>
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .section-heading--center {
+    align-items: center;
+    text-align: center;
+    max-width: 720px;
+    margin-inline: auto;
+  }
+  .section-heading--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-caps);
+    text-transform: uppercase;
+    color: var(--green-600);
+  }
+  .eyebrow__bar {
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+  }
+  .title {
+    margin: 0;
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+    line-height: var(--lh-tight);
+    color: var(--text-primary);
+  }
+  .subtitle {
+    margin: 0;
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+  .section-heading--dark .eyebrow {
+    color: var(--green-300);
+  }
+  .section-heading--dark .title {
+    color: var(--text-on-dark);
+  }
+  .section-heading--dark .subtitle {
+    color: var(--neutral-300);
+  }
+</style>

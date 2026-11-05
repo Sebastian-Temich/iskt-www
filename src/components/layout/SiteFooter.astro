@@ -1,0 +1,59 @@
+---
+// Jedna stopka wszystkich stron: pełna wersja z D/ESG.dc.html:247-252, dane z content/site.ts,
+// rok z daty buildu. Link do polityki prywatności dodaje T5.
+import { company } from '../../content/site';
+
+const year = new Date().getFullYear();
+const { street, postalCode, city } = company.address;
+---
+
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__legal">
+      © {year}
+      {company.name} · {street}, {postalCode}
+      {city} · NIP {company.nip}
+    </p>
+    <p class="site-footer__contact">
+      <a href={`mailto:${company.email}`}>{company.email}</a>
+      <a href={company.phoneHref}>{company.phone}</a>
+      <span>{company.domain}</span>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding: var(--space-8) var(--container-pad);
+    background: var(--ink-900);
+    color: var(--neutral-300);
+  }
+  .site-footer__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .site-footer__legal {
+    margin: 0;
+    font-size: var(--text-xs);
+  }
+  .site-footer__contact {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--green-300);
+  }
+  .site-footer__contact a {
+    color: var(--green-300);
+  }
+  .site-footer__contact a:hover {
+    color: var(--green-200);
+  }
+</style>

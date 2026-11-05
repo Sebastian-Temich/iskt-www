@@ -1,0 +1,74 @@
+---
+// Strona 404 (W-09) w layoucie z W-02, z linkiem do strony głównej.
+import Breadcrumb from '../components/layout/Breadcrumb.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import { nav } from '../content/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Nie znaleziono strony · ISKT Greennovation"
+  description="Strona, której szukasz, nie istnieje albo została przeniesiona."
+>
+  <section class="not-found">
+    <div class="not-found__inner">
+      <Breadcrumb
+        items={[{ label: 'Start', href: nav.home }, { label: 'Nie znaleziono strony' }]}
+      />
+      <Card padding="lg" class="not-found__card">
+        <Badge tone="lime">Błąd 404</Badge>
+        <SectionHeading
+          as="h1"
+          align="left"
+          title="Nie znaleziono strony"
+          subtitle="Strona, której szukasz, nie istnieje albo została przeniesiona. Wróć na stronę główną albo zobacz nasze kompetencje."
+        />
+        <div class="not-found__actions">
+          <Button href={nav.home} size="lg" iconRight="arrow-right">
+            Wróć na stronę główną
+          </Button>
+          <Button href={nav.competences} size="lg" variant="outline">
+            Zobacz kompetencje
+          </Button>
+        </div>
+      </Card>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    padding: var(--space-16) var(--container-pad) var(--space-20);
+    background: var(--gradient-wash);
+  }
+  .not-found__inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .not-found__inner :global(.not-found__card) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  @media (max-width: 480px) {
+    .not-found__actions {
+      width: 100%;
+    }
+    .not-found__actions :global(.btn) {
+      width: 100%;
+      white-space: normal;
+    }
+  }
+</style>

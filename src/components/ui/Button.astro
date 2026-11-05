@@ -1,0 +1,165 @@
+---
+// Przycisk DS (DS/_ds_bundle.js:483) przepisany na .astro. Renderuje <a> (z href) albo <button>,
+// nigdy oba zagnieżdżone.
+import type { HTMLAttributes } from 'astro/types';
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'dark';
+type Size = 'sm' | 'md' | 'lg';
+
+interface Props {
+  href?: string;
+  variant?: Variant;
+  size?: Size;
+  iconLeft?: IconName;
+  iconRight?: IconName;
+  fullWidth?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  class?: string;
+  target?: HTMLAttributes<'a'>['target'];
+  rel?: string;
+  'aria-current'?: HTMLAttributes<'a'>['aria-current'];
+}
+
+const {
+  href,
+  variant = 'primary',
+  size = 'md',
+  iconLeft,
+  iconRight,
+  fullWidth = false,
+  type = 'button',
+  disabled = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const iconSize = { sm: 16, md: 18, lg: 20 }[size];
+const classes = ['btn', `btn--${variant}`, `btn--${size}`, fullWidth && 'btn--full', className];
+---
+
+{href ? (
+  <a href={href} class:list={classes} {...rest}>
+    {iconLeft && <Icon name={iconLeft} size={iconSize} />}
+    <slot />
+    {iconRight && <Icon name={iconRight} size={iconSize} />}
+  </a>
+) : (
+  <button type={type} disabled={disabled} class:list={classes} {...rest}>
+    {iconLeft && <Icon name={iconLeft} size={iconSize} />}
+    <slot />
+    {iconRight && <Icon name={iconRight} size={iconSize} />}
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--ls-tight);
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      background var(--dur-fast) var(--ease-standard),
+      box-shadow var(--dur-base) var(--ease-standard),
+      transform var(--dur-fast) var(--ease-standard);
+  }
+  .btn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.99);
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .btn--full {
+    width: 100%;
+  }
+
+  .btn--sm {
+    gap: 0.4rem;
+    min-height: 38px;
+    padding: 0.5rem 1rem;
+    font-size: var(--text-sm);
+  }
+  .btn--md {
+    gap: 0.5rem;
+    min-height: 46px;
+    padding: 0.7rem 1.4rem;
+    font-size: var(--text-base);
+  }
+  .btn--lg {
+    gap: 0.6rem;
+    min-height: 56px;
+    padding: 0.95rem 1.9rem;
+    font-size: var(--text-lg);
+  }
+
+  .btn--primary {
+    color: #fff;
+    background: var(--green-700);
+    border: 1px solid var(--green-700);
+    box-shadow: var(--shadow-xs);
+  }
+  .btn--primary:hover:not(:disabled) {
+    color: #fff;
+    background: var(--green-800);
+    box-shadow: var(--shadow-brand);
+  }
+  .btn--secondary {
+    color: #fff;
+    background: var(--green-500);
+    border: 1px solid var(--green-500);
+    box-shadow: var(--shadow-xs);
+  }
+  .btn--secondary:hover:not(:disabled) {
+    color: #fff;
+    background: var(--green-600);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn--outline {
+    color: var(--green-700);
+    background: transparent;
+    border: 1.5px solid var(--green-700);
+  }
+  .btn--outline:hover:not(:disabled) {
+    color: var(--green-700);
+    background: var(--green-50);
+  }
+  .btn--ghost {
+    color: var(--green-700);
+    background: transparent;
+    border: 1px solid transparent;
+  }
+  .btn--ghost:hover:not(:disabled) {
+    color: var(--green-700);
+    background: var(--green-50);
+  }
+  .btn--dark {
+    color: #fff;
+    background: var(--ink-900);
+    border: 1px solid var(--ink-900);
+    box-shadow: var(--shadow-xs);
+  }
+  .btn--dark:hover:not(:disabled) {
+    color: #fff;
+    background: var(--ink-700);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+    }
+    .btn:active:not(:disabled) {
+      transform: none;
+    }
+  }
+</style>
