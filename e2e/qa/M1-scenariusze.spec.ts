@@ -47,10 +47,8 @@ test.describe('QA M1', () => {
     await expect(page.locator('main a[href="/"]').first()).toBeVisible();
   });
 
-  // QA-M1-2: test oczekuje porażki (test.fail), dopóki błąd istnieje; po naprawie zmieni się w
-  // nieoczekiwany sukces i CI to wykaże, więc naprawa usuwa test.fail.
+  // QA-M1-2: naprawione w #23; zachowanie CSP w przeglądarce sprawdza e2e/csp.spec.ts.
   test('QA-M1-2: vercel.json ustawia Content-Security-Policy z architektury', () => {
-    test.fail(true, 'QA-M1-2');
     const config = JSON.parse(readFileSync('vercel.json', 'utf8'));
     const keys = config.headers.flatMap((h: { headers: { key: string }[] }) =>
       h.headers.map((x) => x.key.toLowerCase()),

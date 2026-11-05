@@ -97,5 +97,9 @@ export default defineConfig({
     seoOutput(),
     ...(useNodeAdapter ? [e2eNodePreview()] : []),
   ],
+  // CSP bez hashy (vercel.json, #23): style i skrypty zawsze jako pliki w /_astro/, nigdy inline,
+  // więc polityka 'self' nie zależy od treści komponentów.
+  build: { inlineStylesheets: 'never' },
+  vite: { build: { assetsInlineLimit: 0 } },
   server: { port: 55326 },
 });

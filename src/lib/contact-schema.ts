@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+// CSP bez 'unsafe-eval' (vercel.json, #23): zod v4 przy pierwszym parsowaniu obiektu sprawdza
+// `new Function("")` (JIT), co w przeglądarce zgłasza naruszenie script-src. Tryb bez JIT pomija tę
+// próbę i działa tak samo.
+z.config({ jitless: true });
+
 /**
  * Schemat zgłoszenia z formularza kontaktowego (W-04, W-05; ADR-004 pkt 2), wspólny dla
  * `ContactForm` (walidacja w przeglądarce) i `POST /api/contact` (walidacja serwera, zawsze ponowna).
