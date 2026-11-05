@@ -8,7 +8,7 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #5 | Szkielet projektu Astro, CI, tokeny i czcionki | done | 1 | M1 Szkielet, layout i strona główna | #17 merged | pass |
 | #6 | Layout strony i prymitywy UI, strona 404 | done | 2 | M1 Szkielet, layout i strona główna | #18 merged | pass |
 | #7 | SEO techniczne - meta, Open Graph, sitemap, robots, favicony | done | 1 | M1 Szkielet, layout i strona główna | #20 merged | pass |
-| #8 | Strona główna - hero, kompetencje, sekcja kontaktu | in-progress | 2 | M1 Szkielet, layout i strona główna | #19 open | pass |
+| #8 | Strona główna - hero, kompetencje, sekcja kontaktu | done | 2 | M1 Szkielet, layout i strona główna | #19 merged | pass |
 | #9 | Strona polityki prywatności z roboczą treścią | todo | 0 | M2 Formularz kontaktowy end-to-end | - | - |
 | #10 | Komponenty stron usług i strona ESG | todo | 0 | M3 Strony usług | - | - |
 | #11 | Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | todo | 0 | M2 Formularz kontaktowy end-to-end | - | - |

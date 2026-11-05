@@ -1,16 +1,16 @@
 ---
 zadania_todo: 8
-zadania_in_progress: 1
+zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 3
+zadania_done: 4
 zadania_anulowane: 0
-pr_otwarte: 1
+pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `<head>` (l. 1-22) siedmiu plików `D/*.dc.html`, `D/sitemap.xml`, `D/robots.txt`, `D/assets/*`, `src/lib/env.ts`, `src/content/site.ts`, `docs/07-realizacja/T-6.md`, `.github/workflows/ci.yml`, `playwright.config.ts`, `node_modules/@astrojs/vercel/dist/index.js` (kolejność hooków i kopiowanie do `.vercel/output`)."}, {"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "Favicony i obraz OG", "decyzja": "wygenerowane jednorazowo skryptem z `sharp` (poza repo); obraz OG używa systemowego kroju sans (Helvetica Neue), bo `sharp`/librsvg nie czyta `woff2` Inter."}, {"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "Jak przetestować e2e obie wartości `PUBLIC_SITE_ENV` przy jednym serwerze testów (`playwright.config.ts` poza zakresem)?", "decyzja": "Serwer testów to staging (wartość domyślna); test „produkcja” uruchamia drugi `astro build --outDir` w katalogu wyników testu z `PUBLIC_SITE_ENV=production` i czyta pliki. Build nadpisuje `.vercel/output`, więc test robi kopię i ją przywraca."}, {"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "Strona bez wpisu (404)", "decyzja": "bez canonical i `og:url`, z `noindex`."}, {"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "`BaseLayout` props `title`/`description`", "decyzja": "opcjonalne, używane tylko dla stron bez wpisu w `seo.ts` (404); dla stron z wpisem wygrywa `seo.ts`, więc tymczasowy tytuł w `index.astro` jest ignorowany."}]
-ostatnia_synchronizacja: 2026-11-05T15:31:08Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `docs/02-design/zrodla/Strona firmowa ISKT/ISKT-standalone.dc.html`, `_ds/…/_ds_bundle.js` (l. 755-845, 1097-1166), `src/layouts/BaseLayout.astro`, `src/components/layout/SiteHeader.astro`, prymitywy `src/components/ui/*`, `src/pages/404.astro`, `e2e/layout.spec.ts`, `playwright.config.ts`, `docs/07-realizacja/T-6.md` (format raportu). Pliki spoza „Zakresu” nie były zmieniane."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Dane kontaktowe w sekcji", "decyzja": "tylko adres i NIP/REGON jak w designie (l. 160-163); e-mail i telefon są w stopce."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "`Field`", "decyzja": "jeden komponent dla Input i Textarea (`type=\"textarea\"`), `*` z `aria-hidden` (wymagalność przekazuje atrybut `required`), `aria-invalid` i komunikat błędu gotowe dla T6."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Kontrolki hero na 375 px", "decyzja": "przyciski na całą szerokość poniżej 480 px (wzorzec z `404.astro`), a kolumny hero i kontaktu `minmax(min(300px, 100%), 1fr)`, żeby nie wymuszać poziomego scrolla."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Logo hero: `loading`", "decyzja": "`eager` zamiast `lazy` z designu, bo jest w pierwszym ekranie na desktopie (LCP); dekoracyjne `alt=\"\"` jak w designie."}]
+ostatnia_synchronizacja: 2026-11-05T16:20:09Z
 ---
 
 # Status projektu
