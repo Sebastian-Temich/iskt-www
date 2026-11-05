@@ -1,0 +1,14 @@
+---
+// Dane strukturalne schema.org (D/*.dc.html l. 19). `<` jest escapowany, żeby treść nie mogła
+// zamknąć elementu <script>.
+import type { JsonLdNode } from '../../content/seo';
+
+interface Props {
+  data: readonly JsonLdNode[];
+}
+
+const { data } = Astro.props;
+const json = JSON.stringify(data.length === 1 ? data[0] : data).replace(/</g, '\\u003c');
+---
+
+<script is:inline type="application/ld+json" set:html={json} />
