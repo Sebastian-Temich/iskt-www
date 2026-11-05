@@ -1,0 +1,68 @@
+---
+// Jasne pasmo CTA: D/ESG.dc.html:203-211 (h2 i zdanie po lewej, przycisk „Umów konsultację” po
+// prawej, zawijanie na wąskich ekranach).
+import { nav } from '../../content/site';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  heading: string;
+  text: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const { heading, text, ctaLabel = 'Umów konsultację', ctaHref = nav.contact } = Astro.props;
+---
+
+<section class="cta-band" data-component="cta-band">
+  <div class="cta-band__inner">
+    <div class="cta-band__text">
+      <h2>{heading}</h2>
+      <p>{text}</p>
+    </div>
+    <Button href={ctaHref} class="cta-band__button" iconRight="arrow-right">
+      {ctaLabel}
+    </Button>
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    padding: var(--space-16) var(--container-pad);
+    background: var(--surface-page);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .cta-band__inner {
+    max-width: var(--x-container-narrow);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cta-band__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 520px;
+  }
+  .cta-band__text h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+    text-wrap: pretty;
+  }
+  .cta-band__text p {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+  .cta-band__inner :global(.cta-band__button) {
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    box-shadow: var(--shadow-sm);
+  }
+</style>

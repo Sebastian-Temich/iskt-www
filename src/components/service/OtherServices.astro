@@ -1,0 +1,119 @@
+---
+// „Pozostałe kompetencje”: D/ESG.dc.html:213-243. Karty z content/site.ts (otherServices): wszystkie
+// usługi poza bieżącą, Szkolenia jako link zewnętrzny na końcu. Hover podnosi kartę; pod
+// prefers-reduced-motion bez przesunięcia i bez przejścia (W-11).
+import { otherServices } from '../../content/site';
+
+interface Props {
+  /** URL bieżącej strony usługi (pomijany na liście). */
+  current: string;
+  heading?: string;
+}
+
+const { current, heading = 'Pozostałe kompetencje' } = Astro.props;
+const cards = otherServices(current);
+---
+
+<section class="other-services" data-component="other-services">
+  <div class="other-services__inner">
+    <h2 class="other-services__heading">{heading}</h2>
+    <ul class="other-services__grid">
+      {cards.map((service) => (
+        <li>
+          <a
+            class="other-services__card"
+            href={service.href}
+            {...(service.external ? { target: '_blank', rel: 'noopener' } : {})}
+          >
+            <span class="other-services__title">{service.card.title}</span>
+            <span class="other-services__description">{service.card.description}</span>
+            {service.external && (
+              <span class="other-services__hidden">(otwiera się w nowej karcie)</span>
+            )}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .other-services {
+    padding: var(--space-16) var(--container-pad);
+    background: var(--surface-subtle);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .other-services__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .other-services__heading {
+    margin: 0;
+    font-size: var(--text-xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  .other-services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .other-services__grid li {
+    display: flex;
+  }
+  .other-services__card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: var(--space-5);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    color: var(--text-primary);
+    transition:
+      transform var(--dur-base) var(--ease-standard),
+      box-shadow var(--dur-base) var(--ease-standard);
+  }
+  .other-services__card:hover {
+    color: var(--text-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--green-500);
+  }
+  .other-services__title {
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+  }
+  .other-services__description {
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+  .other-services__hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .other-services__card {
+      transition: none;
+    }
+    .other-services__card:hover {
+      transform: none;
+    }
+  }
+</style>

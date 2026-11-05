@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { iconNames } from '../components/ui/icon-names';
-import { company, nav, services, trainingUrl } from './site';
+import { company, nav, otherServices, services, trainingUrl } from './site';
 
 const W01_SERVICE_URLS = [
   '/uslugi/projekty-br/',
@@ -39,6 +39,30 @@ describe('content/site', () => {
     for (const service of services) {
       expect(service.description.length, service.title).toBeGreaterThan(0);
       expect(iconNames, service.title).toContain(service.icon);
+    }
+  });
+
+  it('otherServices pomija bieżącą stronę, Szkolenia na końcu, karty z designu', () => {
+    const cards = otherServices('/uslugi/esg/');
+    expect(cards.map((s) => s.href)).toEqual([
+      '/uslugi/projekty-br/',
+      '/uslugi/ai-transformacja/',
+      '/startupy/',
+      '/uslugi/oprogramowanie/',
+      '/uslugi/interim/',
+      'https://szkolenia.iskt.pl',
+    ]);
+    expect(cards.map((s) => s.card.title)).toEqual([
+      'Dotacje i ulga B+R',
+      'Wdrożenia AI i automatyzacja',
+      'Wsparcie startupów',
+      'Oprogramowanie dedykowane',
+      'Interim: CAAO, CDO, AI, ESG',
+      'Szkolenia z AI i ESG',
+    ]);
+    for (const service of services) {
+      expect(service.card.description.length, service.title).toBeGreaterThan(0);
+      expect(otherServices(service.href), service.title).toHaveLength(services.length - 1);
     }
   });
 });

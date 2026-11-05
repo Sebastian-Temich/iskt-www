@@ -1,0 +1,92 @@
+---
+// Sekcja „Kiedy”: D/ESG.dc.html:79-94 (h2, akapit wprowadzenia, dwie kolumny z lewą belką 3 px:
+// zielona dla „działa”, neutralna dla „nie działa”). Akapit wprowadzenia trafia do slotu, bo zawiera
+// wyróżnienie <strong>.
+export interface WhenColumn {
+  title: string;
+  text: string;
+  /** `positive` = belka --green-500, `neutral` = belka --neutral-300. */
+  tone: 'positive' | 'neutral';
+}
+
+interface Props {
+  heading: string;
+  columns: WhenColumn[];
+}
+
+const { heading, columns } = Astro.props;
+---
+
+<section class="when-intro" data-component="when-intro">
+  <div class="when-intro__inner">
+    <h2 class="when-intro__heading">{heading}</h2>
+    <p class="when-intro__lead">
+      <slot />
+    </p>
+    <div class="when-intro__columns">
+      {columns.map((column) => (
+        <div class:list={['when-intro__column', `when-intro__column--${column.tone}`]}>
+          <h3>{column.title}</h3>
+          <p>{column.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .when-intro {
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-page);
+  }
+  .when-intro__inner {
+    max-width: var(--x-container-narrow);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .when-intro__heading {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  .when-intro__lead {
+    margin: 0;
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .when-intro__lead :global(strong) {
+    color: var(--text-primary);
+  }
+  .when-intro__columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: var(--space-6);
+    padding-top: var(--space-2);
+  }
+  .when-intro__column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-left: var(--space-5);
+    border-left: 3px solid var(--green-500);
+  }
+  .when-intro__column--neutral {
+    border-left-color: var(--neutral-300);
+  }
+  .when-intro__column h3 {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+  }
+  .when-intro__column p {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+</style>
