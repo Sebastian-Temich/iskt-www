@@ -81,7 +81,7 @@ Brak bazy danych i trwałego stanu (ADR-001, ADR-002). Dane formularza żyją ty
 | `website` | honeypot, musi być pusty (ukryty, `tabindex=-1`, `autocomplete=off`) |
 
 Odpowiedzi: `200 {ok:true}`, `400 {error:"invalid", fields:{…}}`, `429 {error:"rate_limited"}`,
-`502 {error:"send_failed"}`, `405` dla innych metod.
+`502 {error:"send_failed"}`, `405` dla innych metod, `413` dla ciała > 64 kB, `415` dla innych typów treści; bez JS (urlencoded) zamiast JSON `303` na `/?kontakt=STATUS#kontakt`.
 
 Migracje są zgodne wstecz (expand/contract): poprzednia wersja aplikacji działa na nowym schemacie.
 W tym projekcie nie ma schematu; zasada obowiązuje każdą przyszłą bazę (np. CMS) i jej ADR.
@@ -190,7 +190,7 @@ chevron-down, chevron-up.
 | Luka | Rozstrzygnięcie |
 |---|---|
 | Strona B+R: właściciel wybrał `Projekty-BR.dc.html` (wersja podstawowa), ale ma ona `noindex`, brak meta, a wszystkie linki w designie prowadzą do `Projekty-BR-Ekspercki.dc.html` | Treść i układ z `Projekty-BR.dc.html` (decyzja właściciela); meta (title, description, canonical, JSON-LD Service/Breadcrumb) z `<head>` `Projekty-BR-Ekspercki.dc.html:6-19`; bez `noindex`. Pytanie potwierdzające w checkpoincie |
-| Nawigacja: design ma tylko „Kompetencje” i CTA, bez menu mobilnego | Zostaje jak w designie (W-02): strony usług są osiągalne z kafli `/#kompetencje` i z „Pozostałe kompetencje”; dwa elementy nagłówka mieszczą się na 320 px (zawijanie, bez hamburgera); `aria-current` na linku odpowiadającym bieżącej stronie, gdy dotyczy |
+| Nawigacja: design ma tylko „Kompetencje” i CTA, bez menu mobilnego; W-02 wymaga wyróżnienia bieżącej strony z `aria-current="page"` | Nawigację strony tworzą dwa landmarki `<nav>`: nagłówek (`SiteHeader`) i ścieżka (`Breadcrumb`, `<nav aria-label="Ścieżka">`, na stronach usług i polityce). Bieżąca strona: **na stronie głównej** link logo w nagłówku ma `aria-current="page"`; **na każdej innej stronie** ostatnia pozycja ścieżki to nazwa bieżącej strony jako `<a aria-current="page">` wyróżniona wizualnie (`--fw-semibold`, `--text-primary`, bez podkreślenia; poprzednie pozycje w `--text-link`), a w nagłówku link „Kompetencje” na stronach usług ma stan aktywny (podkreślenie 2 px `--color-accent`, `aria-current="true"` — sekcja, nie strona). Dwa elementy nagłówka mieszczą się od 320 px (zawijanie, bez hamburgera — design nie ma menu mobilnego, więc kryterium W-02 o menu mobilnym nie ma zastosowania). Test E2E każdej strony sprawdza dokładnie jeden element `aria-current="page"` wskazujący bieżący URL |
 | Nagłówek home w `<main>` wewnątrz hero | `SiteHeader` zawsze w `<header>` poza `<main>`; wygląd home bez zmian (nałożony na tło hero) |
 | Brak polityki prywatności i klauzuli | Strona `/polityka-prywatnosci/` w stylu stron usług i robocza klauzula przy formularzu (decyzja właściciela P2), oznaczone do akceptacji przy odbiorze |
 | Stopki różnią się między stronami | Jedna stopka: wersja pełna z `D/ESG.dc.html:247-252` + link do polityki prywatności; rok z daty buildu |
@@ -210,7 +210,14 @@ chevron-down, chevron-up.
 
 - **Auth:** brak kont i paneli; jedyna powierzchnia zapisu to `POST /api/contact`.
 - **Dostęp do danych:** brak przechowywanych danych (ADR-001). Walidacja serwera Zod, honeypot,
-  limit rozmiaru ciała żądania 16 kB, sprawdzenie `Origin` = `PUBLIC_SITE_URL`, tylko `POST` (ADR-004).
+  sprawdzenie `Origin` = `PUBLIC_SITE_URL`, tylko `POST` (ADR-004). **Transport i limit ciała:**
+  `ContactForm` wysyła `fetch` z `Content-Type: application/json` (UTF-8); bez JS formularz wysyła
+  `application/x-www-form-urlencoded` (progresywne ulepszanie, odpowiedź 303 na `/?kontakt=STATUS#kontakt` ze stanem w
+  parametrze). Inne typy → 415. Limit ciała **64 kB** dla obu formatów, liczony z najgorszego przypadku
+  dozwolonych pól: znak 4-bajtowy UTF-8 to 12 bajtów w urlencoded, więc 5000 × 12 + 100 × 12 + 254 × 12
+  + honeypot i narzut ≈ 63,1 kB < 64 kB (JSON: ≤ 4 B/znak ≈ 21 kB). Długości liczymy w znakach Unicode
+  (code points), nie bajtach. Testy: poprawne żądanie z maksymalnymi długościami pól złożonymi ze
+  znaków 4-bajtowych w obu formatach → 200 (z mockiem), ciało > 64 kB → 413.
 - **Rate limit:** ADR-003.
 - **Sekrety:** `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`, `PUBLIC_SITE_URL`, `PUBLIC_SITE_ENV`,
   `RATE_LIMIT_PROVIDER`, `RATE_LIMIT_SALT` — w `.env.example` bez wartości; `lib/env.ts` waliduje
