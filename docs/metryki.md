@@ -13,3 +13,4 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 | #23 QA M1: brak nagłówka Content-Security-Policy z architektury | M | 3h 23min | 1 | 2 | 1 | PR #24 |
 | #22 QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | M | 2h 24min | 1 | 2 | 0 | PR #27 |
 | #29 QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main | M | 36min | 1 | 1 | 0 | PR #30 |
+| #10 Komponenty stron usług i strona ESG | M | 29min | 1 | 1 | 0 | PR #31 |

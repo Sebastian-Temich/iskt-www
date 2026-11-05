@@ -1,16 +1,16 @@
 ---
 zadania_todo: 5
-zadania_in_progress: 1
+zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 9
+zadania_done: 10
 zadania_anulowane: 0
-pr_otwarte: 1
-ci_fail: 1
+pr_otwarte: 0
+ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-29", "pytanie": "Co sprawdza test QA-M1-1 zamiast braku arkuszy?", "decyzja": "brak `<style>` inline i arkusze wyłącznie z `/_astro/` tego samego źródła, bo to warunek zgodności z CSP i odwrotność poprzedniego założenia; sprawdzenie tokenu koloru zostaje."}, {"data": "2026-11-05", "zrodlo": "T-29", "pytanie": "CSS wbudowany (`'always'`, T-22) czy CSS w plikach (`'never'`, T-23)?", "decyzja": "`'never'`: CSP `style-src 'self'` bez `'unsafe-inline'` jest wymaganiem architektury, a wbudowany CSS wymagałby `'unsafe-inline'` albo hashy generowanych przy każdej zmianie stylów. W-10 jest spełnione również z CSS w plikach (Lighthouse mobile QA M2: 98, 99, 96)."}, {"data": "2026-11-05", "zrodlo": "wlasciciel", "pytanie": "E-006: wysyłka e-maila na stagingu (W-04, O-3) sprawdzana przy odbiorze końcowym, nie w QA M2", "decyzja": "kto: właściciel 2026-11-05, E-006 opcja C; na co: kontynuacja M3 mimo niedziałającej wysyłki przez Resend (403: CONTACT_TO inny niż adres konta Resend); zakres: konfiguracja CONTACT_TO/Resend do poprawy przez właściciela przed odbiorem; do kiedy: odbiór zlecenia (etap wydanie); ryzyko: ścieżka W-04 niesprawdzona do końca. Cofnięcie: polecenie właściciela: opcja A albo B z E-006 i ponowny test O-3 przez QA"}, {"data": "2026-11-05", "zrodlo": "qa", "pytanie": "Pomiar reguły WAF żądaniami z niepoprawnym ciałem (400) zamiast honeypota (200)", "decyzja": "błąd cytowania w pętli; reguła liczy żądania przed funkcją, w dwóch oknach dokładnie 5 przeszło, 6. → 429; żaden e-mail nie został wysłany. Cofnięcie: powtórka O-5 przez właściciela przy odbiorze"}, {"data": "2026-11-05", "zrodlo": "qa", "pytanie": "Test „CSS wbudowany” (e2e/qa/QA-M1-1-wydajnosc.spec.ts:26) bez test.fixme w PR QA M2", "decyzja": "QA nie zmienia plików spoza e2e/qa/MN-*, a zmiana uruchomiłaby lint; naprawa QA-M2-1 (#29) obejmuje ten test. Cofnięcie: #29 przed zadaniami M3"}]
-ostatnia_synchronizacja: 2026-11-05T21:49:33Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `D/AI-Transformacja.dc.html` i `D/Interim.dc.html` (sekcja „Pozostałe kompetencje”) dla treści i kolejności kart innych usług, `e2e/polityka.spec.ts` jako wzorzec testu, `src/components/home/ServiceTile.astro` i `src/components/ui/Button.astro` jako wzorzec komponentów."}, {"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "Aktualizacja gałęzi po scaleniu #29: orkiestrator polecił `git merge origin/main`, ale profil workera odrzuca `git merge`", "decyzja": "zrobiłem `git rebase origin/main` (krok 4 procedury sh-worker) i `git push --force-with-lease` na `task/10-*`. Konfliktów nie było, a treść zmian jest ta sama."}, {"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "Zdublowany klucz `build` w `astro.config.mjs`", "decyzja": "nie poprawiam go, bo to poza zakresem i ma własne issue #29 (PR #30)."}, {"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "Okruszki w hero", "decyzja": "`ServiceHero` ma slot `breadcrumb`. Strona sama przekazuje `Breadcrumb` (jak w kryterium 1), a kolejne strony usług ustalają własną ścieżkę."}, {"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "Podpis tabeli", "decyzja": "`<caption>` ukryty wizualnie, który nazywa przewijany region (`aria-labelledby`). Design nie ma widocznego podpisu, więc wygląd zostaje taki jak w designie."}]
+ostatnia_synchronizacja: 2026-11-05T22:01:44Z
 ---
 
 # Status projektu
