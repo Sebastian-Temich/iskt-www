@@ -1,0 +1,83 @@
+/* ISKT Greenovation — Color tokens
+   Źródło 1:1: DS/tokens/colors.css (docs/02-design/zrodla/…/_ds/…/tokens/colors.css).
+   Palette sampled directly from the ISKT brand mark (green leaves + circuit globe).
+   Core wordmark green ≈ #1E551D, deepest #0A3400, leaf-lime #54841D, pale leaf #D5EBAC. */
+
+:root {
+  /* ---- Brand green scale (nature) ---- */
+  --green-50: #f2f8ec;
+  --green-100: #e1efcf;
+  --green-200: #d5ebac; /* lightest leaf */
+  --green-300: #a9ce6e;
+  --green-400: #7fa83a;
+  --green-500: #54841d; /* leaf-lime accent */
+  --green-600: #2e6b1e;
+  --green-700: #1e551d; /* PRIMARY — the ISKT wordmark green */
+  --green-800: #123f14;
+  --green-900: #0a3400; /* deepest forest */
+
+  /* ---- Ink / tech (circuit side of the mark) ---- */
+  --ink-900: #0e1511; /* near-black, faintly green-warm — primary text */
+  --ink-800: #182019;
+  --ink-700: #2a322c;
+  --ink-600: #3e4740;
+
+  /* ---- Warm-neutral grays ---- */
+  --neutral-0: #ffffff;
+  --neutral-50: #fafbf8;
+  --neutral-100: #f3f5f0;
+  --neutral-200: #e7eae2;
+  --neutral-300: #d4d9cd;
+  --neutral-400: #aeb4a6;
+  --neutral-500: #7e857a;
+  --neutral-600: #5b6157;
+  --neutral-700: #40453d;
+  --neutral-800: #282c26;
+  --neutral-900: #14170f;
+
+  /* ---- Status ---- */
+  --success-500: #2e6b1e;
+  --success-50: #eaf4e3;
+  --warning-500: #b8860b;
+  --warning-50: #fbf3de;
+  --error-500: #b23b2e;
+  --error-50: #fbebe8;
+  --info-500: #1c6e6a; /* eco-teal */
+  --info-50: #e3f1f0;
+
+  /* ---- Semantic aliases ---- */
+  --color-primary: var(--green-700);
+  --color-primary-hover: var(--green-800);
+  --color-primary-active: var(--green-900);
+  --color-accent: var(--green-500); /* leaf-lime highlights */
+
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--neutral-600);
+  --text-muted: var(--neutral-500);
+  --text-brand: var(--green-700);
+  --text-on-dark: var(--neutral-50);
+  --text-on-brand: #ffffff;
+  --text-link: var(--green-700);
+  --text-link-hover: var(--green-900);
+
+  --surface-page: var(--neutral-0);
+  --surface-subtle: var(--neutral-50);
+  --surface-muted: var(--green-50); /* soft green wash sections */
+  --surface-card: var(--neutral-0);
+  --surface-dark: var(--ink-900); /* tech / footer sections */
+  --surface-brand: var(--green-700);
+
+  --border-subtle: var(--neutral-200);
+  --border-default: var(--neutral-300);
+  --border-strong: var(--neutral-400);
+  --border-brand: var(--green-700);
+
+  --focus-ring: color-mix(in srgb, var(--green-500) 55%, transparent);
+
+  /* ---- Pomocnicze z designu (architektura, „Design”) ---- */
+  --x-glow-1: rgba(84, 132, 29, 0.16);
+  --x-glow-2: rgba(84, 132, 29, 0.2);
+  --x-glow-3: rgba(213, 235, 172, 0.22);
+  --x-dark-card-bg: rgba(255, 255, 255, 0.04);
+  --x-dark-card-border: rgba(255, 255, 255, 0.1);
+}

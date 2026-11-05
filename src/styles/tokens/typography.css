@@ -1,0 +1,53 @@
+/* ISKT Greenovation — Typography tokens
+   Źródło 1:1: DS/tokens/typography.css; tokeny --x-* z architektury („Typografia”). */
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: var(--font-sans);
+
+  /* Type scale (rem) — modular ~1.2, tuned for a marketing one-pager */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.375rem; /* 22px */
+  --text-2xl: 1.75rem; /* 28px */
+  --text-3xl: 2.25rem; /* 36px */
+  --text-4xl: 3rem; /* 48px */
+  --text-5xl: 3.75rem; /* 60px */
+  --text-6xl: 4.5rem; /* 72px */
+
+  /* Weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* Line heights */
+  --lh-tight: 1.08;
+  --lh-snug: 1.25;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.65;
+
+  /* Letter spacing */
+  --ls-tighter: -0.03em;
+  --ls-tight: -0.015em;
+  --ls-normal: 0;
+  --ls-wide: 0.02em;
+  --ls-caps: 0.08em;
+
+  /* Semantic roles */
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-display);
+
+  /* ---- Nagłówki hero z designu (architektura) ---- */
+  --x-h1-home: clamp(2.2rem, 5vw, 3.6rem);
+  --x-h1-home-lh: 1.04;
+  --x-h1-service: clamp(2.2rem, 5.2vw, 3.8rem);
+  --x-h1-service-lh: 1.02;
+  --x-h1-br: clamp(2rem, 4.4vw, 3.2rem);
+  --x-h1-br-lh: 1.06;
+  --x-h2-cta: clamp(1.8rem, 3.6vw, 2.6rem);
+}

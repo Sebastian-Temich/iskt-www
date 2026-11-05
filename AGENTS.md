@@ -38,10 +38,12 @@ Stałe dla tego projektu, uzupełnia intake lub zadanie szkieletu:
 |---|---|
 | Typ projektu | Web: strona firmowa, strony statyczne (SSG) + jeden endpoint serverless formularza |
 | Framework | Astro 5 + TypeScript, adapter `@astrojs/vercel`, e-mail przez Resend (SDK `resend`); bez bazy danych |
-| Instalacja | `pnpm install` (Node LTS przez fnm) |
-| Lint | `pnpm lint` (ESLint + `prettier --check` + `astro check`) |
-| Testy | `pnpm test` (Vitest), `pnpm test:e2e` (Playwright chromium + webkit na `astro build` + `astro preview`) |
-| Build | `pnpm build` |
+| Instalacja | `fnm use` (Node 26 LTS z `.nvmrc`), `pnpm install --frozen-lockfile` |
+| Lint | `pnpm lint` (ESLint + `prettier --check .`) |
+| Typy | `pnpm typecheck` (`astro check`, TS strict) |
+| Testy | `pnpm test` (Vitest, `src/**/*.test.ts`) |
+| E2E | `pnpm exec playwright install chromium webkit` (raz), `pnpm test:e2e` (Playwright 1.61.1 chromium + webkit, `workers: 1`, na `astro build` + `astro preview --port 55327`) |
+| Build | `pnpm build` (wynik dla Vercel w `.vercel/output/`) |
 | Uruchomienie lokalne | `pnpm dev --port 55326` (port `dev` z bloku 55321-55329); `.env.local` z kluczem testowym albo `MAIL_TRANSPORT=mock` |
 | Baza danych | Brak — odstępstwo od kontraktu stałego („Baza lokalnie”, „Docker”) wg ADR-002 |
 
