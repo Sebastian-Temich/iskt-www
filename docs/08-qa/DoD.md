@@ -10,17 +10,20 @@ akceptacja_wlasciciela: false
 ## Dokumentacja
 
 - [ ] Raport QA powstał dla każdego kamienia milowego
+  (M1: `raport-M1.md`; pole zaznaczane w QA ostatniego kamienia M4)
 
 ## Funkcjonalność
 
-- [ ] Testy E2E przechodzą (chromium + webkit)
-- [ ] Integracja i zgodność z wymaganiami są sprawdzone
+- [x] Testy E2E przechodzą (chromium + webkit)
+- [x] Integracja i zgodność z wymaganiami są sprawdzone
 - [ ] Błędy z QA są issue i zostały zamknięte
+  (M1: QA-M1-1 i QA-M1-2 jako issue po merge'u; pole zaznaczane w QA ostatniego kamienia)
 
 ## Checklisty jakości
 
 - [ ] Nie ma otwartych zgłoszeń krytycznych ani istotnych
-- [ ] Bezpieczeństwo i sekrety są sprawdzone
+  (M1: 2 istotne otwarte — QA-M1-1, QA-M1-2)
+- [x] Bezpieczeństwo i sekrety są sprawdzone
 
 ## Checkpoint
 

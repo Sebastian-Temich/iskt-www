@@ -1,0 +1,41 @@
+# QA M1, commit ff5c386, 2026-11-05T16:20Z (UTC)
+zadania:
+  - id: QA-M1-1
+    tytul: "QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90)"
+    cel: >-
+      Lighthouse 12.8.2 na stagingu https://iskt-www.vercel.app/ w profilu mobile daje wydajność 87,
+      89, 89 (3 przebiegi), przy desktop 100; W-10 spełnione częściowo. LCP 3,5 s to logo w hero
+      (img _astro/iskt-logo…webp, opóźnienie renderu elementu), FCP 2,1 s; audyty: 3 blokujące pliki
+      CSS (_astro/index.*.css) i „Properly size images” (szac. 84 KiB). Kroki: npx lighthouse@12.8.2
+      https://iskt-www.vercel.app/ --form-factor=mobile --skip-audits=is-crawlable. Oczekiwane: ≥ 90.
+      Pliki designu: docs/02-design/zrodla/Strona firmowa ISKT/ISKT-standalone.dc.html (hero l. 54-86).
+      Poza zakresem: inne strony (T11).
+    kryteria:
+      - "Logo w hero ładowane jako obraz LCP: loading=eager, fetchpriority=high, rozmiary (widths/sizes) dopasowane do miejsca na 375/768/1440 px, bez nadmiaru > 10 KiB w audycie uses-responsive-images"
+      - "CSS strony głównej nie blokuje renderu ponad potrzebę: jeden plik krytycznego CSS albo CSS wbudowany (build.inlineStylesheets) - audyt render-blocking bez plików _astro/*.css albo z jednym"
+      - "Lighthouse 12.8.2 na stagingu po merge'u, profil mobile, 3 przebiegi: wydajność ≥ 90 w każdym; desktop nadal ≥ 90 we wszystkich 4 kategoriach; wyniki w raporcie T-NR.md"
+      - "pnpm lint, pnpm typecheck, pnpm test i pnpm test:e2e przechodzą (wygląd hero bez zmian: e2e/home.spec.ts)"
+    pliki: [src/components/home/HomeHero.astro, src/layouts/BaseLayout.astro, astro.config.mjs, src/styles/]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/home.spec.ts
+    typ: qa
+    waga: istotne
+    milestone: M1 Szkielet, layout i strona główna
+
+  - id: QA-M1-2
+    tytul: "QA M1: brak nagłówka Content-Security-Policy z architektury"
+    cel: >-
+      Architektura (sekcja „Bezpieczeństwo”, nagłówki) wymaga Content-Security-Policy w vercel.json
+      (self, bez inline skryptów poza hashami Astro); na stagingu odpowiedź / ma Referrer-Policy,
+      X-Content-Type-Options, Permissions-Policy i X-Robots-Tag, ale nie ma CSP (curl -sI
+      https://iskt-www.vercel.app/). Dotyczy W-10 (dobre praktyki) i W-12. Poza zakresem: endpoint
+      formularza (T6) poza dopuszczeniem connect-src 'self'.
+    kryteria:
+      - "vercel.json ustawia Content-Security-Policy dla /(.*): default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' (z hashami lub 'unsafe-inline' tylko gdy wymaga tego Astro, uzasadnione w raporcie); script-src 'self' z hashami skryptów Astro; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+      - "test e2e/qa/M1-scenariusze.spec.ts „QA-M1-2” przechodzi po usunięciu test.fail (z test.fail jest oznaczony jako nieoczekiwany sukces)"
+      - "Strona główna i 404 bez błędów CSP w konsoli przeglądarki w chromium i webkit (nowy test e2e nasłuchujący konsoli na /)"
+      - "Na stagingu curl -sI https://iskt-www.vercel.app/ pokazuje nagłówek content-security-policy (wynik w raporcie T-NR.md); pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [vercel.json, e2e/qa/M1-scenariusze.spec.ts, e2e/csp.spec.ts]
+    testy: pnpm exec playwright test e2e/qa/M1-scenariusze.spec.ts e2e/csp.spec.ts --project=chromium --project=webkit
+    typ: qa
+    waga: istotne
+    milestone: M1 Szkielet, layout i strona główna
