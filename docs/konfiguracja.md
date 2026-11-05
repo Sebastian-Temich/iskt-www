@@ -25,7 +25,7 @@ modele:
     rozumowanie: high
 hosting:
   aplikacja: vercel
-  baza: supabase-cloud
+  baza: brak
   region: eu
   konta: klient
   zaakceptowany: false
