@@ -16,3 +16,4 @@ Plik wspólny. Aktualizuje go wyłącznie orkiestrator przez `shctl task close`.
 - #10: Komponenty stron usług i strona ESG (PR #31)
 - #13: Strony Interim i Startupy (PR #32)
 - #12: Strony AI-transformacja i Oprogramowanie (PR #33)
+- #14: Strona Projekty B+R z FAQ (PR #34)

@@ -1,16 +1,16 @@
 ---
 zadania_todo: 2
-zadania_in_progress: 1
+zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 12
+zadania_done: 13
 zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `src/pages/uslugi/esg.astro`, `e2e/esg.spec.ts` i `T-10.md` jako wzorzec, komponenty `src/components/service/*`, `src/components/ui/{Badge,Icon,icon-names}`, `src/content/{site,seo}.ts`, `playwright.config.ts`."}, {"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "Kolejność `data-component` na Oprogramowaniu", "decyzja": "dwie karty `product-card` między `scope-list` i `comparison-table`; sekcja nie ma własnego `data-component`, żeby test kolejności był jednoznaczny."}, {"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "Okruszki", "decyzja": "„AI i transformacja cyfrowa” i „Rozwój oprogramowania”, jak w designie (l. 67) i w BreadcrumbList `seo.ts`."}, {"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "Cudzysłowy zamykające w designie są ASCII (`„wdróżmy AI\"`, `„Chcemy zacząć z AI, nie wiemy gdzie\"`)", "decyzja": "użyłem polskiego `”`, jak w `esg.astro`."}, {"data": "2026-11-05", "zrodlo": "T-12", "pytanie": "Sekcja „Nasze autorskie aplikacje” (nagłówek, opis, siatka)", "decyzja": "w `oprogramowanie.astro` z własnym `<style>`, a `ProductCard` to pojedyncza karta. Issue wymaga tylko nowego `ProductCard`, a sekcja występuje na jednej stronie."}]
-ostatnia_synchronizacja: 2026-11-05T22:36:40Z
+ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Klawiatura w teście: Tab między przyciskami?", "decyzja": "fokus ustawiany przez `focus()`. WebKit na macOS domyślnie pomija przyciski przy Tab (ustawienie systemu). Test sprawdza obsługę Enter i Spacji."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Test „bez noindex”: brak `meta robots`?", "decyzja": "robots równy temu na stronie głównej i bez `nofollow`. W E2E (staging) wszystkie strony mają `noindex` środowiskowy z W-08. Brak noindex na produkcji zapewnia wpis w `seo.ts`, co test też sprawdza."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Sekcja „Programy”: osobny komponent sekcji?", "decyzja": "`ProgramCard` to pojedyncza karta (nazwa z architektury), a siatkę z `SectionHeading` składa strona. Styl siatki jest w `<style>` strony."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Chipy: lista z designu (5) czy wszystkie usługi z `site.ts` (z Interim)?", "decyzja": "5 chipów z designu, w tej samej kolejności i z tymi etykietami. Zmienione są tylko adresy: na URL z W-01 zamiast `#kompetencje`, zgodnie z kryterium issue."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Okruszek bieżącej strony: `<span>` z designu czy link?", "decyzja": "link z `aria-current=\"page\"`, spójnie z ESG, Interim i Startupami (`Breadcrumb` z T-10)."}]
+ostatnia_synchronizacja: 2026-11-05T23:10:40Z
 ---
 
 # Status projektu

@@ -16,3 +16,4 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 | #10 Komponenty stron usług i strona ESG | M | 29min | 1 | 1 | 0 | PR #31 |
 | #13 Strony Interim i Startupy | M | 31min | 1 | 1 | 0 | PR #32 |
 | #12 Strony AI-transformacja i Oprogramowanie | M | 34min | 1 | 1 | 0 | PR #33 |
+| #14 Strona Projekty B+R z FAQ | M | 35min | 1 | 1 | 0 | PR #34 |
