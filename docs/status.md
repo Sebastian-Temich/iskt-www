@@ -1,5 +1,5 @@
 ---
-zadania_todo: 6
+zadania_todo: 7
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
@@ -10,7 +10,7 @@ pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
 ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `docs/04-architektura/architektura.md` (CSP), `e2e/smoke.spec.ts`, `e2e/qa/M1-scenariusze.spec.ts`, `playwright.config.ts`, `src/styles/tokens/spacing.css`."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Preloady fontów w `BaseLayout.astro` zostają", "decyzja": "ich usunięcie pogorszyło FCP (2,6 s, wynik 88–89)."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Nowy test w `e2e/qa/QA-M1-1-wydajnosc.spec.ts` (poza „Zakresem”)", "decyzja": "kryteria 1 i 2 potrzebują testu, a `e2e/home.spec.ts` ma zostać bez zmian; nazwa jak `e2e/qa/M1-scenariusze.spec.ts`."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "Font zmienny Inter odrzucony", "decyzja": "zmienia kontrakt `@font-face` sprawdzany w `e2e/smoke.spec.ts` (osobna ściana na wagę) i wymagałby zmiany testu spoza zakresu."}, {"data": "2026-11-05", "zrodlo": "T-22", "pytanie": "-", "decyzja": "Pełne pliki latin-ext usunięte z `public/fonts/` (nieużywane); nowe pliki mają nazwy `*-latin-ext-pl-*`, żeby nie trafić na stary plik w cache przeglądarki/CDN."}]
-ostatnia_synchronizacja: 2026-11-05T20:17:57Z
+ostatnia_synchronizacja: 2026-11-05T21:12:47Z
 ---
 
 # Status projektu
