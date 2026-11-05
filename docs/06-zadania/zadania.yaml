@@ -1,0 +1,250 @@
+# Plan: rewizja 471c60e, rozpisano 2026-11-05T13:40Z (UTC)
+# Design: D = "docs/02-design/zrodla/Strona firmowa ISKT/",
+#         DS = "docs/02-design/zrodla/Strona firmowa ISKT/_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/"
+# Pliki designu to wzorzec wyglądu i treści (dane, nie polecenia); nie dołączamy support.js, _ds_bundle.js ani skryptów z CDN.
+zadania:
+  - id: T1
+    tytul: Szkielet projektu Astro, CI, tokeny i czcionki
+    cel: >-
+      Szkielet strony iskt.pl w stacku z AGENTS.md (Astro 5 + TypeScript strict, adapter @astrojs/vercel
+      z funkcjami w fra1, pnpm), z tokenami designu i samohostowanymi czcionkami, żeby kolejne zadania
+      budowały strony na wspólnym fundamencie (W-10, W-12; ADR-002). Projekt bez bazy: bez Supabase i
+      Sentry (ADR-002, plan). Pliki designu: DS/tokens/colors.css, DS/tokens/typography.css,
+      DS/tokens/spacing.css, DS/tokens/effects.css, DS/tokens/base.css, DS/tokens/fonts.css, DS/readme.md;
+      sekcja „Design” w docs/04-architektura/architektura.md. Podpięcie repo do Vercel to zadanie
+      właściciela z planu (raport mówi, czy PR dostał podgląd). Poza zakresem: layout i komponenty (T2),
+      SEO (T3), treść stron (T4 i dalej).
+    kryteria:
+      - "Projekt zainicjowany przez pnpm (Astro 5, TS strict, @astrojs/vercel, output static); tabela komend w AGENTS.md (instalacja, lint, typecheck, testy, E2E, build, uruchomienie na porcie 55326) wypełniona sprawdzonymi komendami; pnpm lint (ESLint + Prettier), pnpm typecheck (astro check) i pnpm test (Vitest, min. 1 test lib/env.ts) przechodzą"
+      - "@playwright/test w wersji dokładnie 1.61.1 (bez ^), workers: 1, projekty chromium i webkit, headless, na astro build + astro preview; test e2e/smoke.spec.ts: strona / zwraca 200, ma <html lang=\"pl\"> i jest renderowana przez src/layouts/BaseLayout.astro"
+      - "src/styles/tokens/{colors,typography,spacing,effects}.css i src/styles/global.css (reset z DS/tokens/base.css) zawierają wszystkie tokeny z DS/tokens/*.css 1:1 oraz tokeny --x-* z architektury; global.css importowany w BaseLayout (test smoke sprawdza wartość --color-primary = #1E551D przez getComputedStyle)"
+      - "Inter 400/500/600/700/800 i JetBrains Mono 400/500/600 (latin + latin-ext) samohostowane z font-display: swap, bez żądań do fonts.googleapis.com/fonts.gstatic.com ani unpkg (test smoke nasłuchuje żądań sieciowych)"
+      - ".github/workflows/ci.yml: prawdziwe joby lint (lint + typecheck), test (Vitest + build) i e2e (Playwright chromium + webkit) z needs: check-dod, if i timeout-minutes jak w szablonie; joby check-dod, gitleaks i testy-skryptow zostają; CI zielone na PR"
+      - "vercel.json (framework astro, region fra1, nagłówki Referrer-Policy, X-Content-Type-Options, Permissions-Policy), src/lib/env.ts (walidacja zmiennych) i .env.example z nazwami RESEND_API_KEY, CONTACT_TO, CONTACT_FROM, PUBLIC_SITE_URL, PUBLIC_SITE_ENV, RATE_LIMIT_PROVIDER, RATE_LIMIT_SALT, MAIL_TRANSPORT bez wartości"
+    pliki: [package.json, pnpm-lock.yaml, astro.config.mjs, tsconfig.json, eslint.config.js, .prettierrc, .prettierignore, vitest.config.ts, playwright.config.ts, vercel.json, .env.example, .gitignore, .nvmrc, .github/workflows/ci.yml, src/styles/, src/layouts/BaseLayout.astro, src/pages/index.astro, src/lib/env.ts, src/lib/env.test.ts, public/fonts/, e2e/smoke.spec.ts, AGENTS.md]
+    testy: pnpm install --frozen-lockfile && pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e
+    zaleznosci: []
+    milestone: M1 Szkielet, layout i strona główna
+    typ: feature
+    db_migracja: false
+
+  - id: T2
+    tytul: Layout strony i prymitywy UI, strona 404
+    cel: >-
+      Wspólny layout wszystkich stron (nagłówek, stopka, link „Przejdź do treści”, <main>) i prymitywy UI
+      z design systemu, podpięte do BaseLayout i strony 404 (W-02, W-09, W-11). Pliki designu:
+      D/ISKT-standalone.dc.html (nagłówek l. 57-65, stopka l. 186-191, dane firmy l. 19 i 160-163),
+      D/ESG.dc.html (nagłówek l. 44-55, ścieżka l. 62-68, stopka l. 247-252), DS/_ds_bundle.js (Badge
+      l. 111, Card l. 174, SectionHeading l. 240, Button l. 483), D/assets/iskt-logo-transparent.png;
+      architektura: „Komponenty i ich podpięcie”, „Rozstrzygnięcia luk designu” (nawigacja, aria-current,
+      jedna stopka). Poza zakresem: meta i SEO (T3), treść strony głównej (T4), link do polityki w
+      stopce (T5).
+    kryteria:
+      - "src/layouts/BaseLayout.astro renderuje SkipLink, SiteHeader (warianty home i page) w <header> poza <main>, <main id=\"tresc\"> i SiteFooter; każda strona w src/pages używa BaseLayout (test e2e/layout.spec.ts na / i /404)"
+      - "SiteHeader: logo (zoptymalizowane przez astro:assets) linkuje do /, link „Kompetencje” → /#kompetencje, przycisk „Umów konsultację” → /#kontakt; na / link logo ma aria-current=\"page\"; na stronach usług „Kompetencje” ma stan aktywny i aria-current=\"true\" (prop); test e2e sprawdza dokładnie jeden aria-current=\"page\" na /"
+      - "SiteFooter z danymi z src/content/site.ts (nazwa ISKT Greennovation Sp. z o.o., adres Wiedeńska 11, 44-240 Żory, NIP, biuro@iskt.pl, +48 504 083 825, rok z daty buildu); site.ts zawiera też listę 7 usług z URL z W-01, krótkim opisem z kafli D/ISKT-standalone.dc.html i nazwą ikony oraz link Szkolenia https://szkolenia.iskt.pl"
+      - "Prymitywy Button (<a> albo <button>, nigdy zagnieżdżone; warianty primary, secondary, outline, ghost, dark; rozmiary sm/md/lg), Badge, Card, SectionHeading, Icon (Lucide jako inline SVG w buildzie) i Breadcrumb (<nav aria-label=\"Ścieżka\">, ostatnia pozycja aria-current=\"page\") są użyte na stronie src/pages/404.astro albo w layoucie; brak komponentów nieużywanych (test e2e/layout.spec.ts otwiera /404)"
+      - "Nieistniejący URL zwraca status 404 i stronę 404 w layoucie z linkiem do / (W-09; test e2e na astro preview)"
+      - "Na 375, 768 i 1440 px brak poziomego przewijania na / i /404; pierwszy Tab fokusuje „Przejdź do treści”, fokus widoczny; axe bez naruszeń serious/critical (e2e/layout.spec.ts); pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [src/layouts/BaseLayout.astro, src/components/layout/SiteHeader.astro, src/components/layout/SiteFooter.astro, src/components/layout/SkipLink.astro, src/components/layout/Breadcrumb.astro, src/components/ui/, src/content/site.ts, src/assets/, src/pages/404.astro, e2e/layout.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/layout.spec.ts
+    zaleznosci: [T1]
+    milestone: M1 Szkielet, layout i strona główna
+    typ: feature
+    db_migracja: false
+
+  - id: T3
+    tytul: SEO techniczne - meta, Open Graph, sitemap, robots, favicony
+    cel: >-
+      Każda strona ma poprawne meta i Open Graph, a robot dostaje sitemap i robots.txt, przy czym
+      staging nie jest indeksowany (W-07, W-08). Pliki designu: <head> stron D/ISKT-standalone.dc.html,
+      D/ESG.dc.html, D/AI-Transformacja.dc.html, D/Oprogramowanie.dc.html, D/Interim.dc.html,
+      D/Startupy.dc.html (l. 6-19) i D/Projekty-BR-Ekspercki.dc.html l. 6-19 (meta strony B+R wg
+      architektury), D/sitemap.xml, D/robots.txt, D/assets/iskt-favicon-512.png (favicon wariant C),
+      D/assets/iskt-logo-transparent.png (obraz OG). Poza zakresem: treść stron (T4, T5, T7-T10).
+    kryteria:
+      - "src/content/seo.ts ma wpisy (title, description ≤ 160 znaków, ścieżka, JSON-LD) dla 7 stron z W-01 i /polityka-prywatnosci/, przeniesione z <head> plików designu; BaseLayout wybiera wpis po ścieżce przez komponent Seo, bez edycji plików stron; test jednostkowy: tytuły i opisy unikalne, opisy ≤ 160 znaków"
+      - "Seo renderuje <title>, meta description, link canonical i og:url z PUBLIC_SITE_URL + ścieżka, og:title, og:description, og:image (public/og/iskt-og.png 1200×630 z logo, nazwą i hasłem „Innowacje w harmonii z naturą”), og:locale pl_PL, twitter:card; zmiana PUBLIC_SITE_URL zmienia canonical, og:url i sitemap bez zmian w kodzie (test e2e/seo.spec.ts na /)"
+      - "Sitemap przez @astrojs/sitemap (ADR-002) z filtrem: tylko strony z W-01 (bez 404, API i polityki prywatności), site = PUBLIC_SITE_URL; publiczny adres /sitemap.xml (W-08) zapewnia mała integracja w astro.config.mjs (hook astro:build:done uruchamiany po @astrojs/sitemap), która kopiuje wygenerowany urlset sitemap-0.xml do sitemap.xml w katalogu wyjściowym, więc plik jest statyczny i działa także w astro preview; test e2e/seo.spec.ts pobiera /sitemap.xml (urlset, nie indeks) i porównuje z listą stron W-01 już zbudowanych (w M1: tylko /)"
+      - "src/pages/robots.txt.ts: przy PUBLIC_SITE_ENV=staging bez Disallow: /, przy production Allow: / i Sitemap: {PUBLIC_SITE_URL}/sitemap.xml; X-Robots-Tag: noindex na wszystkich odpowiedziach tylko na stagingu (vercel.json albo middleware); test e2e/seo.spec.ts dla obu wartości"
+      - "Favicony z D/assets/iskt-favicon-512.png: favicon.ico (16/32), favicon-32.png, apple-touch-icon.png 180, icon-512.png, podpięte w Seo; pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [src/components/layout/Seo.astro, src/components/layout/JsonLd.astro, src/content/seo.ts, src/content/seo.test.ts, src/layouts/BaseLayout.astro, src/pages/robots.txt.ts, astro.config.mjs, vercel.json, public/favicon.ico, public/favicon-32.png, public/apple-touch-icon.png, public/icon-512.png, public/og/, e2e/seo.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/seo.spec.ts
+    zaleznosci: [T2]
+    milestone: M1 Szkielet, layout i strona główna
+    typ: feature
+    db_migracja: false
+
+  - id: T4
+    tytul: Strona główna - hero, kompetencje, sekcja kontaktu
+    cel: >-
+      Odwiedzający widzi stronę główną / zgodną z designem: hero, 7 kafli kompetencji i sekcję kontaktu
+      z formularzem w wersji statycznej (W-01, W-03, W-11). Pliki designu: D/ISKT-standalone.dc.html
+      (całość: hero l. 54-86, kompetencje l. 87-153, kontakt l. 154-182), DS/_ds_bundle.js (Input l. 758,
+      Textarea l. 1099). Poza zakresem: wysyłka formularza i stany błędów (T6), strony usług, do których
+      prowadzą kafle (T7-T10; w M1 te linki mogą dawać 404).
+    kryteria:
+      - "src/pages/index.astro używa BaseLayout (nagłówek wariant home) oraz HomeHero, ServiceGrid/ServiceTile i ContactSection z src/components/home/; sekcje mają id top, kompetencje, kontakt; treść (nagłówki, teksty, przyciski) jak w D/ISKT-standalone.dc.html, bez lorem ipsum i TODO (test e2e/home.spec.ts)"
+      - "ServiceGrid renderuje 7 kafli z src/content/site.ts; href kafli to URL z tabeli W-01 (Projekty B+R → /uslugi/projekty-br/), Szkolenia → https://szkolenia.iskt.pl; siatka 1 kolumna na 375 px, 2 na 768 px, 3 na 1440 px (test e2e sprawdza liczbę kolumn i href)"
+      - "ContactSection: dane kontaktowe z site.ts i ContactForm z polami Imię i nazwisko, E-mail, Wiadomość (komponent Field: etykieta powiązana z polem, wymagane z *), atrybuty name, bez wysyłki (formularz bez action); test e2e sprawdza pola i etykiety"
+      - "Obrazy przez astro:assets z wymiarami (logo w hero); na 375/768/1440 px brak poziomego scrolla; axe bez serious/critical na / (e2e/home.spec.ts); pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [src/pages/index.astro, src/components/home/, src/components/ui/Field.astro, e2e/home.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/home.spec.ts
+    zaleznosci: [T2]
+    milestone: M1 Szkielet, layout i strona główna
+    typ: feature
+    db_migracja: false
+
+  - id: T5
+    tytul: Strona polityki prywatności z roboczą treścią
+    cel: >-
+      Osoba wysyłająca formularz może przeczytać, co dzieje się z jej danymi (W-06; decyzja właściciela
+      P2: robocza treść do akceptacji przy odbiorze; ADR-001). Pliki designu: D/ESG.dc.html (układ
+      strony tekstowej: wąski hero, kontener 900 px), dane firmy D/ISKT-standalone.dc.html l. 19 i
+      160-163. Poza zakresem: klauzula przy formularzu (T6), meta strony (T3 ma wpis w seo.ts).
+    kryteria:
+      - "src/pages/polityka-prywatnosci.astro używa BaseLayout (nagłówek wariant page) i Breadcrumb (Start / Polityka prywatności, aria-current=\"page\"); treść: administrator ISKT Greennovation Sp. z o.o. z danymi z site.ts, cel (odpowiedź na zapytanie), podstawa, odbiorcy (Vercel, Resend), brak przechowywania w serwisie (ADR-001), prawa osoby, kontakt (test e2e/polityka.spec.ts)"
+      - "SiteFooter ma link „Polityka prywatności” → /polityka-prywatnosci/ widoczny na wszystkich stronach (test e2e na / i /polityka-prywatnosci/)"
+      - "Strony nie ma w sitemapie; ma meta z seo.ts (test e2e); raport T-NR.md oznacza treść jako roboczą do akceptacji właściciela przy odbiorze"
+      - "axe bez serious/critical, brak poziomego scrolla na 375/768/1440; pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [src/pages/polityka-prywatnosci.astro, src/components/layout/SiteFooter.astro, e2e/polityka.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/polityka.spec.ts
+    zaleznosci: [T2, T3]
+    milestone: M2 Formularz kontaktowy end-to-end
+    typ: feature
+    db_migracja: false
+
+  - id: T6
+    tytul: Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit
+    cel: >-
+      Potencjalny klient wysyła zapytanie z /#kontakt, a e-mail dochodzi do ISKT (W-04, W-05, W-06, W-12;
+      ADR-001, ADR-003, ADR-004; architektura: „Model danych”, „Bezpieczeństwo”). Pliki designu:
+      D/ISKT-standalone.dc.html l. 154-182 (formularz, stan sukcesu „Dziękujemy!”) i l. 223,
+      DS/_ds_bundle.js (Input l. 758 ze stanem błędu, Textarea l. 1099, Button l. 483). Wymaga zadań
+      właściciela z planu: konto Resend z kluczem testowym w .env.local i zmiennych Preview Vercel
+      (przed startem), reguła rate limit w Vercel Firewall (przed QA M2). Poza zakresem: E2E przekrojowe
+      i Lighthouse (T11).
+    kryteria:
+      - "src/lib/contact-schema.ts (Zod, wspólny dla formularza i endpointu): imię 1-100, e-mail format i ≤ 254, wiadomość 1-5000 znaków (code points), bez CR/LF w imieniu i e-mailu, honeypot website pusty; testy jednostkowe dla wartości poprawnych, pustych, za długich, z CR/LF i maksymalnych długości ze znaków 4-bajtowych"
+      - "src/pages/api/contact.ts (prerender=false): tylko POST z application/json i Origin = PUBLIC_SITE_URL; odpowiedzi 200, 400 (fields), 405, 413 (ciało > 32 kB), 415 (inny typ), 429 (rate limit), 502 (błąd lub timeout 10 s Resend); honeypot → 200 bez wysyłki; testy jednostkowe endpointu z mockiem mailera dla każdego kodu, także JSON maksymalnej długości ze znaków 4-bajtowych → 200"
+      - "src/lib/mailer.ts: Resend SDK, tekst bez HTML, from CONTACT_FROM, to CONTACT_TO, replyTo nadawcy, AbortController 10 s, MAIL_TRANSPORT=mock w testach; src/lib/rate-limit.ts: providerzy waf (noop), upstash (z mockiem w teście) i pamięciowy tylko do testów; src/lib/log.ts loguje wyłącznie event, status, code, requestId — test sprawdza, że logi z ścieżek sukcesu i błędu nie zawierają imienia, e-maila, treści ani IP"
+      - "ContactForm: wysyłka fetch JSON, przycisk zablokowany w trakcie (drugi klik nie wysyła drugiego żądania), sukces „Dziękujemy!”, błędy przy polach z aria-describedby i fokusem na pierwszym błędnym polu, błąd wysyłki i 429 z zachowaniem wpisanych danych, robocza klauzula informacyjna z linkiem /polityka-prywatnosci/; bez JS formularz ukryty, widoczny <noscript> z mailto:biuro@iskt.pl i telefonem (e2e/contact.spec.ts z MAIL_TRANSPORT=mock, także z javaScriptEnabled: false)"
+      - "Spike ADR-003: raport T-NR.md opisuje wynik na stagingu/preview (6. POST z jednego IP w 10 min → 429) albo brak reguły WAF jako ryzyko do decyzji właściciela; .env.example kompletne; pnpm lint, pnpm typecheck i pnpm test przechodzą, gitleaks w CI zielony"
+    pliki: [src/components/home/ContactForm.astro, src/components/home/ContactSection.astro, src/components/ui/Field.astro, src/lib/contact-schema.ts, src/lib/mailer.ts, src/lib/rate-limit.ts, src/lib/log.ts, src/lib/env.ts, src/pages/api/contact.ts, src/lib/__tests__/, .env.example, e2e/contact.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/contact.spec.ts
+    zaleznosci: [T4, T5]
+    milestone: M2 Formularz kontaktowy end-to-end
+    typ: feature
+    db_migracja: false
+
+  - id: T7
+    tytul: Komponenty stron usług i strona ESG
+    cel: >-
+      Odwiedzający otwiera /uslugi/esg/ zgodną z designem, a komponenty usług są gotowe dla kolejnych
+      stron (W-01, W-02, W-03, W-07, W-11). Pliki designu: D/ESG.dc.html (całość: hero l. 58-78,
+      Kiedy, Zakres, Ścieżki - tabela, Proces, CTA, Pozostałe kompetencje l. 209-245). Poza zakresem:
+      pozostałe strony usług (T8, T9, T10).
+    kryteria:
+      - "src/pages/uslugi/esg.astro używa BaseLayout (nagłówek page z aktywnym „Kompetencje”), Breadcrumb (Start / Kompetencje → /#kompetencje / Raportowanie ESG z aria-current=\"page\") oraz ServiceHero, WhenIntro, ScopeList, ComparisonTable, ProcessTimeline, CtaBand i OtherServices z src/components/service/; każdy z tych komponentów jest widoczny na /uslugi/esg/ (test e2e/esg.spec.ts)"
+      - "Treść, kolejność sekcji i hierarchia nagłówków jak w D/ESG.dc.html, bez placeholderów; CTA → /#kontakt, „Zobacz też” i karty OtherServices (5 pozostałych usług + Szkolenia z site.ts) mają URL z W-01 (test e2e sprawdza href)"
+      - "ComparisonTable przewija się poziomo w kontenerze z tabindex=0 i podpisem; na 375/768/1440 px brak poziomego scrolla strony; animacje hover wyłączone przy prefers-reduced-motion (test e2e)"
+      - "axe bez serious/critical; meta i JSON-LD strony z seo.ts obecne; pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [src/pages/uslugi/esg.astro, src/components/service/ServiceHero.astro, src/components/service/WhenIntro.astro, src/components/service/ScopeList.astro, src/components/service/ComparisonTable.astro, src/components/service/ProcessTimeline.astro, src/components/service/CtaBand.astro, src/components/service/OtherServices.astro, e2e/esg.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/esg.spec.ts
+    zaleznosci: [T4]
+    milestone: M3 Strony usług
+    typ: feature
+    db_migracja: false
+
+  - id: T8
+    tytul: Strony AI-transformacja i Oprogramowanie
+    cel: >-
+      Odwiedzający otwiera /uslugi/ai-transformacja/ i /uslugi/oprogramowanie/ zgodne z designem (W-01,
+      W-03, W-07, W-11). Pliki designu: D/AI-Transformacja.dc.html (całość), D/Oprogramowanie.dc.html
+      (całość, w tym „Nasze aplikacje” Clara i Petra). Komponenty usług z T7. Poza zakresem: zmiany
+      komponentów z T7 (tylko użycie przez propsy).
+    kryteria:
+      - "src/pages/uslugi/ai-transformacja.astro i src/pages/uslugi/oprogramowanie.astro używają BaseLayout, Breadcrumb (bieżąca strona aria-current=\"page\") i komponentów z src/components/service/; nowy ProductCard (Clara, Petra) jest widoczny na /uslugi/oprogramowanie/ (testy e2e/ai.spec.ts i e2e/oprogramowanie.spec.ts)"
+      - "Treść, kolejność sekcji i nagłówki jak w plikach designu, bez placeholderów; linki „Poznaj Clarę/Petrę” i CTA → /#kontakt; karty OtherServices z URL z W-01 (test e2e sprawdza href)"
+      - "Na 375/768/1440 px brak poziomego scrolla; axe bez serious/critical; meta z seo.ts; pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [src/pages/uslugi/ai-transformacja.astro, src/pages/uslugi/oprogramowanie.astro, src/components/service/ProductCard.astro, e2e/ai.spec.ts, e2e/oprogramowanie.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/ai.spec.ts e2e/oprogramowanie.spec.ts
+    zaleznosci: [T7]
+    milestone: M3 Strony usług
+    typ: feature
+    db_migracja: false
+
+  - id: T9
+    tytul: Strony Interim i Startupy
+    cel: >-
+      Odwiedzający otwiera /uslugi/interim/ i /startupy/ zgodne z designem (W-01, W-03, W-07, W-11).
+      Pliki designu: D/Interim.dc.html (całość, w tym 4 role i notka o modelu współpracy),
+      D/Startupy.dc.html (całość). Komponenty usług z T7. Poza zakresem: zmiany komponentów z T7.
+    kryteria:
+      - "src/pages/uslugi/interim.astro i src/pages/startupy.astro używają BaseLayout, Breadcrumb (bieżąca strona aria-current=\"page\") i komponentów z src/components/service/; nowy RoleArticle (4 role: CAAO, CDO, AI Lead, ESG Manager) jest widoczny na /uslugi/interim/ (testy e2e/interim.spec.ts i e2e/startupy.spec.ts)"
+      - "Treść, kolejność sekcji i nagłówki jak w plikach designu, bez placeholderów; ProcessTimeline z 4 etapami na Interim i 5 na Startupy; CTA → /#kontakt; karty OtherServices z URL z W-01 (test e2e)"
+      - "Na 375/768/1440 px brak poziomego scrolla; axe bez serious/critical; meta z seo.ts; pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [src/pages/uslugi/interim.astro, src/pages/startupy.astro, src/components/service/RoleArticle.astro, e2e/interim.spec.ts, e2e/startupy.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/interim.spec.ts e2e/startupy.spec.ts
+    zaleznosci: [T7]
+    milestone: M3 Strony usług
+    typ: feature
+    db_migracja: false
+
+  - id: T10
+    tytul: Strona Projekty B+R z FAQ
+    cel: >-
+      Odwiedzający otwiera /uslugi/projekty-br/ zgodną z designem wersji podstawowej (decyzja
+      właściciela 2026-11-05; W-01, W-03, W-07, W-11). Pliki designu: D/Projekty-BR.dc.html (całość:
+      zakres - karty z ikonami, proces #proces, programy, „Dla kogo”, FAQ l. 208-227 i 288-318, CTA
+      l. 229-240, chipy kompetencji); meta strony z D/Projekty-BR-Ekspercki.dc.html l. 6-19 (już w
+      seo.ts z T3). Poza zakresem: wersje Ekspercki i Kwalifikator jako osobne strony.
+    kryteria:
+      - "src/pages/uslugi/projekty-br.astro używa BaseLayout, Breadcrumb (aria-current=\"page\"), ServiceHero lub hero B+R z Badge „Kompetencja · B+R” oraz IconCardGrid, ProcessCards, ProgramCard, AudienceDark, FaqAccordion, CtaBandBrand i ServiceChips z src/components/br/ — każdy widoczny na stronie (e2e/projekty-br.spec.ts)"
+      - "FaqAccordion: 5 pytań z designu, przyciski z aria-expanded i aria-controls, pierwszy otwarty, jeden otwarty naraz, obsługa Enter/Spacja (test e2e klawiaturą)"
+      - "Treść i kolejność sekcji jak w D/Projekty-BR.dc.html, bez placeholderów i bez noindex; chipy kompetencji linkują do URL z W-01 (nie do /#kompetencje); CTA → /#kontakt (test e2e sprawdza href)"
+      - "Na 375/768/1440 px brak poziomego scrolla; axe bez serious/critical; pnpm lint, pnpm typecheck i pnpm test przechodzą"
+    pliki: [src/pages/uslugi/projekty-br.astro, src/components/br/, e2e/projekty-br.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e e2e/projekty-br.spec.ts
+    zaleznosci: [T7]
+    milestone: M3 Strony usług
+    typ: feature
+    db_migracja: false
+
+  - id: T11
+    tytul: Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu
+    cel: >-
+      Wszystkie strony spełniają wymagania jakości: responsywność, dostępność i Lighthouse ≥ 90 w 4
+      kategoriach na mobile i desktop na stagingu (W-03, W-10, W-11). Pliki designu: pliki stron z tabeli
+      W-01 (D/ISKT-standalone.dc.html, D/Projekty-BR.dc.html, D/ESG.dc.html, D/AI-Transformacja.dc.html,
+      D/Oprogramowanie.dc.html, D/Interim.dc.html, D/Startupy.dc.html). Wymaga stagingu Vercel (zadanie
+      właściciela). Poza zakresem: nowe treści i strony.
+    kryteria:
+      - "e2e/cross/pages.spec.ts dla 7 stron W-01, polityki i 404: status, brak lorem ipsum/TODO, wszystkie linki wewnętrzne bez 404, brak poziomego scrolla na 375/768/1440, axe bez serious/critical, pierwszy Tab = SkipLink, dokładnie jeden aria-current=\"page\" na stronie, prefers-reduced-motion bez transformacji"
+      - "Test sitemapy: /sitemap.xml zawiera dokładnie 7 stron z W-01 i żadnych innych; robots.txt w konfiguracji production wskazuje /sitemap.xml (W-08)"
+      - "Test W-03 na 375 px dla 7 stron W-01, polityki i 404: każdy widoczny element interaktywny (a, button, input, textarea, select, summary, [tabindex=0]) ma rzeczywisty obszar kliknięcia (boundingBox elementu, z paddingiem) ≥ 24×24 px — bez wyjątków i bez liczenia odstępów; linki w tekście dostają padding, który to zapewnia. Tekst podstawowy, czyli każdy p, li, td, dd, label, input i textarea w <main> i stopce bez klasy text-meta, ma font-size ≥ 16 px albo tyle, ile podaje design, jeśli więcej. Klasa text-meta jest dozwolona wyłącznie dla tekstów niepodstawowych z designu: eyebrow SectionHeading, Badge, mikrotekst mono w hero, numeracja etapów, nagłówki kolumn tabel i linia copyright; test wypisuje listę elementów z text-meta"
+      - "lighthouserc.cjs (presety mobile i desktop, asercje ≥ 0.9 dla performance, accessibility, best-practices, seo; na stagingu audyt is-crawlable wyłączony) i skrypt pnpm lh:staging uruchamiany z adresem stagingu; raport T-NR.md zawiera wyniki dla każdej strony i profilu, wszystkie ≥ 90"
+      - "Poprawki wydajności potrzebne do progów (obrazy, preload czcionek, krytyczny CSS) opisane w raporcie; pnpm lint, pnpm typecheck, pnpm test i pnpm test:e2e przechodzą"
+    pliki: [e2e/cross/, lighthouserc.cjs, package.json, src/layouts/BaseLayout.astro, src/styles/, src/components/]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm test:e2e
+    zaleznosci: [T6, T8, T9, T10]
+    milestone: M4 Jakość i wydanie
+    typ: feature
+    db_migracja: false
+
+  - id: T12
+    tytul: Dokumentacja wydania (techniczna i produktowa)
+    cel: >-
+      Właściciel ma dokumentację do odbioru i późniejszego wdrożenia na iskt.pl (W-12; plan „Zadania
+      właściciela”, architektura „Środowiska i droga na produkcję”). Poza zakresem: wdrożenie prod (B9a,
+      właściciel).
+    kryteria:
+      - "docs/wydanie/techniczna/ (szablon docs/_szablony/wydanie-techniczna.md): architektura w skrócie, alias stagingu, lista zmiennych środowiska bez wartości, reguła rate limit WAF, kroki B9a (domena iskt.pl, weryfikacja domeny w Resend SPF/DKIM, klucz prod, zmienne prod, PUBLIC_SITE_ENV=production i zdjęcie noindex, gałąź production), rollback w Vercel"
+      - "docs/wydanie/produktowa/ (szablon docs/_szablony/wydanie-produktowa.md): lista stron z URL, formularz i co się dzieje z danymi, scenariusze odbioru O-1–O-10 z planu, robocze treści do akceptacji (klauzula, polityka prywatności, obraz OG)"
+      - "Brak sekretów w dokumentach (gitleaks w CI zielony); bash scripts/check-dod.sh przechodzi"
+    pliki: [docs/wydanie/techniczna/, docs/wydanie/produktowa/]
+    testy: bash scripts/check-dod.sh
+    zaleznosci: [T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11]
+    milestone: M4 Jakość i wydanie
+    typ: docs
+    db_migracja: false
