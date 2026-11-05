@@ -17,8 +17,8 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #14 | Strona Projekty B+R z FAQ | todo | 0 | M3 Strony usług | - | - |
 | #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | todo | 0 | M4 Jakość i wydanie | - | - |
 | #16 | Dokumentacja wydania (techniczna i produktowa) | todo | 0 | M4 Jakość i wydanie | - | - |
-| #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | in-progress | 1 | M1 Szkielet, layout i strona główna | #27 open | fail |
-| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | in-progress | 2 | M1 Szkielet, layout i strona główna | #24 open | fail |
+| #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | review | 2 | M1 Szkielet, layout i strona główna | #27 open | pass |
+| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | done | 2 | M1 Szkielet, layout i strona główna | #24 merged | pass |
 <!-- sync-status:end -->
 
 ## Mapa zadań z planu

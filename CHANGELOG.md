@@ -10,3 +10,4 @@ Plik wspólny. Aktualizuje go wyłącznie orkiestrator przez `shctl task close`.
 - #8: Strona główna - hero, kompetencje, sekcja kontaktu (PR #19)
 - #9: Strona polityki prywatności z roboczą treścią (PR #25)
 - #11: Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit (PR #26)
+- #23: QA M1: brak nagłówka Content-Security-Policy z architektury (PR #24)

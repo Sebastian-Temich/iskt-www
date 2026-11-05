@@ -1,16 +1,16 @@
 ---
 zadania_todo: 6
-zadania_in_progress: 2
-zadania_review: 0
+zadania_in_progress: 0
+zadania_review: 1
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 6
+zadania_done: 7
 zadania_anulowane: 0
-pr_otwarte: 2
-ci_fail: 2
+pr_otwarte: 1
+ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `e2e/home.spec.ts`, `e2e/layout.spec.ts`, `e2e/seo.spec.ts`, `e2e/qa/M1-scenariusze.spec.ts`, `src/pages/404.astro`, `src/content/site.ts`, `vercel.json`, `.github/workflows/ci.yml`, kod `astro` (preview, checkOrigin, wtyczka env) i typy `resend`."}, {"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "Treść klauzuli?", "decyzja": "robocza, zgodna z polityką prywatności (administrator, cel, link), do akceptacji przy odbiorze (P2)."}, {"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "Formularz po sukcesie?", "decyzja": "ukryty bez resetu (stan sukcesu z designu); wpisane dane zostają w DOM, co utrzymuje test M1 `e2e/home.spec.ts` (wartość pola po wysłaniu)."}, {"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "`maxlength` w polach?", "decyzja": "nie, bo liczy jednostki UTF-16 i ucinałby 100 emoji do 50; limity pilnuje schemat (code points)."}, {"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "Sekret wklejany do paczki funkcji", "decyzja": "`runtimeEnv` przeniesiony do nowego `src/lib/runtime-env.ts` (plik spoza „Zakresu”), `env.ts` go reeksportuje. Wtyczka env Astro przy odwołaniu do całego `import.meta.env` wkleja wartości z plików `.env*` dla kluczy, których nazwy są w tekście modułu; stary `runtimeEnv` w `env.ts` (z nazwami zmiennych) wklejał klucz z `.env.local` do `.vercel/output/_functions`. Test regresji `src/lib/__tests__/runtime-env.test.ts`."}]
-ostatnia_synchronizacja: 2026-11-05T19:40:16Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-23", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `astro.config.mjs`, `playwright.config.ts`, `src/lib/contact-schema.ts`, wynik buildu `.vercel/output/static/` i `dist/client/_astro/`, logi CI runów 42070489965, 42071473614, 42075083080."}, {"data": "2026-11-05", "zrodlo": "T-23", "pytanie": "Rebase zamiast `git merge origin/main` przy konflikcie z `main`", "decyzja": "profil workera nie pozwala na `git merge`. Konflikt w `astro.config.mjs` (adapter Node z #11) rozwiązany przez zachowanie obu zmian."}, {"data": "2026-11-05", "zrodlo": "T-23", "pytanie": "Jak sprawdzić CSP lokalnie, skoro `astro preview` ignoruje `vercel.json`?", "decyzja": "test dokleja nagłówek z `vercel.json` przez `page.route`, więc przeglądarka egzekwuje dokładnie tę politykę, która trafi na Vercel."}, {"data": "2026-11-05", "zrodlo": "T-23", "pytanie": "Dodatkowe `object-src 'none'` poza listą z issue?", "decyzja": "dodane, bo to standardowe utwardzenie bez wpływu na stronę."}, {"data": "2026-11-05", "zrodlo": "T-23", "pytanie": "JSON-LD (`<script type=\"application/ld+json\">`) w `script-src`?", "decyzja": "bez zmian: to blok danych, przeglądarka go nie wykonuje i CSP go nie blokuje."}]
+ostatnia_synchronizacja: 2026-11-05T20:17:13Z
 ---
 
 # Status projektu
