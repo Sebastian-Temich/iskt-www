@@ -32,3 +32,6 @@ Plik wspólny, aktualizuje orkiestrator. Zgłoszenia ⚪ z review i „Drobne uw
 | 2026-11-05 | T-10 | W `global.css` brakuje wspólnej klasy `visually-hidden`. Ten sam blok CSS powtarza się w `ServiceTile`, `OtherServices` i `ComparisonTable` i warto go przenieść do `global.css`. | otwarta |
 | 2026-11-05 | T-10 | „Zobacz też” w hero ma zakodowaną strzałkę „→” w tekście linku (jak w designie). Czytnik ekranu ją odczyta. Można ją przenieść do `aria-hidden`. | otwarta |
 | 2026-11-05 | review PR #31 | Opis kryterium 4 nadal podaje czerwony lint i typecheck, choć sekcja „Testy” potwierdza zielone wyniki po rebase. Zaktualizuj ten akapit i usuń nieaktualne odesłanie do „Ryzyk”. (`docs/07-realizacja/T-10.md:30`) | otwarta |
+| 2026-11-05 | T-13 | `src/pages/uslugi/esg.astro:56-59` (T7/#10): ten sam wzorzec `</strong>` w osobnej linii daje w HTML spację przed kropką („klimatyczne . Wtedy liczy się…”). Do poprawki osobnym zadaniem. | otwarta |
+| 2026-11-05 | T-13 | `ServiceHero` ma stałe `max-width: 680px` leadu; w `D/Interim.dc.html:70` lead ma 700 px. Różnica 20 px, komponentu T7 nie zmieniałem. | otwarta |
+| 2026-11-05 | T-13 | `ComparisonTable` mógłby mieć opcjonalny slot na notkę pod tabelą (Interim), wtedy blok `model-note` w `interim.astro` byłby zbędny. | otwarta |

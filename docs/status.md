@@ -1,16 +1,16 @@
 ---
-zadania_todo: 5
-zadania_in_progress: 0
+zadania_todo: 3
+zadania_in_progress: 1
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 10
+zadania_done: 11
 zadania_anulowane: 0
-pr_otwarte: 0
+pr_otwarte: 1
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `D/AI-Transformacja.dc.html` i `D/Interim.dc.html` (sekcja „Pozostałe kompetencje”) dla treści i kolejności kart innych usług, `e2e/polityka.spec.ts` jako wzorzec testu, `src/components/home/ServiceTile.astro` i `src/components/ui/Button.astro` jako wzorzec komponentów."}, {"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "Aktualizacja gałęzi po scaleniu #29: orkiestrator polecił `git merge origin/main`, ale profil workera odrzuca `git merge`", "decyzja": "zrobiłem `git rebase origin/main` (krok 4 procedury sh-worker) i `git push --force-with-lease` na `task/10-*`. Konfliktów nie było, a treść zmian jest ta sama."}, {"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "Zdublowany klucz `build` w `astro.config.mjs`", "decyzja": "nie poprawiam go, bo to poza zakresem i ma własne issue #29 (PR #30)."}, {"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "Okruszki w hero", "decyzja": "`ServiceHero` ma slot `breadcrumb`. Strona sama przekazuje `Breadcrumb` (jak w kryterium 1), a kolejne strony usług ustalają własną ścieżkę."}, {"data": "2026-11-05", "zrodlo": "T-10", "pytanie": "Podpis tabeli", "decyzja": "`<caption>` ukryty wizualnie, który nazywa przewijany region (`aria-labelledby`). Design nie ma widocznego podpisu, więc wygląd zostaje taki jak w designie."}]
-ostatnia_synchronizacja: 2026-11-05T22:01:44Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "Test „linki wewnętrzne bez 404” sprawdza tylko istniejące strony (`/`, ESG, Interim, Startupy, polityka)", "decyzja": "pozostałe strony usług powstają w innych zadaniach M3."}, {"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "-", "decyzja": "Wyróżnienie we wstępie Startupy w stałej `focus`: inaczej Prettier łamie `</strong>` i kropkę do osobnych linii, co w HTML daje spację przed kropką („miesięcy . Reszta”). Test sprawdza „miesięcy. Reszta jest konsekwencją.”."}, {"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "Cudzysłów w „ustalimy później” (design: `„…\"`)", "decyzja": "typograficzny `„…”`, jak w pozostałych tekstach strony."}, {"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "Siatka ról: `minmax(360px, 1fr)` z designu daje przy 1440 px trzy kolumny (3 + 1)", "decyzja": "zostawione jak w designie; dodane tylko `min(360px, 100%)`, żeby karta nie wychodziła poza ekran 375 px. Test sprawdza jedną kolumnę przy 375 px i więcej niż jedną przy 1440 px."}, {"data": "2026-11-05", "zrodlo": "T-13", "pytanie": "Gdzie umieścić notkę pod tabelą „Modele współpracy” (`D/Interim.dc.html:231`), skoro `ComparisonTable` z T7 nie ma na nią miejsca, a zmiany komponentów T7 są poza zakresem?", "decyzja": "Blok `model-note` w `interim.astro` tuż po tabeli, z tym samym tłem i ujemnym marginesem, który daje odstęp `--space-8` jak `gap` sekcji w designie; treść i wygląd jak w designie."}]
+ostatnia_synchronizacja: 2026-11-05T22:34:16Z
 ---
 
 # Status projektu
