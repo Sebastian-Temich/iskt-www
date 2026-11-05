@@ -9,19 +9,19 @@ akceptacja_wlasciciela: true
 
 ## Dokumentacja
 
-- [ ] `plan.md` ma kamienie milowe jako pionowe przekroje
-- [ ] `plan.md` ma 5–10 scenariuszy odbioru, zakres autoryzacji i jeden następny krok
+- [x] `plan.md` ma kamienie milowe jako pionowe przekroje
+- [x] `plan.md` ma 5–10 scenariuszy odbioru, zakres autoryzacji i jeden następny krok
 
 ## Funkcjonalność
 
-- [ ] Każde wymaganie ma miejsce w planie
-- [ ] Pierwsze zadanie to szkielet projektu
-- [ ] Ostatnie zadanie to dokumentacja wydania (`wydanie/techniczna` i `wydanie/produktowa`)
+- [x] Każde wymaganie ma miejsce w planie
+- [x] Pierwsze zadanie to szkielet projektu
+- [x] Ostatnie zadanie to dokumentacja wydania (`wydanie/techniczna` i `wydanie/produktowa`)
 
 ## Checklisty jakości
 
-- [ ] Zależności między zadaniami są jawne
-- [ ] Zadania właściciela są w planie: konta prod i staging, DNS, `STAGING_DB_URL`, zmienne prod w Vercel oraz kroki typu projektu
+- [x] Zależności między zadaniami są jawne
+- [x] Zadania właściciela są w planie: konta prod i staging, DNS, `STAGING_DB_URL`, zmienne prod w Vercel oraz kroki typu projektu
 
 ## Checkpoint
 
