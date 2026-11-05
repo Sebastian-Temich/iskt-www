@@ -57,5 +57,4 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-- E-002 (#5): Profil workera (.claude/roles/worker/settings.json) blokuje Edit/Write .env.example mimo allow Edit(.env.example): reguła deny Edit(.env.e[!x]*) (i podobne z [!...]) najpewniej dopasowuje .env.example, bo matcher nie traktuje [!x] jako negacji. Kryterium 6 issue #5 wymaga zmiany .env.example.
-
+(brak)
