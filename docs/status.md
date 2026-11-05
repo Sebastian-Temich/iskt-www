@@ -21,23 +21,23 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `08-qa`: review
+- `08-qa`: escalated
 
 ## Punkt przekazania
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-05T22:28Z (M3 w toku, limit Codexa)
-- Kamień zakończony: M2 funkcjonalnie (#9, #11 zamknięte; naprawy QA M1 #22, #23 zamknięte). QA M2 PR #28 scalony, werdykt FAIL: 🟡 QA-M2-1 → #29 (zdublowany klucz `build` w `astro.config.mjs`, lint/typecheck/E2E czerwone na `main`); wysyłka e-maila nie działa (Resend 403 dla `CONTACT_TO`) → E-006. CSP na stagingu i reguła WAF (6. POST → 429) potwierdzone
-- Kamień bieżący: M3 (#10 zamknięte; #12 PR #33 i #13 PR #32: CI zielone, review czeka na limit Codexa; #14 czeka na slot). #29 zamknięte, Lighthouse mobile stagingu 99/99/99
-- PR w toku: #32 (#13), #33 (#12), oba `status:review`, panele workerów otwarte
-- Eskalacje: brak otwartych (E-006 zamknięta: opcja C, O-3 przy odbiorze końcowym)
-- Wstrzymania: review Codex do 2026-11-06T00:36Z (limit użycia; nie podbija iteracji); #14 bez slotu do zamknięcia #12 lub #13
+- Czas: 2026-11-05T23:55Z (M3 zakończony, QA M3 czeka na CI)
+- Kamień zakończony: M3 (#10, #12, #13, #14 zamknięte). QA M3: PR #35 (`stage/08-qa`), werdykt PASS, brak błędów 🔴/🟡, 1 drobna uwaga (B+R bez chipu Interim, zgodnie z designem); E2E lokalnie 332 pass, `e2e/qa/` 46/46, Lighthouse stagingu stron usług mobile ≥ 97, desktop 100
+- Kamień bieżący: M4 (#15 gotowe do dispatchu, #16 zależy od #15); start po merge'u QA M3
+- PR w toku: #35 (QA M3): CI czerwone — job e2e nie startuje (billing GitHub Actions), review etapu jeszcze nie uruchomione
+- Eskalacje: E-007 (billing GitHub Actions)
+- Wstrzymania: CI GitHub Actions do naprawy płatności/limitu przez właściciela
 - `shctl doctor` 2026-11-05T14:12Z: 0 błędów
 - Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md`
-- Zadania właściciela: poprawa `CONTACT_TO`/Resend przed odbiorem (E-006/C), potem O-3; O-6 podgląd w walidatorze OG przy odbiorze
-- Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia
-- Następny krok: po 00:36Z `shctl review run 32` i `33`, zamknięcie, dispatch #14; po M3: QA M3 (`sh-qa`)
+- Zadania właściciela: E-007 (billing); poprawa `CONTACT_TO`/Resend przed odbiorem (E-006/C), potem O-3; O-6 i O-10 podgląd w walidatorze OG przy odbiorze
+- Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia po QA M4
+- Następny krok: po E-007 ponowić job e2e PR #35, `shctl pr check 35 --czekaj`, `shctl review run 35`, merge, drobna uwaga do `backlog-drobne.md`, `shctl stage` dla 08-qa, dispatch #15
 
 ## Dziennik etapów
 
@@ -67,4 +67,5 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-(brak)
+- E-007 (08-qa): GitHub Actions nie uruchamia jobów: 'recent account payments have failed or your spending limit needs to be increased'. Job e2e PR #35 (QA M3) nie wystartował po ponowieniu; pierwszy przebieg przerwał timeout instalacji przeglądarek. Bez zielonego CI nie ma review ani merge'a QA M3, więc M4 (#15, #16) nie startuje.
+
