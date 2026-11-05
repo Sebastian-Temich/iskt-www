@@ -27,16 +27,17 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-05T17:30Z (po QA M1)
-- Kamień zakończony: M1 (#5–#8 zamknięte; QA M1 PR #21 scalony na decyzję właściciela E-003/B, werdykt FAIL: 2 × 🟡 → #22 wydajność mobile, #23 CSP). Etap `08-qa` zostaje otwarty do QA ostatniego kamienia
-- Kamień bieżący: M2 (#9 polityka w toku, potem #11 formularz); naprawy QA M1: #23 w toku, #22 w kolejce
-- PR w toku: brak (workery #9 i #23 pracują)
-- Eskalacje: brak otwartych (E-001, E-002, E-003 zamknięte)
-- Wstrzymania: M3 (#10 i dalej) czeka na QA M2
+- Czas: 2026-11-05T21:25Z (po QA M2)
+- Kamień zakończony: M2 funkcjonalnie (#9, #11 zamknięte; naprawy QA M1 #22, #23 zamknięte). QA M2 PR #28 scalony, werdykt FAIL: 🟡 QA-M2-1 → #29 (zdublowany klucz `build` w `astro.config.mjs`, lint/typecheck/E2E czerwone na `main`); wysyłka e-maila nie działa (Resend 403 dla `CONTACT_TO`) → E-006. CSP na stagingu i reguła WAF (6. POST → 429) potwierdzone
+- Kamień bieżący: M2 (naprawa #29), M3 wstrzymany
+- PR w toku: brak (worker #29 pracuje, panel `worker:iskt-www:29`)
+- Eskalacje: E-006 otwarta (08-qa, konfiguracja Resend: opcje A/B/C)
+- Wstrzymania: M3 (#10 gotowe) do rozstrzygnięcia E-006 i zamknięcia #29 (bez #29 CI każdego PR z kodem jest czerwone)
 - `shctl doctor` 2026-11-05T14:12Z: 0 błędów
 - Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md`
-- Zadania właściciela: reguła rate limit w Vercel Firewall przed QA M2 (sprawdzić dostępność na Hobby); O-6 podgląd w walidatorze OG przy odbiorze
-- Następny krok: monitoring #9 i #23, potem dispatch #22 i #11
+- Zadania właściciela: E-006; O-3 (odbiór e-maila i `Reply-To` w skrzynce) po E-006; O-6 podgląd w walidatorze OG przy odbiorze
+- Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia
+- Następny krok: monitoring #29 (`shctl task wait 29`); po E-006/A ponowny test O-3 na stagingu i dopisek do `raport-M2.md`; potem start M3 (#10)
 
 ## Dziennik etapów
 
