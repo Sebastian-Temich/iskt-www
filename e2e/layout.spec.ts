@@ -1,12 +1,15 @@
+import { readFileSync } from 'node:fs';
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
-// Strona 404 (src/pages/404.astro) otwierana przez nieistniejący URL: przy trailingSlash: 'always'
-// `astro preview` odpowiada na `/404` bez ukośnika własną stroną, a nie plikiem 404.html.
+// Adres /404 strony src/pages/404.astro. Przy trailingSlash: 'always' kanoniczna postać to /404/:
+// na Vercel `/404` przekierowuje na nią (vercel.json, test niżej), a `astro preview` odrzuca każdy
+// adres bez ukośnika własną stroną, zanim poszuka pliku.
+const PATH_404 = '/404/';
 const NOT_FOUND_PATH = '/nie-ma-takiej-strony/';
 const PAGES = [
   { path: '/', name: 'strona główna' },
-  { path: NOT_FOUND_PATH, name: 'strona 404' },
+  { path: PATH_404, name: 'strona 404' },
 ];
 const VIEWPORTS = [375, 768, 1440];
 
@@ -111,7 +114,7 @@ test.describe('layout', () => {
 
 test.describe('strona 404', () => {
   test('nieistniejący URL zwraca 404 i stronę w layoucie z linkiem do /', async ({ page }) => {
-    const response = await page.goto('/nie-ma-takiej-strony/');
+    const response = await page.goto(NOT_FOUND_PATH);
     expect(response?.status()).toBe(404);
     await expectLayout(page);
     await expect(
@@ -122,8 +125,22 @@ test.describe('strona 404', () => {
     ).toHaveAttribute('href', '/');
   });
 
+  test('/404 to strona src/pages/404.astro w layoucie', async ({ page }) => {
+    await page.goto(PATH_404);
+    await expectLayout(page);
+    await expect(page).toHaveTitle('Nie znaleziono strony · ISKT Greennovation');
+    await expect(
+      page.getByRole('heading', { level: 1, name: 'Nie znaleziono strony' }),
+    ).toBeVisible();
+  });
+
+  test('/404 bez ukośnika przekierowuje na Vercel na /404/', () => {
+    const config = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+    expect(config.trailingSlash).toBe(true);
+  });
+
   test('prymitywy UI: Breadcrumb, Badge, Card, SectionHeading, Button, Icon', async ({ page }) => {
-    await page.goto(NOT_FOUND_PATH);
+    await page.goto(PATH_404);
     const main = page.locator('main');
 
     const breadcrumb = main.getByRole('navigation', { name: 'Ścieżka' });
