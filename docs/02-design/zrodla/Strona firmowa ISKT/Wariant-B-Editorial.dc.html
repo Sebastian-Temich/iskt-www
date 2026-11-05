@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/effects.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/base.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/styles.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/_ds_bundle.js"></script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--surface-page); color: var(--text-primary); font-family: var(--font-sans); }
+  a { color: var(--text-link); text-decoration: none; }
+  a:hover { color: var(--text-link-hover); }
+</style>
+</helmet>
+
+<div style="background: var(--surface-page); color: var(--text-primary); font-family: var(--font-sans);">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.86); backdrop-filter: blur(12px);">
+    <div style="max-width: 1320px; margin: 0 auto; padding: 1rem var(--container-pad); display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-5); border-bottom: 1px solid var(--border-subtle);">
+      <a href="#top" style="display: flex; align-items: center; gap: 0.6rem; color: inherit;">
+        <img src="assets/iskt-logo-transparent.png" alt="ISKT Greennovation" style="height: 34px; width: auto;">
+        <span style="font-size: var(--text-base); font-weight: var(--fw-extrabold); letter-spacing: var(--ls-tight);">ISKT Greennovation</span>
+      </a>
+      <nav style="margin-left: auto; display: flex; flex-wrap: wrap; gap: var(--space-6); font-size: var(--text-sm); color: var(--text-secondary); white-space: nowrap;">
+        <a href="#o-nas" style="color: var(--text-secondary);">01 — Kim jesteśmy</a>
+        <a href="#kompetencje" style="color: var(--text-secondary);">02 — Kompetencje</a>
+        <a href="#dlaczego" style="color: var(--text-secondary);">03 — Dlaczego my</a>
+        <a href="#kontakt" style="color: var(--text-secondary);">04 — Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="top" style="padding: clamp(3rem, 8vw, 6rem) var(--container-pad) var(--section-pad-y);">
+    <div style="max-width: 1320px; margin: 0 auto;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-10); align-items: end;">
+        <h1 style="margin: 0; grid-column: 1 / -1; font-size: clamp(3rem, 9vw, 7rem); font-weight: var(--fw-extrabold); letter-spacing: -0.04em; line-height: 0.94; text-wrap: balance;">Innowacje<br>w Harmonii<br><span style="background: var(--gradient-brand); -webkit-background-clip: text; background-clip: text; color: transparent;">z Naturą</span></h1>
+      </div>
+      <div style="margin-top: var(--space-12); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-10); align-items: start; border-top: 1px solid var(--border-subtle); padding-top: var(--space-8);">
+        <p style="margin: 0; font-size: var(--text-xl); line-height: var(--lh-relaxed); color: var(--text-primary); text-wrap: pretty;">Łączymy technologie przyszłości ze zrównoważonym rozwojem, tworząc rozwiązania dla odpowiedzialnego biznesu.</p>
+        <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary); text-wrap: pretty;">Projekty B+R, ESG, sztuczna inteligencja i dedykowane oprogramowanie — dla firm, startupów i instytucji, które chcą rosnąć odpowiedzialnie.</p>
+        <div style="display: flex; flex-direction: column; gap: 0.9rem; align-items: flex-start;">
+          <a href="#kompetencje" style="display: inline-flex;">
+            <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Button" size="lg" icon-right="{{ icArrow }}" hint-size="240px,56px">Poznaj nasze usługi</x-import>
+          </a>
+          <a href="#kontakt" style="font-size: var(--text-sm); color: var(--text-secondary); border-bottom: 1px solid var(--border-default);">albo napisz do nas: biuro@iskt.pl</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="o-nas" data-screen-label="Kim jesteśmy" style="scroll-margin-top: 90px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-muted);">
+    <div style="max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-16); align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700);">01 — Kim jesteśmy</span>
+        <h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: var(--fw-extrabold); letter-spacing: var(--ls-tight); line-height: var(--lh-tight); text-wrap: pretty;">Zespół ekspertów łączących pasję do innowacji technologicznych.</h2>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-6);">
+        <p style="margin: 0; font-size: var(--text-lg); line-height: var(--lh-relaxed); color: var(--text-secondary); text-wrap: pretty;">Wspieramy organizacje w transformacji cyfrowej, wdrażaniu rozwiązań AI i strategiach ESG. Pracujemy projektowo: od diagnozy i koncepcji, przez finansowanie, po wdrożenie i rozliczenie efektów.</p>
+        <img src="assets/iskt-logo-transparent.png" alt="" style="width: 180px; height: auto; opacity: 0.95;">
+      </div>
+    </div>
+  </section>
+
+  <section id="kompetencje" data-screen-label="Kompetencje" style="scroll-margin-top: 90px; padding: var(--section-pad-y) var(--container-pad);">
+    <div style="max-width: 1320px; margin: 0 auto;">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4); max-width: 720px;">
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700);">02 — Kompetencje</span>
+        <h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: var(--fw-extrabold); letter-spacing: var(--ls-tight); line-height: var(--lh-tight);">Kompleksowe rozwiązania dla nowoczesnego biznesu</h2>
+      </div>
+      <div style="margin-top: var(--space-12); display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-10) var(--space-16);">
+        <div style="display: flex; gap: var(--space-5); border-top: 2px solid var(--ink-900); padding-top: var(--space-5);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--green-600);">01</span>
+          <div>
+            <h3 style="margin: 0 0 0.5rem; font-size: var(--text-xl); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Projekty B+R</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Innowacyjne rozwiązania badawczo-rozwojowe wspierające rozwój Twojej organizacji.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-5); border-top: 2px solid var(--ink-900); padding-top: var(--space-5);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--green-600);">02</span>
+          <div>
+            <h3 style="margin: 0 0 0.5rem; font-size: var(--text-xl); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">ESG i Zrównoważony Rozwój</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Strategie i wdrożenia praktyk odpowiedzialnego biznesu zgodnych z normami środowiskowymi.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-5); border-top: 2px solid var(--ink-900); padding-top: var(--space-5);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--green-600);">03</span>
+          <div>
+            <h3 style="margin: 0 0 0.5rem; font-size: var(--text-xl); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">AI i Transformacja Cyfrowa</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Implementacja sztucznej inteligencji i nowoczesnych technologii w procesach biznesowych.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-5); border-top: 2px solid var(--ink-900); padding-top: var(--space-5);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--green-600);">04</span>
+          <div>
+            <h3 style="margin: 0 0 0.5rem; font-size: var(--text-xl); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Startupy</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Kompleksowe wsparcie dla startupów – od pomysłu po skalowanie biznesu.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-5); border-top: 2px solid var(--ink-900); padding-top: var(--space-5);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--green-600);">05</span>
+          <div>
+            <h3 style="margin: 0 0 0.5rem; font-size: var(--text-xl); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Rozwój Oprogramowania</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Tworzenie dedykowanych rozwiązań software’owych dopasowanych do potrzeb Twojej firmy.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-5); border-top: 2px solid var(--ink-900); padding-top: var(--space-5);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); color: var(--green-600);">06</span>
+          <div>
+            <h3 style="margin: 0 0 0.5rem; font-size: var(--text-xl); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Szkolenia</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Profesjonalne szkolenia z zakresu technologii, innowacji i zrównoważonego rozwoju.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dlaczego" data-screen-label="Dlaczego my" style="scroll-margin-top: 90px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-subtle); border-top: 1px solid var(--border-subtle);">
+    <div style="max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-16); align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700);">03 — Dlaczego my</span>
+        <h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: var(--fw-extrabold); letter-spacing: var(--ls-tight); line-height: var(--lh-tight); text-wrap: pretty;">Dlaczego warto z nami współpracować?</h2>
+        <p style="margin: 0; font-size: var(--text-lg); line-height: var(--lh-relaxed); color: var(--text-secondary); text-wrap: pretty;">Połączenie technologicznej ekspertyzy z odpowiedzialnością za środowisko. Tworzymy rozwiązania, które nie tylko zwiększają efektywność biznesu, ale również dbają o przyszłość naszej planety.</p>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; gap: var(--space-5); align-items: flex-start; padding: var(--space-6) 0; border-bottom: 1px solid var(--border-subtle);">
+          <span style="display: inline-flex; color: var(--green-700);">{{ icBrain }}</span>
+          <div>
+            <h3 style="margin: 0 0 0.35rem; font-size: var(--text-lg); font-weight: var(--fw-bold);">Innowacyjność</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Najnowsze technologie — wdrażane z myślą o utrzymaniu, nie o demie.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-5); align-items: flex-start; padding: var(--space-6) 0; border-bottom: 1px solid var(--border-subtle);">
+          <span style="display: inline-flex; color: var(--green-700);">{{ icGlobe }}</span>
+          <div>
+            <h3 style="margin: 0 0 0.35rem; font-size: var(--text-lg); font-weight: var(--fw-bold);">Zrównoważenie</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Odpowiedzialny rozwój z mierzalnymi wskaźnikami biznesowymi i środowiskowymi.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: var(--space-5); align-items: flex-start; padding: var(--space-6) 0; border-bottom: 1px solid var(--border-subtle);">
+          <span style="display: inline-flex; color: var(--green-700);">{{ icShield }}</span>
+          <div>
+            <h3 style="margin: 0 0 0.35rem; font-size: var(--text-lg); font-weight: var(--fw-bold);">Ekspertyza</h3>
+            <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Doświadczony zespół technologów, specjalistów ESG i praktyków finansowania projektów.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" data-screen-label="Kontakt" style="scroll-margin-top: 90px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-page);">
+    <div style="max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-16); align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: var(--space-5);">
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700);">04 — Kontakt</span>
+        <h2 style="margin: 0; font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: var(--fw-extrabold); letter-spacing: var(--ls-tight); line-height: var(--lh-tight);">Porozmawiajmy o Twoim projekcie</h2>
+        <div style="display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--text-lg);">
+          <a href="mailto:biuro@iskt.pl" style="font-weight: var(--fw-semibold); color: var(--text-primary); border-bottom: 1px solid var(--green-200); align-self: flex-start;">biuro@iskt.pl</a>
+          <a href="tel:+48504083825" style="font-weight: var(--fw-semibold); color: var(--text-primary); border-bottom: 1px solid var(--green-200); align-self: flex-start;">+48 504 083 825</a>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.2rem; font-family: var(--font-mono); font-size: var(--text-sm); color: var(--text-muted);">
+          <span>Wiedeńska 11, 44-240 Żory</span>
+          <span>NIP 6511752112 · REGON 543251405</span>
+        </div>
+      </div>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="padding: var(--space-10); border: 1.5px solid var(--green-700); border-radius: var(--radius-lg);">
+          <h3 style="margin: 0 0 0.5rem; font-size: var(--text-2xl); font-weight: var(--fw-bold);">Dziękujemy!</h3>
+          <p style="margin: 0; color: var(--text-secondary);">Odezwiemy się najszybciej jak to możliwe.</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onSubmit }}" style="display: flex; flex-direction: column; gap: var(--space-4);">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4);">
+            <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Input" label="Imię i nazwisko" placeholder="Jan Kowalski" required="{{ true }}" hint-size="100%,74px"></x-import>
+            <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Input" label="E-mail" type="email" placeholder="jan@firma.pl" required="{{ true }}" hint-size="100%,74px"></x-import>
+          </div>
+          <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Textarea" label="Wiadomość" rows="{{ n5 }}" placeholder="Opisz swój projekt…" required="{{ true }}" hint-size="100%,140px"></x-import>
+          <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Button" type="submit" size="lg" icon-right="{{ icSend }}" hint-size="220px,56px">Wyślij wiadomość</x-import>
+        </form>
+      </sc-if>
+    </div>
+  </section>
+
+  <footer style="padding: var(--space-10) var(--container-pad); border-top: 1px solid var(--border-subtle);">
+    <div style="max-width: 1320px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: var(--space-4); justify-content: space-between; align-items: center;">
+      <span style="font-size: var(--text-xs); color: var(--text-muted);">© 2026 ISKT Greennovation Sp. z o.o. Wszystkie prawa zastrzeżone.</span>
+      <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--green-700);">iskt.pl</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { sent: false, dsReady: false };
+  componentDidMount() { this.poll(); }
+  poll() {
+    if (window.ISKTGreenovationDesignSystem_1705b2 && window.lucide && window.lucide.icons) this.setState({ dsReady: true });
+    else setTimeout(() => this.poll(), 80);
+  }
+  ic(name, size) {
+    const L = window.lucide;
+    if (!L || !L.icons) return null;
+    const key = name.split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+    const node = L.icons[key];
+    if (!node) return null;
+    const parts = Array.isArray(node[2]) ? node[2] : (Array.isArray(node[0]) ? node : []);
+    const inner = parts.map((c) => {
+      const attrs = c[1] || {};
+      const a = Object.keys(attrs).filter((k) => k !== 'key').map((k) => k + '="' + String(attrs[k]).replace(/"/g, '&quot;') + '"').join(' ');
+      return '<' + c[0] + ' ' + a + '></' + c[0] + '>';
+    }).join('');
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size +
+      '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
+    return React.createElement('span', { style: { display: 'inline-flex', width: size, height: size }, dangerouslySetInnerHTML: { __html: svg } });
+  }
+  renderVals() {
+    return {
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      n5: 5,
+      icArrow: this.ic('arrow-right', 18),
+      icSend: this.ic('send', 18),
+      icBrain: this.ic('brain-circuit', 24),
+      icGlobe: this.ic('globe', 24),
+      icShield: this.ic('shield-check', 24),
+    };
+  }
+}
+</script>
+</body>
+</html>
