@@ -64,5 +64,4 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-- E-005 (#23): Kryterium 4 i review iteracji 1 (🔴) wymagają potwierdzenia nagłówka CSP na wdrożeniu Vercel. Preview PR #24 jest za Vercel Deployment Protection (302 na vercel.com/sso-api), a staging wdraża się dopiero z main.
-
+(brak)
