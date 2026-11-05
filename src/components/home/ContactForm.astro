@@ -1,16 +1,27 @@
 ---
-// Formularz kontaktowy w wersji statycznej: D/ISKT-standalone.dc.html:165-180 (Card lg, pola DS
-// Input/Textarea, przycisk „Wyślij wiadomość”). Wysyłka, stany i klauzula dochodzą w T6; tu formularz
-// nie ma `action` i nie wysyła danych. Bez JavaScriptu formularz jest ukryty (`hidden`), a `<noscript>`
-// podaje kontakt (architektura, „Bezpieczeństwo”); skrypt odkrywa go dopiero po podpięciu obsługi.
+// Formularz kontaktowy: D/ISKT-standalone.dc.html:165-180 (Card lg, pola DS Input/Textarea, przycisk
+// „Wyślij wiadomość”) i stan sukcesu „Dziękujemy!” (l. 166-171, przełączany jak w l. 223).
+// Stany (architektura, „Design”): domyślny, wysyłanie (przycisk zablokowany), sukces, błąd pola,
+// błąd wysyłki, 429. Wysyłka wyłącznie przez fetch JSON do POST /api/contact (W-04, ADR-004).
+// Bez JavaScriptu formularz jest ukryty (`hidden`, bez `action`), a `<noscript>` podaje kontakt
+// (architektura, „Bezpieczeństwo”). Klauzula informacyjna jest ROBOCZA (W-06, decyzja właściciela P2)
+// i czeka na akceptację przy odbiorze, razem z /polityka-prywatnosci/.
 import { company } from '../../content/site';
 import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import Field from '../ui/Field.astro';
+
+const { name: companyName, address } = company;
 ---
 
 <Card padding="lg" class="contact-form">
-  <form class="contact-form__form" method="post" hidden data-contact-form>
+  <div class="contact-form__success" hidden data-contact-success>
+    <h3 class="contact-form__success-title" tabindex="-1" data-contact-success-title>
+      Dziękujemy!
+    </h3>
+    <p class="contact-form__success-text">Odezwiemy się najszybciej jak to możliwe.</p>
+  </div>
+  <form class="contact-form__form" method="post" novalidate hidden data-contact-form>
     <Field
       label="Imię i nazwisko"
       name="name"
@@ -34,9 +45,19 @@ import Field from '../ui/Field.astro';
       placeholder="Opisz swój projekt…"
       required
     />
+    <div class="contact-form__trap" aria-hidden="true">
+      <label for="field-website">Nie wypełniaj tego pola</label>
+      <input id="field-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+    <p class="contact-form__alert" role="alert" hidden data-contact-alert></p>
     <Button type="submit" size="lg" fullWidth iconRight="send">
       Wyślij wiadomość
     </Button>
+    <p class="contact-form__clause" data-testid="contact-clause">
+      Administratorem Twoich danych jest {companyName}, {address.street}, {address.postalCode}
+      {address.city}. Imię, e-mail i treść wiadomości przetwarzamy wyłącznie po to, aby odpowiedzieć
+      na Twoje zapytanie. Szczegóły w <a href="/polityka-prywatnosci/">polityce prywatności</a>.
+    </p>
   </form>
   <noscript>
     <p class="contact-form__noscript" data-testid="contact-noscript">
@@ -48,11 +69,125 @@ import Field from '../ui/Field.astro';
 </Card>
 
 <script>
-  // Do T6 (wysyłka przez fetch) formularz niczego nie wysyła. Odkrywamy go dopiero po podpięciu
-  // blokady, więc bez JS nie da się go wysłać natywnie.
-  for (const form of document.querySelectorAll<HTMLFormElement>('[data-contact-form]')) {
-    form.addEventListener('submit', (event) => event.preventDefault());
+  import { company } from '../../content/site';
+  import {
+    CONTACT_FIELDS,
+    validateContact,
+    type ContactField,
+    type ContactFieldErrors,
+  } from '../../lib/contact-schema';
+
+  // Z końcowym ukośnikiem (trailingSlash: 'always'): adres bez niego Vercel przekierowuje.
+  const ENDPOINT = '/api/contact/';
+  const MESSAGES = {
+    sendFailed: `Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę albo napisz do nas: ${company.email}.`,
+    rateLimited: 'Zbyt wiele zgłoszeń, spróbuj później.',
+  };
+
+  function setFieldError(control: HTMLInputElement | HTMLTextAreaElement, message?: string) {
+    const errorId = control.dataset.errorId;
+    const errorEl = errorId ? document.getElementById(errorId) : null;
+    const describedBy = [control.dataset.hintId, message ? errorId : undefined].filter(Boolean);
+    if (message) control.setAttribute('aria-invalid', 'true');
+    else control.removeAttribute('aria-invalid');
+    if (describedBy.length > 0) control.setAttribute('aria-describedby', describedBy.join(' '));
+    else control.removeAttribute('aria-describedby');
+    if (errorEl) {
+      errorEl.textContent = message ?? '';
+      errorEl.hidden = !message;
+    }
+  }
+
+  function setup(form: HTMLFormElement) {
+    const card = form.parentElement;
+    const success = card?.querySelector<HTMLElement>('[data-contact-success]');
+    const successTitle = card?.querySelector<HTMLElement>('[data-contact-success-title]');
+    const alert = form.querySelector<HTMLElement>('[data-contact-alert]');
+    const submit = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const controls = Object.fromEntries(
+      CONTACT_FIELDS.map((field) => [
+        field,
+        form.elements.namedItem(field) as HTMLInputElement | HTMLTextAreaElement,
+      ]),
+    ) as Record<ContactField, HTMLInputElement | HTMLTextAreaElement>;
+    const honeypot = form.elements.namedItem('website') as HTMLInputElement | null;
+    let sending = false;
+
+    function showAlert(message?: string) {
+      if (!alert) return;
+      alert.textContent = message ?? '';
+      alert.hidden = !message;
+    }
+
+    function showFieldErrors(fields: ContactFieldErrors) {
+      let first: HTMLInputElement | HTMLTextAreaElement | undefined;
+      for (const field of CONTACT_FIELDS) {
+        setFieldError(controls[field], fields[field]);
+        if (fields[field] && !first) first = controls[field];
+      }
+      first?.focus();
+      return Boolean(first);
+    }
+
+    function setSending(value: boolean) {
+      sending = value;
+      if (!submit) return;
+      submit.disabled = value;
+      submit.setAttribute('aria-busy', String(value));
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      showAlert();
+
+      const input = {
+        name: controls.name.value,
+        email: controls.email.value,
+        message: controls.message.value,
+        website: honeypot?.value ?? '',
+      };
+      const validation = validateContact({ ...input, website: '' });
+      if (!validation.ok) {
+        showFieldErrors(validation.fields);
+        return;
+      }
+      showFieldErrors({});
+
+      setSending(true);
+      try {
+        const response = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+          body: JSON.stringify(input),
+          credentials: 'same-origin',
+        });
+        if (response.ok) {
+          // Dane zostają w ukrytym formularzu (bez resetu); widoczny jest stan sukcesu z designu.
+          form.hidden = true;
+          if (success) success.hidden = false;
+          successTitle?.focus();
+          return;
+        }
+        if (response.status === 400) {
+          const body = (await response.json().catch(() => ({}))) as {
+            fields?: ContactFieldErrors;
+          };
+          if (showFieldErrors(body.fields ?? {})) return;
+        }
+        showAlert(response.status === 429 ? MESSAGES.rateLimited : MESSAGES.sendFailed);
+      } catch {
+        showAlert(MESSAGES.sendFailed);
+      } finally {
+        setSending(false);
+      }
+    });
+
     form.hidden = false;
+  }
+
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-contact-form]')) {
+    setup(form);
   }
 </script>
 
@@ -62,8 +197,51 @@ import Field from '../ui/Field.astro';
     flex-direction: column;
     gap: var(--space-4);
   }
-  .contact-form__form[hidden] {
+  .contact-form__form[hidden],
+  .contact-form__success[hidden],
+  .contact-form__alert[hidden] {
     display: none;
+  }
+  .contact-form__success {
+    text-align: center;
+    padding: var(--space-8) 0;
+  }
+  .contact-form__success-title {
+    margin: 0 0 0.5rem;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+    outline: none;
+  }
+  .contact-form__success-text {
+    margin: 0;
+    color: var(--text-secondary);
+  }
+  .contact-form__trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .contact-form__alert {
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--error-50);
+    color: var(--error-500);
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+  }
+  .contact-form__clause {
+    margin: 0;
+    font-size: var(--text-xs);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+  .contact-form__clause a {
+    color: var(--text-link);
+    text-decoration: underline;
   }
   .contact-form__noscript {
     margin: 0;

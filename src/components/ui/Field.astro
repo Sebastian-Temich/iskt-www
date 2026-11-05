@@ -1,7 +1,9 @@
 ---
 // Pole formularza DS: Input (DS/_ds_bundle.js:758) i Textarea (DS/_ds_bundle.js:1099) przepisane na
-// .astro. Etykieta powiązana z polem przez for/id, wymagane z czerwoną `*`, podpowiedź albo błąd pod
+// .astro. Etykieta powiązana z polem przez for/id, wymagane z czerwoną `*`, podpowiedź i błąd pod
 // polem powiązane przez aria-describedby (stan błędu: architektura, „Rozstrzygnięcia luk designu”).
+// Element błędu (`[data-field-error]`, id `${id}-error`) jest zawsze w DOM, ukryty bez błędu, żeby
+// skrypt formularza mógł pokazać komunikat z walidacji bez przebudowy pola.
 interface Props {
   label: string;
   name: string;
@@ -33,8 +35,9 @@ const {
   class: className,
 } = Astro.props;
 
-const messageId = `${id}-message`;
-const message = error ?? hint;
+const hintId = `${id}-hint`;
+const errorId = `${id}-error`;
+const describedBy = [hint && hintId, error && errorId].filter(Boolean).join(' ');
 const control = {
   id,
   name,
@@ -43,7 +46,9 @@ const control = {
   autocomplete,
   maxlength,
   'aria-invalid': error ? ('true' as const) : undefined,
-  'aria-describedby': message ? messageId : undefined,
+  'aria-describedby': describedBy || undefined,
+  'data-hint-id': hint ? hintId : undefined,
+  'data-error-id': errorId,
 };
 ---
 
@@ -61,11 +66,14 @@ const control = {
   ) : (
     <input class="field__control field__control--input" type={type} {...control} />
   )}
-  {message && (
-    <span class:list={['field__message', error && 'field__message--error']} id={messageId}>
-      {message}
+  {hint && (
+    <span class="field__message" id={hintId}>
+      {hint}
     </span>
   )}
+  <span class="field__message field__message--error" id={errorId} data-field-error hidden={!error}>
+    {error}
+  </span>
 </div>
 
 <style>
@@ -117,8 +125,12 @@ const control = {
   .field__control:disabled {
     background: var(--neutral-100);
   }
-  .field--error .field__control {
+  .field--error .field__control,
+  .field__control[aria-invalid='true'] {
     border-color: var(--error-500);
+  }
+  .field__message[hidden] {
+    display: none;
   }
   .field__message {
     font-size: var(--text-xs);

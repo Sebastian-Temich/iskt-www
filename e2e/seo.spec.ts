@@ -5,10 +5,46 @@ import { expect, test, type APIRequestContext, type Page } from '@playwright/tes
 import { findSeoEntry, sitemapPaths } from '../src/content/seo';
 
 // SEO techniczne (W-07, W-08). Serwer testów to `astro build` + `astro preview` bez
-// PUBLIC_SITE_ENV, czyli staging (bezpieczna wartość domyślna z src/lib/env.ts). Konfigurację
-// produkcyjną sprawdza osobny build z PUBLIC_SITE_ENV=production i innym PUBLIC_SITE_URL.
+// PUBLIC_SITE_ENV, czyli staging (bezpieczna wartość domyślna z src/lib/env.ts), z adapterem Node
+// (astro.config.mjs: adapter Vercel nie obsługuje preview endpointu /api/contact). Wynik Build Output
+// API (nagłówek X-Robots-Tag) i konfigurację produkcyjną sprawdzają osobne buildy z adapterem Vercel.
 
 const VERCEL_OUTPUT = '.vercel/output';
+const VERCEL_STATIC = join(VERCEL_OUTPUT, 'static');
+
+interface VercelConfig {
+  routes: { src?: string; headers?: Record<string, string>; continue?: boolean }[];
+}
+
+/**
+ * Build z adapterem Vercel do katalogu testu; `.vercel/output` jest przywracany po buildzie.
+ * Pliki statyczne czyta z `.vercel/output/static`, zanim kopia zostanie przywrócona.
+ */
+function vercelBuild(
+  outputPath: (name: string) => string,
+  env: Record<string, string>,
+  paths: string[],
+): { config: VercelConfig; files: Record<string, string> } {
+  const outDir = outputPath('dist-vercel');
+  const backup = outputPath('vercel-output-backup');
+  if (existsSync(VERCEL_OUTPUT)) cpSync(VERCEL_OUTPUT, backup, { recursive: true });
+  const buildEnv: NodeJS.ProcessEnv = { ...process.env, ...env };
+  delete buildEnv.ASTRO_ADAPTER;
+  try {
+    execFileSync('pnpm', ['exec', 'astro', 'build', '--outDir', outDir], {
+      env: buildEnv,
+      stdio: 'pipe',
+    });
+    const config = JSON.parse(readFileSync(join(VERCEL_OUTPUT, 'config.json'), 'utf-8'));
+    const files = Object.fromEntries(
+      paths.map((path) => [path, readFileSync(join(VERCEL_STATIC, path), 'utf-8')]),
+    );
+    return { config, files };
+  } finally {
+    rmSync(VERCEL_OUTPUT, { recursive: true, force: true });
+    if (existsSync(backup)) cpSync(backup, VERCEL_OUTPUT, { recursive: true });
+  }
+}
 
 async function head(page: Page) {
   const content = (selector: string) => page.locator(selector).getAttribute('content');
@@ -127,10 +163,7 @@ test('/sitemap.xml: urlset ze zbudowanymi stronami W-01, bez 404, API i polityki
   for (const loc of locs) expect(loc).not.toMatch(/404|\/api\/|polityka-prywatnosci/);
 });
 
-test('staging: robots.txt bez Disallow: /, noindex w meta i X-Robots-Tag w konfiguracji Vercel', async ({
-  page,
-  request,
-}) => {
+test('staging: robots.txt bez Disallow: /, noindex w meta', async ({ page, request }) => {
   const robots = await request.get('/robots.txt');
   expect(robots.status()).toBe(200);
   const text = await robots.text();
@@ -140,56 +173,47 @@ test('staging: robots.txt bez Disallow: /, noindex w meta i X-Robots-Tag w konfi
 
   await page.goto('/');
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
-
-  const config = JSON.parse(readFileSync(join(VERCEL_OUTPUT, 'config.json'), 'utf-8'));
-  expect(config.routes[0]).toEqual({
-    src: '^/.*$',
-    headers: { 'X-Robots-Tag': 'noindex' },
-    continue: true,
-  });
 });
 
-test.describe('produkcja (osobny build z PUBLIC_SITE_ENV=production)', () => {
+test.describe('buildy Vercel (osobne, z adapterem Vercel)', () => {
   test.setTimeout(180_000);
 
   const SITE_URL = 'https://iskt.pl';
 
-  test('robots.txt z Sitemap, bez noindex; PUBLIC_SITE_URL zmienia canonical, og:url i sitemap', async ({
-    browserName,
-  }, testInfo) => {
+  test('staging: X-Robots-Tag noindex w konfiguracji Vercel', async ({ browserName }, testInfo) => {
     // Build nie zależy od przeglądarki: sprawdzany raz, w projekcie chromium.
     test.skip(browserName !== 'chromium', 'build sprawdzany raz');
-    const outDir = testInfo.outputPath('dist-production');
-    const backup = testInfo.outputPath('vercel-output-backup');
-    // Build nadpisuje .vercel/output; kopia przywraca wynik buildu serwera testów.
-    if (existsSync(VERCEL_OUTPUT)) cpSync(VERCEL_OUTPUT, backup, { recursive: true });
-    let config: { routes: { headers?: Record<string, string> }[] };
-    try {
-      execFileSync('pnpm', ['exec', 'astro', 'build', '--outDir', outDir], {
-        env: { ...process.env, PUBLIC_SITE_ENV: 'production', PUBLIC_SITE_URL: SITE_URL },
-        stdio: 'pipe',
-      });
-      config = JSON.parse(readFileSync(join(VERCEL_OUTPUT, 'config.json'), 'utf-8'));
-    } finally {
-      if (existsSync(backup)) {
-        rmSync(VERCEL_OUTPUT, { recursive: true, force: true });
-        cpSync(backup, VERCEL_OUTPUT, { recursive: true });
-      }
-    }
+    const { config } = vercelBuild((name) => testInfo.outputPath(name), {}, []);
+    expect(config.routes[0]).toEqual({
+      src: '^/.*$',
+      headers: { 'X-Robots-Tag': 'noindex' },
+      continue: true,
+    });
+  });
 
-    const robots = readFileSync(join(outDir, 'robots.txt'), 'utf-8');
+  test('produkcja: robots.txt z Sitemap, bez noindex; PUBLIC_SITE_URL zmienia canonical, og:url i sitemap', async ({
+    browserName,
+  }, testInfo) => {
+    test.skip(browserName !== 'chromium', 'build sprawdzany raz');
+    const { config, files } = vercelBuild(
+      (name) => testInfo.outputPath(name),
+      { PUBLIC_SITE_ENV: 'production', PUBLIC_SITE_URL: SITE_URL },
+      ['robots.txt', 'index.html', 'sitemap.xml'],
+    );
+
+    const robots = files['robots.txt'] ?? '';
     expect(robots).toMatch(/^User-agent: \*$/m);
     expect(robots).toMatch(/^Allow: \/$/m);
     expect(robots).toMatch(/^Sitemap: https:\/\/iskt\.pl\/sitemap\.xml$/m);
     expect(robots).not.toMatch(/^Disallow:/m);
 
-    const html = readFileSync(join(outDir, 'index.html'), 'utf-8');
+    const html = files['index.html'] ?? '';
     expect(html).toContain('<link rel="canonical" href="https://iskt.pl/">');
     expect(html).toContain('<meta property="og:url" content="https://iskt.pl/">');
     expect(html).toContain('<meta property="og:image" content="https://iskt.pl/og/iskt-og.png">');
     expect(html).not.toContain('name="robots"');
 
-    const sitemap = readFileSync(join(outDir, 'sitemap.xml'), 'utf-8');
+    const sitemap = files['sitemap.xml'] ?? '';
     expect(sitemap).toContain('<urlset');
     expect(sitemapLocs(sitemap)).toContain('https://iskt.pl/');
     for (const loc of sitemapLocs(sitemap)) expect(loc.startsWith(`${SITE_URL}/`)).toBe(true);

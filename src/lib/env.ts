@@ -148,11 +148,5 @@ export function parseServerEnv(source: EnvSource): ServerEnv {
   };
 }
 
-/**
- * Źródło zmiennych: `import.meta.env` (pliki `.env*` wczytane przez Vite) nadpisane przez
- * `process.env` (zmienne Vercel w funkcji i w buildzie).
- */
-export function runtimeEnv(): EnvSource {
-  const fromProcess = typeof process === 'undefined' ? {} : process.env;
-  return { ...(import.meta.env as EnvSource), ...fromProcess };
-}
+// Źródło zmiennych w osobnym module: patrz komentarz w runtime-env.ts (sekrety poza paczką funkcji).
+export { runtimeEnv } from './runtime-env';
