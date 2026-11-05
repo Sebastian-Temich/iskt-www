@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `08-qa`: in-progress
+- `08-qa`: review
 
 ## Punkt przekazania
 
@@ -63,6 +63,7 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-05 `08-qa`: iteracja 2 (FAIL review PR #21)
 - 2026-11-05 `08-qa`: iteracja 3 (FAIL review PR #21)
 - 2026-11-05 `08-qa`: in-progress, QA M2 scalone (PR #28); etap otwarty do QA ostatniego kamienia
+- 2026-11-06 `08-qa`: review
 
 ## Otwarte eskalacje
 
