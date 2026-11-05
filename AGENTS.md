@@ -38,11 +38,12 @@ Stałe dla tego projektu, uzupełnia intake lub zadanie szkieletu:
 |---|---|
 | Typ projektu | Web: strona firmowa, strony statyczne (SSG) + jeden endpoint serverless formularza |
 | Framework | Astro 5 + TypeScript, adapter `@astrojs/vercel`, e-mail przez Resend (SDK `resend`); bez bazy danych |
-| Instalacja | (do uzupełnienia) |
-| Lint | (do uzupełnienia) |
-| Testy | (do uzupełnienia) |
-| Build | (do uzupełnienia) |
-| Uruchomienie lokalne | (do uzupełnienia) |
+| Instalacja | `pnpm install` (Node LTS przez fnm) |
+| Lint | `pnpm lint` (ESLint + `prettier --check` + `astro check`) |
+| Testy | `pnpm test` (Vitest), `pnpm test:e2e` (Playwright chromium + webkit na `astro build` + `astro preview`) |
+| Build | `pnpm build` |
+| Uruchomienie lokalne | `pnpm dev --port 55326` (port `dev` z bloku 55321-55329); `.env.local` z kluczem testowym albo `MAIL_TRANSPORT=mock` |
+| Baza danych | Brak — odstępstwo od kontraktu stałego („Baza lokalnie”, „Docker”) wg ADR-002 |
 
 Zmiana kontraktu wymaga ADR w `docs/04-architektura/adr/`.
 

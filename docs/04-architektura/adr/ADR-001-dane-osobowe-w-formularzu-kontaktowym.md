@@ -10,8 +10,10 @@ rola: intake
 Status: proponowana
 Data: 2026-11-05
 
-Autor: intake, z decyzji właściciela (E-001, opcja A). Architekt w etapie `04-architektura` przyjmuje
-tę decyzję (status „zaakceptowana”) albo zastępuje ją nowym ADR z uzasadnieniem.
+Autor: intake, z decyzji właściciela (E-001, opcja A). Architekt w etapie `04-architektura` przyjął
+decyzję bez zmian merytorycznych (2026-11-05); mechanizm limitu z pkt 5 rozstrzyga ADR-003, a
+integrację e-mail ADR-004. Status zmienia się na „zaakceptowana” z akceptacją architektury przez
+właściciela.
 
 Powiązane wymagania: W-04 (formularz), W-05 (antyspam i rate limit), W-06 (informacja o
 przetwarzaniu), W-12 (sekrety).
@@ -39,8 +41,7 @@ nadawcy (adres IP) przechowywanego współdzielenie między instancjami funkcji.
    jednostkowe endpointu sprawdzają, że ścieżki sukcesu i błędu nie logują tych pól.
 5. **Rate limit i IP.** Klucz limitu to adres IP albo jego skrót (hash z solą ze zmiennej
    środowiskowej), trzymany tylko na czas okna limitu (10 minut) w mechanizmie współdzielonym między
-   instancjami. Konkretny mechanizm (reguła Vercel Firewall albo magazyn klucz–wartość) wybiera
-   architekt w osobnym ADR; ta decyzja obowiązuje każdy z nich.
+   instancjami. Mechanizm: ADR-003 (reguła Vercel Firewall; fallback Upstash ze skrótem IP).
 6. **Podmioty przetwarzające.** Vercel (hosting funkcji, region UE `fra1`) i Resend (wysyłka e-maili,
    region UE, jeśli dostępny na koncie). Akceptacja umów powierzenia (DPA) na koncie ISKT to krok ręczny
    właściciela.
