@@ -11,3 +11,4 @@ Plik wspólny. Aktualizuje go wyłącznie orkiestrator przez `shctl task close`.
 - #9: Strona polityki prywatności z roboczą treścią (PR #25)
 - #11: Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit (PR #26)
 - #23: QA M1: brak nagłówka Content-Security-Policy z architektury (PR #24)
+- #22: QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) (PR #27)

@@ -11,3 +11,4 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 | #9 Strona polityki prywatności z roboczą treścią | M | 20min | 1 | 1 | 0 | PR #25 |
 | #11 Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | M | 2h 26min | 1 | 1 | 1 | PR #26 |
 | #23 QA M1: brak nagłówka Content-Security-Policy z architektury | M | 3h 23min | 1 | 2 | 1 | PR #24 |
+| #22 QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | M | 2h 24min | 1 | 2 | 0 | PR #27 |
