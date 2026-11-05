@@ -1,0 +1,161 @@
+---
+// Wdrożenia AI i transformacja cyfrowa (W-01): treść, kolejność sekcji i hierarchia nagłówków z
+// D/AI-Transformacja.dc.html. Meta i JSON-LD z content/seo.ts (wpis /uslugi/ai-transformacja/).
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import ComparisonTable from '../../components/service/ComparisonTable.astro';
+import CtaBand from '../../components/service/CtaBand.astro';
+import OtherServices from '../../components/service/OtherServices.astro';
+import ProcessTimeline from '../../components/service/ProcessTimeline.astro';
+import ScopeList from '../../components/service/ScopeList.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import WhenIntro from '../../components/service/WhenIntro.astro';
+import { nav } from '../../content/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const PATH = '/uslugi/ai-transformacja/';
+// Nazwa bieżącej strony w okruszkach = BreadcrumbList w JSON-LD (seo.ts) = D/AI-Transformacja.dc.html:67.
+const pageName = 'AI i transformacja cyfrowa';
+---
+
+<BaseLayout header="page" activeSection="kompetencje">
+  <ServiceHero
+    titleBefore="AI, która"
+    titleHighlight="wychodzi z pilotażu"
+    titleAfter="i zostaje w procesie"
+    lead="Najdroższe wdrożenia AI to te, które kończą się demonstracją. Zaczynamy od procesu i danych, wybieramy jeden przypadek użycia z policzalnym efektem i doprowadzamy go do produkcji — z właścicielem po Twojej stronie, kosztem miesięcznym i miarą, czy to działa."
+    cta={{ label: 'Umów konsultację', href: nav.contact }}
+    note="odpowiedź w 1 dzień roboczy"
+    seeAlso={{ label: 'Startupy', href: '/startupy/' }}
+  >
+    <Breadcrumb
+      slot="breadcrumb"
+      items={[
+        { label: 'Start', href: nav.home },
+        { label: 'Kompetencje', href: nav.competences },
+        { label: pageName, href: PATH },
+      ]}
+    />
+  </ServiceHero>
+
+  <WhenIntro
+    heading="Kiedy AI naprawdę się opłaca"
+    columns={[
+      {
+        title: 'Dobre przypadki użycia',
+        text: 'Obsługa dokumentów i ofertowania, wyszukiwanie w wiedzy firmowej, kontrola jakości na zdjęciach, prognozy popytu i zużycia, wsparcie zgłoszeń serwisowych.',
+        tone: 'positive',
+      },
+      {
+        title: 'Sygnały ostrzegawcze',
+        text: 'Projekt „wdróżmy AI” bez wskazanego procesu, dane rozproszone po arkuszach i skrzynkach, brak osoby odpowiedzialnej po stronie biznesu, cel opisany jako innowacyjność.',
+        tone: 'neutral',
+      },
+    ]}
+  >
+    Warunek jest prosty: <strong>powtarzalny proces, mierzalny koszt i dostępne dane</strong>. Jeśli
+    któregoś z tych elementów brakuje, najpierw uporządkujmy proces — inaczej model tylko
+    przyspieszy bałagan.
+  </WhenIntro>
+
+  <ScopeList
+    heading="Sześć obszarów naszej pracy"
+    items={[
+      {
+        title: 'Audyt procesów i danych',
+        text: 'Mapa procesów, czasochłonności i systemów. Sprawdzamy, gdzie realnie uciekają godziny i czy dane, których potrzebuje model, w ogóle istnieją w użytecznej formie.',
+      },
+      {
+        title: 'Wybór i wycena przypadków użycia',
+        text: 'Lista pomysłów uszeregowana według efektu i trudności, z szacunkiem kosztu wdrożenia i utrzymania. Wskazujemy jeden, od którego warto zacząć.',
+      },
+      {
+        title: 'Dane i integracje',
+        text: 'Uporządkowanie źródeł, połączenie z ERP, CRM i systemami produkcyjnymi, kontrola jakości danych. Bez tego etapu każde wdrożenie zatrzymuje się po pilotażu.',
+      },
+      {
+        title: 'Pilotaż i wdrożenie produkcyjne',
+        text: 'Asystenci oparci na wiedzy firmowej, automatyzacja obiegu dokumentów, modele predykcyjne i wizyjne — z testami na realnych danych i kryterium przejścia do produkcji.',
+      },
+      {
+        title: 'Zgodność, bezpieczeństwo i AI Act',
+        text: 'Klasyfikacja ryzyka systemów, polityka korzystania z narzędzi AI, ochrona danych firmowych i osobowych, rejestr zastosowań oraz nadzór człowieka nad decyzjami.',
+      },
+      {
+        title: 'Adopcja i kompetencje zespołu',
+        text: 'Szkolenia praktyczne na Waszych procesach, instrukcje, wsparcie liderów zmiany i pomiar faktycznego użycia narzędzi po wdrożeniu.',
+      },
+    ]}
+  />
+
+  <ComparisonTable
+    id="punkty-startu-ai"
+    heading="Cztery typowe punkty startu"
+    intro="Zakresy i czasy orientacyjne — precyzujemy je po audycie procesów. Część prac o charakterze badawczym można sfinansować dotacją lub rozliczyć w uldze B+R."
+    caption="Typowe punkty startu wdrożenia AI: co robimy, efekt i czas (tabela przewijana poziomo)"
+    columns={['Punkt startu', 'Co robimy', 'Efekt', 'Czas']}
+    rows={[
+      [
+        '„Chcemy zacząć z AI, nie wiemy gdzie”',
+        'Audyt procesów i danych, warsztat z zespołem',
+        'Lista przypadków użycia z wyceną i rekomendacją pierwszego kroku',
+        '3–4 tygodnie',
+      ],
+      [
+        'Konkretny proces do odciążenia',
+        'Pilotaż na realnych danych, integracja z systemem',
+        'Działające rozwiązanie z policzonym czasem i kosztem obsługi',
+        '6–12 tygodni',
+      ],
+      [
+        'Pilotaż, który utknął',
+        'Przegląd architektury, jakości danych i kosztów, plan naprawczy',
+        'Decyzja: doprowadzić do produkcji albo świadomie zamknąć',
+        '2–4 tygodnie',
+      ],
+      [
+        'Zespół używa AI bez zasad',
+        'Polityka korzystania z AI, klasyfikacja ryzyka, szkolenia',
+        'Rejestr zastosowań i zasady zgodne z wymogami AI Act',
+        '3–5 tygodni',
+      ],
+    ]}
+  />
+
+  <ProcessTimeline
+    heading="Przebieg współpracy"
+    steps={[
+      {
+        duration: '1–2 tygodnie',
+        title: 'Audyt i warsztat',
+        text: 'Rozmowy z zespołem, przegląd systemów i danych. Efekt: mapa procesów z oszacowaniem czasu i kosztu.',
+      },
+      {
+        duration: '1–2 tygodnie',
+        title: 'Wybór przypadku i kryteria sukcesu',
+        text: 'Jeden proces, jedna miara, jeden właściciel po Waszej stronie. Efekt: karta wdrożenia z budżetem.',
+      },
+      {
+        duration: '4–8 tygodni',
+        title: 'Pilotaż na realnych danych',
+        text: 'Prototyp, testy z użytkownikami, poprawki i pomiar wyniku. Efekt: decyzja o wdrożeniu oparta na liczbach.',
+      },
+      {
+        duration: '4–8 tygodni',
+        title: 'Wdrożenie produkcyjne',
+        text: 'Integracje, uprawnienia, monitoring i koszty utrzymania. Efekt: rozwiązanie w codziennej pracy zespołu.',
+      },
+      {
+        duration: 'cykl ciągły',
+        title: 'Utrzymanie i rozwój',
+        text: 'Monitoring jakości odpowiedzi, aktualizacja danych, kolejne procesy. Efekt: rosnący efekt bez rosnącego ryzyka.',
+      },
+    ]}
+  />
+
+  <CtaBand
+    heading="Opisz proces, który zabiera Wam najwięcej czasu"
+    text="Odpowiemy, czy da się go sensownie odciążyć AI i od czego zacząć."
+  />
+
+  <OtherServices current={PATH} />
+</BaseLayout>
