@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/colors.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/typography.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/effects.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/tokens/base.css">
+<link rel="stylesheet" href="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/styles.css">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="_ds/iskt-greenovation-design-system-1705b29f-a657-4ea0-8548-faa4bf02a1b4/_ds_bundle.js"></script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--surface-page); color: var(--text-primary); font-family: var(--font-sans); }
+  a { color: var(--text-link); text-decoration: none; }
+  a:hover { color: var(--text-link-hover); }
+</style>
+</helmet>
+
+<div style="font-family: var(--font-sans); color: var(--text-primary); background: var(--surface-page);">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.82); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle);">
+    <div style="max-width: var(--container-max); margin: 0 auto; padding: 0.85rem var(--container-pad); display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap;">
+      <a href="#top" style="display: flex; align-items: center; gap: 0.6rem; color: inherit;">
+        <img src="assets/iskt-logo-transparent.png" alt="ISKT Greennovation" style="height: 40px; width: auto;">
+        <span style="font-size: var(--text-lg); font-weight: var(--fw-extrabold); letter-spacing: var(--ls-tight);">ISKT <span style="color: var(--green-700);">Greennovation</span></span>
+      </a>
+      <nav style="margin-left: auto; display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-5); font-size: var(--text-sm); font-weight: var(--fw-medium); white-space: nowrap;">
+        <a href="#o-nas" style="color: var(--text-secondary);" style-hover="color: var(--green-700);">O nas</a>
+        <a href="#kompetencje" style="color: var(--text-secondary);" style-hover="color: var(--green-700);">Kompetencje</a>
+        <a href="#dla-kogo" style="color: var(--text-secondary);" style-hover="color: var(--green-700);">Dla kogo</a>
+        <a href="#proces" style="color: var(--text-secondary);" style-hover="color: var(--green-700);">Proces</a>
+        <a href="#finansowanie" style="color: var(--text-secondary);" style-hover="color: var(--green-700);">Finansowanie</a>
+      </nav>
+      <a href="#kontakt" style="display: inline-flex; white-space: nowrap;">
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Button" size="sm" icon-right="{{ icArrowSm }}" hint-size="150px,38px">Napisz do nas</x-import>
+      </a>
+    </div>
+  </header>
+
+  <section id="top" style="position: relative; overflow: hidden; background: var(--gradient-wash); padding: calc(var(--section-pad-y) + 1rem) var(--container-pad) var(--section-pad-y);">
+    <div aria-hidden="true" style="position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 720px; height: 720px; border-radius: 50%; background: radial-gradient(circle, rgba(84,132,29,0.18), transparent 62%); pointer-events: none;"></div>
+    <div style="position: relative; max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-6);">
+      <img src="assets/iskt-logo-transparent.png" alt="" style="height: 128px; width: auto; filter: drop-shadow(0 12px 28px rgba(30,85,29,0.22));">
+      <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Badge" tone="lime" hint-size="280px,28px">Innowacje w harmonii z naturą</x-import>
+      <h1 style="margin: 0; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: var(--fw-extrabold); letter-spacing: var(--ls-tighter); line-height: 1.02; text-wrap: balance;">Innowacje w Harmonii<br><span style="background: var(--gradient-brand); -webkit-background-clip: text; background-clip: text; color: transparent;">z Naturą</span></h1>
+      <p style="margin: 0; max-width: 640px; font-size: var(--text-xl); line-height: var(--lh-relaxed); color: var(--text-secondary); text-wrap: pretty;">Łączymy technologie przyszłości ze zrównoważonym rozwojem, tworząc rozwiązania dla odpowiedzialnego biznesu.</p>
+      <div style="display: flex; gap: 0.9rem; flex-wrap: wrap; justify-content: center;">
+        <a href="#kompetencje" style="display: inline-flex;">
+          <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Button" size="lg" icon-right="{{ icArrow }}" hint-size="240px,56px">Poznaj nasze usługi</x-import>
+        </a>
+        <a href="#kontakt" style="display: inline-flex;">
+          <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Button" size="lg" variant="outline" hint-size="200px,56px">Skontaktuj się</x-import>
+        </a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: var(--space-4);">
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700); background: var(--green-50); border: 1px solid var(--green-200); border-radius: var(--radius-pill); padding: 0.35rem 0.85rem;">B+R</span>
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700); background: var(--green-50); border: 1px solid var(--green-200); border-radius: var(--radius-pill); padding: 0.35rem 0.85rem;">ESG</span>
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700); background: var(--green-50); border: 1px solid var(--green-200); border-radius: var(--radius-pill); padding: 0.35rem 0.85rem;">AI</span>
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700); background: var(--green-50); border: 1px solid var(--green-200); border-radius: var(--radius-pill); padding: 0.35rem 0.85rem;">Startupy</span>
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700); background: var(--green-50); border: 1px solid var(--green-200); border-radius: var(--radius-pill); padding: 0.35rem 0.85rem;">Software</span>
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-700); background: var(--green-50); border: 1px solid var(--green-200); border-radius: var(--radius-pill); padding: 0.35rem 0.85rem;">Szkolenia</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="o-nas" data-screen-label="O nas" style="scroll-margin-top: 80px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-page);">
+    <div style="max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: var(--space-16); align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: var(--space-5);">
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.SectionHeading" align="left" eyebrow="O nas" title="Kim jesteśmy?" hint-size="100%,140px"></x-import>
+        <p style="margin: 0; font-size: var(--text-lg); line-height: var(--lh-relaxed); color: var(--text-secondary); text-wrap: pretty;">ISKT Greennovation to zespół ekspertów łączących pasję do innowacji technologicznych. Wspieramy organizacje w transformacji cyfrowej, wdrażaniu rozwiązań AI i strategiach ESG.</p>
+        <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary); text-wrap: pretty;">Pracujemy projektowo i partnersko: rozumiemy realia biznesu, wymogi instytucji finansujących i tempo, w jakim zmienia się technologia.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" padding="md" hint-size="100%,140px">
+          <div style="display: flex; gap: var(--space-5); align-items: flex-start;">
+            <span style="width: 52px; height: 52px; flex: none; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+              {{ icBrain22 }}
+            </span>
+            <div>
+              <h3 style="margin: 0 0 0.35rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Ekspertyza technologiczna</h3>
+              <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">AI, dane i dedykowane oprogramowanie wdrażane tam, gdzie realnie zmieniają wynik.</p>
+            </div>
+          </div>
+        </x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" padding="md" hint-size="100%,140px">
+          <div style="display: flex; gap: var(--space-5); align-items: flex-start;">
+            <span style="width: 52px; height: 52px; flex: none; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+              {{ icLeaf22 }}
+            </span>
+            <div>
+              <h3 style="margin: 0 0 0.35rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Odpowiedzialność środowiskowa</h3>
+              <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Zrównoważony rozwój traktujemy jako kryterium projektowe, nie dodatek do prezentacji.</p>
+            </div>
+          </div>
+        </x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" padding="md" hint-size="100%,140px">
+          <div style="display: flex; gap: var(--space-5); align-items: flex-start;">
+            <span style="width: 52px; height: 52px; flex: none; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+              {{ icShield22 }}
+            </span>
+            <div>
+              <h3 style="margin: 0 0 0.35rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Partnerskie podejście</h3>
+              <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Jeden zespół po stronie klienta i po naszej — z jasnym zakresem, terminami i odpowiedzialnością.</p>
+            </div>
+          </div>
+        </x-import>
+      </div>
+    </div>
+  </section>
+
+  <section id="kompetencje" data-screen-label="Kompetencje" style="scroll-margin-top: 80px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-subtle);">
+    <div style="max-width: var(--container-max); margin: 0 auto;">
+      <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.SectionHeading" eyebrow="Usługi" title="Nasze Kompetencje" subtitle="Kompleksowe rozwiązania dla nowoczesnego biznesu" hint-size="100%,160px"></x-import>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-6); margin-top: var(--space-12);">
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.ServiceCard" icon="{{ icFlask }}" title="Projekty B+R" description="Innowacyjne rozwiązania badawczo-rozwojowe wspierające rozwój Twojej organizacji." hint-size="100%,240px"></x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.ServiceCard" icon="{{ icRecycle }}" title="ESG i Zrównoważony Rozwój" description="Strategie i wdrożenia praktyk odpowiedzialnego biznesu zgodnych z normami środowiskowymi." hint-size="100%,240px"></x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.ServiceCard" icon="{{ icCpu }}" title="AI i Transformacja Cyfrowa" description="Implementacja sztucznej inteligencji i nowoczesnych technologii w procesach biznesowych." hint-size="100%,240px"></x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.ServiceCard" icon="{{ icRocket }}" title="Startupy" description="Kompleksowe wsparcie dla startupów – od pomysłu po skalowanie biznesu." hint-size="100%,240px"></x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.ServiceCard" icon="{{ icCode }}" title="Rozwój Oprogramowania" description="Tworzenie dedykowanych rozwiązań software’owych dopasowanych do potrzeb Twojej firmy." hint-size="100%,240px"></x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.ServiceCard" icon="{{ icCap }}" title="Szkolenia" description="Profesjonalne szkolenia z zakresu technologii, innowacji i zrównoważonego rozwoju." hint-size="100%,240px"></x-import>
+      </div>
+    </div>
+  </section>
+
+  <section id="dla-kogo" data-screen-label="Dla kogo" style="scroll-margin-top: 80px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-page);">
+    <div style="max-width: var(--container-max); margin: 0 auto;">
+      <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.SectionHeading" eyebrow="Dla kogo" title="Z kim pracujemy" subtitle="Cztery typy organizacji, cztery różne punkty wyjścia — jeden sposób pracy." hint-size="100%,160px"></x-import>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); margin-top: var(--space-12);">
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" variant="brand" padding="md" hint-size="100%,240px">
+          <span style="display: inline-flex; color: var(--green-700);">
+            {{ icBuilding26 }}
+          </span>
+          <h3 style="margin: var(--space-4) 0 0.5rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">MŚP z ambicją B+R</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Firmy produkcyjne i usługowe, które chcą sfinansować rozwój z dotacji i ulg — i potrzebują partnera od pomysłu po rozliczenie.</p>
+        </x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" variant="brand" padding="md" hint-size="100%,240px">
+          <span style="display: inline-flex; color: var(--green-700);">
+            {{ icRecycle26 }}
+          </span>
+          <h3 style="margin: var(--space-4) 0 0.5rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Organizacje wdrażające ESG</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Zespoły, przed którymi stoi raportowanie zrównoważonego rozwoju i realna zmiana operacyjna, nie tylko dokument.</p>
+        </x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" variant="brand" padding="md" hint-size="100%,240px">
+          <span style="display: inline-flex; color: var(--green-700);">
+            {{ icRocket26 }}
+          </span>
+          <h3 style="margin: var(--space-4) 0 0.5rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Startupy i founderzy</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Zespoły na etapie walidacji i pierwszego produktu, którym potrzebne są technologia, finansowanie i tempo.</p>
+        </x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" variant="brand" padding="md" hint-size="100%,240px">
+          <span style="display: inline-flex; color: var(--green-700);">
+            {{ icLandmark26 }}
+          </span>
+          <h3 style="margin: var(--space-4) 0 0.5rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Instytucje i uczelnie</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Partnerzy publiczni i naukowi — konsorcja badawcze, projekty wdrożeniowe i transfer wiedzy do biznesu.</p>
+        </x-import>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showProcess }}" hint-placeholder-val="{{ true }}">
+  <section id="proces" data-screen-label="Proces" style="scroll-margin-top: 80px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-subtle);">
+    <div style="max-width: var(--container-max); margin: 0 auto;">
+      <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.SectionHeading" eyebrow="Proces" title="Jak pracujemy" subtitle="Cztery kroki od rozmowy do wdrożenia, które da się rozliczyć." hint-size="100%,160px"></x-import>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6); margin-top: var(--space-12);">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-8); background: var(--surface-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--green-700); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--green-600);">01</span>
+          <h3 style="margin: 0; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Diagnoza</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Warsztat i audyt: gdzie jesteś, co blokuje rozwój, co da się sfinansować.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-8); background: var(--surface-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--green-700); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--green-600);">02</span>
+          <h3 style="margin: 0; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Koncepcja i finansowanie</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Zakres, harmonogram i budżet projektu wraz ze ścieżką dofinansowania.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-8); background: var(--surface-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--green-700); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--green-600);">03</span>
+          <h3 style="margin: 0; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Wdrożenie</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Prace B+R, rozwój oprogramowania i zmiana procesów — w krótkich iteracjach.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-8); background: var(--surface-card); border: 1px solid var(--border-subtle); border-top: 3px solid var(--green-700); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);">
+          <span style="font-family: var(--font-mono); font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--green-600);">04</span>
+          <h3 style="margin: 0; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Rozwój i raportowanie</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Utrzymanie, szkolenia zespołu oraz dokumentacja i rozliczenie efektów.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section data-screen-label="Dlaczego my" style="position: relative; overflow: hidden; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-dark); color: var(--text-on-dark);">
+    <div aria-hidden="true" style="position: absolute; top: -30%; right: -10%; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(circle, rgba(84,132,29,0.22), transparent 65%); pointer-events: none;"></div>
+    <div style="position: relative; max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-16); align-items: start;">
+      <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.SectionHeading" align="left" on-dark="{{ true }}" eyebrow="Dlaczego my" title="Dlaczego warto z nami współpracować?" subtitle="Połączenie technologicznej ekspertyzy z odpowiedzialnością za środowisko. Tworzymy rozwiązania, które nie tylko zwiększają efektywność biznesu, ale również dbają o przyszłość naszej planety." hint-size="100%,220px"></x-import>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6);">
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6); border-radius: var(--radius-lg); background: rgba(255,255,255,0.04); border: 1px solid var(--ink-700);">
+          <span style="display: inline-flex; color: var(--green-300);">
+            {{ icBrain24 }}
+          </span>
+          <h3 style="margin: 0; font-size: var(--text-base); font-weight: var(--fw-bold); color: var(--text-on-dark);">Innowacyjność</h3>
+          <p style="margin: 0; font-size: var(--text-sm); line-height: var(--lh-relaxed); color: var(--neutral-300);">Najnowsze technologie — AI, automatyzacja i dane wdrażane z myślą o utrzymaniu, nie o demie.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6); border-radius: var(--radius-lg); background: rgba(255,255,255,0.04); border: 1px solid var(--ink-700);">
+          <span style="display: inline-flex; color: var(--green-300);">
+            {{ icGlobe24 }}
+          </span>
+          <h3 style="margin: 0; font-size: var(--text-base); font-weight: var(--fw-bold); color: var(--text-on-dark);">Zrównoważenie</h3>
+          <p style="margin: 0; font-size: var(--text-sm); line-height: var(--lh-relaxed); color: var(--neutral-300);">Odpowiedzialny rozwój — każdy projekt ma zdefiniowane wskaźniki biznesowe i środowiskowe.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6); border-radius: var(--radius-lg); background: rgba(255,255,255,0.04); border: 1px solid var(--ink-700);">
+          <span style="display: inline-flex; color: var(--green-300);">
+            {{ icShield24 }}
+          </span>
+          <h3 style="margin: 0; font-size: var(--text-base); font-weight: var(--fw-bold); color: var(--text-on-dark);">Ekspertyza</h3>
+          <p style="margin: 0; font-size: var(--text-sm); line-height: var(--lh-relaxed); color: var(--neutral-300);">Doświadczony zespół — technolodzy, specjaliści ESG i praktycy finansowania projektów.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showFinansowanie }}" hint-placeholder-val="{{ true }}">
+  <section id="finansowanie" data-screen-label="Finansowanie" style="scroll-margin-top: 80px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-page);">
+    <div style="max-width: var(--container-max); margin: 0 auto;">
+      <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.SectionHeading" eyebrow="Finansowanie" title="Ścieżki finansowania innowacji" subtitle="Dobieramy źródło finansowania do projektu — i prowadzimy przez dokumentację, wdrożenie oraz rozliczenie." hint-size="100%,180px"></x-import>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-6); margin-top: var(--space-12);">
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" padding="md" interactive="{{ true }}" hint-size="100%,220px">
+          <span style="width: 52px; height: 52px; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+            {{ icLandmark24 }}
+          </span>
+          <h3 style="margin: var(--space-4) 0 0.5rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Dotacje krajowe i unijne</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Programy wspierające prace badawczo-rozwojowe i wdrożenia innowacji — od wyboru naboru po wniosek.</p>
+        </x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" padding="md" interactive="{{ true }}" hint-size="100%,220px">
+          <span style="width: 52px; height: 52px; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+            {{ icPin24 }}
+          </span>
+          <h3 style="margin: var(--space-4) 0 0.5rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Programy regionalne</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Wsparcie dostępne dla firm z województwa śląskiego i regionów sąsiednich, w tym projekty środowiskowe.</p>
+        </x-import>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" padding="md" interactive="{{ true }}" hint-size="100%,220px">
+          <span style="width: 52px; height: 52px; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+            {{ icFileCheck24 }}
+          </span>
+          <h3 style="margin: var(--space-4) 0 0.5rem; font-size: var(--text-lg); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight);">Ulgi podatkowe</h3>
+          <p style="margin: 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary);">Ulga B+R i IP Box: identyfikacja kwalifikowanych prac, ewidencja i dokumentacja projektowa.</p>
+        </x-import>
+      </div>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="kontakt" data-screen-label="Kontakt" style="scroll-margin-top: 80px; padding: var(--section-pad-y) var(--container-pad); background: var(--surface-subtle);">
+    <div style="max-width: var(--container-max); margin: 0 auto;">
+      <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.SectionHeading" eyebrow="Kontakt" title="Skontaktuj się z nami" subtitle="Porozmawiajmy o Twoim projekcie" hint-size="100%,160px"></x-import>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-12); margin-top: var(--space-12); align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: var(--space-5);">
+          <div style="display: flex; align-items: center; gap: var(--space-4);">
+            <span style="width: 52px; height: 52px; flex: none; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+              {{ icMail22 }}
+            </span>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-muted);">E-mail</div>
+              <a href="mailto:biuro@iskt.pl" style="font-size: var(--text-lg); font-weight: var(--fw-semibold); color: var(--text-primary);">biuro@iskt.pl</a>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-4);">
+            <span style="width: 52px; height: 52px; flex: none; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+              {{ icPin22 }}
+            </span>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-muted);">Siedziba</div>
+              <div style="font-size: var(--text-lg); font-weight: var(--fw-semibold);">Wiedeńska 11, 44-240 Żory</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-4);">
+            <span style="width: 52px; height: 52px; flex: none; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+              {{ icPhone22 }}
+            </span>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-muted);">Telefon</div>
+              <a href="tel:+48504083825" style="font-size: var(--text-lg); font-weight: var(--fw-semibold); color: var(--text-primary);">+48 504 083 825</a>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-4);">
+            <span style="width: 52px; height: 52px; flex: none; border-radius: var(--radius-md); display: inline-flex; align-items: center; justify-content: center; background: var(--green-50); color: var(--green-700);">
+              {{ icFileText22 }}
+            </span>
+            <div>
+              <div style="font-size: var(--text-sm); color: var(--text-muted);">NIP</div>
+              <div style="font-size: var(--text-lg); font-weight: var(--fw-semibold); font-family: var(--font-mono);">6511752112</div>
+            </div>
+          </div>
+          <p style="margin: var(--space-2) 0 0; font-size: var(--text-base); line-height: var(--lh-relaxed); color: var(--text-secondary); max-width: 420px; text-wrap: pretty;">Opisz krótko, na jakim etapie jest Twój projekt. Odpowiadamy zwykle w ciągu jednego dnia roboczego i proponujemy termin rozmowy.</p>
+        </div>
+        <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Card" padding="lg" hint-size="100%,420px">
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align: center; padding: var(--space-10) 0;">
+              <span style="display: inline-flex; color: var(--green-600);">
+                {{ icCheck48 }}
+              </span>
+              <h3 style="margin-top: var(--space-4); font-size: var(--text-2xl); font-weight: var(--fw-bold);">Dziękujemy!</h3>
+              <p style="color: var(--text-secondary); margin: 0;">Odezwiemy się najszybciej jak to możliwe.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ onSubmit }}" style="display: flex; flex-direction: column; gap: var(--space-4);">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4);">
+                <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Input" label="Imię i nazwisko" placeholder="Jan Kowalski" required="{{ true }}" hint-size="100%,74px"></x-import>
+                <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Input" label="E-mail" type="email" placeholder="jan@firma.pl" required="{{ true }}" hint-size="100%,74px"></x-import>
+              </div>
+              <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Input" label="Firma" placeholder="Nazwa firmy lub instytucji" hint-size="100%,74px"></x-import>
+              <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Select" label="Obszar współpracy" options="{{ obszary }}" hint-size="100%,74px"></x-import>
+              <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Textarea" label="Wiadomość" rows="{{ n4 }}" placeholder="Opisz swój projekt…" required="{{ true }}" hint-size="100%,120px"></x-import>
+              <x-import component-from-global-scope="ISKTGreenovationDesignSystem_1705b2.Button" type="submit" size="lg" full-width="{{ true }}" icon-right="{{ icSend }}" hint-size="100%,56px">Wyślij wiadomość</x-import>
+              <p style="margin: 0; font-size: var(--text-xs); line-height: var(--lh-relaxed); color: var(--text-muted);">Wysyłając wiadomość zgadzasz się na kontakt w sprawie zapytania. Danych nie wykorzystujemy do innych celów.</p>
+            </form>
+          </sc-if>
+        </x-import>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: var(--surface-dark); color: var(--text-on-dark); padding: var(--space-16) var(--container-pad) var(--space-10);">
+    <div style="max-width: var(--container-max); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-10);">
+      <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <img src="assets/iskt-logo-transparent.png" alt="ISKT Greennovation" style="height: 44px; width: auto;">
+          <span style="font-size: var(--text-lg); font-weight: var(--fw-extrabold); letter-spacing: var(--ls-tight);">ISKT Greennovation</span>
+        </div>
+        <p style="margin: 0; max-width: 320px; font-size: var(--text-sm); line-height: var(--lh-relaxed); color: var(--neutral-300);">Innowacje technologiczne w harmonii ze zrównoważonym rozwojem.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+        <span style="font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-300); font-weight: var(--fw-semibold);">Nawigacja</span>
+        <a href="#o-nas" style="font-size: var(--text-sm); color: var(--neutral-300);" style-hover="color: #fff;">O nas</a>
+        <a href="#kompetencje" style="font-size: var(--text-sm); color: var(--neutral-300);" style-hover="color: #fff;">Kompetencje</a>
+        <a href="#dla-kogo" style="font-size: var(--text-sm); color: var(--neutral-300);" style-hover="color: #fff;">Dla kogo</a>
+        <a href="#kontakt" style="font-size: var(--text-sm); color: var(--neutral-300);" style-hover="color: #fff;">Kontakt</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+        <span style="font-size: var(--text-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--green-300); font-weight: var(--fw-semibold);">Dane firmy</span>
+        <span style="font-size: var(--text-sm); color: var(--neutral-300);">ISKT Greennovation Sp. z o.o.</span>
+        <span style="font-size: var(--text-sm); color: var(--neutral-300);">Wiedeńska 11, 44-240 Żory, Polska</span>
+        <span style="font-size: var(--text-sm); color: var(--neutral-300); font-family: var(--font-mono);">NIP 6511752112</span>
+        <span style="font-size: var(--text-sm); color: var(--neutral-300); font-family: var(--font-mono);">REGON 543251405</span>
+        <a href="mailto:biuro@iskt.pl" style="font-size: var(--text-sm); color: var(--green-300);">biuro@iskt.pl</a>
+        <a href="tel:+48504083825" style="font-size: var(--text-sm); color: var(--green-300);">+48 504 083 825</a>
+      </div>
+    </div>
+    <div style="max-width: var(--container-max); margin: var(--space-10) auto 0; padding-top: var(--space-6); border-top: 1px solid var(--ink-700); display: flex; flex-wrap: wrap; gap: var(--space-4); justify-content: space-between; align-items: center;">
+      <span style="font-size: var(--text-xs); color: var(--neutral-500);">© 2026 ISKT Greennovation Sp. z o.o. Wszystkie prawa zastrzeżone.</span>
+      <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--green-300);">iskt.pl</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showProcess&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcje&quot;},&quot;showFinansowanie&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcje&quot;}}">
+class Component extends DCLogic {
+  state = { sent: false, dsReady: false };
+
+  componentDidMount() { this.poll(); }
+
+  poll() {
+    if (window.ISKTGreenovationDesignSystem_1705b2 && window.lucide && window.lucide.icons) {
+      this.setState({ dsReady: true });
+    } else {
+      setTimeout(() => this.poll(), 80);
+    }
+  }
+
+  // Lucide glyphs rendered as static inline SVG markup. The DS Icon component swaps its
+  // own <i> node via lucide.createIcons(), which mutates React-owned DOM and breaks on re-render.
+  ic(name, size) {
+    const L = window.lucide;
+    if (!L || !L.icons) return null;
+    const key = name.split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+    const node = L.icons[key];
+    if (!node) return null;
+    const parts = Array.isArray(node[2]) ? node[2] : (Array.isArray(node[0]) ? node : []);
+    const inner = parts.map((child) => {
+      const tag = child[0];
+      const attrs = child[1] || {};
+      const a = Object.keys(attrs)
+        .filter((k) => k !== 'key')
+        .map((k) => k + '="' + String(attrs[k]).replace(/"/g, '&quot;') + '"')
+        .join(' ');
+      return '<' + tag + ' ' + a + '></' + tag + '>';
+    }).join('');
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size +
+      '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      inner + '</svg>';
+    return React.createElement('span', {
+      style: { display: 'inline-flex', width: size, height: size },
+      dangerouslySetInnerHTML: { __html: svg },
+    });
+  }
+
+  renderVals() {
+    return {
+      showProcess: this.props.showProcess !== false,
+      showFinansowanie: this.props.showFinansowanie !== false,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      onSubmit: (e) => { e.preventDefault(); this.setState({ sent: true }); },
+      obszary: [
+        { value: 'br', label: 'Projekty B+R' },
+        { value: 'esg', label: 'ESG i zrównoważony rozwój' },
+        { value: 'ai', label: 'AI i transformacja cyfrowa' },
+        { value: 'startup', label: 'Wsparcie startupu' },
+        { value: 'software', label: 'Rozwój oprogramowania' },
+        { value: 'szkolenia', label: 'Szkolenia' },
+      ],
+      n4: 4,
+      icArrow: this.ic('arrow-right', 18),
+      icArrowSm: this.ic('arrow-right', 16),
+      icSend: this.ic('send', 18),
+      icFlask: this.ic('flask-conical', 26),
+      icRecycle: this.ic('recycle', 26),
+      icCpu: this.ic('cpu', 26),
+      icRocket: this.ic('rocket', 26),
+      icCode: this.ic('code-xml', 26),
+      icCap: this.ic('graduation-cap', 26),
+      icBrain22: this.ic('brain-circuit', 22),
+      icLeaf22: this.ic('leaf', 22),
+      icShield22: this.ic('shield-check', 22),
+      icBuilding26: this.ic('building-2', 26),
+      icRecycle26: this.ic('recycle', 26),
+      icRocket26: this.ic('rocket', 26),
+      icLandmark26: this.ic('landmark', 26),
+      icShield24: this.ic('shield-check', 24),
+      icTrend24: this.ic('trending-up', 24),
+      icGlobe24: this.ic('globe', 24),
+      icBrain24: this.ic('brain-circuit', 24),
+      icLandmark24: this.ic('landmark', 24),
+      icPin24: this.ic('map-pin', 24),
+      icFileCheck24: this.ic('file-check', 24),
+      icMail22: this.ic('mail', 22),
+      icPhone22: this.ic('phone', 22),
+      icPin22: this.ic('map-pin', 22),
+      icFileText22: this.ic('file-text', 22),
+      icCheck48: this.ic('circle-check-big', 48),
+    };
+  }
+}
+</script>
+</body>
+</html>
