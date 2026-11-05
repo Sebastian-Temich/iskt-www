@@ -27,7 +27,13 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-(brak)
+- Czas: 2026-11-05T14:12Z (przed pierwszym dispatchem)
+- Kamień: M1 startuje; etapy 00, 04, 05, 06 `done`
+- `shctl doctor`: 0 błędów (uwaga: 3 stare repo testowe do usunięcia, nie dotyczy projektu)
+- Autoryzacja: wiersz „Autoryzacja planu PR #3” w `decyzje.md`; start workerów na sygnał właściciela 2026-11-05 („start”)
+- Zadania właściciela: Vercel (projekt, alias https://iskt-www.vercel.app, zmienne Production+Preview) i Resend (klucz, `.env.local`) gotowe; region fra1 do potwierdzenia; reguła WAF przed QA M2
+- Eskalacje: brak otwartych
+- Następny krok: dispatch #5 (szkielet), do jego zamknięcia nic innego
 
 ## Dziennik etapów
 
