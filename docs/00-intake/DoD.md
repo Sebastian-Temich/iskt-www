@@ -1,6 +1,6 @@
 ---
 etap: 00-intake
-status: escalated
+status: in-progress
 iteracja: 2
 akceptacja_wlasciciela: true
 ---

@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `00-intake`: escalated
+- `00-intake`: in-progress
 
 ## Punkt przekazania
 
@@ -37,5 +37,4 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-- E-001 (00-intake): Review PR #1 (iteracja 2) blokuje 🔴: żąda ADR danych osobowych już w etapie 00-intake. Skill sh-intake zabrania pisania ADR (robi to sh-architekt), a ADR w specyfikacji jest dla intake zgłoszeniem 🟡. Specyfikacja zawiera ustalenia wejściowe do ADR i wymaga go przed planem. Kolejny FAIL = 3. iteracja i automatyczna eskalacja.
-
+(brak)
