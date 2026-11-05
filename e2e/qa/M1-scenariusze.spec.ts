@@ -47,8 +47,10 @@ test.describe('QA M1', () => {
     await expect(page.locator('main a[href="/"]').first()).toBeVisible();
   });
 
+  // QA-M1-2: test oczekuje porażki (test.fail), dopóki błąd istnieje; po naprawie zmieni się w
+  // nieoczekiwany sukces i CI to wykaże, więc naprawa usuwa test.fail.
   test('QA-M1-2: vercel.json ustawia Content-Security-Policy z architektury', () => {
-    test.fixme(true, 'QA-M1-2');
+    test.fail(true, 'QA-M1-2');
     const config = JSON.parse(readFileSync('vercel.json', 'utf8'));
     const keys = config.headers.flatMap((h: { headers: { key: string }[] }) =>
       h.headers.map((x) => x.key.toLowerCase()),

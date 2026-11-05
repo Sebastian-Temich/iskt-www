@@ -31,7 +31,7 @@ zadania:
       formularza (T6) poza dopuszczeniem connect-src 'self'.
     kryteria:
       - "vercel.json ustawia Content-Security-Policy dla /(.*): default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' (z hashami lub 'unsafe-inline' tylko gdy wymaga tego Astro, uzasadnione w raporcie); script-src 'self' z hashami skryptów Astro; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-      - "test e2e/qa/M1-scenariusze.spec.ts „QA-M1-2” przechodzi bez test.fixme"
+      - "test e2e/qa/M1-scenariusze.spec.ts „QA-M1-2” przechodzi po usunięciu test.fail (z test.fail jest oznaczony jako nieoczekiwany sukces)"
       - "Strona główna i 404 bez błędów CSP w konsoli przeglądarki w chromium i webkit (nowy test e2e nasłuchujący konsoli na /)"
       - "Na stagingu curl -sI https://iskt-www.vercel.app/ pokazuje nagłówek content-security-policy (wynik w raporcie T-NR.md); pnpm lint, pnpm typecheck i pnpm test przechodzą"
     pliki: [vercel.json, e2e/qa/M1-scenariusze.spec.ts, e2e/csp.spec.ts]
