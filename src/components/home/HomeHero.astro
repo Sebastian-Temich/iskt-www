@@ -1,11 +1,24 @@
 ---
 // Hero strony głównej: D/ISKT-standalone.dc.html:54-86. Nagłówek z logo i „Umów konsultację”
 // renderuje SiteHeader (wariant home) poza <main>; tu zostaje treść hero pod nim.
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import logo from '../../assets/iskt-logo.png';
 import { company } from '../../content/site';
 import Badge from '../ui/Badge.astro';
 import Button from '../ui/Button.astro';
+
+// Logo to element LCP na mobile (QA M1, #22). Szerokość na ekranie = min(320px, 78% kolumny):
+// - jedna kolumna (< 712 px): kolumna = 100vw − 2 × --container-pad;
+// - dwie kolumny (od 712 px, gdy wnętrze ≥ 2 × 300 px + --space-10): kolumna = połowa wnętrza bez
+//   odstępu, wnętrze najwyżej --container-max (1200 px), więc od ~1300 px logo ma zawsze 320 px.
+// Zmiana paddingu, odstępu albo siatki w .hero__inner wymaga aktualizacji `sizes`.
+const pad = 'clamp(1.25rem, 5vw, 3rem)';
+const sizes = [
+  `(min-width: 712px) min(320px, calc((100vw - 2 * ${pad} - 2.5rem) * 0.39))`,
+  `min(320px, calc((100vw - 2 * ${pad}) * 0.78))`,
+].join(', ');
+// Gęsta drabinka szerokości: przy DPR 1,75–3 nadmiar w audycie uses-responsive-images < 10 KiB.
+const widths = [240, 320, 400, 480, 520, 560, 640];
 ---
 
 <section id="top" class="hero">
@@ -30,15 +43,19 @@ import Button from '../ui/Button.astro';
       </div>
     </div>
     <div class="hero__visual">
-      <Image
+      <Picture
         src={logo}
         alt=""
         width={320}
-        densities={[1, 2]}
-        format="webp"
+        widths={widths}
+        sizes={sizes}
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
         loading="eager"
         decoding="async"
+        fetchpriority="high"
         class="hero__logo"
+        pictureAttributes={{ class: 'hero__picture' }}
       />
     </div>
   </div>
@@ -107,6 +124,10 @@ import Button from '../ui/Button.astro';
   .hero__visual {
     display: flex;
     justify-content: center;
+  }
+  /* <picture> bez własnego pudełka: <img> zostaje elementem flex jak przed zmianą na Picture. */
+  .hero__visual :global(.hero__picture) {
+    display: contents;
   }
   .hero__visual :global(.hero__logo) {
     width: min(320px, 78%);

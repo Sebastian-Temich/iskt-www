@@ -92,6 +92,9 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   adapter: useNodeAdapter ? node({ mode: 'standalone' }) : vercel(),
+  // CSS wbudowany w <style> zamiast plików _astro/*.css: bez zasobów blokujących render (W-10, #22).
+  // Strony są małe (~20 KB CSS przed kompresją), więc brak cache CSS między stronami nie przeważa.
+  build: { inlineStylesheets: 'always' },
   integrations: [
     sitemap({ filter: isSitemapPage }),
     seoOutput(),
