@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `08-qa`: review
+- `08-qa`: escalated
 
 ## Punkt przekazania
 
@@ -64,4 +64,5 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-(brak)
+- E-006 (08-qa): QA M2: formularz na stagingu i lokalnie zwraca 502. Resend odrzuca wysyłkę (403 validation_error): z nadawcą onboarding@resend.dev można wysyłać tylko na adres właściciela konta Resend, a CONTACT_TO wskazuje inny adres. W-04 i O-3 niespełnione do zmiany konfiguracji; kod działa zgodnie z kryteriami (502 z zachowaniem danych)
+
