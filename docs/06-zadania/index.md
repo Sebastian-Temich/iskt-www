@@ -5,7 +5,7 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 <!-- sync-status:start -->
 | Zadanie | Tytuł | Status | Iteracja | Kamień milowy | PR | CI |
 |---|---|---|---|---|---|---|
-| #5 | Szkielet projektu Astro, CI, tokeny i czcionki | todo | 0 | M1 Szkielet, layout i strona główna | - | - |
+| #5 | Szkielet projektu Astro, CI, tokeny i czcionki | done | 1 | M1 Szkielet, layout i strona główna | #17 merged | pass |
 | #6 | Layout strony i prymitywy UI, strona 404 | todo | 0 | M1 Szkielet, layout i strona główna | - | - |
 | #7 | SEO techniczne - meta, Open Graph, sitemap, robots, favicony | todo | 0 | M1 Szkielet, layout i strona główna | - | - |
 | #8 | Strona główna - hero, kompetencje, sekcja kontaktu | todo | 0 | M1 Szkielet, layout i strona główna | - | - |

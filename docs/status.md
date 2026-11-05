@@ -1,16 +1,16 @@
 ---
-zadania_todo: 12
+zadania_todo: 11
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 0
+zadania_done: 1
 zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "architekt", "pytanie": "Dodatkowa strona /polityka-prywatnosci/ (poza sitemap) z roboczą treścią i obraz OG 1200x630 generowany z logo", "decyzja": "W-06 i P2; brak w designie, PR #3. Cofnięcie: akceptacja lub zmiana treści przy odbiorze"}, {"data": "2026-11-05", "zrodlo": "architekt", "pytanie": "Nawigacja jak w designie (Kompetencje + CTA, bez hamburgera); bieżąca strona przez aria-current w logo (home) i ścieżce (pozostałe); formularz tylko JSON przez fetch, bez JS komunikat noscript z mailto, limit 32 kB", "decyzja": "design jako jedyne źródło wyglądu; W-02, W-04; review PR #3. Cofnięcie: zmiana nawigacji = zmiana zakresu; obsługa bez JS = nowy ADR"}, {"data": "2026-11-05", "zrodlo": "architekt", "pytanie": "Style: czysty CSS z tokenami DS 1:1, bez Tailwinda; czcionki Inter i JetBrains Mono samohostowane (OFL)", "decyzja": "design ma własny system tokenów; Lighthouse i brak zewnętrznych żądań, PR #3. Cofnięcie: ADR przy zmianie"}, {"data": "2026-11-05", "zrodlo": "architekt", "pytanie": "Rate limit przez regułę Vercel Firewall, fallback Upstash (ADR-003)", "decyzja": "licznik współdzielony bez nowego konta, PR #3. Cofnięcie: przełączenie RATE_LIMIT_PROVIDER po decyzji właściciela"}, {"data": "2026-11-05", "zrodlo": "architekt", "pytanie": "Bez Supabase i Dockera w projekcie (ADR-002)", "decyzja": "brak danych do przechowania (ADR-001), PR #3. Cofnięcie: nowy ADR przy CMS lub zapisie zgłoszeń"}]
-ostatnia_synchronizacja: 2026-11-05T13:01:13Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "`RATE_LIMIT_PROVIDER`", "decyzja": "wartości `waf` (domyślnie), `upstash`, `memory` (ADR-003: pamięć lokalnie i w testach); `RATE_LIMIT_SALT` wymagana tylko dla `upstash`."}, {"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "Port E2E", "decyzja": "`astro preview` na 55327 (blok 55321-55329), żeby nie kolidować z `pnpm dev` na 55326."}, {"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "Dowód renderowania przez BaseLayout", "decyzja": "atrybut `data-layout=\"base\"` na `<html>` ustawiany tylko w `BaseLayout.astro`."}, {"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "Region fra1", "decyzja": "w `vercel.json` (`regions`), bo adapter `@astrojs/vercel` 8 nie ma opcji regionu."}, {"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "Zapis hex w tokenach", "decyzja": "małe litery (Prettier); test 1:1 porównuje wartości bez rozróżniania wielkości liter, a smoke porównuje `--color-primary` z `#1E551D` po `toUpperCase`."}]
+ostatnia_synchronizacja: 2026-11-05T14:36:32Z
 ---
 
 # Status projektu
