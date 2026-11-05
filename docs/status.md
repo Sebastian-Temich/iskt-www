@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `04-architektura`: in-progress
+- `04-architektura`: review
 - `05-plan`: review
 
 ## Punkt przekazania

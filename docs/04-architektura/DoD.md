@@ -1,6 +1,6 @@
 ---
 etap: 04-architektura
-status: in-progress
+status: review
 iteracja: 3
 akceptacja_wlasciciela: true
 ---
