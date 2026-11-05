@@ -12,6 +12,7 @@ node_modules/
 __pycache__/
 .next/
 .vercel/
+.astro/
 dist/
 build/
 coverage/
