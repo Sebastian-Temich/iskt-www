@@ -27,13 +27,16 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-05T14:12Z (przed pierwszym dispatchem)
-- Kamień: M1 startuje; etapy 00, 04, 05, 06 `done`
-- `shctl doctor`: 0 błędów (uwaga: 3 stare repo testowe do usunięcia, nie dotyczy projektu)
-- Autoryzacja: wiersz „Autoryzacja planu PR #3” w `decyzje.md`; start workerów na sygnał właściciela 2026-11-05 („start”)
-- Zadania właściciela: Vercel (projekt, alias https://iskt-www.vercel.app, zmienne Production+Preview) i Resend (klucz, `.env.local`) gotowe; region fra1 do potwierdzenia; reguła WAF przed QA M2
-- Eskalacje: brak otwartych
-- Następny krok: dispatch #5 (szkielet), do jego zamknięcia nic innego
+- Czas: 2026-11-05T17:30Z (po QA M1)
+- Kamień zakończony: M1 (#5–#8 zamknięte; QA M1 PR #21 scalony na decyzję właściciela E-003/B, werdykt FAIL: 2 × 🟡 → #22 wydajność mobile, #23 CSP). Etap `08-qa` zostaje otwarty do QA ostatniego kamienia
+- Kamień bieżący: M2 (#9 polityka w toku, potem #11 formularz); naprawy QA M1: #23 w toku, #22 w kolejce
+- PR w toku: brak (workery #9 i #23 pracują)
+- Eskalacje: brak otwartych (E-001, E-002, E-003 zamknięte)
+- Wstrzymania: M3 (#10 i dalej) czeka na QA M2
+- `shctl doctor` 2026-11-05T14:12Z: 0 błędów
+- Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md`
+- Zadania właściciela: reguła rate limit w Vercel Firewall przed QA M2 (sprawdzić dostępność na Hobby); O-6 podgląd w walidatorze OG przy odbiorze
+- Następny krok: monitoring #9 i #23, potem dispatch #22 i #11
 
 ## Dziennik etapów
 
