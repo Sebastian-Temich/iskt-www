@@ -36,7 +36,8 @@ i na stagingu używamy wyłącznie klucza testowego.
    `{ "error": "send_failed" }`, formularz zachowuje dane i pokazuje komunikat z W-04. Bez ponowień po
    stronie serwera (unikamy duplikatów); ponowienie robi użytkownik.
 5. **Idempotencja po stronie klienta:** przycisk zablokowany w trakcie wysyłki (W-04); endpoint
-   przyjmuje tylko `POST` z `Content-Type` formularza lub JSON i nagłówkiem `Origin` z adresu bazowego.
+   przyjmuje tylko `POST` z `Content-Type: application/json` (ciało ≤ 32 kB) i nagłówkiem `Origin` z
+   adresu bazowego; bez JavaScriptu formularz nie jest wysyłany (architektura, „Bezpieczeństwo”).
 6. **Sekrety i zmienne:** `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`, `PUBLIC_SITE_URL`,
    `RATE_LIMIT_PROVIDER` (ADR-003), opcjonalnie `RATE_LIMIT_SALT` — wszystkie w `.env.example` bez
    wartości; wartości w `.env.local` (klucz testowy) i w zmiennych środowiska Vercel (Preview/staging)

@@ -81,7 +81,7 @@ Brak bazy danych i trwałego stanu (ADR-001, ADR-002). Dane formularza żyją ty
 | `website` | honeypot, musi być pusty (ukryty, `tabindex=-1`, `autocomplete=off`) |
 
 Odpowiedzi: `200 {ok:true}`, `400 {error:"invalid", fields:{…}}`, `429 {error:"rate_limited"}`,
-`502 {error:"send_failed"}`, `405` dla innych metod, `413` dla ciała > 64 kB, `415` dla innych typów treści; bez JS (urlencoded) zamiast JSON `303` na `/?kontakt=STATUS#kontakt`.
+`502 {error:"send_failed"}`, `405` dla innych metod, `413` dla ciała > 32 kB, `415` dla typów innych niż JSON.
 
 Migracje są zgodne wstecz (expand/contract): poprzednia wersja aplikacji działa na nowym schemacie.
 W tym projekcie nie ma schematu; zasada obowiązuje każdą przyszłą bazę (np. CMS) i jej ADR.
@@ -211,13 +211,19 @@ chevron-down, chevron-up.
 - **Auth:** brak kont i paneli; jedyna powierzchnia zapisu to `POST /api/contact`.
 - **Dostęp do danych:** brak przechowywanych danych (ADR-001). Walidacja serwera Zod, honeypot,
   sprawdzenie `Origin` = `PUBLIC_SITE_URL`, tylko `POST` (ADR-004). **Transport i limit ciała:**
-  `ContactForm` wysyła `fetch` z `Content-Type: application/json` (UTF-8); bez JS formularz wysyła
-  `application/x-www-form-urlencoded` (progresywne ulepszanie, odpowiedź 303 na `/?kontakt=STATUS#kontakt` ze stanem w
-  parametrze). Inne typy → 415. Limit ciała **64 kB** dla obu formatów, liczony z najgorszego przypadku
-  dozwolonych pól: znak 4-bajtowy UTF-8 to 12 bajtów w urlencoded, więc 5000 × 12 + 100 × 12 + 254 × 12
-  + honeypot i narzut ≈ 63,1 kB < 64 kB (JSON: ≤ 4 B/znak ≈ 21 kB). Długości liczymy w znakach Unicode
-  (code points), nie bajtach. Testy: poprawne żądanie z maksymalnymi długościami pól złożonymi ze
-  znaków 4-bajtowych w obu formatach → 200 (z mockiem), ciało > 64 kB → 413.
+  `ContactForm` wysyła `fetch` z `Content-Type: application/json` (UTF-8); endpoint przyjmuje
+  **wyłącznie JSON** (inne typy → 415). **Bez JavaScriptu formularz nie jest wysyłany:** element
+  `<form>` ma atrybut `hidden` usuwany przez skrypt komponentu, a `<noscript>` pokazuje komunikat
+  „Aby wysłać formularz, włącz JavaScript albo napisz do nas: biuro@iskt.pl” z linkiem `mailto:` i
+  telefonem z `site.ts`. Dzięki temu nie ma wysyłki bez JS ani danych osobowych w URL (formularz nie
+  ma `action` i nigdy nie wysyła GET), a stan sukcesu/błędu i zachowanie wpisanych danych (W-04)
+  obsługuje zawsze skrypt po stronie przeglądarki. Limit ciała **32 kB**, liczony z najgorszego
+  przypadku dozwolonych pól: znak 4-bajtowy UTF-8 to 4 bajty w JSON (bez escapowania), więc
+  (5000 + 100 + 254) × 4 B + klucze, honeypot i narzut ≈ 21,6 kB < 32 kB. Długości liczymy w znakach
+  Unicode (code points), nie bajtach. Testy: JSON z maksymalnymi długościami pól ze znaków
+  4-bajtowych → 200 (z mockiem); ciało > 32 kB → 413; `application/x-www-form-urlencoded` → 415; E2E z
+  wyłączonym JavaScriptem: formularz ukryty, widoczny komunikat `<noscript>` z `mailto:`, brak
+  żądania do `/api/contact`.
 - **Rate limit:** ADR-003.
 - **Sekrety:** `RESEND_API_KEY`, `CONTACT_TO`, `CONTACT_FROM`, `PUBLIC_SITE_URL`, `PUBLIC_SITE_ENV`,
   `RATE_LIMIT_PROVIDER`, `RATE_LIMIT_SALT` — w `.env.example` bez wartości; `lib/env.ts` waliduje
