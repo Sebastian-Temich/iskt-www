@@ -1,0 +1,104 @@
+---
+// Karta DS (DS/_ds_bundle.js:174): powierzchnia z zaokrągleniem, ramką i cieniem; `interactive`
+// unosi ją przy hover.
+type Variant = 'default' | 'subtle' | 'brand' | 'dark' | 'outline';
+type Padding = 'sm' | 'md' | 'lg';
+
+interface Props {
+  as?: 'div' | 'article' | 'section' | 'aside';
+  variant?: Variant;
+  padding?: Padding;
+  interactive?: boolean;
+  class?: string;
+  'aria-labelledby'?: string;
+}
+
+const {
+  as: Tag = 'div',
+  variant = 'default',
+  padding = 'md',
+  interactive = false,
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<Tag
+  class:list={[
+    'card',
+    `card--${variant}`,
+    `card--pad-${padding}`,
+    interactive && 'card--interactive',
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .card {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+      box-shadow var(--dur-base) var(--ease-standard),
+      transform var(--dur-base) var(--ease-standard);
+  }
+  .card--pad-sm {
+    padding: var(--space-5);
+  }
+  .card--pad-md {
+    padding: var(--space-8);
+  }
+  .card--pad-lg {
+    padding: var(--space-10);
+  }
+  .card--default {
+    color: var(--text-primary);
+    background: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+  }
+  .card--subtle {
+    color: var(--text-primary);
+    background: var(--surface-subtle);
+    border: 1px solid var(--border-subtle);
+  }
+  .card--brand {
+    color: var(--text-primary);
+    background: var(--surface-muted);
+    border: 1px solid var(--green-200);
+  }
+  .card--dark {
+    color: var(--text-on-dark);
+    background: var(--ink-900);
+    border: 1px solid var(--ink-700);
+  }
+  .card--outline {
+    color: var(--text-primary);
+    background: transparent;
+    border: 1.5px solid var(--border-default);
+  }
+  .card--interactive {
+    cursor: pointer;
+  }
+  .card--interactive:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  @media (max-width: 480px) {
+    .card--pad-md,
+    .card--pad-lg {
+      padding: var(--space-6);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: none;
+    }
+    .card--interactive:hover {
+      transform: none;
+    }
+  }
+</style>

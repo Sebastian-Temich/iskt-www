@@ -1,0 +1,35 @@
+---
+// Ikona Lucide (stroke 2) jako inline SVG w buildzie.
+import { icons, type IconName } from './icons';
+
+interface Props {
+  name: IconName;
+  size?: number;
+  /** Opis dla czytnika ekranu; bez niego ikona jest dekoracyjna (aria-hidden). */
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 24, label, class: className } = Astro.props;
+const Svg = icons[name];
+---
+
+{label ? (
+  <Svg
+    size={size}
+    stroke-width={2}
+    class:list={['icon', className]}
+    role="img"
+    aria-label={label}
+    data-icon={name}
+  />
+) : (
+  <Svg
+    size={size}
+    stroke-width={2}
+    class:list={['icon', className]}
+    aria-hidden="true"
+    focusable="false"
+    data-icon={name}
+  />
+)}

@@ -1,0 +1,130 @@
+---
+// Nagłówek strony. Wariant `home`: D/ISKT-standalone.dc.html:57-65 (na tle hero),
+// wariant `page`: D/ESG.dc.html:44-55. Zawsze w <header> poza <main> (architektura,
+// „Rozstrzygnięcia luk designu”).
+import { Image } from 'astro:assets';
+import logo from '../../assets/iskt-logo.png';
+import { nav } from '../../content/site';
+import Button from '../ui/Button.astro';
+
+interface Props {
+  variant?: 'home' | 'page';
+  /** Sekcja aktywna w nagłówku; „Kompetencje” na stronach usług (aria-current="true"). */
+  activeSection?: 'kompetencje';
+}
+
+const { variant = 'page', activeSection } = Astro.props;
+const isHomePage = Astro.url.pathname === '/';
+const competencesActive = activeSection === 'kompetencje';
+const logoHeight = variant === 'home' ? 40 : 34;
+---
+
+<header class:list={['site-header', `site-header--${variant}`]}>
+  <div class="site-header__inner">
+    <a
+      class="brand"
+      href={nav.home}
+      aria-current={isHomePage ? 'page' : undefined}
+      data-testid="logo-link"
+    >
+      <Image
+        src={logo}
+        alt=""
+        height={logoHeight}
+        densities={[1, 2]}
+        format="webp"
+        loading="eager"
+        decoding="async"
+        class="brand__logo"
+      />
+      <span class="brand__name">
+        ISKT <span class="brand__accent">Greennovation</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Główna">
+      <a
+        class:list={['site-nav__link', competencesActive && 'site-nav__link--active']}
+        href={nav.competences}
+        aria-current={competencesActive ? 'true' : undefined}
+      >
+        Kompetencje
+      </a>
+      <Button href={nav.contact} size="sm">
+        Umów konsultację
+      </Button>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding: var(--space-5) var(--container-pad);
+  }
+  .site-header--page {
+    background: var(--surface-card);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .site-header--home {
+    padding-top: var(--space-10);
+    padding-bottom: 0;
+    background: var(--gradient-wash);
+  }
+  .site-header__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-primary);
+  }
+  .brand:hover {
+    color: var(--text-primary);
+  }
+  .brand :global(.brand__logo) {
+    width: auto;
+    height: 34px;
+  }
+  .site-header--home .brand :global(.brand__logo) {
+    height: 40px;
+  }
+  .brand__name {
+    font-size: var(--text-base);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+    white-space: nowrap;
+  }
+  .site-header--home .brand__name {
+    font-size: var(--text-lg);
+  }
+  .brand__accent {
+    color: var(--green-700);
+  }
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5);
+    font-size: var(--text-sm);
+  }
+  .site-nav__link {
+    color: var(--text-secondary);
+    white-space: nowrap;
+    padding-block: 0.25rem;
+    border-bottom: 2px solid transparent;
+  }
+  .site-nav__link:hover {
+    color: var(--text-primary);
+  }
+  .site-nav__link--active {
+    color: var(--text-primary);
+    font-weight: var(--fw-semibold);
+    border-bottom-color: var(--color-accent);
+  }
+</style>
