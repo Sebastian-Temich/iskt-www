@@ -1,6 +1,6 @@
 ---
 etap: 02-design
-status: todo
+status: pominiety
 iteracja: 0
 akceptacja_wlasciciela: false
 ---

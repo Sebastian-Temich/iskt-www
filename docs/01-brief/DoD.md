@@ -1,6 +1,6 @@
 ---
 etap: 01-brief
-status: todo
+status: pominiety
 iteracja: 0
 akceptacja_wlasciciela: false
 ---

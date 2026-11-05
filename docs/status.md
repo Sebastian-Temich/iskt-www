@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-(brak)
+- `00-intake`: todo (następny)
 
 ## Punkt przekazania
 

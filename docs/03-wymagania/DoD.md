@@ -1,6 +1,6 @@
 ---
 etap: 03-wymagania
-status: todo
+status: pominiety
 iteracja: 0
 akceptacja_wlasciciela: false
 ---
