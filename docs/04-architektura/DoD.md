@@ -1,6 +1,6 @@
 ---
 etap: 04-architektura
-status: review
+status: done
 iteracja: 3
 akceptacja_wlasciciela: true
 ---
@@ -27,8 +27,8 @@ akceptacja_wlasciciela: true
 
 ## Checkpoint
 
-- [ ] Review etapu dało PASS (zaznacza reviewer, nie autor)
-- [ ] Właściciel zaakceptował architekturę
+- [x] Review etapu dało PASS (zaznacza reviewer, nie autor)
+- [x] Właściciel zaakceptował architekturę
 <!-- tylko-tryb:L -->
 - [ ] Checkpoint 1 zaliczony
 <!-- /tylko-tryb -->
