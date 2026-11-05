@@ -64,4 +64,5 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-(brak)
+- E-004 (#11): Profil workera blokuje edycję .env.example (deny na .env*), a kryterium issue #11 wymaga kompletnego .env.example. Brakuje nazw: UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN (fallback rate limit ADR-003) i ASTRO_ADAPTER (tylko build E2E). Pełny blok do wklejenia jest w raporcie docs/07-realizacja/T-11.md (sekcja Ryzyka).
+
