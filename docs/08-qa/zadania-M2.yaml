@@ -1,0 +1,27 @@
+# QA M2, commit 0ddfb77, 2026-11-05T20:28Z (UTC)
+zadania:
+  - id: QA-M2-1
+    tytul: "QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main"
+    cel: >-
+      Po merge'u #22 (PR #27) i #23 (PR #24) obiekt defineConfig w astro.config.mjs ma dwa klucze
+      build: l. 97 inlineStylesheets 'always' (#22, wydajność W-10) i l. 105 inlineStylesheets 'never'
+      (#23, CSP bez inline). Każdy PR przeszedł CI na bazie sprzed drugiego merge'u, a CI na push do
+      main uruchamia tylko check-dod, więc regresja nie została wykryta. Działa ostatni klucz ('never'),
+      czyli CSS z plików _astro/*.css. Skutki: pnpm lint (no-dupe-keys) i pnpm typecheck (ts 1117)
+      czerwone na main, więc CI każdego kolejnego PR z kodem (M3) będzie czerwone; test
+      e2e/qa/QA-M1-1-wydajnosc.spec.ts:26 „CSS wbudowany” pada w chromium i webkit. Kroki: na main
+      pnpm lint; pnpm typecheck; pnpm exec playwright test e2e/qa/QA-M1-1-wydajnosc.spec.ts:26
+      --project=chromium --project=webkit. Oczekiwane: jeden klucz build, wszystko zielone.
+      Pomiar QA M2 na stagingu z CSS w plikach: Lighthouse mobile / 98, 99, 96, desktop 100; CSP bez
+      naruszeń. Wybór między CSS wbudowanym a CSP 'self' (decyzje T-22 i T-23) worker zapisuje w
+      raporcie; CSP style-src 'self' bez 'unsafe-inline' jest wymaganiem architektury.
+    kryteria:
+      - "astro.config.mjs ma jeden klucz build; pnpm lint i pnpm typecheck przechodzą"
+      - "Nagłówek CSP z vercel.json bez zmian (bez 'unsafe-inline'); e2e/csp.spec.ts przechodzi w chromium i webkit"
+      - "e2e/qa/QA-M1-1-wydajnosc.spec.ts zgodny z wybranym sposobem ładowania CSS i przechodzi w chromium i webkit; pełne pnpm test:e2e zielone"
+      - "Lighthouse 12.8.2 na stagingu po merge'u, profil mobile, 3 przebiegi na /: wydajność ≥ 90 w każdym; wyniki w raporcie T-NR.md"
+    pliki: [astro.config.mjs, e2e/qa/QA-M1-1-wydajnosc.spec.ts]
+    testy: pnpm lint && pnpm typecheck && pnpm test && pnpm exec playwright test e2e/csp.spec.ts e2e/qa/QA-M1-1-wydajnosc.spec.ts --project=chromium --project=webkit
+    typ: qa
+    waga: istotne
+    milestone: M2 Formularz kontaktowy end-to-end
