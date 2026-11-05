@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `08-qa`: review
+- `08-qa`: escalated
 
 ## Punkt przekazania
 
@@ -61,4 +61,5 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-(brak)
+- E-003 (08-qa): 3 iteracje review etapu bez PASS
+
