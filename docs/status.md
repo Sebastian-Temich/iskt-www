@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `00-intake`: in-progress
+- `00-intake`: review
 
 ## Punkt przekazania
 
@@ -32,3 +32,4 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 ## Dziennik etapów
 
 - 2026-11-05 `00-intake`: in-progress
+- 2026-11-05 `00-intake`: review
