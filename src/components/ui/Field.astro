@@ -1,0 +1,136 @@
+---
+// Pole formularza DS: Input (DS/_ds_bundle.js:758) i Textarea (DS/_ds_bundle.js:1099) przepisane na
+// .astro. Etykieta powiązana z polem przez for/id, wymagane z czerwoną `*`, podpowiedź albo błąd pod
+// polem powiązane przez aria-describedby (stan błędu: architektura, „Rozstrzygnięcia luk designu”).
+interface Props {
+  label: string;
+  name: string;
+  id?: string;
+  /** `textarea` renderuje pole wielowierszowe (DS Textarea), pozostałe typy to <input>. */
+  type?: 'text' | 'email' | 'tel' | 'textarea';
+  placeholder?: string;
+  required?: boolean;
+  rows?: number;
+  autocomplete?: string;
+  maxlength?: number;
+  hint?: string;
+  error?: string;
+  class?: string;
+}
+
+const {
+  label,
+  name,
+  id = `field-${name}`,
+  type = 'text',
+  placeholder,
+  required = false,
+  rows = 4,
+  autocomplete,
+  maxlength,
+  hint,
+  error,
+  class: className,
+} = Astro.props;
+
+const messageId = `${id}-message`;
+const message = error ?? hint;
+const control = {
+  id,
+  name,
+  placeholder,
+  required,
+  autocomplete,
+  maxlength,
+  'aria-invalid': error ? ('true' as const) : undefined,
+  'aria-describedby': message ? messageId : undefined,
+};
+---
+
+<div class:list={['field', error && 'field--error', className]}>
+  <label class="field__label" for={id}>
+    {label}
+    {required && (
+      <span class="field__required" aria-hidden="true">
+        *
+      </span>
+    )}
+  </label>
+  {type === 'textarea' ? (
+    <textarea class="field__control field__control--textarea" rows={rows} {...control} />
+  ) : (
+    <input class="field__control field__control--input" type={type} {...control} />
+  )}
+  {message && (
+    <span class:list={['field__message', error && 'field__message--error']} id={messageId}>
+      {message}
+    </span>
+  )}
+</div>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+  }
+  .field__label {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-primary);
+  }
+  .field__required {
+    margin-left: 2px;
+    color: var(--error-500);
+  }
+  .field__control {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    background: var(--surface-card);
+    border: 1.5px solid var(--border-default);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition:
+      border-color var(--dur-fast) var(--ease-standard),
+      box-shadow var(--dur-fast) var(--ease-standard);
+  }
+  .field__control--input {
+    height: 46px;
+    padding: 0 0.9rem;
+  }
+  .field__control--textarea {
+    padding: 0.75rem 0.9rem;
+    resize: vertical;
+  }
+  .field__control::placeholder {
+    color: var(--text-muted);
+  }
+  .field__control:focus,
+  .field__control:focus-visible {
+    border-color: var(--green-600);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+    outline: none;
+  }
+  .field__control:disabled {
+    background: var(--neutral-100);
+  }
+  .field--error .field__control {
+    border-color: var(--error-500);
+  }
+  .field__message {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+  }
+  .field__message--error {
+    color: var(--error-500);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .field__control {
+      transition: none;
+    }
+  }
+</style>

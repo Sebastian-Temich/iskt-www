@@ -1,0 +1,70 @@
+---
+// Sekcja „Nasze Kompetencje”: D/ISKT-standalone.dc.html:87-153. 7 kafli z content/site.ts; ostatni
+// (Interim) na całą szerokość. Design ma stałe repeat(3, …); architektura („Punkty przełamania”)
+// rozkłada siatkę na 1/2/3 kolumny przy 640 i 960 px.
+import { services } from '../../content/site';
+import ServiceTile from './ServiceTile.astro';
+
+const lastIndex = services.length - 1;
+---
+
+<section id="kompetencje" class="competences" aria-labelledby="kompetencje-title">
+  <div class="competences__inner">
+    <div class="competences__head">
+      <h2 class="competences__title" id="kompetencje-title">
+        Nasze Kompetencje
+      </h2>
+      <span class="competences__subtitle">Kompleksowe rozwiązania dla nowoczesnego biznesu</span>
+    </div>
+    <div class="service-grid">
+      {services.map((service, i) => (
+        <ServiceTile service={service} wide={i === lastIndex} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .competences {
+    scroll-margin-top: 40px;
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-page);
+  }
+  .competences__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .competences__head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .competences__title {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  .competences__subtitle {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+  }
+  .service-grid {
+    margin-top: var(--space-8);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+  @media (min-width: 640px) {
+    .service-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 960px) {
+    .service-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
