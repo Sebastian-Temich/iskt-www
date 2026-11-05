@@ -17,3 +17,8 @@ Plik wspólny, aktualizuje orkiestrator. Zgłoszenia ⚪ z review i „Drobne uw
 | 2026-11-05 | QA M1 | Test `e2e/layout.spec.ts:137` nazywa się „przekierowanie HTTP”, a sprawdza tylko `trailingSlash` w `vercel.json`; zmienić nazwę testu. | otwarta |
 | 2026-11-05 | T-9 | Lokalnie `playwright.config.ts` z `reuseExistingServer: !CI` używa serwera z innego worktree na porcie 55327 (strona dawała 404 ze starego buildu); lokalnie testy uruchamiałem z `CI=1`. | otwarta |
 | 2026-11-05 | T-9 | `seo.ts` ma ścieżkę polityki jako literał, a `SiteFooter` drugi raz; warto mieć jedno źródło (np. `nav.privacy` w `site.ts`). | otwarta |
+| 2026-11-05 | T-11 | Zod (klasyczne API) trafia do JS przeglądarki z walidacją formularza; przy Lighthouse (T11) warto sprawdzić rozmiar paczki i ewentualnie przejść na `zod/mini`. | otwarta |
+| 2026-11-05 | T-11 | `e2e/home.spec.ts` (M1) zakłada formularz „bez wysyłki”; po T6 test l. 143 wysyła prawdziwe żądanie do mocka. Działa, ale nazwy i komentarze tego testu są nieaktualne. | otwarta |
+| 2026-11-05 | T-11 | Vercel ostrzega, że lokalny Node 26 nie jest wspierany w funkcjach (runtime 22); do rozważenia `engines`/ustawienie wersji Node projektu Vercel. | otwarta |
+| 2026-11-05 | T-11 | `astro.config.mjs` ma teraz dwa warianty adaptera; po pojawieniu się `previewEntrypoint` w `@astrojs/vercel` można wrócić do jednego. | otwarta |
+| 2026-11-05 | review PR #26 | Raport nadal opisuje .env.example jako nieuzupełnione, również w sekcji Ryzyka, choć commit 59bd6ee dodaje wskazane zmienne. Zaktualizuj oba miejsca, oznaczając brak jako rozwiązany. (`docs/07-realizacja/T-11.md:49`) | otwarta |

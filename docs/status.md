@@ -1,16 +1,16 @@
 ---
-zadania_todo: 8
-zadania_in_progress: 1
+zadania_todo: 6
+zadania_in_progress: 2
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 5
+zadania_done: 6
 zadania_anulowane: 0
-pr_otwarte: 1
-ci_fail: 0
+pr_otwarte: 2
+ci_fail: 2
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `docs/02-design/zrodla/.../ESG.dc.html` (układ), ADR-001, `e2e/layout.spec.ts`, `e2e/seo.spec.ts`, `e2e/qa/M1-scenariusze.spec.ts` (wzorce testów i ocena czerwonego testu QA)."}, {"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "JSON-LD z jednym węzłem `JsonLd` renderuje bez tablicy", "decyzja": "test normalizuje odczyt do tablicy, bez zmiany komponentu spoza zakresu."}, {"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "Linki w treści polityki podkreślone", "decyzja": "axe `link-in-text-block` (serious) przy samym kolorze."}, {"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "-", "decyzja": "Link w stopce: w wierszu kontaktowym obok domeny, ten sam styl (`--green-300` na `--ink-900`), bez zmiany układu stopki."}, {"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "Czy dopisać ścieżkę polityki do `nav` w `site.ts`?", "decyzja": "nie, `site.ts` jest poza zakresem; stała `privacyPath` w `SiteFooter.astro`."}]
-ostatnia_synchronizacja: 2026-11-05T17:13:40Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `e2e/home.spec.ts`, `e2e/layout.spec.ts`, `e2e/seo.spec.ts`, `e2e/qa/M1-scenariusze.spec.ts`, `src/pages/404.astro`, `src/content/site.ts`, `vercel.json`, `.github/workflows/ci.yml`, kod `astro` (preview, checkOrigin, wtyczka env) i typy `resend`."}, {"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "Treść klauzuli?", "decyzja": "robocza, zgodna z polityką prywatności (administrator, cel, link), do akceptacji przy odbiorze (P2)."}, {"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "Formularz po sukcesie?", "decyzja": "ukryty bez resetu (stan sukcesu z designu); wpisane dane zostają w DOM, co utrzymuje test M1 `e2e/home.spec.ts` (wartość pola po wysłaniu)."}, {"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "`maxlength` w polach?", "decyzja": "nie, bo liczy jednostki UTF-16 i ucinałby 100 emoji do 50; limity pilnuje schemat (code points)."}, {"data": "2026-11-05", "zrodlo": "T-11", "pytanie": "Sekret wklejany do paczki funkcji", "decyzja": "`runtimeEnv` przeniesiony do nowego `src/lib/runtime-env.ts` (plik spoza „Zakresu”), `env.ts` go reeksportuje. Wtyczka env Astro przy odwołaniu do całego `import.meta.env` wkleja wartości z plików `.env*` dla kluczy, których nazwy są w tekście modułu; stary `runtimeEnv` w `env.ts` (z nazwami zmiennych) wklejał klucz z `.env.local` do `.vercel/output/_functions`. Test regresji `src/lib/__tests__/runtime-env.test.ts`."}]
+ostatnia_synchronizacja: 2026-11-05T19:40:16Z
 ---
 
 # Status projektu
@@ -64,4 +64,5 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-(brak)
+- E-005 (#23): Kryterium 4 i review iteracji 1 (🔴) wymagają potwierdzenia nagłówka CSP na wdrożeniu Vercel. Preview PR #24 jest za Vercel Deployment Protection (302 na vercel.com/sso-api), a staging wdraża się dopiero z main.
+

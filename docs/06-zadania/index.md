@@ -11,14 +11,14 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #8 | Strona główna - hero, kompetencje, sekcja kontaktu | done | 2 | M1 Szkielet, layout i strona główna | #19 merged | pass |
 | #9 | Strona polityki prywatności z roboczą treścią | done | 1 | M2 Formularz kontaktowy end-to-end | #25 merged | pass |
 | #10 | Komponenty stron usług i strona ESG | todo | 0 | M3 Strony usług | - | - |
-| #11 | Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | todo | 0 | M2 Formularz kontaktowy end-to-end | - | - |
+| #11 | Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | done | 1 | M2 Formularz kontaktowy end-to-end | #26 merged | pass |
 | #12 | Strony AI-transformacja i Oprogramowanie | todo | 0 | M3 Strony usług | - | - |
 | #13 | Strony Interim i Startupy | todo | 0 | M3 Strony usług | - | - |
 | #14 | Strona Projekty B+R z FAQ | todo | 0 | M3 Strony usług | - | - |
 | #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | todo | 0 | M4 Jakość i wydanie | - | - |
 | #16 | Dokumentacja wydania (techniczna i produktowa) | todo | 0 | M4 Jakość i wydanie | - | - |
-| #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | todo | 0 | M1 Szkielet, layout i strona główna | - | - |
-| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | in-progress | 1 | M1 Szkielet, layout i strona główna | #24 open | pending |
+| #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | in-progress | 1 | M1 Szkielet, layout i strona główna | #27 open | fail |
+| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | in-progress | 2 | M1 Szkielet, layout i strona główna | #24 open | fail |
 <!-- sync-status:end -->
 
 ## Mapa zadań z planu

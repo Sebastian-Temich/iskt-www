@@ -9,3 +9,4 @@ Plik wspólny. Aktualizuje go wyłącznie orkiestrator przez `shctl task close`.
 - #7: SEO techniczne - meta, Open Graph, sitemap, robots, favicony (PR #20)
 - #8: Strona główna - hero, kompetencje, sekcja kontaktu (PR #19)
 - #9: Strona polityki prywatności z roboczą treścią (PR #25)
+- #11: Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit (PR #26)
