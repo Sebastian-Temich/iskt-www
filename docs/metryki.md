@@ -6,3 +6,4 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 |---|---|---|---|---|---|---|
 | #5 Szkielet projektu Astro, CI, tokeny i czcionki | M | 23min | 1 | 1 | 1 | PR #17 |
 | #6 Layout strony i prymitywy UI, strona 404 | M | 37min | 1 | 2 | 0 | PR #18 |
+| #7 SEO techniczne - meta, Open Graph, sitemap, robots, favicony | M | 16min | 1 | 1 | 0 | PR #20 |

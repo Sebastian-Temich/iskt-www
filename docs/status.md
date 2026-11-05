@@ -1,16 +1,16 @@
 ---
-zadania_todo: 10
-zadania_in_progress: 0
+zadania_todo: 8
+zadania_in_progress: 1
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 2
+zadania_done: 3
 zadania_anulowane: 0
-pr_otwarte: 0
+pr_otwarte: 1
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `docs/02-design/zrodla/.../ISKT-standalone.dc.html` l. 15-233 (mapowanie ikon kafli l. 225-233), `D/ESG.dc.html` l. 40-79 i 245-253, `DS/_ds_bundle.js` l. 105-305 i 478-590, `vitest.config.ts`, `scripts/ci-zakres.sh`."}, {"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "Breadcrumb bez JSON-LD BreadcrumbList", "decyzja": "JSON-LD należy do T3 (meta i SEO, poza zakresem)."}, {"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "Strona 404 bez listy usług", "decyzja": "linki do stron usług dawałyby dziś 404 (strony powstają w kolejnych zadaniach); 404 linkuje do `/` i `/#kompetencje`."}, {"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "`Button` w nagłówku jako rozmiar sm", "decyzja": "najbliższy rozmiar DS do przycisku z designu (0.6rem 1.15rem, `--text-sm`)."}, {"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "Gdzie lista nazw ikon?", "decyzja": "`src/components/ui/icon-names.ts` bez importów `.astro`, żeby `site.ts` i testy jednostkowe nie ładowały komponentów; mapa komponentów w `src/components/ui/icons.ts`."}]
-ostatnia_synchronizacja: 2026-11-05T15:14:04Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `<head>` (l. 1-22) siedmiu plików `D/*.dc.html`, `D/sitemap.xml`, `D/robots.txt`, `D/assets/*`, `src/lib/env.ts`, `src/content/site.ts`, `docs/07-realizacja/T-6.md`, `.github/workflows/ci.yml`, `playwright.config.ts`, `node_modules/@astrojs/vercel/dist/index.js` (kolejność hooków i kopiowanie do `.vercel/output`)."}, {"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "Favicony i obraz OG", "decyzja": "wygenerowane jednorazowo skryptem z `sharp` (poza repo); obraz OG używa systemowego kroju sans (Helvetica Neue), bo `sharp`/librsvg nie czyta `woff2` Inter."}, {"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "Jak przetestować e2e obie wartości `PUBLIC_SITE_ENV` przy jednym serwerze testów (`playwright.config.ts` poza zakresem)?", "decyzja": "Serwer testów to staging (wartość domyślna); test „produkcja” uruchamia drugi `astro build --outDir` w katalogu wyników testu z `PUBLIC_SITE_ENV=production` i czyta pliki. Build nadpisuje `.vercel/output`, więc test robi kopię i ją przywraca."}, {"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "Strona bez wpisu (404)", "decyzja": "bez canonical i `og:url`, z `noindex`."}, {"data": "2026-11-05", "zrodlo": "T-7", "pytanie": "`BaseLayout` props `title`/`description`", "decyzja": "opcjonalne, używane tylko dla stron bez wpisu w `seo.ts` (404); dla stron z wpisem wygrywa `seo.ts`, więc tymczasowy tytuł w `index.astro` jest ignorowany."}]
+ostatnia_synchronizacja: 2026-11-05T15:31:08Z
 ---
 
 # Status projektu
