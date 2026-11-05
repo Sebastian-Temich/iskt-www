@@ -25,6 +25,8 @@ export default defineConfig({
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
-    env: { MAIL_TRANSPORT: 'mock' },
+    // Adapter Node: `astro preview` z endpointem /api/contact (astro.config.mjs). PUBLIC_SITE_URL to
+    // adres serwera testów, bo endpoint przyjmuje tylko Origin = PUBLIC_SITE_URL.
+    env: { MAIL_TRANSPORT: 'mock', ASTRO_ADAPTER: 'node', PUBLIC_SITE_URL: baseURL },
   },
 });
