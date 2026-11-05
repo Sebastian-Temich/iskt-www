@@ -11,7 +11,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'sha256-Goa4lXfXXHcCkoySwI2mzYJNt3HGHrRPLuw62MvBG40='; script-src 'self' 'sha256-pvhuZ7YWx3LnQrZ92J4mTOWigV1YpC1N6YdEU4AzF4s='; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+          "value": "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
         },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },

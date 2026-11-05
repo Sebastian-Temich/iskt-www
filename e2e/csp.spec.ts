@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 
@@ -32,18 +31,19 @@ const PAGES = [
   { name: '404', path: '/nie-ma-takiej-strony/', status: 404 },
 ];
 
-/** Wykonywalne skrypty (bez bloków danych, np. JSON-LD) i style inline z dokumentu HTML. */
-function inlineBlocks(html: string): { tag: 'script' | 'style'; hash: string }[] {
-  const blocks: { tag: 'script' | 'style'; hash: string }[] = [];
+/**
+ * Wykonywalne skrypty inline (bez bloków danych, np. JSON-LD), style inline i atrybuty `style=""`
+ * z dokumentu HTML: każdy z nich wymagałby hasha albo 'unsafe-inline' w CSP.
+ */
+function inlineBlocks(html: string): string[] {
+  const blocks: string[] = [];
   for (const [, tag, attrs, body] of html.matchAll(/<(script|style)(\s[^>]*)?>([\s\S]*?)<\/\1>/g)) {
     if (/\ssrc=/.test(attrs ?? '')) continue;
     const type = /\stype="([^"]*)"/.exec(attrs ?? '')?.[1];
     if (tag === 'script' && type && !['module', 'text/javascript'].includes(type)) continue;
-    const hash = `'sha256-${createHash('sha256')
-      .update(body ?? '')
-      .digest('base64')}'`;
-    blocks.push({ tag: tag as 'script' | 'style', hash });
+    blocks.push(`<${tag}> ${(body ?? '').slice(0, 80)}`);
   }
+  for (const [attr] of html.matchAll(/\sstyle="[^"]*"/g)) blocks.push(attr.trim());
   return blocks;
 }
 
@@ -85,23 +85,18 @@ test.describe('Content-Security-Policy', () => {
     expect(d.get('frame-ancestors')).toEqual(["'none'"]);
     expect(d.get('base-uri')).toEqual(["'self'"]);
     expect(d.get('form-action')).toEqual(["'self'"]);
-    for (const name of ['script-src', 'style-src']) {
-      const values = d.get(name) ?? [];
-      expect(values[0], name).toBe("'self'");
-      for (const v of values.slice(1)) expect(v, name).toMatch(/^'sha256-[A-Za-z0-9+/]+=*'$/);
-    }
+    // Bez hashy i 'unsafe-inline': Astro nie inline'uje stylów ani skryptów (astro.config.mjs).
+    expect(d.get('script-src')).toEqual(["'self'"]);
+    expect(d.get('style-src')).toEqual(["'self'"]);
   });
 
   for (const { name, path, status } of PAGES) {
-    test(`${name}: każdy skrypt i styl inline ma hash w CSP`, async ({ request }) => {
+    test(`${name}: brak skryptów i stylów inline w HTML`, async ({ request }) => {
       const res = await request.get(path);
       expect(res.status()).toBe(status);
-      const d = directives(CSP);
-      for (const { tag, hash } of inlineBlocks(await res.text())) {
-        expect(d.get(`${tag}-src`), `${tag} inline ${hash} (zaktualizuj vercel.json)`).toContain(
-          hash,
-        );
-      }
+      expect(inlineBlocks(await res.text()), 'inline w HTML (sprawdź astro.config.mjs)').toEqual(
+        [],
+      );
     });
 
     test(`${name}: brak naruszeń CSP w przeglądarce`, async ({ page }) => {
@@ -134,7 +129,7 @@ test.describe('Content-Security-Policy', () => {
     });
   }
 
-  test('strona główna: skrypt formularza z hashem działa pod CSP', async ({ page }) => {
+  test('strona główna: skrypt formularza z /_astro/ działa pod CSP', async ({ page }) => {
     await withCsp(page);
     await page.goto('/');
     await expect(page.locator('form[data-contact-form]')).toBeVisible();
