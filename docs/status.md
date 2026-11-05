@@ -1,5 +1,5 @@
 ---
-zadania_todo: 8
+zadania_todo: 10
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
@@ -9,8 +9,8 @@ zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `docs/02-design/zrodla/Strona firmowa ISKT/ISKT-standalone.dc.html`, `_ds/…/_ds_bundle.js` (l. 755-845, 1097-1166), `src/layouts/BaseLayout.astro`, `src/components/layout/SiteHeader.astro`, prymitywy `src/components/ui/*`, `src/pages/404.astro`, `e2e/layout.spec.ts`, `playwright.config.ts`, `docs/07-realizacja/T-6.md` (format raportu). Pliki spoza „Zakresu” nie były zmieniane."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Dane kontaktowe w sekcji", "decyzja": "tylko adres i NIP/REGON jak w designie (l. 160-163); e-mail i telefon są w stopce."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "`Field`", "decyzja": "jeden komponent dla Input i Textarea (`type=\"textarea\"`), `*` z `aria-hidden` (wymagalność przekazuje atrybut `required`), `aria-invalid` i komunikat błędu gotowe dla T6."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Kontrolki hero na 375 px", "decyzja": "przyciski na całą szerokość poniżej 480 px (wzorzec z `404.astro`), a kolumny hero i kontaktu `minmax(min(300px, 100%), 1fr)`, żeby nie wymuszać poziomego scrolla."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Logo hero: `loading`", "decyzja": "`eager` zamiast `lazy` z designu, bo jest w pierwszym ekranie na desktopie (LCP); dekoracyjne `alt=\"\"` jak w designie."}]
-ostatnia_synchronizacja: 2026-11-05T16:20:09Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "wlasciciel", "pytanie": "Merge raportu QA M1 (PR #21) mimo FAIL review iteracji 3; zgłoszenie dotyczyło wyłącznie braku wyniku walidatora OG", "decyzja": "kto: właściciel 2026-11-05, E-003 opcja B; metadane i obraz OG potwierdzone pobraniem jak crawler; publiczne walidatory niedostępne (429/render w przeglądarce). Cofnięcie: podgląd w walidatorze OG w scenariuszu O-6 przy odbiorze; przy błędzie nowe issue typ:qa"}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `docs/02-design/zrodla/Strona firmowa ISKT/ISKT-standalone.dc.html`, `_ds/…/_ds_bundle.js` (l. 755-845, 1097-1166), `src/layouts/BaseLayout.astro`, `src/components/layout/SiteHeader.astro`, prymitywy `src/components/ui/*`, `src/pages/404.astro`, `e2e/layout.spec.ts`, `playwright.config.ts`, `docs/07-realizacja/T-6.md` (format raportu). Pliki spoza „Zakresu” nie były zmieniane."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Dane kontaktowe w sekcji", "decyzja": "tylko adres i NIP/REGON jak w designie (l. 160-163); e-mail i telefon są w stopce."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "`Field`", "decyzja": "jeden komponent dla Input i Textarea (`type=\"textarea\"`), `*` z `aria-hidden` (wymagalność przekazuje atrybut `required`), `aria-invalid` i komunikat błędu gotowe dla T6."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Kontrolki hero na 375 px", "decyzja": "przyciski na całą szerokość poniżej 480 px (wzorzec z `404.astro`), a kolumny hero i kontaktu `minmax(min(300px, 100%), 1fr)`, żeby nie wymuszać poziomego scrolla."}]
+ostatnia_synchronizacja: 2026-11-05T16:52:21Z
 ---
 
 # Status projektu

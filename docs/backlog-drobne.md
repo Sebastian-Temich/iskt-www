@@ -14,3 +14,4 @@ Plik wspólny, aktualizuje orkiestrator. Zgłoszenia ⚪ z review i „Drobne uw
 | 2026-11-05 | T-7 | `@astrojs/sitemap` zostawia też `sitemap-index.xml` i `sitemap-0.xml`; nie przeszkadzają, robots wskazuje `sitemap.xml`. | otwarta |
 | 2026-11-05 | T-8 | `.visually-hidden` jest zdefiniowane lokalnie w `ServiceTile.astro`; przyda się globalna klasa w `src/styles/global.css` (np. dla T6 i stron usług). | otwarta |
 | 2026-11-05 | T-8 | Animowany kafel (`translateY` na hover) i duże logo z `filter: drop-shadow` — warto sprawdzić wpływ na Lighthouse w zadaniu W-08. | otwarta |
+| 2026-11-05 | QA M1 | Test `e2e/layout.spec.ts:137` nazywa się „przekierowanie HTTP”, a sprawdza tylko `trailingSlash` w `vercel.json`; zmienić nazwę testu. | otwarta |

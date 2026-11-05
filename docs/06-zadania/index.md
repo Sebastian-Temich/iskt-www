@@ -17,6 +17,8 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #14 | Strona Projekty B+R z FAQ | todo | 0 | M3 Strony usług | - | - |
 | #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | todo | 0 | M4 Jakość i wydanie | - | - |
 | #16 | Dokumentacja wydania (techniczna i produktowa) | todo | 0 | M4 Jakość i wydanie | - | - |
+| #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | todo | 0 | M1 Szkielet, layout i strona główna | - | - |
+| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | todo | 0 | M1 Szkielet, layout i strona główna | - | - |
 <!-- sync-status:end -->
 
 ## Mapa zadań z planu
@@ -38,4 +40,6 @@ Sekcję uzupełnia `shctl task create`: ID z pliku YAML i numer issue.
 | T10 | #14 | Strona Projekty B+R z FAQ | #10 |
 | T11 | #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | #11, #12, #13, #14 |
 | T12 | #16 | Dokumentacja wydania (techniczna i produktowa) | #5, #6, #7, #8, #9, #11, #10, #12, #13, #14, #15 |
+| QA-M1-1 | #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | - |
+| QA-M1-2 | #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | - |
 <!-- shctl:mapa:end -->
