@@ -1,0 +1,104 @@
+---
+// Przebieg współpracy: D/ESG.dc.html:175-201 (oś pionowa z belką --green-200 i kropkami, etykieta
+// mono „ETAP 0N · CZAS”, h3 i opis). Ostatni etap bez belki i odstępu dolnego.
+export interface ProcessStep {
+  /** Czas etapu z designu, np. „1 tydzień”; wyświetlany wersalikami po „ETAP 0N ·”. */
+  duration: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  heading: string;
+  steps: ProcessStep[];
+}
+
+const { heading, steps } = Astro.props;
+---
+
+<section class="timeline" data-component="process-timeline">
+  <div class="timeline__inner">
+    <h2 class="timeline__heading">{heading}</h2>
+    <ol class="timeline__steps">
+      {steps.map((step, index) => (
+        <li class="timeline__step">
+          <span class="timeline__dot" aria-hidden="true" />
+          <div>
+            <span class="timeline__label">
+              ETAP {String(index + 1).padStart(2, '0')} · {step.duration.toLocaleUpperCase('pl')}
+            </span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-subtle);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .timeline__inner {
+    max-width: var(--x-container-narrow);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+  .timeline__heading {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  .timeline__steps {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .timeline__step {
+    position: relative;
+    display: flex;
+    gap: var(--space-6);
+    margin-left: 6px;
+    padding-bottom: var(--space-8);
+    padding-left: var(--space-6);
+    border-left: 2px solid var(--green-200);
+  }
+  .timeline__step:last-child {
+    padding-bottom: 0;
+    border-left-color: transparent;
+  }
+  .timeline__dot {
+    position: absolute;
+    top: 4px;
+    left: -8px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--green-600);
+  }
+  .timeline__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--ls-wide);
+    color: var(--green-600);
+  }
+  .timeline__step h3 {
+    margin: 0.3rem 0 0.35rem;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
+  }
+  .timeline__step p {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+</style>
