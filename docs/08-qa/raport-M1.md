@@ -18,7 +18,7 @@ robots, favicony; #8 Strona główna — hero, kompetencje, sekcja kontaktu. Pom
 brak.
 
 Przepływy: layout (#6) → strona główna (#8) → SEO z `content/seo.ts` (#7); 404 w layoucie. Scenariusze
-odbioru M1: O-1, O-6, O-9. Lighthouse na stagingu https://iskt-www.vercel.app/ (DoD QA z planu, W-10).
+odbioru M1: O-1, O-9 sprawdzone; O-6 sprawdzone poza podglądem w walidatorze OG (niesprawdzony, do odbioru). Lighthouse na stagingu https://iskt-www.vercel.app/ (DoD QA z planu, W-10).
 Znane i niebędące błędem M1: linki kafli do stron usług dają 404 do M3 (plan).
 
 ## Wyniki testów
@@ -32,7 +32,7 @@ Znane i niebędące błędem M1: linki kafli do stron usług dają 404 do M3 (pl
 | Lighthouse mobile (staging, `/`) | fail | Lighthouse 12.8.2, `--form-factor=mobile --skip-audits=is-crawlable`, 3 przebiegi: wydajność 87 / 89 / 89, dostępność 100, dobre praktyki 100, SEO 100; LCP 3,5 s (logo w hero), FCP 2,1 s, TBT 0 ms, CLS 0 |
 | Lighthouse desktop (staging, `/`) | pass | `--preset=desktop --skip-audits=is-crawlable`: 100 / 100 / 100 / 100 |
 | Staging — nagłówki i pliki | pass | `curl -sI /`: `x-robots-tag: noindex`, Referrer-Policy, X-Content-Type-Options, Permissions-Policy (bez CSP — QA-M1-2); `/robots.txt` bez `Disallow: /`; `/sitemap.xml` = urlset z `/`; `/og/iskt-og.png` 200; `/nie-ma-takiej-strony` → 308 → 404 |
-| Open Graph na stagingu (O-6) | pass | Pobranie `https://iskt-www.vercel.app/` jako zewnętrzny crawler (`curl -A "facebookexternalhit/1.1"`, bez uwierzytelnienia): og:title, og:description, og:url, og:image `https://iskt-www.vercel.app/og/iskt-og.png` (+ type, width 1200, height 630, alt), `twitter:card=summary_large_image`; pełny URL obrazu: 200 `image/png`, wymiary 1200×630 (`sips`) |
+| Open Graph na stagingu (O-6) | niesprawdzone (walidator) | Podglądu w walidatorze OG nie uzyskano: opengraph.xyz odpowiedział 429 (limit), metatags.io i heymeta.com renderują wynik dopiero w przeglądarce (pobranie stron pokazało ich własne metadane). Wykonano tylko sprawdzenie pomocnicze jako zewnętrzny crawler (`curl -A "facebookexternalhit/1.1"`): og:title, og:description, og:url, og:image (pełny URL 200 `image/png`, 1200×630), `twitter:card=summary_large_image`. Podgląd w walidatorze sprawdzi właściciel w scenariuszu O-6 przy odbiorze |
 | Sekrety | pass | `gitleaks git --redact --no-banner .`: no leaks found |
 
 Testy niestabilne: brak. Logi z przebiegu bez danych osobowych (M1 nie przetwarza danych formularza).
@@ -44,7 +44,7 @@ Testy niestabilne: brak. Logi z przebiegu bez danych osobowych (M1 nie przetwarz
 | W-01 (strona główna) | spełnione | `e2e/home.spec.ts` (sekcje, treść, kafle), O-1 w `e2e/qa/M1-scenariusze.spec.ts`; pozostałe strony w M3 |
 | W-02 | spełnione | `e2e/layout.spec.ts` (nagłówek, stopka, `aria-current="page"` na logo), O-1 |
 | W-03 | spełnione | `e2e/home.spec.ts` (kolumny 1/2/3 na 375/768/1440, brak poziomego scrolla), O-1; pełny test 24×24 px i 16 px w T11 |
-| W-07 | spełnione | `e2e/seo.spec.ts` (title, description, canonical, OG, twitter), O-6 lokalnie; na stagingu walidacja jako zewnętrzny crawler: tytuł, opis i obraz OG (pełny URL, 200, 1200×630) — wiersz „Open Graph na stagingu” |
+| W-07 | niesprawdzone (podgląd w walidatorze); meta spełnione | Meta i OG: `e2e/seo.spec.ts` i O-6 lokalnie, na stagingu sprawdzenie pomocnicze crawlerem (wiersz „Open Graph na stagingu”). Kryterium „podgląd linku w walidatorze OG” niesprawdzone — przeniesione do O-6 przy odbiorze; nie jest to wykryty błąd, więc bez issue |
 | W-08 | spełnione | `e2e/seo.spec.ts` (sitemap, robots staging/production), staging: `x-robots-tag: noindex`, robots bez `Disallow: /`, O-6 |
 | W-09 | spełnione | `e2e/layout.spec.ts` (404 w layoucie), O-9, staging 404 |
 | W-10 | częściowo | Lighthouse desktop 100 × 4; mobile wydajność 87–89 < 90 (QA-M1-1); brak CSP z architektury (QA-M1-2) |
