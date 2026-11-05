@@ -1,6 +1,6 @@
 ---
 etap: 00-intake
-status: review
+status: done
 iteracja: 2
 akceptacja_wlasciciela: true
 ---
@@ -33,5 +33,5 @@ akceptacja_wlasciciela: true
 
 ## Checkpoint
 
-- [ ] Review etapu dało PASS (zaznacza reviewer, nie autor)
-- [ ] Właściciel zaakceptował specyfikację
+- [x] Review etapu dało PASS (zaznacza reviewer, nie autor)
+- [x] Właściciel zaakceptował specyfikację
