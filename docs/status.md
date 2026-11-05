@@ -1,16 +1,16 @@
 ---
-zadania_todo: 10
-zadania_in_progress: 0
+zadania_todo: 8
+zadania_in_progress: 1
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 4
+zadania_done: 5
 zadania_anulowane: 0
-pr_otwarte: 0
+pr_otwarte: 1
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "wlasciciel", "pytanie": "Merge raportu QA M1 (PR #21) mimo FAIL review iteracji 3; zgłoszenie dotyczyło wyłącznie braku wyniku walidatora OG", "decyzja": "kto: właściciel 2026-11-05, E-003 opcja B; metadane i obraz OG potwierdzone pobraniem jak crawler; publiczne walidatory niedostępne (429/render w przeglądarce). Cofnięcie: podgląd w walidatorze OG w scenariuszu O-6 przy odbiorze; przy błędzie nowe issue typ:qa"}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `docs/02-design/zrodla/Strona firmowa ISKT/ISKT-standalone.dc.html`, `_ds/…/_ds_bundle.js` (l. 755-845, 1097-1166), `src/layouts/BaseLayout.astro`, `src/components/layout/SiteHeader.astro`, prymitywy `src/components/ui/*`, `src/pages/404.astro`, `e2e/layout.spec.ts`, `playwright.config.ts`, `docs/07-realizacja/T-6.md` (format raportu). Pliki spoza „Zakresu” nie były zmieniane."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Dane kontaktowe w sekcji", "decyzja": "tylko adres i NIP/REGON jak w designie (l. 160-163); e-mail i telefon są w stopce."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "`Field`", "decyzja": "jeden komponent dla Input i Textarea (`type=\"textarea\"`), `*` z `aria-hidden` (wymagalność przekazuje atrybut `required`), `aria-invalid` i komunikat błędu gotowe dla T6."}, {"data": "2026-11-05", "zrodlo": "T-8", "pytanie": "Kontrolki hero na 375 px", "decyzja": "przyciski na całą szerokość poniżej 480 px (wzorzec z `404.astro`), a kolumny hero i kontaktu `minmax(min(300px, 100%), 1fr)`, żeby nie wymuszać poziomego scrolla."}]
-ostatnia_synchronizacja: 2026-11-05T16:52:21Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `docs/02-design/zrodla/.../ESG.dc.html` (układ), ADR-001, `e2e/layout.spec.ts`, `e2e/seo.spec.ts`, `e2e/qa/M1-scenariusze.spec.ts` (wzorce testów i ocena czerwonego testu QA)."}, {"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "JSON-LD z jednym węzłem `JsonLd` renderuje bez tablicy", "decyzja": "test normalizuje odczyt do tablicy, bez zmiany komponentu spoza zakresu."}, {"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "Linki w treści polityki podkreślone", "decyzja": "axe `link-in-text-block` (serious) przy samym kolorze."}, {"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "-", "decyzja": "Link w stopce: w wierszu kontaktowym obok domeny, ten sam styl (`--green-300` na `--ink-900`), bez zmiany układu stopki."}, {"data": "2026-11-05", "zrodlo": "T-9", "pytanie": "Czy dopisać ścieżkę polityki do `nav` w `site.ts`?", "decyzja": "nie, `site.ts` jest poza zakresem; stała `privacyPath` w `SiteFooter.astro`."}]
+ostatnia_synchronizacja: 2026-11-05T17:13:40Z
 ---
 
 # Status projektu

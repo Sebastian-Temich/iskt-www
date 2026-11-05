@@ -15,3 +15,5 @@ Plik wspólny, aktualizuje orkiestrator. Zgłoszenia ⚪ z review i „Drobne uw
 | 2026-11-05 | T-8 | `.visually-hidden` jest zdefiniowane lokalnie w `ServiceTile.astro`; przyda się globalna klasa w `src/styles/global.css` (np. dla T6 i stron usług). | otwarta |
 | 2026-11-05 | T-8 | Animowany kafel (`translateY` na hover) i duże logo z `filter: drop-shadow` — warto sprawdzić wpływ na Lighthouse w zadaniu W-08. | otwarta |
 | 2026-11-05 | QA M1 | Test `e2e/layout.spec.ts:137` nazywa się „przekierowanie HTTP”, a sprawdza tylko `trailingSlash` w `vercel.json`; zmienić nazwę testu. | otwarta |
+| 2026-11-05 | T-9 | Lokalnie `playwright.config.ts` z `reuseExistingServer: !CI` używa serwera z innego worktree na porcie 55327 (strona dawała 404 ze starego buildu); lokalnie testy uruchamiałem z `CI=1`. | otwarta |
+| 2026-11-05 | T-9 | `seo.ts` ma ścieżkę polityki jako literał, a `SiteFooter` drugi raz; warto mieć jedno źródło (np. `nav.privacy` w `site.ts`). | otwarta |

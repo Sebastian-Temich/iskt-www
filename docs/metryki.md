@@ -8,3 +8,4 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 | #6 Layout strony i prymitywy UI, strona 404 | M | 37min | 1 | 2 | 0 | PR #18 |
 | #7 SEO techniczne - meta, Open Graph, sitemap, robots, favicony | M | 16min | 1 | 1 | 0 | PR #20 |
 | #8 Strona główna - hero, kompetencje, sekcja kontaktu | M | 1h 5min | 1 | 2 | 0 | PR #19 |
+| #9 Strona polityki prywatności z roboczą treścią | M | 20min | 1 | 1 | 0 | PR #25 |

@@ -9,7 +9,7 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #6 | Layout strony i prymitywy UI, strona 404 | done | 2 | M1 Szkielet, layout i strona główna | #18 merged | pass |
 | #7 | SEO techniczne - meta, Open Graph, sitemap, robots, favicony | done | 1 | M1 Szkielet, layout i strona główna | #20 merged | pass |
 | #8 | Strona główna - hero, kompetencje, sekcja kontaktu | done | 2 | M1 Szkielet, layout i strona główna | #19 merged | pass |
-| #9 | Strona polityki prywatności z roboczą treścią | todo | 0 | M2 Formularz kontaktowy end-to-end | - | - |
+| #9 | Strona polityki prywatności z roboczą treścią | done | 1 | M2 Formularz kontaktowy end-to-end | #25 merged | pass |
 | #10 | Komponenty stron usług i strona ESG | todo | 0 | M3 Strony usług | - | - |
 | #11 | Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | todo | 0 | M2 Formularz kontaktowy end-to-end | - | - |
 | #12 | Strony AI-transformacja i Oprogramowanie | todo | 0 | M3 Strony usług | - | - |
@@ -18,7 +18,7 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | todo | 0 | M4 Jakość i wydanie | - | - |
 | #16 | Dokumentacja wydania (techniczna i produktowa) | todo | 0 | M4 Jakość i wydanie | - | - |
 | #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | todo | 0 | M1 Szkielet, layout i strona główna | - | - |
-| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | todo | 0 | M1 Szkielet, layout i strona główna | - | - |
+| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | in-progress | 1 | M1 Szkielet, layout i strona główna | #24 open | pending |
 <!-- sync-status:end -->
 
 ## Mapa zadań z planu
