@@ -1,0 +1,263 @@
+---
+// Interim (W-01): treść, kolejność sekcji i hierarchia nagłówków z D/Interim.dc.html. Meta i JSON-LD
+// z content/seo.ts (wpis /uslugi/interim/, wybierany po ścieżce przez Seo w BaseLayout).
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import ComparisonTable from '../../components/service/ComparisonTable.astro';
+import CtaBand from '../../components/service/CtaBand.astro';
+import OtherServices from '../../components/service/OtherServices.astro';
+import ProcessTimeline from '../../components/service/ProcessTimeline.astro';
+import RoleArticle, { type Role } from '../../components/service/RoleArticle.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import WhenIntro from '../../components/service/WhenIntro.astro';
+import { nav } from '../../content/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const PATH = '/uslugi/interim/';
+// Nazwa bieżącej strony w okruszkach = BreadcrumbList w JSON-LD (seo.ts) = D/Interim.dc.html:67.
+const pageName = 'Interim';
+
+// Cztery role z D/Interim.dc.html:103-182.
+const roles: Role[] = [
+  {
+    code: 'CAAO',
+    title: 'Chief AI & Automation Officer',
+    subtitle: 'Właściciel agendy AI i automatyzacji',
+    text: 'CAAO odpowiada za to, żeby AI i automatyzacja przestały być zbiorem pilotaży, a stały się portfelem wdrożeń z policzonym efektem. Buduje listę przypadków użycia, ustala kolejność według zwrotu i trudności, pilnuje jakości danych, kosztów modeli i zasad bezpiecznego użycia narzędzi. Prowadzi też stronę zgodności — klasyfikację ryzyka systemów i rejestr zastosowań wymagany przez AI Act. Rozmawia zarówno z produkcją i finansami, jak i z dostawcami technologii.',
+    benefits: [
+      'Jedna osoba odpowiedzialna za AI zamiast rozproszonych inicjatyw w działach.',
+      'Portfel wdrożeń uszeregowany według efektu, z budżetem i miarą sukcesu.',
+      'Kontrola kosztów licencji, modeli i utrzymania — zamiast rosnących faktur bez właściciela.',
+      'Gotowość na wymogi AI Act i pytania audytora o nadzór nad decyzjami algorytmów.',
+    ],
+  },
+  {
+    code: 'CDO',
+    title: 'Chief Digital / Data Officer',
+    subtitle: 'Architektura cyfrowa i porządek w danych',
+    text: 'CDO patrzy szerzej niż jedno wdrożenie: odpowiada za to, jak firma pracuje z systemami i danymi. Porządkuje krajobraz aplikacji, ustala, gdzie jest źródło prawdy o kliencie, produkcie i kosztach, prowadzi integracje ERP, CRM i systemów produkcyjnych. Buduje raportowanie zarządcze na jednych liczbach, definiuje właścicieli danych i zasady ich jakości. Prowadzi też trudne rozmowy z dostawcami — o umowach, licencjach i wychodzeniu z uzależnienia od jednego systemu.',
+    benefits: [
+      'Jedna, spójna wersja liczb dla zarządu — koniec sporów o to, czyj raport jest prawdziwy.',
+      'Plan systemów i integracji na 12–24 miesiące zamiast decyzji podejmowanych pod presją.',
+      'Mniejsze ryzyko uzależnienia od dostawcy i lepsze warunki w umowach IT.',
+      'Dane gotowe pod analitykę i AI — bez tego etapu każde wdrożenie staje po pilotażu.',
+    ],
+  },
+  {
+    code: 'AI Lead',
+    title: 'Interim AI Lead / Architekt AI',
+    subtitle: 'Rola techniczna, blisko wdrożenia',
+    text: 'AI Lead to rola praktyczna: projektuje rozwiązanie, wybiera modele i architekturę, prowadzi zespół wdrożeniowy lub dostawcę. Odpowiada za pilotaż na realnych danych, kryteria przejścia do produkcji, monitoring jakości odpowiedzi i koszt jednego przetworzonego dokumentu czy zapytania. Recenzuje propozycje zewnętrznych dostawców i potrafi powiedzieć, które obietnice są nierealne. Zostawia po sobie dokumentację i zespół, który umie utrzymać rozwiązanie.',
+    benefits: [
+      'Kompetencja techniczna dostępna od pierwszego tygodnia, bez budowania zespołu od zera.',
+      'Rzetelna ocena ofert dostawców — realne koszty i ryzyka zamiast prezentacji sprzedażowej.',
+      'Pilotaże zamykane decyzją: do produkcji albo świadomie odrzucone.',
+      'Wiedza zostaje w firmie — dokumentacja, standardy pracy i przeszkolony zespół.',
+    ],
+  },
+  {
+    code: 'ESG',
+    title: 'Interim ESG Manager',
+    subtitle: 'Raportowanie i wdrożenie praktyk',
+    text: 'ESG Manager przeprowadza firmę przez pierwsze raportowanie i to, co po nim zostaje. Zbiera dane o emisjach, energii, odpadach i łańcuchu dostaw, prowadzi analizę istotności, przygotowuje raport w standardzie adekwatnym do skali — VSME dla mniejszych firm, CSRD tam, gdzie jest obowiązek. Odpowiada na ankiety klientów, banków i inwestorów, których w praktyce bywa więcej niż samego raportu. Wskazuje też, które działania obniżają koszt, a nie tylko wskaźnik w tabeli.',
+    benefits: [
+      'Raport i dane gotowe na termin, bez gaszenia pożaru w ostatnim kwartale.',
+      'Jeden adresat pytań od klientów, banku i inwestorów — z gotowymi, spójnymi odpowiedziami.',
+      'Powtarzalny proces zbierania danych, który zostaje w firmie na kolejne lata.',
+      'Priorytety wybrane tam, gdzie redukcja emisji spotyka się z niższym kosztem energii i odpadów.',
+    ],
+  },
+];
+---
+
+<BaseLayout header="page" activeSection="kompetencje">
+  <ServiceHero
+    titleBefore="Kompetencja na etacie"
+    titleHighlight="tylko na tyle, ile trwa zmiana"
+    lead="Bywa, że decyzja jest już podjęta — wchodzimy w AI, porządkujemy dane, raportujemy ESG — a w strukturze nie ma nikogo, kto to poprowadzi. Rekrutacja takiej roli trwa miesiące i kosztuje jak stanowisko na stałe. Interim to ta sama odpowiedzialność, obsadzona w kilka tygodni, na czas trwania zmiany."
+    cta={{ label: 'Umów konsultację', href: nav.contact }}
+    note="start zwykle w 2–3 tygodnie"
+    seeAlso={{ label: 'AI i transformacja', href: '/uslugi/ai-transformacja/' }}
+  >
+    <Breadcrumb
+      slot="breadcrumb"
+      items={[
+        { label: 'Start', href: nav.home },
+        { label: 'Kompetencje', href: nav.competences },
+        { label: pageName, href: PATH },
+      ]}
+    />
+  </ServiceHero>
+
+  <WhenIntro
+    heading="Kiedy interim jest lepszy od rekrutacji"
+    columns={[
+      {
+        title: 'Typowe sytuacje',
+        text: 'Zarząd zdecydował o transformacji, ale nie ma właściciela tematu. Pierwszy raport zrównoważonego rozwoju przed terminem. Odejście kluczowej osoby. Wymóg klienta, banku lub inwestora, żeby wskazać odpowiedzialnego. Dział IT tonie w utrzymaniu i nie ma kto prowadzić zmiany.',
+        tone: 'positive',
+      },
+      {
+        title: 'Kiedy odradzamy',
+        text: 'Gdy rola ma być stała i pilna zarazem — wtedy interim tylko odsuwa rekrutację. Gdy zarząd nie chce oddać realnych decyzji i mandatu. Gdy oczekiwaniem jest wyłącznie dokument do szuflady — na to wystarczy doradztwo projektowe.',
+        tone: 'neutral',
+      },
+    ]}
+  >
+    Interim ma sens wtedy, gdy <strong>zadanie ma początek i koniec</strong> — wdrożenie, pierwszy
+    raport, uporządkowanie obszaru, zastępstwo. Jeśli rola jest docelowo stała i dobrze
+    zdefiniowana, uczciwiej powiedzieć: rekrutujcie. Często robimy jedno i drugie — prowadzimy
+    obszar i równolegle przygotowujemy go dla osoby, która przejmie go na stałe.
+  </WhenIntro>
+
+  <section class="roles" data-section="roles" aria-labelledby="role-naglowek">
+    <div class="roles__inner">
+      <div class="roles__head">
+        <h2 id="role-naglowek" class="roles__heading">
+          Cztery role, które obsadzamy
+        </h2>
+        <p class="roles__intro">
+          Każdą z nich obejmujemy z mandatem decyzyjnym, miejscem w kalendarzu zarządu i konkretnym
+          zakresem odpowiedzialności. Nie doradzamy z boku — pracujemy jak członek Waszego zespołu.
+        </p>
+      </div>
+      <div class="roles__grid">
+        {roles.map((role, index) => (
+          <RoleArticle role={role} index={index + 1} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <ComparisonTable
+    id="modele-wspolpracy"
+    heading="Modele współpracy"
+    intro="Rozliczamy się za dostępność w miesiącu, nie za godziny. Zaangażowanie ustalamy na start i weryfikujemy po pierwszym miesiącu — zwykle maleje, gdy obszar jest już uporządkowany."
+    caption="Modele współpracy interim: zaangażowanie, dla kogo i czas (tabela przewijana poziomo)"
+    columns={['Model', 'Zaangażowanie', 'Dla kogo', 'Czas']}
+    rows={[
+      [
+        'Nadzór doradczy',
+        '1–2 dni w miesiącu',
+        'Zarząd ma plan i zespół, brakuje zewnętrznego spojrzenia i dyscypliny decyzji',
+        '3–12 miesięcy',
+      ],
+      [
+        'Interim część etatu',
+        '4–6 dni w miesiącu',
+        'Obszar wymaga prowadzenia, ale nie pełnego stanowiska — najczęściej wybierany model',
+        '6–12 miesięcy',
+      ],
+      [
+        'Interim intensywny',
+        '2–3 dni w tygodniu',
+        'Wdrożenie, pierwsze raportowanie lub zastępstwo po odejściu kluczowej osoby',
+        '3–9 miesięcy',
+      ],
+      [
+        'Interim z sukcesją',
+        'jak wyżej + przekazanie',
+        'Rola docelowo stała: prowadzimy obszar i przygotowujemy go dla nowej osoby',
+        '6–18 miesięcy',
+      ],
+    ]}
+  />
+  {/* Notka pod tabelą (D/Interim.dc.html:231); ComparisonTable z T7 nie ma miejsca na tekst po tabeli. */}
+  <div class="model-note" data-section="model-note">
+    <div class="model-note__inner">
+      <p>
+        Umowa jest wypowiadalna z miesięcznym okresem — nie wiążemy Was na rok, jeśli po dwóch
+        miesiącach okaże się, że rola jest niepotrzebna.
+      </p>
+    </div>
+  </div>
+
+  <ProcessTimeline
+    heading="Przebieg współpracy"
+    steps={[
+      {
+        duration: '2–3 dni',
+        title: 'Rozmowa o zakresie i mandacie',
+        text: 'Ustalamy, za co rola odpowiada, jakie decyzje podejmuje samodzielnie i komu raportuje. Efekt: opis roli i kryteria sukcesu na pierwsze pół roku.',
+      },
+      {
+        duration: '2–3 tygodnie',
+        title: 'Wejście w organizację',
+        text: 'Rozmowy z zespołami, przegląd systemów, danych i zobowiązań. Efekt: obraz stanu wyjściowego i plan działania na 90 dni.',
+      },
+      {
+        duration: 'cykl miesięczny',
+        title: 'Prowadzenie obszaru',
+        text: 'Decyzje, wdrożenia, praca z dostawcami i zespołem, raport dla zarządu po każdym miesiącu. Efekt: postęp widoczny w liczbach, nie w prezentacjach.',
+      },
+      {
+        duration: '4–8 tygodni',
+        title: 'Przekazanie i wyjście',
+        text: 'Dokumentacja, standardy pracy, wdrożenie następcy — własnego lub zrekrutowanego. Efekt: obszar działa dalej bez nas.',
+      },
+    ]}
+  />
+
+  <CtaBand
+    heading="Powiedzcie, czego dziś nie ma kto poprowadzić"
+    text="Odpowiemy, czy to zadanie na interim, na projekt, czy na rekrutację."
+  />
+
+  <OtherServices current={PATH} />
+</BaseLayout>
+
+<style>
+  .roles {
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-subtle);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .roles__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+  .roles__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 760px;
+  }
+  .roles__heading {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  .roles__intro {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .roles__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+    gap: var(--space-6);
+  }
+  /* Notka doklejona do sekcji tabeli: to samo tło, odstęp od tabeli jak gap sekcji (--space-8). */
+  .model-note {
+    margin-top: calc(var(--space-8) - var(--space-20));
+    padding: 0 var(--container-pad) var(--space-20);
+    background: var(--surface-page);
+  }
+  .model-note__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+  .model-note p {
+    max-width: 760px;
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+</style>

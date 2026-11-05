@@ -1,0 +1,164 @@
+---
+// Wsparcie startupów (W-01): treść, kolejność sekcji i hierarchia nagłówków z D/Startupy.dc.html.
+// Meta i JSON-LD z content/seo.ts (wpis /startupy/, wybierany po ścieżce przez Seo w BaseLayout).
+import Breadcrumb from '../components/layout/Breadcrumb.astro';
+import ComparisonTable from '../components/service/ComparisonTable.astro';
+import CtaBand from '../components/service/CtaBand.astro';
+import OtherServices from '../components/service/OtherServices.astro';
+import ProcessTimeline from '../components/service/ProcessTimeline.astro';
+import ScopeList from '../components/service/ScopeList.astro';
+import ServiceHero from '../components/service/ServiceHero.astro';
+import WhenIntro from '../components/service/WhenIntro.astro';
+import { nav } from '../content/site';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const PATH = '/startupy/';
+// Nazwa bieżącej strony w okruszkach = BreadcrumbList w JSON-LD (seo.ts) = D/Startupy.dc.html:67.
+const pageName = 'Wsparcie startupów';
+// Wyróżnienie we wstępie „Na czym skupiamy się najpierw” (D/Startupy.dc.html:82); w stałej, żeby
+// formatowanie nie rozdzieliło </strong> i kropki spacją.
+const focus =
+  'zrozumiany problem klienta, najprostsza wersja rozwiązania i sposób finansowania kolejnych miesięcy';
+---
+
+<BaseLayout header="page" activeSection="kompetencje">
+  <ServiceHero
+    titleBefore="Od pomysłu do"
+    titleHighlight="pierwszych klientów"
+    titleAfter="i pierwszej rundy"
+    lead="Startupy technologiczne rzadko przegrywają na technologii. Przegrywają na braku dowodu, że ktoś za to zapłaci, i na modelu, którego nie da się obronić przed inwestorem. Pracujemy nad jednym i drugim — równolegle z budową produktu."
+    cta={{ label: 'Umów konsultację', href: nav.contact }}
+    note="odpowiedź w 1 dzień roboczy"
+    seeAlso={{ label: 'Rozwój oprogramowania', href: '/uslugi/oprogramowanie/' }}
+  >
+    <Breadcrumb
+      slot="breadcrumb"
+      items={[
+        { label: 'Start', href: nav.home },
+        { label: 'Kompetencje', href: nav.competences },
+        { label: pageName, href: PATH },
+      ]}
+    />
+  </ServiceHero>
+
+  <WhenIntro
+    heading="Na czym skupiamy się najpierw"
+    columns={[
+      {
+        title: 'Dobry moment na rozmowę',
+        text: 'Masz działający zespół i pierwsze rozmowy z klientami, planujesz MVP, przygotowujesz się do aplikacji o dotację albo do rozmów z inwestorem.',
+        tone: 'positive',
+      },
+      {
+        title: 'Sygnały ostrzegawcze',
+        text: 'Rok budowy produktu bez rozmowy z klientem, model przychodowy „ustalimy później”, podział udziałów bez umowy założycielskiej, prognozy bez założeń.',
+        tone: 'neutral',
+      },
+    ]}
+  >
+    Zanim powstanie pełny produkt, potrzebne są trzy rzeczy: <strong>{focus}</strong>. Reszta jest
+    konsekwencją.
+  </WhenIntro>
+
+  <ScopeList
+    heading="Sześć obszarów naszej pracy"
+    items={[
+      {
+        title: 'Walidacja pomysłu i rynku',
+        text: 'Rozmowy z potencjalnymi klientami, analiza konkurencji i wielkości rynku. Efekt: potwierdzony problem albo szybka decyzja o zmianie kierunku.',
+      },
+      {
+        title: 'Model biznesowy i wycena',
+        text: 'Sposób zarabiania, struktura kosztów, jednostkowa ekonomia i prognoza z jawnymi założeniami — taka, którą da się obronić w rozmowie z inwestorem.',
+      },
+      {
+        title: 'MVP i mapa produktu',
+        text: 'Najmniejsza wersja, która rozwiązuje problem, zakres pierwszego wydania i plan kolejnych. Budujemy sami albo prowadzimy Wasz zespół i podwykonawców.',
+      },
+      {
+        title: 'Finansowanie: dotacje i inwestorzy',
+        text: 'Dobór źródeł — dotacje na B+R, programy akceleracyjne, aniołowie biznesu, fundusze VC. Przygotowujemy dokumentację i materiały dla każdej ścieżki.',
+      },
+      {
+        title: 'Pitch deck i data room',
+        text: 'Narracja, materiały inwestorskie, model finansowy i komplet dokumentów do due diligence. Ćwiczymy prezentację przed spotkaniami.',
+      },
+      {
+        title: 'Fundamenty spółki i IP',
+        text: 'Podział udziałów i vesting, umowy z założycielami i współpracownikami, przeniesienie praw do kodu i marki oraz ochrona własności intelektualnej.',
+      },
+    ]}
+  />
+
+  <ComparisonTable
+    id="etapy-startupu"
+    heading="Wsparcie dopasowane do etapu"
+    intro="Pracujemy w krótkich cyklach — zakres ustalamy na jeden etap, nie na rok z góry. Czasy orientacyjne, zależne od dostępności zespołu założycielskiego."
+    caption="Wsparcie startupu według etapu: co robimy, efekt i czas (tabela przewijana poziomo)"
+    columns={['Etap', 'Co robimy', 'Efekt', 'Czas']}
+    rows={[
+      [
+        'Pomysł',
+        'Walidacja problemu, rozmowy z klientami, model biznesowy',
+        'Decyzja: budujemy, zmieniamy kierunek albo odpuszczamy',
+        '3–6 tygodni',
+      ],
+      [
+        'Prototyp / MVP',
+        'Zakres pierwszego wydania, budowa, testy z użytkownikami',
+        'Działający produkt u pierwszych klientów',
+        '8–16 tygodni',
+      ],
+      [
+        'Pierwsze finansowanie',
+        'Wniosek o dotację lub materiały inwestorskie, model finansowy',
+        'Złożona aplikacja albo pitch deck i data room gotowe na spotkania',
+        '4–10 tygodni',
+      ],
+      [
+        'Skalowanie',
+        'Procesy sprzedaży, mierniki wzrostu, plan zespołu i technologii',
+        'Powtarzalny proces pozyskiwania klientów i plan na kolejną rundę',
+        'współpraca ciągła',
+      ],
+    ]}
+  />
+
+  <ProcessTimeline
+    heading="Przebieg współpracy"
+    steps={[
+      {
+        duration: '1 tydzień',
+        title: 'Sesja startowa',
+        text: 'Pomysł, zespół, dotychczasowe rozmowy z rynkiem i realne ograniczenia budżetowe. Efekt: lista założeń do sprawdzenia w pierwszej kolejności.',
+      },
+      {
+        duration: '2–4 tygodnie',
+        title: 'Walidacja i model',
+        text: 'Wywiady z klientami, analiza rynku, model przychodowy i wstępna ekonomia. Efekt: decyzja o kierunku poparta danymi.',
+      },
+      {
+        duration: '8–16 tygodni',
+        title: 'Budowa MVP',
+        text: 'Zakres, wydania co dwa tygodnie, testy z pierwszymi użytkownikami. Efekt: produkt, który można pokazać klientowi i inwestorowi.',
+      },
+      {
+        duration: '4–10 tygodni',
+        title: 'Pozyskanie finansowania',
+        text: 'Wniosek o dotację albo runda: materiały, model, lista funduszy i przygotowanie do spotkań. Efekt: proces prowadzony, nie improwizowany.',
+      },
+      {
+        duration: 'współpraca ciągła',
+        title: 'Wzrost',
+        text: 'Sprzedaż, mierniki, rekrutacje i rozwój technologii. Efekt: wzrost oparty na powtarzalnym procesie, nie na jednorazowych sukcesach.',
+      },
+    ]}
+  />
+
+  <CtaBand
+    heading="Opowiedz, na jakim etapie jesteś"
+    text="Powiemy, co zrobić w najbliższych trzech miesiącach i czym możemy się zająć my."
+  />
+
+  <OtherServices current={PATH} />
+</BaseLayout>
