@@ -125,6 +125,12 @@ Jako właściciel chcę, aby formularz nie był kanałem spamu, aby skrzynka zaw
   zwraca odpowiedź sukcesu, ale e-maila nie wysyła.
 - Given więcej niż 5 zgłoszeń z jednego adresu IP w ciągu 10 minut, when przychodzi kolejne, then
   serwer zwraca 429 i nie wysyła e-maila.
+- Given wiele równoległych instancji funkcji albo restart funkcji, when z jednego IP przychodzi
+  szóste zgłoszenie w oknie 10 minut, then limit nadal działa (429), bo licznik jest współdzielony
+  między instancjami i przeżywa restart (np. reguła rate limit w Vercel Firewall przed funkcją albo
+  współdzielony magazyn klucz–wartość). Licznik w pamięci pojedynczej instancji nie spełnia tego
+  kryterium. Wybór mechanizmu rozstrzyga ADR w `04-architektura`; jeśli wymaga nowego konta lub płatnej
+  usługi, jest krokiem ręcznym właściciela.
 - Given pola tekstowe, when wartość przekracza limity (imię 100, e-mail 254, wiadomość 5000 znaków),
   then serwer odrzuca zgłoszenie kodem 400.
 - Given treść z HTML lub znakami nowej linii w nagłówkach, when serwer buduje e-mail, then treść jest
@@ -161,8 +167,12 @@ Jako robot wyszukiwarki chcę mapy strony, aby zaindeksować wszystkie strony.
 
 - Given zbudowana aplikacja, when pobieram `/sitemap.xml`, then zawiera wszystkie strony z W-01 i
   żadnych innych (bez 404 i endpointów).
-- Given staging, when pobieram `/robots.txt` albo nagłówki strony, then staging ma `noindex` (nagłówek
-  `X-Robots-Tag` albo `Disallow: /`), a konfiguracja produkcyjna wskazuje sitemap i pozwala indeksować.
+- Given staging, when pobieram dowolną stronę, then odpowiedź ma nagłówek `X-Robots-Tag: noindex` (albo
+  `<meta name="robots" content="noindex">`), a `/robots.txt` stagingu nie blokuje crawlowania
+  (`Disallow: /` jest niedozwolone, bo ukryłoby `noindex` przed robotem i nie wyklucza adresu z
+  indeksu).
+- Given konfiguracja produkcyjna (adres bazowy iskt.pl), when pobieram `/robots.txt` i strony, then
+  `robots.txt` wskazuje `sitemap.xml`, pozwala indeksować, a strony nie mają `noindex`.
 
 ### W-09: Strona 404 (powinno)
 
@@ -265,6 +275,7 @@ Architekt wyprowadza z materiałów tokeny (kolory, typografia, odstępy) i list
 4. Dostarczyć treść polityki prywatności i klauzuli informacyjnej, jeśli design jej nie zawiera (P2).
 5. Później, poza pilotem (B9a): domena iskt.pl w Vercel, weryfikacja domeny w Resend (SPF/DKIM),
    klucz produkcyjny, przełączenie adresu bazowego i zdjęcie `noindex`.
+6. Zaakceptować umowy powierzenia (DPA) Vercel i Resend na koncie ISKT (ADR danych osobowych).
 
 Usługi: Vercel Hobby/Pro i Resend Free wystarczają na v1; ewentualny płatny plan wybiera właściciel.
 
@@ -274,12 +285,29 @@ Usługi: Vercel Hobby/Pro i Resend Free wystarczają na v1; ewentualny płatny p
 |---|---|---|
 | Auth i RLS, role użytkowników | nie | Brak kont i panelu |
 | Płatności | nie | — |
-| Dane osobowe | tak | Formularz zbiera imię, e-mail i treść: ADR (brak zapisu danych, logi bez PII, klauzula informacyjna W-06), testy logów |
+| Dane osobowe | tak | Formularz zbiera imię, e-mail i treść. Minimum M i ADR „Dane osobowe w formularzu kontaktowym” w `04-architektura` (wymagany przed planem), powiązany z W-04, W-05 i W-06; ustalenia wejściowe niżej. Testy logów bez PII |
 | AI przetwarzające dane użytkowników | nie | — |
 | Migracje bazy produkcyjnej | nie | Brak bazy |
 | Upload plików, integracje zewnętrzne | tak | Integracja Resend: walidacja wejścia, timeout 10 s, obsługa błędów (W-04), rate limit i honeypot (W-05) |
 | Płatne usługi, sekrety, nowe konta | tak | Konta Vercel i Resend oraz klucz testowy to kroki ręczne właściciela; klucze tylko w env (W-12) |
 | Zgodność z designem i niekompletne materiały | do ustalenia | Lista stron i treści zależą od materiałów; brak elementu w designie zgłaszamy jako pytanie, nie zgadujemy treści |
+
+### Ustalenia wejściowe do ADR: dane osobowe w formularzu (W-04, W-05, W-06)
+
+Intake nie pisze ADR (robi to architekt), ale ustala decyzje, które ADR musi potwierdzić albo
+uzasadnić zmianę:
+
+| Kwestia | Ustalenie |
+|---|---|
+| Zakres danych | Tylko pola z designu formularza (co najmniej imię, e-mail, wiadomość); bez pól zbędnych do odpowiedzi |
+| Cel i podstawa | Odpowiedź na zapytanie (podjęcie działań na żądanie osoby, której dane dotyczą); informacja przy formularzu (W-06) |
+| Przechowywanie | Brak zapisu w aplikacji i bazie; dane istnieją tylko w e-mailu u odbiorcy i w logach dostawcy e-mail |
+| Podmioty przetwarzające | Vercel (hosting funkcji, region UE) i Resend (wysyłka); ADR odnotowuje ich rolę i potrzebę umów powierzenia (DPA) jako krok właściciela |
+| Logi | Bez imienia, e-maila, treści i pełnego IP; tylko identyfikator zdarzenia, status, kod błędu |
+| Rate limit | Klucz limitu to IP (lub jego skrót) przechowywany tylko na czas okna limitu (W-05) |
+| Retencja | W aplikacji brak; retencja e-maili w skrzynce odbiorcy po stronie właściciela |
+
+ADR musi istnieć i być zaakceptowany w etapie `04-architektura` przed rozpisaniem zadań.
 
 ## Szacunek poglądowy
 
@@ -299,8 +327,9 @@ Założenia:
 - Strona jest w jednym języku — w tym, w którym jest design (zakładamy polski).
 - Treść wszystkich stron pochodzi wyłącznie z designu; brakujących tekstów nie wymyślamy.
 - Odbiorca zapytań i klucz Resend są w zmiennych środowiskowych, nie w kodzie.
-- Rate limit W-05 jest realizowany w pamięci funkcji lub prostym mechanizmie bez bazy; jeśli okaże się
-  niewystarczający, architekt proponuje alternatywę w ADR.
+- Rate limit W-05 wymaga licznika współdzielonego między instancjami (reguła przed funkcją albo
+  współdzielony magazyn); konkretny mechanizm wybiera ADR architekta, preferując rozwiązanie bez
+  nowego płatnego konta.
 
 Otwarte pytania:
 
