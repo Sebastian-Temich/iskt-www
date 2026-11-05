@@ -5,3 +5,4 @@ Plik wspólny. Aktualizuje go wyłącznie orkiestrator przez `shctl task close`.
 ## Niewydane
 
 - #5: Szkielet projektu Astro, CI, tokeny i czcionki (PR #17)
+- #6: Layout strony i prymitywy UI, strona 404 (PR #18)

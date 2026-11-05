@@ -1,16 +1,16 @@
 ---
-zadania_todo: 11
+zadania_todo: 10
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 1
+zadania_done: 2
 zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "`RATE_LIMIT_PROVIDER`", "decyzja": "wartości `waf` (domyślnie), `upstash`, `memory` (ADR-003: pamięć lokalnie i w testach); `RATE_LIMIT_SALT` wymagana tylko dla `upstash`."}, {"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "Port E2E", "decyzja": "`astro preview` na 55327 (blok 55321-55329), żeby nie kolidować z `pnpm dev` na 55326."}, {"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "Dowód renderowania przez BaseLayout", "decyzja": "atrybut `data-layout=\"base\"` na `<html>` ustawiany tylko w `BaseLayout.astro`."}, {"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "Region fra1", "decyzja": "w `vercel.json` (`regions`), bo adapter `@astrojs/vercel` 8 nie ma opcji regionu."}, {"data": "2026-11-05", "zrodlo": "T-5", "pytanie": "Zapis hex w tokenach", "decyzja": "małe litery (Prettier); test 1:1 porównuje wartości bez rozróżniania wielkości liter, a smoke porównuje `--color-primary` z `#1E551D` po `toUpperCase`."}]
-ostatnia_synchronizacja: 2026-11-05T14:36:32Z
+ostatnie_decyzje: [{"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "-", "decyzja": "Dodatkowo przeczytane: `docs/02-design/zrodla/.../ISKT-standalone.dc.html` l. 15-233 (mapowanie ikon kafli l. 225-233), `D/ESG.dc.html` l. 40-79 i 245-253, `DS/_ds_bundle.js` l. 105-305 i 478-590, `vitest.config.ts`, `scripts/ci-zakres.sh`."}, {"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "Breadcrumb bez JSON-LD BreadcrumbList", "decyzja": "JSON-LD należy do T3 (meta i SEO, poza zakresem)."}, {"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "Strona 404 bez listy usług", "decyzja": "linki do stron usług dawałyby dziś 404 (strony powstają w kolejnych zadaniach); 404 linkuje do `/` i `/#kompetencje`."}, {"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "`Button` w nagłówku jako rozmiar sm", "decyzja": "najbliższy rozmiar DS do przycisku z designu (0.6rem 1.15rem, `--text-sm`)."}, {"data": "2026-11-05", "zrodlo": "T-6", "pytanie": "Gdzie lista nazw ikon?", "decyzja": "`src/components/ui/icon-names.ts` bez importów `.astro`, żeby `site.ts` i testy jednostkowe nie ładowały komponentów; mapa komponentów w `src/components/ui/icons.ts`."}]
+ostatnia_synchronizacja: 2026-11-05T15:14:04Z
 ---
 
 # Status projektu
