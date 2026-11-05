@@ -1,14 +1,16 @@
 ---
 // Formularz kontaktowy w wersji statycznej: D/ISKT-standalone.dc.html:165-180 (Card lg, pola DS
 // Input/Textarea, przycisk „Wyślij wiadomość”). Wysyłka, stany i klauzula dochodzą w T6; tu formularz
-// nie ma `action` i nie wysyła danych (method="post" + preventDefault, żeby dane nie trafiły do URL).
+// nie ma `action` i nie wysyła danych. Bez JavaScriptu formularz jest ukryty (`hidden`), a `<noscript>`
+// podaje kontakt (architektura, „Bezpieczeństwo”); skrypt odkrywa go dopiero po podpięciu obsługi.
+import { company } from '../../content/site';
 import Button from '../ui/Button.astro';
 import Card from '../ui/Card.astro';
 import Field from '../ui/Field.astro';
 ---
 
 <Card padding="lg" class="contact-form">
-  <form class="contact-form__form" method="post" data-contact-form>
+  <form class="contact-form__form" method="post" hidden data-contact-form>
     <Field
       label="Imię i nazwisko"
       name="name"
@@ -36,12 +38,21 @@ import Field from '../ui/Field.astro';
       Wyślij wiadomość
     </Button>
   </form>
+  <noscript>
+    <p class="contact-form__noscript" data-testid="contact-noscript">
+      Aby wysłać formularz, włącz JavaScript albo napisz do nas:
+      <a href={`mailto:${company.email}`}>{company.email}</a>
+      lub zadzwoń: <a href={company.phoneHref}>{company.phone}</a>.
+    </p>
+  </noscript>
 </Card>
 
 <script>
-  // Do T6 (wysyłka przez fetch) formularz niczego nie wysyła.
+  // Do T6 (wysyłka przez fetch) formularz niczego nie wysyła. Odkrywamy go dopiero po podpięciu
+  // blokady, więc bez JS nie da się go wysłać natywnie.
   for (const form of document.querySelectorAll<HTMLFormElement>('[data-contact-form]')) {
     form.addEventListener('submit', (event) => event.preventDefault());
+    form.hidden = false;
   }
 </script>
 
@@ -50,5 +61,13 @@ import Field from '../ui/Field.astro';
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
+  }
+  .contact-form__form[hidden] {
+    display: none;
+  }
+  .contact-form__noscript {
+    margin: 0;
+    color: var(--text-primary);
+    line-height: var(--lh-relaxed);
   }
 </style>

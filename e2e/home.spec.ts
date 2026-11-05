@@ -153,6 +153,46 @@ test.describe('strona główna', () => {
     await expect(form.getByLabel('Imię i nazwisko')).toHaveValue('Jan Kowalski');
   });
 
+  test.describe('bez JavaScriptu', () => {
+    test.use({ javaScriptEnabled: false });
+
+    test('kontakt: formularz ukryty, nie da się go wysłać (brak POST), jest kontakt w noscript', async ({
+      page,
+    }) => {
+      const posts: string[] = [];
+      page.on('request', (request) => {
+        if (request.method() === 'POST') posts.push(request.url());
+      });
+      await page.goto('/');
+      const section = page.locator('#kontakt');
+      const form = section.locator('form');
+      await expect(form).toHaveCount(1);
+      await expect(form).toBeHidden();
+      await expect(form).toHaveAttribute('hidden', '');
+
+      // Ukrytego formularza nie da się wypełnić ani wysłać: pola i przycisk są niewidoczne.
+      await expect(form.getByRole('button', { name: 'Wyślij wiadomość' })).toHaveCount(0);
+      await expect(section.locator('input:visible, textarea:visible, button:visible')).toHaveCount(
+        0,
+      );
+      await page.keyboard.press('Enter');
+      expect(posts).toEqual([]);
+      await expect(page).toHaveURL(/\/$/);
+
+      const fallback = section.getByTestId('contact-noscript');
+      await expect(fallback).toBeVisible();
+      await expect(fallback).toContainText('Aby wysłać formularz, włącz JavaScript');
+      await expect(fallback.getByRole('link', { name: 'biuro@iskt.pl' })).toHaveAttribute(
+        'href',
+        'mailto:biuro@iskt.pl',
+      );
+      await expect(fallback.getByRole('link', { name: '+48 504 083 825' })).toHaveAttribute(
+        'href',
+        'tel:+48504083825',
+      );
+    });
+  });
+
   test('treść bez lorem ipsum i TODO', async ({ page }) => {
     await page.goto('/');
     const text = (await page.locator('body').innerText()).toLowerCase();
