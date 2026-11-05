@@ -25,10 +25,10 @@ modele:
     rozumowanie: high
 hosting:
   aplikacja: vercel
-  baza: supabase-cloud
+  baza: brak
   region: eu
   konta: klient
-  zaakceptowany: false
+  zaakceptowany: true
 data: "2026-11-05"
 blok_portow: 55321-55329
 ---
