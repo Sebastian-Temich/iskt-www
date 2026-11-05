@@ -27,17 +27,17 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-05T21:25Z (po QA M2)
+- Czas: 2026-11-05T22:28Z (M3 w toku, limit Codexa)
 - Kamień zakończony: M2 funkcjonalnie (#9, #11 zamknięte; naprawy QA M1 #22, #23 zamknięte). QA M2 PR #28 scalony, werdykt FAIL: 🟡 QA-M2-1 → #29 (zdublowany klucz `build` w `astro.config.mjs`, lint/typecheck/E2E czerwone na `main`); wysyłka e-maila nie działa (Resend 403 dla `CONTACT_TO`) → E-006. CSP na stagingu i reguła WAF (6. POST → 429) potwierdzone
-- Kamień bieżący: M2 (naprawa #29), M3 wstrzymany
-- PR w toku: brak (worker #29 pracuje, panel `worker:iskt-www:29`)
-- Eskalacje: E-006 otwarta (08-qa, konfiguracja Resend: opcje A/B/C)
-- Wstrzymania: M3 (#10 gotowe) do rozstrzygnięcia E-006 i zamknięcia #29 (bez #29 CI każdego PR z kodem jest czerwone)
+- Kamień bieżący: M3 (#10 zamknięte; #12 PR #33 i #13 PR #32: CI zielone, review czeka na limit Codexa; #14 czeka na slot). #29 zamknięte, Lighthouse mobile stagingu 99/99/99
+- PR w toku: #32 (#13), #33 (#12), oba `status:review`, panele workerów otwarte
+- Eskalacje: brak otwartych (E-006 zamknięta: opcja C, O-3 przy odbiorze końcowym)
+- Wstrzymania: review Codex do 2026-11-06T00:36Z (limit użycia; nie podbija iteracji); #14 bez slotu do zamknięcia #12 lub #13
 - `shctl doctor` 2026-11-05T14:12Z: 0 błędów
 - Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md`
-- Zadania właściciela: E-006; O-3 (odbiór e-maila i `Reply-To` w skrzynce) po E-006; O-6 podgląd w walidatorze OG przy odbiorze
+- Zadania właściciela: poprawa `CONTACT_TO`/Resend przed odbiorem (E-006/C), potem O-3; O-6 podgląd w walidatorze OG przy odbiorze
 - Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia
-- Następny krok: monitoring #29 (`shctl task wait 29`); po E-006/A ponowny test O-3 na stagingu i dopisek do `raport-M2.md`; potem start M3 (#10)
+- Następny krok: po 00:36Z `shctl review run 32` i `33`, zamknięcie, dispatch #14; po M3: QA M3 (`sh-qa`)
 
 ## Dziennik etapów
 
