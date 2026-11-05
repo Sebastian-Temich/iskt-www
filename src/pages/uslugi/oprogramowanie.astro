@@ -1,0 +1,239 @@
+---
+// Rozwój oprogramowania dedykowanego (W-01): treść, kolejność sekcji i hierarchia nagłówków z
+// D/Oprogramowanie.dc.html, w tym „Nasze autorskie aplikacje” (Clara, Petra) z kartami ProductCard.
+// Meta i JSON-LD z content/seo.ts (wpis /uslugi/oprogramowanie/).
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import ComparisonTable from '../../components/service/ComparisonTable.astro';
+import CtaBand from '../../components/service/CtaBand.astro';
+import OtherServices from '../../components/service/OtherServices.astro';
+import ProcessTimeline from '../../components/service/ProcessTimeline.astro';
+import ProductCard from '../../components/service/ProductCard.astro';
+import ScopeList from '../../components/service/ScopeList.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import WhenIntro from '../../components/service/WhenIntro.astro';
+import { nav } from '../../content/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const PATH = '/uslugi/oprogramowanie/';
+// Nazwa bieżącej strony w okruszkach = BreadcrumbList w JSON-LD (seo.ts) = D/Oprogramowanie.dc.html:67.
+const pageName = 'Rozwój oprogramowania';
+---
+
+<BaseLayout header="page" activeSection="kompetencje">
+  <ServiceHero
+    titleBefore="Oprogramowanie, które"
+    titleHighlight="zostaje Twoją własnością"
+    lead="Budujemy systemy dedykowane tam, gdzie gotowe narzędzia nie wystarczają: integracje, aplikacje wewnętrzne, platformy danych. Kod, dokumentacja i infrastruktura należą do Ciebie od pierwszego dnia — bez uzależnienia od jednego dostawcy. Standardowe aplikacje realizujemy w ok. 2 tygodnie."
+    cta={{ label: 'Umów konsultację', href: nav.contact }}
+    seeAlso={{ label: 'AI i transformacja', href: '/uslugi/ai-transformacja/' }}
+  >
+    <Breadcrumb
+      slot="breadcrumb"
+      items={[
+        { label: 'Start', href: nav.home },
+        { label: 'Kompetencje', href: nav.competences },
+        { label: pageName, href: PATH },
+      ]}
+    />
+  </ServiceHero>
+
+  <WhenIntro
+    heading="Kiedy warto budować, a kiedy kupić"
+    columns={[
+      {
+        title: 'Budujemy',
+        text: 'Integracje między systemami, aplikacje wspierające unikalny proces produkcyjny, platformy danych i raportowania, portale dla klientów, moduły do istniejącego ERP.',
+        tone: 'positive',
+      },
+      {
+        title: 'Odradzamy',
+        text: 'Pisanie od zera kolejnego CRM-a, systemu kadrowego czy sklepu, gdy standardowe rozwiązanie pokrywa 90% potrzeb — koszt utrzymania przewyższy oszczędność.',
+        tone: 'neutral',
+      },
+    ]}
+  >
+    Dedykowany system ma sens, gdy proces jest Twoją przewagą albo gdy{' '}
+    <strong>żadne gotowe narzędzie nie łączy tego, co musi zostać połączone</strong>. W pozostałych
+    przypadkach uczciwiej jest wdrożyć rozwiązanie z półki — i tak też doradzamy.
+  </WhenIntro>
+
+  <ScopeList
+    heading="Sześć obszarów naszej pracy"
+    items={[
+      {
+        title: 'Analiza i specyfikacja',
+        text: 'Warsztaty z użytkownikami, opis procesu, przypadki użycia i zakres pierwszego wydania. Efekt: dokument, na podstawie którego da się wycenić pracę.',
+      },
+      {
+        title: 'Projekt interfejsu',
+        text: 'Makiety i klikalny prototyp przed rozpoczęciem kodowania. Użytkownicy oceniają rozwiązanie, zanim stanie się kosztowne w zmianie.',
+      },
+      {
+        title: 'Budowa aplikacji',
+        text: 'Aplikacje webowe, panele operacyjne, API i usługi backendowe. Wydania co dwa tygodnie, testy automatyczne i kod w Twoim repozytorium.',
+      },
+      {
+        title: 'Integracje i dane',
+        text: 'Połączenia z ERP, CRM, systemami produkcyjnymi i urządzeniami, migracje danych, hurtownie i raportowanie w jednym miejscu.',
+      },
+      {
+        title: 'Wdrożenie i utrzymanie',
+        text: 'Środowiska, kopie zapasowe, monitoring, poprawki i rozwój po starcie. Jasne zasady wsparcia i przewidywalny koszt miesięczny.',
+      },
+      {
+        title: 'Audyt i przejęcie kodu',
+        text: 'Przegląd istniejącego systemu, ocena długu technicznego i bezpieczeństwa, plan naprawy albo przejęcie projektu po innym wykonawcy.',
+      },
+    ]}
+  />
+
+  <section class="products" aria-labelledby="nasze-aplikacje">
+    <div class="products__inner">
+      <div class="products__head">
+        <h2 id="nasze-aplikacje">Nasze autorskie aplikacje</h2>
+        <p>
+          Budujemy nie tylko na zlecenie. Dwa własne produkty rozwiązują problemy, na które
+          trafialiśmy u kolejnych klientów — możesz je zobaczyć na żywo podczas demonstracji.
+        </p>
+      </div>
+      <div class="products__grid">
+        <ProductCard
+          name="Clara"
+          badge="faktury za media"
+          badgeTone="green"
+          description="Zarządza fakturami za media w całej organizacji. Porównuje każdą fakturę z warunkami umowy i wskazuje nieprawidłowości — błędne stawki, zawyżone zużycie, pozycje niezgodne z kontraktem."
+          features={[
+            'Rejestr umów, punktów poboru i faktur w jednym miejscu',
+            'Automatyczna kontrola zgodności faktury z umową',
+            'Dane o zużyciu gotowe do raportowania śladu węglowego',
+          ]}
+          ctaLabel="Poznaj Clarę"
+        />
+        <ProductCard
+          name="Petra"
+          badge="opłata środowiskowa"
+          badgeTone="lime"
+          description="Prowadzi rozliczenie opłaty środowiskowej w małych i średnich firmach oraz instytucjach. Zbiera dane o korzystaniu ze środowiska, liczy należną opłatę i przygotowuje dokumenty do sprawozdania."
+          features={[
+            'Ewidencja źródeł emisji i danych za okres rozliczeniowy',
+            'Wyliczenie opłaty i komplet dokumentów sprawozdawczych',
+            'Historia rozliczeń dostępna przy kontroli i audycie',
+          ]}
+          ctaLabel="Poznaj Petrę"
+        />
+      </div>
+    </div>
+  </section>
+
+  <ComparisonTable
+    id="formy-wspolpracy"
+    heading="Cztery formy współpracy"
+    intro="Standardową aplikację oddajemy w ok. 2 tygodnie; większe systemy dzielimy na etapy o tej samej długości. Prace o charakterze badawczym — nowe algorytmy, nietypowe integracje — często kwalifikują się do ulgi B+R lub dotacji."
+    caption="Formy współpracy przy oprogramowaniu: kiedy pasuje, efekt i czas (tabela przewijana poziomo)"
+    columns={['Forma', 'Kiedy pasuje', 'Efekt', 'Czas']}
+    rows={[
+      [
+        'Warsztat i wycena',
+        'Wiesz, co boli, nie wiesz, ile to kosztuje',
+        'Specyfikacja, makiety i wycena etapów',
+        '3–5 dni',
+      ],
+      [
+        'Projekt na zakres',
+        'Zdefiniowana aplikacja o jasnych granicach',
+        'Wdrożona aplikacja z dokumentacją i testami; większy system w etapach',
+        'ok. 2 tygodnie (standard)',
+      ],
+      [
+        'Zespół w abonamencie',
+        'Produkt rozwijany ciągle, zmienne priorytety',
+        'Stała moc przerobowa i przewidywalny koszt',
+        'cykl miesięczny',
+      ],
+      [
+        'Audyt lub ratunek',
+        'System po innym wykonawcy, awarie, brak dokumentacji',
+        'Raport ryzyk i plan naprawy z priorytetami',
+        '1–2 tygodnie',
+      ],
+    ]}
+  />
+
+  <ProcessTimeline
+    heading="Przebieg współpracy"
+    steps={[
+      {
+        duration: '2–3 dni',
+        title: 'Warsztat i analiza',
+        text: 'Proces, użytkownicy, systemy i ograniczenia. Efekt: zakres pierwszego wydania i lista rzeczy, których nie budujemy.',
+      },
+      {
+        duration: '2–3 dni',
+        title: 'Prototyp i wycena',
+        text: 'Klikalne makiety i architektura rozwiązania. Efekt: wycena etapów oraz harmonogram wydań.',
+      },
+      {
+        duration: '1–2 tygodnie',
+        title: 'Budowa',
+        text: 'Działające wydanie co kilka dni, testy z użytkownikami, korekta priorytetów. Efekt: brak niespodzianek na końcu projektu.',
+      },
+      {
+        duration: '2–3 dni',
+        title: 'Wdrożenie',
+        text: 'Migracja danych, szkolenie użytkowników, przekazanie kodu i dokumentacji. Efekt: system w codziennej pracy, bez uzależnienia od nas.',
+      },
+      {
+        duration: 'cykl miesięczny',
+        title: 'Utrzymanie i rozwój',
+        text: 'Monitoring, poprawki, aktualizacje bezpieczeństwa i kolejne funkcje według potrzeb. Efekt: system, który nie starzeje się po roku.',
+      },
+    ]}
+  />
+
+  <CtaBand
+    heading="Opisz, co dziś robicie ręcznie"
+    text="Powiemy, czy warto to zbudować, kupić gotowe — i ile to zajmie."
+  />
+
+  <OtherServices current={PATH} />
+</BaseLayout>
+
+<style>
+  /* „Nasze aplikacje”: D/Oprogramowanie.dc.html:127-162 (kontener 1200 px, nagłówek z opisem do
+     720 px, siatka kart min. 320 px). */
+  .products {
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-page);
+  }
+  .products__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .products__head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 720px;
+  }
+  .products__head h2 {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  .products__head p {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .products__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: var(--space-5);
+  }
+</style>

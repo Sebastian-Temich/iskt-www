@@ -1,0 +1,114 @@
+---
+// Zielone pasmo CTA: D/Projekty-BR.dc.html:229-240 — tło --green-700 z poświatą, h2 i zdanie po
+// lewej, biały przycisk-pigułka „Umów konsultację” ze strzałką po prawej.
+import { nav } from '../../content/site';
+import Icon from '../ui/Icon.astro';
+
+interface Props {
+  heading: string;
+  text: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const { heading, text, ctaLabel = 'Umów konsultację', ctaHref = nav.contact } = Astro.props;
+---
+
+<section class="cta-brand" data-component="cta-band-brand">
+  <div class="cta-brand__glow" aria-hidden="true"></div>
+  <div class="cta-brand__inner">
+    <div class="cta-brand__text">
+      <h2>{heading}</h2>
+      <p>{text}</p>
+    </div>
+    <a class="cta-brand__button" href={ctaHref}>
+      {ctaLabel}
+      <Icon name="arrow-right" size={18} />
+    </a>
+  </div>
+</section>
+
+<style>
+  .cta-brand {
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-16) var(--container-pad);
+    background: var(--green-700);
+    color: #fff;
+  }
+  .cta-brand__glow {
+    position: absolute;
+    bottom: -45%;
+    right: -5%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--x-glow-3), transparent 65%);
+    pointer-events: none;
+  }
+  .cta-brand__inner {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cta-brand__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 620px;
+  }
+  h2 {
+    margin: 0;
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+    line-height: var(--lh-tight);
+    color: #fff;
+    text-wrap: pretty;
+  }
+  p {
+    margin: 0;
+    font-size: var(--text-lg);
+    line-height: var(--lh-relaxed);
+    color: var(--green-200);
+    text-wrap: pretty;
+  }
+  .cta-brand__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    border-radius: var(--radius-pill);
+    background: #fff;
+    color: var(--green-800);
+    font-size: var(--text-base);
+    font-weight: var(--fw-semibold);
+    box-shadow: var(--shadow-md);
+    transition:
+      transform var(--dur-base) var(--ease-standard),
+      background var(--dur-base) var(--ease-standard);
+  }
+  .cta-brand__button:hover {
+    background: var(--green-50);
+    color: var(--green-800);
+    transform: translateY(-2px);
+  }
+  .cta-brand__button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-brand__button {
+      transition: none;
+    }
+    .cta-brand__button:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -10,15 +10,16 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #7 | SEO techniczne - meta, Open Graph, sitemap, robots, favicony | done | 1 | M1 Szkielet, layout i strona główna | #20 merged | pass |
 | #8 | Strona główna - hero, kompetencje, sekcja kontaktu | done | 2 | M1 Szkielet, layout i strona główna | #19 merged | pass |
 | #9 | Strona polityki prywatności z roboczą treścią | done | 1 | M2 Formularz kontaktowy end-to-end | #25 merged | pass |
-| #10 | Komponenty stron usług i strona ESG | todo | 0 | M3 Strony usług | - | - |
+| #10 | Komponenty stron usług i strona ESG | done | 1 | M3 Strony usług | #31 merged | pass |
 | #11 | Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | done | 1 | M2 Formularz kontaktowy end-to-end | #26 merged | pass |
-| #12 | Strony AI-transformacja i Oprogramowanie | todo | 0 | M3 Strony usług | - | - |
-| #13 | Strony Interim i Startupy | todo | 0 | M3 Strony usług | - | - |
-| #14 | Strona Projekty B+R z FAQ | todo | 0 | M3 Strony usług | - | - |
+| #12 | Strony AI-transformacja i Oprogramowanie | done | 1 | M3 Strony usług | #33 merged | pass |
+| #13 | Strony Interim i Startupy | done | 1 | M3 Strony usług | #32 merged | pass |
+| #14 | Strona Projekty B+R z FAQ | done | 1 | M3 Strony usług | #34 merged | pass |
 | #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | todo | 0 | M4 Jakość i wydanie | - | - |
 | #16 | Dokumentacja wydania (techniczna i produktowa) | todo | 0 | M4 Jakość i wydanie | - | - |
 | #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | done | 2 | M1 Szkielet, layout i strona główna | #27 merged | pass |
 | #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | done | 2 | M1 Szkielet, layout i strona główna | #24 merged | pass |
+| #29 | QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main | done | 1 | M2 Formularz kontaktowy end-to-end | #30 merged | pass |
 <!-- sync-status:end -->
 
 ## Mapa zadań z planu
@@ -42,4 +43,5 @@ Sekcję uzupełnia `shctl task create`: ID z pliku YAML i numer issue.
 | T12 | #16 | Dokumentacja wydania (techniczna i produktowa) | #5, #6, #7, #8, #9, #11, #10, #12, #13, #14, #15 |
 | QA-M1-1 | #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | - |
 | QA-M1-2 | #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | - |
+| QA-M2-1 | #29 | QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main | - |
 <!-- shctl:mapa:end -->

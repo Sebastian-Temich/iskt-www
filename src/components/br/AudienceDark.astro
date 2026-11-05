@@ -1,0 +1,125 @@
+---
+// „Dla kogo”: D/Projekty-BR.dc.html:179-206 — ciemne pasmo z poświatą, po lewej nagłówek i lista z
+// ikoną check, po prawej karty obszarów (h3 i opis).
+import Icon from '../ui/Icon.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+export interface AudienceArea {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  eyebrow: string;
+  heading: string;
+  points: string[];
+  areas: AudienceArea[];
+}
+
+const { eyebrow, heading, points, areas } = Astro.props;
+---
+
+<section class="audience" data-component="audience-dark">
+  <div class="audience__glow" aria-hidden="true"></div>
+  <div class="audience__inner">
+    <div class="audience__col">
+      <SectionHeading eyebrow={eyebrow} title={heading} align="left" onDark />
+      <ul class="audience__points">
+        {points.map((point) => (
+          <li>
+            <span class="audience__check">
+              <Icon name="check" size={20} />
+            </span>
+            {point}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <ul class="audience__areas">
+      {areas.map((area) => (
+        <li class="audience__area">
+          <h3>{area.title}</h3>
+          <p>{area.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .audience {
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-20) var(--container-pad);
+    background: var(--ink-900);
+    color: var(--text-on-dark);
+  }
+  .audience__glow {
+    position: absolute;
+    top: -30%;
+    left: -6%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--x-glow-2), transparent 64%);
+    pointer-events: none;
+  }
+  .audience__inner {
+    position: relative;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-12);
+  }
+  .audience__col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .audience__points,
+  .audience__areas {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .audience__points {
+    gap: var(--space-4);
+  }
+  .audience__points li {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: var(--neutral-300);
+  }
+  .audience__check {
+    display: inline-flex;
+    flex: none;
+    color: var(--green-300);
+  }
+  .audience__areas {
+    gap: var(--space-4);
+  }
+  .audience__area {
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    background: var(--x-dark-card-bg);
+    border: 1px solid var(--x-dark-card-border);
+  }
+  h3 {
+    margin: 0 0 0.4rem;
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+    color: var(--text-on-dark);
+  }
+  p {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--neutral-300);
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+// Proces (kotwica #proces): D/Projekty-BR.dc.html:110-141 — pięć kart z górną zieloną belką,
+// etykietą mono „NN · czas”, tytułem h3 i opisem.
+import SectionHeading from '../ui/SectionHeading.astro';
+
+export interface ProcessStep {
+  duration: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  subtitle?: string;
+  steps: ProcessStep[];
+}
+
+const { id, eyebrow, heading, subtitle, steps } = Astro.props;
+---
+
+<section class="process-cards" id={id} data-component="process-cards">
+  <div class="process-cards__inner">
+    <SectionHeading eyebrow={eyebrow} title={heading} subtitle={subtitle} align="left" />
+    <ol class="process-cards__grid">
+      {steps.map((step, index) => (
+        <li class="process-cards__card">
+          <span class="process-cards__label">
+            {String(index + 1).padStart(2, '0')} · {step.duration}
+          </span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process-cards {
+    scroll-margin-top: 24px;
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-subtle);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .process-cards__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+  .process-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .process-cards__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6);
+    background: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-top: 3px solid var(--green-500);
+    border-radius: var(--radius-lg);
+  }
+  .process-cards__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--green-600);
+  }
+  h3 {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+  }
+  p {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+</style>

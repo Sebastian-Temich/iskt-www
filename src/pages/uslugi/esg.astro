@@ -1,0 +1,163 @@
+---
+// Raportowanie ESG (W-01): treść, kolejność sekcji i hierarchia nagłówków z D/ESG.dc.html. Meta i
+// JSON-LD z content/seo.ts (wpis /uslugi/esg/, wybierany po ścieżce przez Seo w BaseLayout).
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import ComparisonTable from '../../components/service/ComparisonTable.astro';
+import CtaBand from '../../components/service/CtaBand.astro';
+import OtherServices from '../../components/service/OtherServices.astro';
+import ProcessTimeline from '../../components/service/ProcessTimeline.astro';
+import ScopeList from '../../components/service/ScopeList.astro';
+import ServiceHero from '../../components/service/ServiceHero.astro';
+import WhenIntro from '../../components/service/WhenIntro.astro';
+import { nav } from '../../content/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const PATH = '/uslugi/esg/';
+// Nazwa bieżącej strony w okruszkach = BreadcrumbList w JSON-LD (seo.ts) = D/ESG.dc.html:67.
+const pageName = 'ESG i zrównoważony rozwój';
+---
+
+<BaseLayout header="page" activeSection="kompetencje">
+  <ServiceHero
+    titleBefore="ESG, które"
+    titleHighlight="przechodzi audyt"
+    titleAfter="i pomaga sprzedawać"
+    lead="Większość firm zaczyna ESG od raportu, a kończy na pytaniach, na które nie ma danych. My zaczynamy od danych: liczymy ślad węglowy, porządkujemy dokumentację i dopiero wtedy piszemy to, co trafia do kontrahenta, banku i sprawozdania."
+    cta={{ label: 'Umów konsultację', href: nav.contact }}
+    note="odpowiedź w 1 dzień roboczy"
+    seeAlso={{ label: 'AI i transformacja', href: '/uslugi/ai-transformacja/' }}
+  >
+    <Breadcrumb
+      slot="breadcrumb"
+      items={[
+        { label: 'Start', href: nav.home },
+        { label: 'Kompetencje', href: nav.competences },
+        { label: pageName, href: PATH },
+      ]}
+    />
+  </ServiceHero>
+
+  <WhenIntro
+    heading="Kiedy ESG przestaje być deklaracją"
+    columns={[
+      {
+        title: 'Działa',
+        text: 'Policzony ślad węglowy z metodyką i źródłami danych, wskaźniki powiązane z systemami firmy, cele redukcji z harmonogramem i budżetem.',
+        tone: 'positive',
+      },
+      {
+        title: 'Nie działa',
+        text: 'Deklaracje bez liczb, polityka skopiowana z internetu, „neutralność klimatyczna” bez inwentaryzacji emisji — to ryzyko zarzutu greenwashingu.',
+        tone: 'neutral',
+      },
+    ]}
+  >
+    Moment, w którym trzeba działać, rzadko wyznacza ustawa — częściej{' '}
+    <strong>
+      ankieta od dużego klienta, warunek w przetargu albo pytanie banku o ryzyka klimatyczne
+    </strong>
+    . Wtedy liczy się nie deklaracja, tylko dane, które da się udokumentować.
+  </WhenIntro>
+
+  <ScopeList
+    heading="Sześć obszarów naszej pracy"
+    items={[
+      {
+        title: 'Diagnoza ESG i analiza istotności',
+        text: 'Przegląd wpływów, ryzyk i szans w trzech obszarach: środowisko, społeczeństwo, ład korporacyjny. Ustalamy, które tematy są dla Twojej firmy naprawdę istotne — i tylko nimi się zajmujemy.',
+      },
+      {
+        title: 'Ślad węglowy (zakres 1, 2, 3)',
+        text: 'Inwentaryzacja emisji zgodna z GHG Protocol: zbiórka danych, wskaźniki emisji, obliczenia i raport z metodyką, który obroni się przed audytorem i klientem.',
+      },
+      {
+        title: 'Strategia i cele redukcji',
+        text: 'Ścieżka dekarbonizacji z listą działań, kosztami i efektem w tonach CO₂e. Wskazujemy, które inwestycje zwracają się same, a które wymagają finansowania.',
+      },
+      {
+        title: 'Raportowanie i sprawozdawczość',
+        text: 'Raport zrównoważonego rozwoju zgodny z wymogami, które faktycznie Cię obejmują — pełne europejskie standardy ESRS albo dobrowolny standard VSME, przygotowany specjalnie dla małych i średnich firm.',
+      },
+      {
+        title: 'ESG w łańcuchu dostaw',
+        text: 'Odpowiedzi na ankiety kontrahentów, kodeks postępowania dostawców, kryteria ESG w zakupach i przetargach. Przygotowujemy pakiet, który wysyłasz raz i używasz wielokrotnie.',
+      },
+      {
+        title: 'Wdrożenie i szkolenia zespołu',
+        text: 'Podział obowiązków, procedura zbierania danych w kolejnych latach i szkolenie osób, które będą to prowadzić po naszym wyjściu.',
+      },
+    ]}
+  />
+
+  <ComparisonTable
+    id="sytuacje-esg"
+    heading="Co Cię dotyczy — cztery typowe sytuacje"
+    intro="Zestawienie orientacyjne. Zakres obowiązków sprawozdawczych w UE zmieniał się w ostatnich latach — Twój przypadek potwierdzamy zawsze na aktualnym stanie przepisów. Dla MŚP punktem odniesienia jest zwykle dobrowolny standard VSME, który ogranicza raportowanie do zestawu danych realnie oczekiwanych przez klientów i banki."
+    caption="Typowe sytuacje ESG: co jest potrzebne, efekt i czas (tabela przewijana poziomo)"
+    columns={['Sytuacja', 'Co jest potrzebne', 'Efekt', 'Czas']}
+    rows={[
+      [
+        'Duży klient przysłał ankietę ESG',
+        'Ślad węglowy zakres 1 i 2, podstawowe polityki, dane kadrowe',
+        'Wypełniona ankieta i pakiet danych w formacie VSME — raz przygotowany, używany przy kolejnych zapytaniach',
+        '3–5 tygodni',
+      ],
+      [
+        'Obowiązek sprawozdawczy',
+        'Analiza istotności, komplet wskaźników, dane za rok obrotowy',
+        'Raport zrównoważonego rozwoju gotowy do atestacji',
+        '3–6 miesięcy',
+      ],
+      [
+        'Finansowanie lub przetarg',
+        'Ryzyka klimatyczne, cele redukcji, zgodność z kryteriami zielonymi',
+        'Dokumentacja pod bank, leasing lub kryteria przetargowe',
+        '4–8 tygodni',
+      ],
+      [
+        'Redukcja kosztów i emisji',
+        'Audyt zużycia energii i surowców, mapa strat',
+        'Lista działań z kosztem, zwrotem i efektem w tonach CO₂e',
+        '4–6 tygodni',
+      ],
+    ]}
+  />
+
+  <ProcessTimeline
+    heading="Przebieg współpracy"
+    steps={[
+      {
+        duration: '1 tydzień',
+        title: 'Ustalenie wymagań',
+        text: 'Kto i czego od Ciebie wymaga: klient, bank, przepisy czy zarząd. Efekt: lista realnych obowiązków zamiast wszystkiego naraz.',
+      },
+      {
+        duration: '2–4 tygodnie',
+        title: 'Dane i obliczenia',
+        text: 'Zbiórka danych z faktur, systemów i od dostawców, obliczenie emisji i wskaźników. Efekt: baza danych ESG z udokumentowanymi źródłami.',
+      },
+      {
+        duration: '2–3 tygodnie',
+        title: 'Strategia i cele',
+        text: 'Priorytety, działania redukcyjne, koszty i harmonogram. Efekt: strategia ESG przyjęta przez zarząd, nie prezentacja do szuflady.',
+      },
+      {
+        duration: '3–6 tygodni',
+        title: 'Raport i komunikacja',
+        text: 'Raport, odpowiedzi na ankiety i materiały dla klientów. Efekt: spójny przekaz bez ryzyka greenwashingu.',
+      },
+      {
+        duration: 'cykl roczny',
+        title: 'Utrzymanie i aktualizacja',
+        text: 'Kolejne pomiary, monitoring celów i aktualizacja dokumentów przy zmianie przepisów. Efekt: proces prowadzony wewnętrznie, z naszym wsparciem tylko tam, gdzie trzeba.',
+      },
+    ]}
+  />
+
+  <CtaBand
+    heading="Nie wiesz, czy ESG już Cię dotyczy?"
+    text="Napisz, kto o dane pyta — odpowiemy, jaki zakres wystarczy i ile to zajmie."
+  />
+
+  <OtherServices current={PATH} />
+</BaseLayout>

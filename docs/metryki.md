@@ -12,3 +12,8 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 | #11 Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | M | 2h 26min | 1 | 1 | 1 | PR #26 |
 | #23 QA M1: brak nagłówka Content-Security-Policy z architektury | M | 3h 23min | 1 | 2 | 1 | PR #24 |
 | #22 QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | M | 2h 24min | 1 | 2 | 0 | PR #27 |
+| #29 QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main | M | 36min | 1 | 1 | 0 | PR #30 |
+| #10 Komponenty stron usług i strona ESG | M | 29min | 1 | 1 | 0 | PR #31 |
+| #13 Strony Interim i Startupy | M | 31min | 1 | 1 | 0 | PR #32 |
+| #12 Strony AI-transformacja i Oprogramowanie | M | 34min | 1 | 1 | 0 | PR #33 |
+| #14 Strona Projekty B+R z FAQ | M | 35min | 1 | 1 | 0 | PR #34 |

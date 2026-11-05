@@ -1,0 +1,86 @@
+---
+// Sekcja „Zakres”: D/ESG.dc.html:96-126 (h2, siatka punktów z numerem mono 01–06, h3 i opisem).
+export interface ScopeItem {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  heading: string;
+  items: ScopeItem[];
+}
+
+const { heading, items } = Astro.props;
+---
+
+<section class="scope-list" data-component="scope-list">
+  <div class="scope-list__inner">
+    <h2 class="scope-list__heading">{heading}</h2>
+    <ol class="scope-list__items">
+      {items.map((item, index) => (
+        <li class="scope-list__item">
+          <span class="scope-list__number" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .scope-list {
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-subtle);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .scope-list__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+  .scope-list__heading {
+    margin: 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tight);
+  }
+  .scope-list__items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-8) var(--space-10);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .scope-list__item {
+    display: flex;
+    gap: var(--space-4);
+  }
+  .scope-list__number {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
+    color: var(--green-600);
+  }
+  .scope-list__item h3 {
+    margin: 0 0 0.35rem;
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
+  }
+  .scope-list__item p {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+</style>

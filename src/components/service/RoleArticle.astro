@@ -1,0 +1,116 @@
+---
+// Karta roli interim: D/Interim.dc.html:103-122 (numer mono 01–04, skrót roli mono, h3 z nazwą,
+// podtytuł, opis i lista „Co zyskuje organizacja” oddzielona górną linią). Sekcję z nagłówkiem i
+// siatką czterech kart buduje strona /uslugi/interim/.
+export interface Role {
+  /** Skrót roli nad nazwą, np. „CAAO”. */
+  code: string;
+  title: string;
+  subtitle: string;
+  text: string;
+  /** Punkty „Co zyskuje organizacja”. */
+  benefits: string[];
+}
+
+interface Props {
+  role: Role;
+  /** Numer karty od 1; wyświetlany jako „01”. */
+  index: number;
+  benefitsHeading?: string;
+}
+
+const { role, index, benefitsHeading = 'Co zyskuje organizacja' } = Astro.props;
+---
+
+<article class="role" data-component="role-article">
+  <div class="role__head">
+    <span class="role__number" aria-hidden="true">
+      {String(index).padStart(2, '0')}
+    </span>
+    <div>
+      <span class="role__code">{role.code}</span>
+      <h3 class="role__title">{role.title}</h3>
+      <p class="role__subtitle">{role.subtitle}</p>
+    </div>
+  </div>
+  <p class="role__text">{role.text}</p>
+  <div class="role__benefits">
+    <span class="role__benefits-heading">{benefitsHeading}</span>
+    <ul>
+      {role.benefits.map((benefit) => (
+        <li>{benefit}</li>
+      ))}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .role {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-8);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card);
+    box-shadow: var(--shadow-xs);
+    min-width: 0;
+  }
+  .role__head {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+  .role__number {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-bold);
+    color: var(--green-600);
+  }
+  .role__code {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--ls-wide);
+    color: var(--green-600);
+  }
+  .role__title {
+    margin: 0.3rem 0 0.15rem;
+    font-size: var(--text-xl);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-tight);
+  }
+  .role__subtitle {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+  .role__text {
+    margin: 0;
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .role__benefits {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .role__benefits-heading {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-bold);
+  }
+  .role__benefits ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin: 0;
+    padding-left: 1.15rem;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+  }
+</style>

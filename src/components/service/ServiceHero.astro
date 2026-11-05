@@ -1,0 +1,130 @@
+---
+// Hero strony usługi: D/ESG.dc.html:59-77 (wąski kontener 900 px, poświata, h1 z fragmentem w
+// gradiencie marki, lead, CTA, mikrotekst mono, link „Zobacz też”). Okruszki trafiają do slotu
+// `breadcrumb` (komponent Breadcrumb), żeby strona sama ustalała ścieżkę.
+import Button from '../ui/Button.astro';
+
+export interface HeroLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  /** Tekst h1 przed fragmentem w gradiencie. */
+  titleBefore?: string;
+  /** Fragment h1 w gradiencie marki. */
+  titleHighlight: string;
+  /** Tekst h1 po fragmencie w gradiencie. */
+  titleAfter?: string;
+  lead: string;
+  cta: HeroLink;
+  /** Mikrotekst mono obok CTA, np. „odpowiedź w 1 dzień roboczy”. */
+  note?: string;
+  /** Link „Zobacz też: …” do innej usługi. */
+  seeAlso?: HeroLink;
+}
+
+const { titleBefore, titleHighlight, titleAfter, lead, cta, note, seeAlso } = Astro.props;
+---
+
+<section class="service-hero" data-component="service-hero">
+  <div class="service-hero__glow" aria-hidden="true"></div>
+  <div class="service-hero__inner">
+    <slot name="breadcrumb" />
+    <h1 class="service-hero__title">
+      {titleBefore && <>{titleBefore} </>}
+      <span class="service-hero__highlight">{titleHighlight}</span>
+      {titleAfter && <> {titleAfter}</>}
+    </h1>
+    <p class="service-hero__lead">{lead}</p>
+    <div class="service-hero__actions">
+      <Button href={cta.href} class="service-hero__cta" iconRight="arrow-right">
+        {cta.label}
+      </Button>
+      {note && <span class="service-hero__note">{note}</span>}
+      {seeAlso && (
+        <a class="service-hero__see-also" href={seeAlso.href}>
+          Zobacz też: {seeAlso.label} →
+        </a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .service-hero {
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-16) var(--container-pad) var(--space-20);
+    background: var(--gradient-wash);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .service-hero__glow {
+    position: absolute;
+    top: -25%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--x-glow-1), transparent 62%);
+    pointer-events: none;
+  }
+  .service-hero__inner {
+    position: relative;
+    max-width: var(--x-container-narrow);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .service-hero__title {
+    margin: 0;
+    font-size: var(--x-h1-service);
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--ls-tighter);
+    line-height: var(--x-h1-service-lh);
+    text-wrap: balance;
+  }
+  .service-hero__highlight {
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .service-hero__lead {
+    margin: 0;
+    max-width: 680px;
+    font-size: var(--text-xl);
+    line-height: var(--lh-relaxed);
+    color: var(--text-secondary);
+    text-wrap: pretty;
+  }
+  .service-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+    padding-top: var(--space-2);
+  }
+  .service-hero__actions :global(.service-hero__cta) {
+    gap: 0.6rem;
+    padding: 0.95rem 1.6rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .service-hero__note {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+  .service-hero__see-also {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--green-700);
+  }
+  .service-hero__see-also:hover {
+    color: var(--text-link-hover);
+  }
+</style>

@@ -1,0 +1,247 @@
+---
+// Projekty B+R (W-01): treść, kolejność sekcji i hierarchia nagłówków z D/Projekty-BR.dc.html
+// (wersja podstawowa, decyzja właściciela 2026-11-05). Meta i JSON-LD z content/seo.ts (wpis
+// /uslugi/projekty-br/ wg D/Projekty-BR-Ekspercki.dc.html:6-19), bez noindex z designu.
+import AudienceDark from '../../components/br/AudienceDark.astro';
+import BrHero from '../../components/br/BrHero.astro';
+import CtaBandBrand from '../../components/br/CtaBandBrand.astro';
+import FaqAccordion from '../../components/br/FaqAccordion.astro';
+import IconCardGrid from '../../components/br/IconCardGrid.astro';
+import ProcessCards from '../../components/br/ProcessCards.astro';
+import ProgramCard from '../../components/br/ProgramCard.astro';
+import ServiceChips from '../../components/br/ServiceChips.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import { nav, trainingUrl } from '../../content/site';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const PATH = '/uslugi/projekty-br/';
+// Nazwa bieżącej strony w okruszkach = BreadcrumbList w JSON-LD (seo.ts) = D/Projekty-BR.dc.html:52.
+const pageName = 'Projekty B+R';
+
+const programs = [
+  {
+    title: 'FENG — Ścieżka SMART',
+    badge: 'krajowy',
+    tone: 'green',
+    text: 'Moduł B+R z opcjonalnym wdrożeniem, cyfryzacją, zazielenieniem i kompetencjami. Dla firm łączących badania z inwestycją produkcyjną.',
+  },
+  {
+    title: 'Programy regionalne (FE)',
+    badge: 'regionalny',
+    tone: 'neutral',
+    text: 'Mniejsze projekty badawcze i bony na innowacje, m.in. w Funduszach Europejskich dla Śląskiego. Krótsza ścieżka i prostsza dokumentacja.',
+  },
+  {
+    title: 'Horyzont Europa i Eurostars',
+    badge: 'europejski',
+    tone: 'info',
+    text: 'Projekty w konsorcjach międzynarodowych. Pomagamy znaleźć partnerów, ustawić rolę w konsorcjum i przygotować część merytoryczną.',
+  },
+  {
+    title: 'Ulga B+R i IP Box',
+    badge: 'podatkowe',
+    tone: 'lime',
+    text: 'Wsparcie bez konkursu i bez wniosku o dotację. Porządkujemy ewidencję kosztów i dokumentację, która obroni ulgę w razie kontroli.',
+  },
+] as const;
+---
+
+<BaseLayout header="page" activeSection="kompetencje">
+  <BrHero
+    badge="Kompetencja · B+R"
+    titleBefore="Projekty"
+    titleHighlight="badawczo‑rozwojowe"
+    titleAfter="z finansowaniem"
+    lead="Prowadzimy Twój projekt B+R od pierwszej rozmowy o pomyśle, przez agendę badawczą i wniosek o dotację, aż po rozliczenie i wdrożenie wyników. Bierzemy odpowiedzialność za dokumentację, budżet i kontakt z instytucją finansującą."
+    cta={{ label: 'Bezpłatna konsultacja', href: nav.contact }}
+    secondary={{ label: 'Jak pracujemy', href: '#proces' }}
+  >
+    <Breadcrumb
+      slot="breadcrumb"
+      items={[
+        { label: 'Start', href: nav.home },
+        { label: 'Kompetencje', href: nav.competences },
+        { label: pageName, href: PATH },
+      ]}
+    />
+  </BrHero>
+
+  <IconCardGrid
+    eyebrow="Zakres wsparcia"
+    heading="Co robimy w projektach B+R"
+    subtitle="Sześć obszarów, które przejmujemy w całości albo uzupełniamy tam, gdzie Twojemu zespołowi brakuje rąk."
+    items={[
+      {
+        icon: 'search-check',
+        title: 'Audyt potencjału B+R',
+        text: 'Przegląd technologii, kompetencji zespołu i planów rozwojowych. Wskazujemy, które pomysły realnie kwalifikują się jako prace badawczo‑rozwojowe.',
+      },
+      {
+        icon: 'flask-conical',
+        title: 'Agenda badawcza',
+        text: 'Podział na etapy badań przemysłowych i prac rozwojowych, kamienie milowe, wskaźniki i poziomy gotowości technologicznej (TRL).',
+      },
+      {
+        icon: 'coins',
+        title: 'Dobór finansowania',
+        text: 'Mapa dostępnych naborów krajowych, regionalnych i europejskich. Dobieramy program pod skalę projektu, poziom dofinansowania i termin.',
+      },
+      {
+        icon: 'file-text',
+        title: 'Wniosek i budżet',
+        text: 'Pełna dokumentacja aplikacyjna, kosztorys zgodny z katalogiem kosztów kwalifikowanych, analiza ryzyk i przygotowanie do panelu ekspertów.',
+      },
+      {
+        icon: 'clipboard-check',
+        title: 'Prowadzenie i rozliczenie',
+        text: 'Harmonogram, wnioski o płatność, sprawozdania, zmiany w umowie i kontakt z instytucją. Utrzymujemy projekt w zgodzie z warunkami dotacji.',
+      },
+      {
+        icon: 'shield-check',
+        title: 'Ulga B+R, IP Box i ochrona wyników',
+        text: 'Ewidencja prac, dokumentacja pod ulgę podatkową oraz strategia ochrony własności intelektualnej i komercjalizacji rezultatów.',
+      },
+    ]}
+  />
+
+  <ProcessCards
+    id="proces"
+    eyebrow="Proces"
+    heading="Pięć kroków od pomysłu do rozliczonej dotacji"
+    subtitle="Każdy etap kończy się konkretnym dokumentem, który zostaje u Ciebie."
+    steps={[
+      {
+        duration: '1 tydzień',
+        title: 'Rozmowa i kwalifikacja',
+        text: 'Weryfikujemy pomysł pod kątem nowości i szans na dofinansowanie. Efekt: wstępna ocena z rekomendacją programu.',
+      },
+      {
+        duration: '2–3 tygodnie',
+        title: 'Koncepcja i agenda',
+        text: 'Zakres badań, zespół, TRL, wskaźniki i budżet ramowy. Efekt: karta projektu i model finansowania.',
+      },
+      {
+        duration: '4–6 tygodni',
+        title: 'Wniosek i złożenie',
+        text: 'Pisanie wniosku, załączniki, kosztorys, korekty. Efekt: złożona aplikacja i przygotowanie do panelu.',
+      },
+      {
+        duration: 'czas projektu',
+        title: 'Realizacja',
+        text: 'Nadzór nad etapami, ewidencja prac, raporty i płatności. Efekt: projekt zgodny z umową i harmonogramem.',
+      },
+      {
+        duration: 'po zakończeniu',
+        title: 'Wdrożenie wyników',
+        text: 'Rozliczenie końcowe, ochrona IP, plan komercjalizacji i trwałość projektu. Efekt: wynik badań w produkcie.',
+      },
+    ]}
+  />
+
+  <section class="programs" data-section="programy">
+    <div class="programs__inner">
+      <SectionHeading
+        eyebrow="Źródła finansowania"
+        title="Programy, w których aplikujemy"
+        subtitle="Dobieramy nabór do etapu rozwoju technologii i wielkości firmy — poziomy dofinansowania potwierdzamy zawsze w aktualnej dokumentacji konkursu."
+        align="left"
+      />
+      <ul class="programs__grid">
+        {programs.map((program) => (
+          <ProgramCard {...program} />
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <AudienceDark
+    eyebrow="Dla kogo"
+    heading="Kiedy warto się do nas zgłosić"
+    points={[
+      'Masz pomysł na nowy produkt lub technologię, ale nie wiesz, czy to już projekt B+R.',
+      'Prowadzisz prace rozwojowe wewnętrznie i chcesz je sfinansować dotacją albo ulgą podatkową.',
+      'Potrzebujesz partnera technologicznego lub jednostki naukowej do konsorcjum.',
+      'Masz przyznaną dotację i brakuje Ci zespołu do rozliczeń i sprawozdawczości.',
+    ]}
+    areas={[
+      {
+        title: 'Technologie środowiskowe',
+        text: 'Efektywność energetyczna, obieg zamknięty, redukcja emisji, monitoring środowiskowy.',
+      },
+      {
+        title: 'Przemysł i produkcja',
+        text: 'Automatyzacja linii, przemysłowe uczenie maszynowe, nowe materiały i procesy.',
+      },
+      {
+        title: 'Oprogramowanie i AI',
+        text: 'Algorytmy, modele predykcyjne, platformy danych — także jako moduł większego projektu.',
+      },
+    ]}
+  />
+
+  <FaqAccordion
+    id="faq-br"
+    eyebrow="Pytania"
+    heading="Najczęstsze pytania o projekty B+R"
+    items={[
+      {
+        q: 'Czy mój pomysł to na pewno projekt B+R?',
+        a: 'Projekt B+R musi zawierać element niepewności technologicznej — coś, czego nie da się rozwiązać rutynowym zastosowaniem istniejącej wiedzy. Na pierwszym spotkaniu sprawdzamy to na podstawie opisu technologii i stanu techniki; jeśli pomysł nie spełnia definicji, mówimy to wprost i proponujemy inną ścieżkę wsparcia.',
+      },
+      {
+        q: 'Ile trwa przygotowanie wniosku o dotację?',
+        a: 'Od decyzji o aplikowaniu do złożenia zwykle 6–10 tygodni, z czego największą część zajmuje część merytoryczna i budżet. Przy naborach ogłaszanych z krótkim terminem pracujemy w trybie przyspieszonym, ale potrzebujemy wtedy szybkiego dostępu do danych finansowych i technicznych firmy.',
+      },
+      {
+        q: 'Jak wygląda rozliczenie i kto pisze wnioski o płatność?',
+        a: 'Prowadzimy dokumentację projektu przez cały okres realizacji: harmonogram, ewidencję czasu pracy zespołu badawczego, wnioski o płatność i sprawozdania okresowe. Twój zespół dostarcza dane źródłowe, my odpowiadamy za formę i zgodność z umową o dofinansowanie.',
+      },
+      {
+        q: 'Czy można łączyć dotację z ulgą B+R?',
+        a: 'Tak, ale nie na tych samych kosztach — koszty pokryte dotacją wyłącza się z podstawy ulgi. Ustawiamy ewidencję tak, aby oba instrumenty dały się bezpiecznie rozdzielić, i przygotowujemy dokumentację, która obroni się w razie kontroli.',
+      },
+      {
+        q: 'Współpracujecie z jednostkami naukowymi?',
+        a: 'Tak. Pomagamy dobrać uczelnię lub instytut badawczy do zakresu prac, wynegocjować warunki podwykonawstwa albo konsorcjum oraz uporządkować kwestie własności wyników badań przed startem projektu.',
+      },
+    ]}
+  />
+
+  <CtaBandBrand
+    heading="Sprawdźmy, czy Twój projekt kwalifikuje się do dotacji"
+    text="Pierwsza rozmowa jest bezpłatna i kończy się konkretną rekomendacją programu. Odpowiadamy w ciągu jednego dnia roboczego."
+  />
+
+  <ServiceChips
+    items={[
+      { label: 'ESG i zrównoważony rozwój', href: '/uslugi/esg/' },
+      { label: 'AI i transformacja cyfrowa', href: '/uslugi/ai-transformacja/' },
+      { label: 'Wsparcie startupów', href: '/startupy/' },
+      { label: 'Rozwój oprogramowania', href: '/uslugi/oprogramowanie/' },
+      { label: 'Szkolenia', href: trainingUrl, external: true },
+    ]}
+  />
+</BaseLayout>
+
+<style>
+  .programs {
+    padding: var(--space-20) var(--container-pad);
+    background: var(--surface-page);
+  }
+  .programs__inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+  .programs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>
