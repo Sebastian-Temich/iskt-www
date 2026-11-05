@@ -21,8 +21,8 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `04-architektura`: in-progress
-- `05-plan`: in-progress
+- `04-architektura`: review
+- `05-plan`: review
 
 ## Punkt przekazania
 
@@ -38,6 +38,8 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-05 `00-intake`: done
 - 2026-11-05 `04-architektura`: in-progress
 - 2026-11-05 `05-plan`: in-progress
+- 2026-11-05 `04-architektura`: review
+- 2026-11-05 `05-plan`: review
 
 ## Otwarte eskalacje
 
