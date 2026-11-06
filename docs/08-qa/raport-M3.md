@@ -22,7 +22,8 @@ kompetencje” (`OtherServices` z `site.ts`, na B+R `ServiceChips`) → kolejna 
 strona główna; dane SEO z `content/seo.ts` (#3 z M1) → meta, OG i sitemap nowych stron.
 
 Scenariusze odbioru M3: O-2 (przejście po wszystkich usługach), O-7 (klawiatura, FAQ na B+R), O-10
-(SEO wszystkich stron, sitemap z 7 stronami). Lighthouse na stagingu dla stron kamienia (DoD QA z planu,
+(SEO wszystkich stron, sitemap z 7 stronami) sprawdzone; O-10 poza podglądem w walidatorze OG
+(niesprawdzony, do odbioru). Lighthouse na stagingu dla stron kamienia (DoD QA z planu,
 W-10). Staging https://iskt-www.vercel.app/ serwuje `main` z #14 (B+R 200, sitemap z 7 stronami).
 
 Nowe testy: `e2e/qa/M3-scenariusze.spec.ts` (O-2, O-7, O-10 z W-07 i W-08 wobec listy W-01 wpisanej
@@ -39,7 +40,7 @@ na sztywno, linki wewnętrzne wszystkich stron W-01 bez 404, W-03 stron usług n
 | Testy QA (`e2e/qa/`) | pass 46/46 | `pnpm exec playwright test e2e/qa/ --project=chromium --project=webkit --workers=1`: `M1-scenariusze`, `QA-M1-1-wydajnosc`, `M3-scenariusze` (6 testów × 2 przeglądarki) |
 | Lighthouse mobile (staging) | pass | Lighthouse 12.8.2, `--form-factor=mobile --skip-audits=is-crawlable`, wydajność / dostępność / dobre praktyki / SEO: `/uslugi/projekty-br/` 100/100/100/100 (LCP 1,4 s), `/uslugi/esg/` 99/100/100/100 (1,7 s), `/uslugi/ai-transformacja/` 99/100/100/100 (1,7 s), `/uslugi/oprogramowanie/` 97/100/100/100 (1,8 s), `/uslugi/interim/` 100 × 4 (1,5 s), `/startupy/` 100 × 4 (1,5 s) |
 | Lighthouse desktop (staging) | pass | `--preset=desktop --skip-audits=is-crawlable`: wszystkie 6 stron usług 100 × 4 (LCP 0,4 s) |
-| SEO na stagingu (O-10) | pass | `curl https://iskt-www.vercel.app/sitemap.xml`: dokładnie 7 adresów z W-01; `curl -sI …/uslugi/esg/`: `x-robots-tag: noindex`; `og:title`, `og:description`, `og:url`, `og:image` strony usługi w HTML. Podgląd w zewnętrznym walidatorze OG sprawdza właściciel przy odbiorze (jak O-6) |
+| SEO na stagingu (O-10) | pass poza walidatorem OG | `curl https://iskt-www.vercel.app/sitemap.xml`: dokładnie 7 adresów z W-01; `curl -sI …/uslugi/esg/`: `x-robots-tag: noindex`; `og:title`, `og:description`, `og:url`, `og:image` strony usługi w HTML. Podgląd w zewnętrznym walidatorze OG sprawdza właściciel przy odbiorze (jak O-6) |
 | Sekrety | pass | `gitleaks git --redact --no-banner .`: 147 commitów, no leaks found |
 
 Testy niestabilne: brak. Przy pisaniu `M3-scenariusze.spec.ts` dwa błędy samego testu poprawiono przed
@@ -52,9 +53,9 @@ w „Drobnych uwagach”) i odpowiedź 304 z pamięci podręcznej WebKit przy po
 | Wymaganie | Wynik | Dowód |
 |---|---|---|
 | W-01 | spełnione | Każda z 7 stron 200 lokalnie (`M3-scenariusze`: linki wewnętrzne) i na stagingu; osiągalna z kafli strony głównej (O-2); treść, kolejność sekcji i hierarchia nagłówków wobec plików designu oraz brak placeholderów: `e2e/esg`, `ai`, `oprogramowanie`, `interim`, `startupy`, `projekty-br.spec.ts` (testy „hierarchia nagłówków i treść jak w D/…”, „sekcje w kolejności z designu”) |
-| W-02 | spełnione | Nagłówek, logo → `/`, stopka na stronach usług: `e2e/layout.spec.ts` i testy stron („BaseLayout, nagłówek page z aktywnym »Kompetencje« i okruszki”); breadcrumb z `aria-current="page"` i logo → `/` na każdej z 6 stron: `M3-scenariusze` O-2; menu mobilne z Escape: `layout.spec.ts` (M1) |
+| W-02 | spełnione | Nagłówek, logo → `/`, stopka na stronach usług: `e2e/layout.spec.ts` i testy stron („BaseLayout, nagłówek page z aktywnym »Kompetencje« i okruszki”); breadcrumb z `aria-current="page"` i logo → `/` na każdej z 6 stron: `M3-scenariusze` O-2; menu mobilne z Escape: nie dotyczy — design nie ma menu mobilnego (`architektura.md`, „Rozstrzygnięcia luk”, nawigacja) |
 | W-03 | spełnione | Brak poziomego scrolla na 375/768/1440 px dla 6 stron usług: `M3-scenariusze` W-03 i testy stron; obszar kliknięcia ≥ 24 px: audyt `target-size` Lighthouse mobile zaliczony (score 1) na wszystkich 6 stronach usług (osobnego testu E2E rozmiaru nie ma; przekrojowo w #15) |
-| W-07 | spełnione | Na 7 stronach unikalne `<title>` i `description` (≤ 160 znaków), `canonical` = ścieżka, `og:url` = `canonical`, `og:title`, `og:description`, `og:image` (200), `twitter:card`, `lang="pl"`: `M3-scenariusze` O-10/W-07; na stagingu jw. (wiersz „SEO na stagingu”) |
+| W-07 | niesprawdzone (podgląd w walidatorze OG); meta spełnione | Kryterium „podgląd linku w walidatorze OG” niesprawdzone — do O-10 przy odbiorze (jak O-6 w M1); nie jest to wykryty błąd, więc bez issue. Meta: na 7 stronach unikalne `<title>` i `description` (≤ 160 znaków), `canonical` = ścieżka, `og:url` = `canonical`, `og:title`, `og:description`, `og:image` (200), `twitter:card`, `lang="pl"`: `M3-scenariusze` O-10/W-07; na stagingu jw. (wiersz „SEO na stagingu”) |
 | W-08 (strony kamienia) | spełnione | `sitemap.xml` lokalnie i na stagingu: dokładnie 7 stron z W-01 (`M3-scenariusze` O-10/W-08); `noindex` na stagingu |
 | W-11 | spełnione | axe bez naruszeń serious/critical na każdej stronie usług (testy stron z `AxeBuilder`); pierwszy Tab na „Przejdź do treści”, FAQ B+R otwiera się Enterem (`aria-expanded`, panel widoczny): `M3-scenariusze` O-7 i `projekty-br.spec.ts`; dostępność Lighthouse 100. `prefers-reduced-motion` sprawdzany w E2E tylko na ESG; przekrojowo w zadaniu #15 (M4) |
 | W-10 (strony kamienia) | spełnione | Lighthouse mobile ≥ 97 i desktop 100 we wszystkich 4 kategoriach dla 6 stron usług na stagingu |
