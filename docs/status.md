@@ -35,7 +35,7 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - Wstrzymania: brak
 - `shctl doctor` 2026-11-05T14:12Z: 0 błędów
 - Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md` (do odbioru zlecenia)
-- Zadania właściciela przed odbiorem: poprawa `CONTACT_TO`/Resend (E-006/C), potem O-3; podgląd w walidatorze OG (O-6, O-10); decyzja o chipie Interim na B+R (`backlog-drobne.md`)
+- Zadania właściciela przed odbiorem: O-3 zrobione 2026-11-06 (Resend poprawiony, e-mail dotarł; `decyzje.md`), do sprawdzenia przy odbiorze `Reply-To`; podgląd w walidatorze OG (O-6, O-10); decyzja o chipie Interim na B+R (`backlog-drobne.md`)
 - Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia
 - Następny krok: „Odbiór” — PR `stage/07-realizacja` z polami `DoD.md` realizacji, potem `stage/wydanie`; review etapów, `shctl checkpoint wydanie`, akceptacja właściciela
 
