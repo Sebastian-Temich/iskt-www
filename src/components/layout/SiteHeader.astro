@@ -69,15 +69,11 @@ const logoHeight = variant === 'home' ? 40 : 34;
     background: var(--surface-card);
     border-bottom: 1px solid var(--border-subtle);
   }
-  /* Wysokość rzędu nagłówka home: logo 40 px i CTA 40 px w jednym rzędzie, a na wąskim ekranie
-     dwa rzędy z odstępem --space-4 (jak flex-wrap we wzorcu). Czyta ją HomeHero (padding-top). */
+  /* Wysokość rzędu nagłówka home: logo 40 px i CTA 40 px w jednym rzędzie na każdej szerokości
+     (odbiór właściciela #43: odstępstwo od wzorca, który zawija CTA pod logo poniżej 520 px).
+     Czyta ją HomeHero (padding-top). */
   :global(:root) {
     --site-header-home-h: 40px;
-  }
-  @media (max-width: 519.98px) {
-    :global(:root) {
-      --site-header-home-h: calc(80px + var(--space-4));
-    }
   }
   .site-header--home {
     position: absolute;
@@ -101,11 +97,32 @@ const logoHeight = variant === 'home' ? 40 : 34;
     padding: 0 1.15rem;
     white-space: nowrap;
   }
-  @media (max-width: 519.98px) {
+  /* Telefon (< 768 px): logo z nazwą i CTA w jednym rzędzie. Mniejsza nazwa, odstępy i padding CTA;
+     poniżej 430 px słowo „Greennovation” jest ukryte wizualnie (zostaje w nazwie dostępnej linku). */
+  @media (max-width: 767.98px) {
     .site-header--home .site-header__inner {
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
+      gap: var(--space-3);
+    }
+    .site-header--home .brand {
+      gap: 0.5rem;
+      min-width: 0;
+    }
+    .site-header--home .brand__name {
+      font-size: var(--text-base);
+    }
+    .site-header--home :global(.btn) {
+      padding: 0 0.9rem;
+    }
+  }
+  @media (max-width: 429.98px) {
+    .site-header--home .brand__accent {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
     }
   }
   .site-header__inner {
