@@ -15,7 +15,8 @@
     "typecheck": "astro check",
     "format": "prettier --write .",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "lh:staging": "node lighthouserc.cjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
@@ -33,6 +34,7 @@
     "@astrojs/node": "^9.5.5",
     "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^9.39.5",
+    "@lhci/cli": "^0.16.0",
     "@playwright/test": "1.61.1",
     "@types/node": "^24.19.2",
     "eslint": "^9.39.5",

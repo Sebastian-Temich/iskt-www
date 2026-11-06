@@ -24,7 +24,7 @@ const { heading, steps } = Astro.props;
         <li class="timeline__step">
           <span class="timeline__dot" aria-hidden="true" />
           <div>
-            <span class="timeline__label">
+            <span class="timeline__label text-meta">
               ETAP {String(index + 1).padStart(2, '0')} · {step.duration.toLocaleUpperCase('pl')}
             </span>
             <h3>{step.title}</h3>
@@ -97,7 +97,7 @@ const { heading, steps } = Astro.props;
   }
   .timeline__step p {
     margin: 0;
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     line-height: var(--lh-relaxed);
     color: var(--text-secondary);
   }

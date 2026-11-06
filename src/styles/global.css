@@ -53,6 +53,17 @@ a:hover {
   color: var(--text-link-hover);
 }
 
+/* Link w tekście (W-03): padding w pionie daje obszar kliknięcia ≥ 24 px wysokości bez zmiany
+   wysokości linii (element inline). Linki-przyciski i nawigacja mają własne wymiary. */
+:where(p, li, dd, td) > a:where(:not([class])) {
+  padding-block: 0.25em;
+}
+
+/* `.text-meta` (W-03, #15): znacznik tekstu niepodstawowego z designu, który może mieć mniej niż
+   16 px na mobile: eyebrow SectionHeading, Badge, mikrotekst mono w hero, numeracja etapów,
+   nagłówki kolumn tabel i linia copyright. Rozmiar ustala komponent; test e2e/cross/mobile.spec.ts
+   wymaga ≥ 16 px od każdego p, li, td, dd, label, input i textarea bez tej klasy. */
+
 :focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
