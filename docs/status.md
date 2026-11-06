@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `07-realizacja`: todo (następny)
+- `07-realizacja`: in-progress
 
 ## Punkt przekazania
 
@@ -66,6 +66,7 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-06 `08-qa`: review
 - 2026-11-06 `08-qa`: in-progress
 - 2026-11-06 `08-qa`: done
+- 2026-11-06 `07-realizacja`: in-progress
 
 ## Otwarte eskalacje
 
