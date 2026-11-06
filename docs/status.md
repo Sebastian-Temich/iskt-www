@@ -1,16 +1,16 @@
 ---
-zadania_todo: 2
+zadania_todo: 0
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 13
+zadania_done: 15
 zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Klawiatura w teście: Tab między przyciskami?", "decyzja": "fokus ustawiany przez `focus()`. WebKit na macOS domyślnie pomija przyciski przy Tab (ustawienie systemu). Test sprawdza obsługę Enter i Spacji."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Test „bez noindex”: brak `meta robots`?", "decyzja": "robots równy temu na stronie głównej i bez `nofollow`. W E2E (staging) wszystkie strony mają `noindex` środowiskowy z W-08. Brak noindex na produkcji zapewnia wpis w `seo.ts`, co test też sprawdza."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Sekcja „Programy”: osobny komponent sekcji?", "decyzja": "`ProgramCard` to pojedyncza karta (nazwa z architektury), a siatkę z `SectionHeading` składa strona. Styl siatki jest w `<style>` strony."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Chipy: lista z designu (5) czy wszystkie usługi z `site.ts` (z Interim)?", "decyzja": "5 chipów z designu, w tej samej kolejności i z tymi etykietami. Zmienione są tylko adresy: na URL z W-01 zamiast `#kompetencje`, zgodnie z kryterium issue."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Okruszek bieżącej strony: `<span>` z designu czy link?", "decyzja": "link z `aria-current=\"page\"`, spójnie z ESG, Interim i Startupami (`Breadcrumb` z T-10)."}]
-ostatnia_synchronizacja: 2026-11-05T23:10:40Z
+ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `docs/decyzje.md`, `docs/08-qa/raport-M1.md`, `raport-M2.md`, `raport-M3.md`, `docs/07-realizacja/escalations/E-006.md`, ADR-001, ADR-003, ADR-004, `docs/wydanie/DoD.md`, `docs/konfiguracja.md`, `scripts/deploy-prod.sh`, `scripts/check-dod.sh`, `vercel.json`, `astro.config.mjs`, `package.json`, `.env.example`, `src/lib/env.ts`, `src/lib/mailer.ts`, `src/pages/api/contact.ts`, `src/pages/robots.txt.ts`, `src/content/seo.ts`, `src/content/site.ts`, `src/components/home/ContactForm.astro`, `src/components/layout/Breadcrumb.astro`."}, {"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "Kolumna „Uwagi” w scenariuszach odbioru", "decyzja": "stan z raportów QA M1–M3 i eskalacji E-003, E-006, żeby właściciel wiedział, co zostało do sprawdzenia przy odbiorze."}, {"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "Status polityki prywatności", "decyzja": "„zaakceptowana 2026-11-05” na podstawie `docs/decyzje.md` (PR #25), z otwartymi punktami T-9; klauzula, obraz OG i meta polityki → „do akceptacji”."}, {"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "`deploy-prod.sh` wymaga bazy (supabase, `PROD_DB_URL`), a projekt jej nie ma", "decyzja": "opisane w „Znanych ograniczeniach” z równoważną ścieżką ręczną (`vercel promote`, smoke test); zmiana skryptu jest poza zakresem (`scripts/`), zgłoszona w „Propozycjach”."}, {"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "Przekierowanie `www.iskt.pl`", "decyzja": "`iskt.pl` w krokach B9a → dodane, bo endpoint odrzuca 403 żądania z `Origin` innym niż `PUBLIC_SITE_URL` (ADR-004), więc formularz pod `www` by nie działał."}]
+ostatnia_synchronizacja: 2026-11-06T09:30:28Z
 ---
 
 # Status projektu
@@ -27,17 +27,17 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-05T22:28Z (M3 w toku, limit Codexa)
-- Kamień zakończony: M2 funkcjonalnie (#9, #11 zamknięte; naprawy QA M1 #22, #23 zamknięte). QA M2 PR #28 scalony, werdykt FAIL: 🟡 QA-M2-1 → #29 (zdublowany klucz `build` w `astro.config.mjs`, lint/typecheck/E2E czerwone na `main`); wysyłka e-maila nie działa (Resend 403 dla `CONTACT_TO`) → E-006. CSP na stagingu i reguła WAF (6. POST → 429) potwierdzone
-- Kamień bieżący: M3 (#10 zamknięte; #12 PR #33 i #13 PR #32: CI zielone, review czeka na limit Codexa; #14 czeka na slot). #29 zamknięte, Lighthouse mobile stagingu 99/99/99
-- PR w toku: #32 (#13), #33 (#12), oba `status:review`, panele workerów otwarte
-- Eskalacje: brak otwartych (E-006 zamknięta: opcja C, O-3 przy odbiorze końcowym)
-- Wstrzymania: review Codex do 2026-11-06T00:36Z (limit użycia; nie podbija iteracji); #14 bez slotu do zamknięcia #12 lub #13
+- Czas: 2026-11-06T00:30Z (M3 zakończony, QA M3 scalone, start M4)
+- Kamień zakończony: M3 (#10, #12, #13, #14 zamknięte). QA M3 PR #35 scalony (e2905cc), review PASS, werdykt PASS, brak błędów 🔴/🟡; 1 drobna uwaga w `backlog-drobne.md` (B+R bez chipu Interim); O-10 podgląd w walidatorze OG do odbioru
+- Kamień bieżący: M4 (#15 dispatch, #16 zależy od #15)
+- PR w toku: brak
+- Eskalacje: brak otwartych (E-007 zamknięta: repo publiczne, decyzja właściciela)
+- Wstrzymania: brak
 - `shctl doctor` 2026-11-05T14:12Z: 0 błędów
 - Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md`
-- Zadania właściciela: poprawa `CONTACT_TO`/Resend przed odbiorem (E-006/C), potem O-3; O-6 podgląd w walidatorze OG przy odbiorze
-- Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia
-- Następny krok: po 00:36Z `shctl review run 32` i `33`, zamknięcie, dispatch #14; po M3: QA M3 (`sh-qa`)
+- Zadania właściciela: poprawa `CONTACT_TO`/Resend przed odbiorem (E-006/C), potem O-3; O-6 i O-10 podgląd w walidatorze OG przy odbiorze
+- Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia po QA M4
+- Następny krok: monitoring #15 (`shctl task wait 15`), review, zamknięcie, dispatch #16; po M4: QA M4 (`sh-qa`), potem odbiór
 
 ## Dziennik etapów
 
@@ -63,6 +63,8 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-05 `08-qa`: iteracja 2 (FAIL review PR #21)
 - 2026-11-05 `08-qa`: iteracja 3 (FAIL review PR #21)
 - 2026-11-05 `08-qa`: in-progress, QA M2 scalone (PR #28); etap otwarty do QA ostatniego kamienia
+- 2026-11-06 `08-qa`: review
+- 2026-11-06 `08-qa`: in-progress
 
 ## Otwarte eskalacje
 

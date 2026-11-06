@@ -38,7 +38,9 @@ const captionId = `${id}-podpis`;
         <thead>
           <tr>
             {columns.map((column) => (
-              <th scope="col">{column}</th>
+              <th scope="col" class="text-meta">
+                {column}
+              </th>
             ))}
           </tr>
         </thead>
@@ -99,6 +101,11 @@ const captionId = `${id}-podpis`;
     min-width: 720px;
     border-collapse: collapse;
     font-size: var(--text-sm);
+  }
+  /* Komórki to tekst podstawowy (W-03: ≥ 16 px na mobile); nagłówki kolumn zostają text-meta. */
+  tbody th,
+  td {
+    font-size: var(--text-base);
   }
   .comparison__caption {
     position: absolute;
