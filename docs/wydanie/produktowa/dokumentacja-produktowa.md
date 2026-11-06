@@ -68,9 +68,11 @@ Na stronie głównej w sekcji kontaktu (`/#kontakt`). Pola: imię i nazwisko (do
    (Frankfurt).
 2. Serwer sprawdza dane jeszcze raz i odrzuca zgłoszenia automatów (ukryte pole-pułapka, limit 5
    zgłoszeń na 10 minut z jednego IP liczony przez zaporę Vercel).
-3. Zgłoszenie idzie e-mailem przez Resend na adres odbiorcy ustawiony w konfiguracji (`CONTACT_TO`).
-   E-mail ma temat „[iskt.pl] Zapytanie z formularza: imię”, zawiera imię, e-mail i treść, a
-   „Odpowiedz” trafia od razu do nadawcy.
+3. Zgłoszenie idzie e-mailem przez Resend na skrzynkę firmową `biuro@iskt.pl` (`CONTACT_TO`). Nadawcą
+   jest adres serwisu z domeny iskt.pl (`formularz@iskt.pl`), nie adres klienta: pocztę z cudzej
+   domeny odrzuciłyby filtry antyspamowe. E-mail ma temat „[iskt.pl] Zapytanie z formularza: imię”,
+   zawiera imię, e-mail i treść, a adres klienta jest w polu `Reply-To`, więc „Odpowiedz” trafia od
+   razu do klienta.
 4. **Strona niczego nie zapisuje:** brak bazy, plików i historii zgłoszeń. Logi techniczne zawierają
    tylko identyfikator zdarzenia, status i kod błędu, bez imienia, e-maila, treści i adresu IP.
 5. Dane zostają tylko w skrzynce odbiorcy i w logach wysyłki Resend (retencję ustawia ISKT). Adres IP
@@ -89,7 +91,7 @@ https://iskt-www.vercel.app. Kolumna „Uwagi” mówi, co zostało do sprawdzen
 |---|---|---|---|---|
 | O-1 | Strona główna jak w designie | Otwórz staging na komputerze i telefonie | Hero, 7 kafli kompetencji, sekcja kontaktu i stopka jak w `ISKT-standalone`; na telefonie kafle w jednej kolumnie, bez przewijania w bok | sprawdzone w QA M1 |
 | O-2 | Przejście po wszystkich usługach | Z kafli strony głównej otwórz każdą z 6 usług, na każdej użyj „Pozostałe kompetencje” i logo | Każda strona zgodna ze swoim plikiem designu, ścieżka, powrót na `/`, żadnego 404 | sprawdzone w QA M3; na B+R 4 linki w „Pozostałe kompetencje”, jak w designie |
-| O-3 | Wysłanie zapytania | Na `/#kontakt` wypełnij imię, e-mail, wiadomość i wyślij | „Dziękujemy!”, e-mail na adresie testowym z danymi i `Reply-To` nadawcy | **do sprawdzenia przy odbiorze** (E-006): wcześniej popraw `CONTACT_TO` na stagingu (adres konta Resend) albo zweryfikuj domenę |
+| O-3 | Wysłanie zapytania | Na `/#kontakt` wypełnij imię, e-mail, wiadomość i wyślij | „Dziękujemy!”, e-mail w skrzynce `biuro@iskt.pl` od `formularz@iskt.pl`, z danymi i `Reply-To` klienta | sprawdzone przez właściciela 2026-11-06 (E-006 zamknięta: nadawca z domeny iskt.pl, odbiorca `biuro@iskt.pl`) |
 | O-4 | Błędy formularza i brak JavaScriptu | Wyślij pusty formularz, potem z błędnym e-mailem; wyłącz JavaScript i otwórz `/#kontakt` | Komunikaty przy polach, fokus na pierwszym błędzie, nic nie wysłane; bez JS komunikat z biuro@iskt.pl (`mailto:`) i telefonem | sprawdzone w QA M2 |
 | O-5 | Ochrona przed spamem | Wyślij formularz 6 razy w ciągu 10 minut | 6. próba: „Zbyt wiele zgłoszeń, spróbuj później.” (429) | sprawdzone w QA M2; przy odbiorze 5 prawdziwych wysyłek trafi do skrzynki |
 | O-6 | Podgląd linku i indeksacja strony głównej | Wklej adres stagingu do walidatora OG (np. opengraph.xyz); otwórz `/robots.txt` i nagłówki odpowiedzi | Tytuł, opis i obraz OG; `robots.txt` bez `Disallow: /`; `X-Robots-Tag: noindex` | robots i nagłówki sprawdzone w QA M1; **walidator OG przy odbiorze** (E-003) |

@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { parsePublicEnv } from '../lib/env';
 import {
   DESCRIPTION_MAX_LENGTH,
+  HOME_DESCRIPTION_MAX_LENGTH,
+  HOME_TITLE_MAX_LENGTH,
   absoluteUrl,
   findSeoEntry,
   isSitemapPage,
@@ -40,6 +42,37 @@ describe('seoEntries', () => {
     for (const description of descriptions) {
       expect(description.trim()).not.toBe('');
       expect([...description].length, description).toBeLessThanOrEqual(DESCRIPTION_MAX_LENGTH);
+    }
+  });
+
+  it('strona główna: tytuł ≤ 60 znaków, opis ≤ 125 znaków (podglądy X i LinkedIn)', () => {
+    const home = findSeoEntry('/');
+    if (!home) throw new Error('brak wpisu / w seo.ts');
+    expect([...home.title].length, home.title).toBeLessThanOrEqual(HOME_TITLE_MAX_LENGTH);
+    expect([...home.description].length, home.description).toBeLessThanOrEqual(
+      HOME_DESCRIPTION_MAX_LENGTH,
+    );
+    expect(HOME_TITLE_MAX_LENGTH).toBe(60);
+    expect(HOME_DESCRIPTION_MAX_LENGTH).toBe(125);
+  });
+
+  it('strona główna: tytuł i opis zachowują słowa kluczowe', () => {
+    const home = findSeoEntry('/');
+    for (const word of ['ISKT Greennovation', 'B+R', 'ESG', 'AI', 'oprogramowanie', 'Żory']) {
+      expect(home?.title).toContain(word);
+    }
+    for (const word of [
+      'firm',
+      'projekty B+R',
+      'finansowaniem',
+      'ESG',
+      'VSME',
+      'CSRD',
+      'wdrożenia AI',
+      'oprogramowanie',
+      'interim management',
+    ]) {
+      expect(home?.description).toContain(word);
     }
   });
 

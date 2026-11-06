@@ -29,6 +29,13 @@ export const LOGO_PATH = '/icon-512.png';
 
 export const DESCRIPTION_MAX_LENGTH = 160;
 
+/**
+ * Limity strony głównej dla podglądów linku w X i LinkedIn (uwaga z O-6): dłuższy tytuł lub opis
+ * jest tam ucinany. `<title>` = `og:title`, `meta description` = `og:description` (Seo.astro).
+ */
+export const HOME_TITLE_MAX_LENGTH = 60;
+export const HOME_DESCRIPTION_MAX_LENGTH = 125;
+
 /** Adres absolutny z adresu bazowego (bez ukośnika na końcu) i ścieżki. */
 export function absoluteUrl(siteUrl: string, path: string): string {
   return new URL(path, `${siteUrl.replace(/\/+$/, '')}/`).href;
@@ -88,16 +95,17 @@ function servicePage(page: ServicePage): SeoEntry {
   };
 }
 
-// Opis z designu ma 178 znaków; skrócony do limitu 160 z W-07 (bez „szkolenia. Żory, Śląsk.”,
-// lokalizację niesie tytuł i JSON-LD).
+// Opis z designu ma 178 znaków; skrócony do 125 dla podglądów w X i LinkedIn (O-6, #44). Zostają
+// słowa kluczowe: projekty B+R z finansowaniem, ESG (VSME, CSRD), wdrożenia AI, oprogramowanie,
+// interim management, firmy. Lokalizację niesie tytuł i JSON-LD.
 const homeDescription =
-  'Doradztwo i wdrożenia dla firm: projekty B+R z finansowaniem, raportowanie ESG (VSME, CSRD), wdrożenia AI, oprogramowanie dedykowane i interim management.';
+  'Doradztwo dla firm: projekty B+R z finansowaniem, ESG (VSME, CSRD), wdrożenia AI, oprogramowanie i interim management.';
 
 /** Strony z W-01 (kolejność z D/sitemap.xml) i polityka prywatności (W-06, poza sitemapą). */
 export const seoEntries: readonly SeoEntry[] = [
   {
     path: '/',
-    title: 'ISKT Greennovation — B+R, ESG, AI i oprogramowanie dla firm | Żory',
+    title: 'ISKT Greennovation — B+R, ESG, AI i oprogramowanie | Żory',
     description: homeDescription,
     inSitemap: true,
     jsonLd: (siteUrl) => [

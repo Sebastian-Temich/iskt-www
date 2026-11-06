@@ -30,7 +30,10 @@ Architektura: `docs/04-architektura/architektura.md` i ADR-001 do ADR-004. Plan 
 
 ## Uruchomienie lokalne
 
-Wymagania: fnm, pnpm. Node z `.nvmrc`.
+Wymagania: fnm, pnpm. Node z `.nvmrc` (22, jak runtime funkcji Vercel `nodejs22.x`; `engines.node`
+w `package.json` to `22.x`, z niego Vercel bierze wersję Node projektu). Adapter `@astrojs/vercel`
+wybiera runtime funkcji z wersji Node buildu i dla wersji spoza swojej listy (20, 22) ostrzega i
+przyjmuje `nodejs22.x`.
 
 ```sh
 fnm use
@@ -75,9 +78,9 @@ nigdy w repo ani w GitHub Secrets.
 |---|---|---|---|---|---|
 | `PUBLIC_SITE_URL` | build i funkcja | nie | Adres bazowy: canonical, `og:url`, sitemap, kontrola `Origin` formularza. Domyślnie `https://` + `VERCEL_PROJECT_PRODUCTION_URL` | adres stagingu | `https://iskt.pl` |
 | `PUBLIC_SITE_ENV` | build i funkcja | nie | `production`, `staging` albo `development`. Brak = `staging` (noindex). Indeksowanie włącza wyłącznie `production` | `staging` | `production` |
-| `RESEND_API_KEY` | funkcja | **tak** | Klucz API Resend z uprawnieniem tylko do wysyłki | klucz testowy | klucz produkcyjny |
-| `CONTACT_TO` | funkcja | nie (dane kontaktowe) | Odbiorca zgłoszeń | adres testowy właściciela | skrzynka firmowa |
-| `CONTACT_FROM` | funkcja | nie | Nadawca, adres albo `Nazwa <adres>` | `onboarding@resend.dev` | adres z domeny `iskt.pl` |
+| `RESEND_API_KEY` | funkcja | **tak** | Klucz API Resend z uprawnieniem tylko do wysyłki | klucz z dostępem do domeny `iskt.pl` | klucz produkcyjny ograniczony do `iskt.pl` |
+| `CONTACT_TO` | funkcja | nie (dane kontaktowe) | Odbiorca zgłoszeń | `biuro@iskt.pl` | `biuro@iskt.pl` (skrzynka firmowa) |
+| `CONTACT_FROM` | funkcja | nie | Nadawca, adres albo `Nazwa <adres>`; zawsze adres z domeny zweryfikowanej w Resend, nigdy adres klienta (klient trafia do `Reply-To`) | adres z domeny `iskt.pl` (`formularz@iskt.pl`) | adres z domeny `iskt.pl` (`formularz@iskt.pl`) |
 | `MAIL_TRANSPORT` | funkcja | nie | `resend` (domyślnie) albo `mock` (testy, bez wysyłki) | nie ustawiać | nie ustawiać |
 | `RATE_LIMIT_PROVIDER` | funkcja | nie | `waf` (domyślnie), `upstash`, `memory` (tylko testy) | nie ustawiać (`waf`) | nie ustawiać (`waf`) |
 | `RATE_LIMIT_SALT` | funkcja | **tak** | Sól skrótu IP, min. 16 znaków, tylko dla `upstash` | — | — |
@@ -126,12 +129,17 @@ Kolejność ma znaczenie: najpierw gałąź i zmienne, potem domena, na końcu w
 3. **Alias stagingu.** Settings → Domains: przypisz `iskt-www.vercel.app` do gałęzi `main` (Git Branch),
    żeby staging nadal pokazywał `main`, a nie produkcję. Sprawdź `curl -sI https://iskt-www.vercel.app/`:
    jest `x-robots-tag: noindex`.
-4. **Zmienne Preview (staging).** Bez zmian względem pilota: `PUBLIC_SITE_ENV=staging`,
-   `PUBLIC_SITE_URL=https://iskt-www.vercel.app`, klucz testowy Resend, `CONTACT_TO` testowy,
-   `CONTACT_FROM=onboarding@resend.dev`.
-5. **Domena w Resend.** Resend → Domains → Add `iskt.pl` (region UE, jeśli dostępny). Dodaj u operatora
-   DNS rekordy z panelu Resend: SPF (TXT/MX dla subdomeny wysyłkowej) i DKIM (TXT). Opcjonalnie DMARC
-   (`_dmarc.iskt.pl`, zacznij od `p=none`). Czekaj na status „Verified”.
+4. **Zmienne Preview (staging).** Bez zmian względem stanu po odbiorze (decyzja właściciela z
+   2026-11-06): `PUBLIC_SITE_ENV=staging`, `PUBLIC_SITE_URL=https://iskt-www.vercel.app`,
+   `RESEND_API_KEY` (klucz z dostępem do domeny `iskt.pl`), `CONTACT_FROM` z domeny `iskt.pl`
+   (`formularz@iskt.pl`, np. `ISKT Greennovation <formularz@iskt.pl>`), `CONTACT_TO=biuro@iskt.pl`.
+   Zgłoszenia ze stagingu trafiają więc do skrzynki firmowej; temat zaczyna się od `[iskt.pl]`, a
+   `Reply-To` to e-mail klienta z formularza. Nadawcą nie może być adres klienta (Resend wysyła tylko z
+   domen zweryfikowanych, a DMARC domeny klienta odrzuciłby taki e-mail). Adres testowy
+   `onboarding@resend.dev` nie jest już używany: wysyła tylko na adres konta Resend (E-006).
+5. **Domena w Resend.** Domena `iskt.pl` jest już zweryfikowana w Resend (stan z 2026-11-06). Sprawdź
+   w Resend → Domains status „Verified” i rekordy SPF i DKIM u operatora DNS. Opcjonalnie DMARC
+   (`_dmarc.iskt.pl`, zacznij od `p=none`), jeśli jeszcze go nie ma.
 6. **Klucz produkcyjny Resend.** Utwórz nowy klucz z uprawnieniem „Sending access” ograniczonym do
    domeny `iskt.pl`. Wpisz go tylko w panel Vercel (Production), nigdzie indziej.
 7. **Zmienne Production w Vercel:**
@@ -139,7 +147,7 @@ Kolejność ma znaczenie: najpierw gałąź i zmienne, potem domena, na końcu w
      indeksować i wskazuje sitemap;
    - `PUBLIC_SITE_URL=https://iskt.pl`: canonical, `og:url`, sitemap i kontrola `Origin` formularza;
    - `RESEND_API_KEY` (klucz produkcyjny, typ Sensitive);
-   - `CONTACT_TO` (skrzynka firmowa, np. `biuro@iskt.pl`);
+   - `CONTACT_TO=biuro@iskt.pl` (skrzynka firmowa, jak na stagingu);
    - `CONTACT_FROM` z domeny zweryfikowanej, np. `ISKT Greennovation <formularz@iskt.pl>`.
 8. **Domena iskt.pl w Vercel.** Settings → Domains → Add `iskt.pl` (Production) i `www.iskt.pl` z
    przekierowaniem 308 na `iskt.pl`. Rekordy DNS według panelu Vercel (A dla apex, CNAME dla `www`).
@@ -222,9 +230,9 @@ Resend, podmiana w Vercel, Redeploy, usunięcie starego klucza.
   `vercel promote <wdrożenie-preview-commita> --yes` i smoke test; rollback jak w „Plan rollbacku”.
 - `deploy-prod.sh` szuka wdrożenia typu Preview dla commita taga, więc działa dopiero po kroku 2 B9a
   (w pilocie `main` buduje się jako Production).
-- Wysyłka e-maila na stagingu (O-3) nie była potwierdzona w QA M2 (E-006): z nadawcą
-  `onboarding@resend.dev` Resend wysyła tylko na adres konta Resend. Przed odbiorem `CONTACT_TO` na
-  stagingu musi być adresem konta Resend albo domena musi być zweryfikowana.
+- Wysyłka e-maila na stagingu (O-3, E-006) działa od 2026-11-06: nadawca z domeny `iskt.pl`
+  (`formularz@iskt.pl`), odbiorca `biuro@iskt.pl`. Testy formularza na stagingu wysyłają więc
+  prawdziwe e-maile do skrzynki firmowej; testy automatyczne i lokalne używają `MAIL_TRANSPORT=mock`.
 - Podgląd w zewnętrznym walidatorze OG (O-6, O-10) nie był sprawdzony automatycznie (E-003); robi go
   właściciel przy odbiorze.
 - Preview PR są za Deployment Protection Vercel; Lighthouse i testy na Vercel robimy na stagingu po
