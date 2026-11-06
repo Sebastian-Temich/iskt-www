@@ -1,16 +1,16 @@
 ---
 zadania_todo: 1
 zadania_in_progress: 0
-zadania_review: 1
+zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 17
+zadania_done: 18
 zadania_anulowane: 0
-pr_otwarte: 1
+pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "Zrzuty porównawcze w `docs/07-realizacja/T-43/` (obok raportu)", "decyzja": "kryterium wymaga ich w raporcie; zrobione tymczasowym specem Playwright, usuniętym przed commitem."}, {"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "Jak zmieścić nagłówek w jednym rzędzie od 360 px?", "decyzja": "mniejsza nazwa marki i padding CTA poniżej 768 px, a poniżej 430 px ukrycie wizualne słowa „Greennovation” (z dopuszczalnych opcji z kryterium). Font i wysokość CTA bez zmian, żeby przycisk był czytelny i miał obszar kliknięcia 40 px. Próg 430 px: przy 440 px pełna nazwa mieści się (zrzut), a przy 390 px wnętrze ma ok. 350 px, mniej niż szacowane ok. 385 px na logo, pełną nazwę i CTA."}, {"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "Zmiana pliku spoza listy „Zakres”", "decyzja": "`src/components/layout/SiteHeader.astro`, bo kryterium z odbioru właściciela (komentarz w #43) dotyczy nagłówka strony głównej; zmiany tylko w regułach wariantu `home`, wariant `page` bez zmian. `e2e/qa/QA-M1-1-wydajnosc.spec.ts` jest w `e2e/` (zakres): zmienione widoki pomiaru, bo na 375 px nie ma już logo."}, {"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "`ComparisonTable` w wariancie `subtle` dostaje też krawędź górną", "decyzja": "tak jest we wzorcu (l. 164); wariant domyślny bez zmian."}, {"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "Szerokość leadu ServiceHero jako wariant klasy, nie liczba w stylu inline", "decyzja": "CSP `style-src 'self'` bez `'unsafe-inline'` blokuje atrybut `style`."}]
-ostatnia_synchronizacja: 2026-11-06T19:23:24Z
+ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `src/components/layout/Seo.astro`, `src/pages/index.astro`, `docs/decyzje.md` i `docs/status.md` (decyzja właściciela o wysyłce z 2026-11-06), kod `@astrojs/vercel` (`dist/index.js`) i pola `engines` zależności. Nic w nich nie zmieniałem."}, {"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "Pliki spoza „Zakresu” w iteracji 2: `docs/04-architektura/adr/ADR-005-node-22-zamiast-26.md` i `AGENTS.md` (wiersz „Instalacja”)", "decyzja": "wymaga ich zgłoszenie 🟡 z review (zmiana kontraktu wymaga ADR) i polecenie orkiestratora. Wiersz „Node” w tabeli kontraktu stałego („LTS przez fnm”) bez zmian, bo 22 to LTS."}, {"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "Plik spoza „Zakresu”: `docs/07-realizacja/T-44.md`", "decyzja": "raport wymagany przez proces."}, {"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "Plik spoza „Zakresu”: `src/content/seo.test.ts`", "decyzja": "test jednostkowy limitów wymaga kryterium „Testy SEO (unit/E2E)”, a testy unit leżą obok `seo.ts`."}, {"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "Jak skrócić treść?", "decyzja": "Usunąłem słowa powtórzone albo najmniej istotne („i wdrożenia”, „raportowanie”, „dedykowane”, w tytule „dla firm”). Marki i „Żory” w tytule nie ruszałem. Treść czeka na akceptację właściciela (tabela w „Co zrobiono”)."}]
+ostatnia_synchronizacja: 2026-11-06T19:24:08Z
 ---
 
 # Status projektu
