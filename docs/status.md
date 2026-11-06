@@ -68,4 +68,5 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-(brak)
+- E-008 (#15): Review iter. 1 PR #36: (1) Lighthouse ma być zmierzony na wdrożeniu z commitem PR, a preview Vercel PR jest za Deployment Protection (302 do SSO), staging serwuje tylko main; (2) wpisy LH_* w .env.example, a profil workera odmawia edycji .env.example (Edit: directory denied), choć skill sh-worker dopuszcza ten plik. Worker zmierzył lokalnie build Vercel z commitem PR (wszystko >= 96) i poprawił test typografii.
+
