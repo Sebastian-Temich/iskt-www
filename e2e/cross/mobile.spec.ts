@@ -9,6 +9,33 @@ const MIN_FONT = 16;
 const INTERACTIVE = 'a, button, input, textarea, select, summary, [tabindex="0"]';
 const BODY_TEXT = 'p, li, td, dd, label, input, textarea';
 
+// Tekst podstawowy, dla którego design podaje więcej niż 16 px (W-03: „albo tyle, ile podaje design,
+// jeśli więcej”). Design ma stałe tokeny bez zmniejszania na mobile: --text-lg = 18 px,
+// --text-xl = 22 px. Źródła: pliki D/*.dc.html z docs/02-design/zrodla/Strona firmowa ISKT/.
+const SERVICE_DESIGN_MIN = [
+  { selector: '.service-hero__lead', px: 22, source: 'l. 70: lead hero, --text-xl' },
+  { selector: '.when-intro__lead', px: 18, source: 'l. 81–82: lead „Kiedy…”, --text-lg' },
+];
+const DESIGN_MIN: Record<string, { selector: string; px: number; source: string }[]> = {
+  '/': [
+    { selector: '.hero__lead', px: 18, source: 'ISKT-standalone.dc.html:70, --text-lg' },
+    { selector: '.contact__lead', px: 18, source: 'ISKT-standalone.dc.html:159, --text-lg' },
+  ],
+  '/uslugi/projekty-br/': [
+    { selector: '.br-hero__lead', px: 18, source: 'Projekty-BR.dc.html:58, --text-lg' },
+    {
+      selector: '[data-component="cta-band-brand"] p',
+      px: 18,
+      source: 'Projekty-BR.dc.html:234, --text-lg',
+    },
+  ],
+  '/uslugi/esg/': SERVICE_DESIGN_MIN,
+  '/uslugi/ai-transformacja/': SERVICE_DESIGN_MIN,
+  '/uslugi/oprogramowanie/': SERVICE_DESIGN_MIN,
+  '/uslugi/interim/': SERVICE_DESIGN_MIN,
+  '/startupy/': SERVICE_DESIGN_MIN,
+};
+
 test.use({ viewport: { width: 375, height: 812 } });
 
 for (const { path } of CROSS_PAGES) {
@@ -78,5 +105,25 @@ for (const { path } of CROSS_PAGES) {
       console.log(`${path} text-meta (${report.meta.length}):\n  ${report.meta.join('\n  ')}`);
       expect(report.small).toEqual([]);
     });
+
+    const designMin = DESIGN_MIN[path] ?? [];
+    if (designMin.length > 0) {
+      test('tekst większy w designie ma co najmniej rozmiar z designu', async ({ page }) => {
+        await page.goto(path);
+        for (const { selector, px, source } of designMin) {
+          const sizes = await page
+            .locator(`main ${selector}`)
+            .evaluateAll((elements) =>
+              elements
+                .filter((el) => el.checkVisibility())
+                .map((el) => parseFloat(getComputedStyle(el).fontSize)),
+            );
+          expect(sizes.length, `${selector}: element z designu (${source})`).toBeGreaterThan(0);
+          for (const size of sizes) {
+            expect(size, `${selector} (${source})`).toBeGreaterThanOrEqual(px);
+          }
+        }
+      });
+    }
   });
 }
