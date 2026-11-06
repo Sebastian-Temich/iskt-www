@@ -15,7 +15,7 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #12 | Strony AI-transformacja i Oprogramowanie | done | 1 | M3 Strony usług | #33 merged | pass |
 | #13 | Strony Interim i Startupy | done | 1 | M3 Strony usług | #32 merged | pass |
 | #14 | Strona Projekty B+R z FAQ | done | 1 | M3 Strony usług | #34 merged | pass |
-| #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | todo | 0 | M4 Jakość i wydanie | - | - |
+| #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | done | 3 | M4 Jakość i wydanie | #36 merged | pass |
 | #16 | Dokumentacja wydania (techniczna i produktowa) | todo | 0 | M4 Jakość i wydanie | - | - |
 | #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | done | 2 | M1 Szkielet, layout i strona główna | #27 merged | pass |
 | #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | done | 2 | M1 Szkielet, layout i strona główna | #24 merged | pass |

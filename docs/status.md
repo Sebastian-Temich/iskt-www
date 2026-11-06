@@ -1,16 +1,16 @@
 ---
-zadania_todo: 2
+zadania_todo: 1
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 13
+zadania_done: 14
 zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Klawiatura w teście: Tab między przyciskami?", "decyzja": "fokus ustawiany przez `focus()`. WebKit na macOS domyślnie pomija przyciski przy Tab (ustawienie systemu). Test sprawdza obsługę Enter i Spacji."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Test „bez noindex”: brak `meta robots`?", "decyzja": "robots równy temu na stronie głównej i bez `nofollow`. W E2E (staging) wszystkie strony mają `noindex` środowiskowy z W-08. Brak noindex na produkcji zapewnia wpis w `seo.ts`, co test też sprawdza."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Sekcja „Programy”: osobny komponent sekcji?", "decyzja": "`ProgramCard` to pojedyncza karta (nazwa z architektury), a siatkę z `SectionHeading` składa strona. Styl siatki jest w `<style>` strony."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Chipy: lista z designu (5) czy wszystkie usługi z `site.ts` (z Interim)?", "decyzja": "5 chipów z designu, w tej samej kolejności i z tymi etykietami. Zmienione są tylko adresy: na URL z W-01 zamiast `#kompetencje`, zgodnie z kryterium issue."}, {"data": "2026-11-06", "zrodlo": "T-14", "pytanie": "Okruszek bieżącej strony: `<span>` z designu czy link?", "decyzja": "link z `aria-current=\"page\"`, spójnie z ESG, Interim i Startupami (`Breadcrumb` z T-10)."}]
-ostatnia_synchronizacja: 2026-11-05T23:10:40Z
+ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "Iteracja 2: minima z designu", "decyzja": "tylko elementy z selektora kryterium (`p` itd.), dla których pliki designu podają rozmiar > 16 px; tokeny designu nie mają wariantu mobile, więc minimum obowiązuje na 375 px. Polityka prywatności i 404 nie mają pliku designu, więc nie mają minimów ponad 16 px."}, {"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "Iteracja 2: pomiar Lighthouse wersji z PR", "decyzja": "build Vercel commita PR serwowany lokalnie (`npx serve` na porcie 55328 z bloku projektu), bo preview jest za Deployment Protection, a bypass to dostęp, o który worker nie prosi sam (eskalacja E-008)."}, {"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "`LH_BASE_URL`, `LH_PRESET`, `LH_ENV`, `LH_RUNS`, `CHROME_PATH` w `.env.example`?", "decyzja": "tak (review iter. 1), ale profil workera blokuje edycję pliku; wpisy czekają na E-008."}, {"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "-", "decyzja": "Lighthouse mierzy 7 stron W-01 (W-10); polityka i 404 są tylko w E2E."}, {"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "`pnpm lh:staging`", "decyzja": "`node lighthouserc.cjs <adres>`: ten sam plik jest konfiguracją LHCI i skryptem uruchamiającym oba profile, bo LHCI przyjmuje jeden preset na przebieg, a `scripts/` jest poza „Zakresem”. Katalog roboczy `.lighthouseci/` w `test-results/lighthouse/` (ignorowany przez git, ESLint i Prettier)."}]
+ostatnia_synchronizacja: 2026-11-06T09:21:34Z
 ---
 
 # Status projektu
