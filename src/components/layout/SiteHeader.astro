@@ -2,6 +2,9 @@
 // Nagłówek strony. Wariant `home`: D/ISKT-standalone.dc.html:57-65 (na tle hero),
 // wariant `page`: D/ESG.dc.html:44-55. Zawsze w <header> poza <main> (architektura,
 // „Rozstrzygnięcia luk designu”).
+// Wariant home (#41): bez tła i krawędzi, nałożony (position: absolute) na górę hero, więc tło i
+// poświata hero przechodzą pod nim jak we wzorcu; po prawej tylko „Umów konsultację”. Wysokość
+// nagłówka jest stała (--site-header-home-h), żeby HomeHero zarezerwował dokładnie tyle miejsca.
 import { Image } from 'astro:assets';
 import logo from '../../assets/iskt-logo.png';
 import { nav } from '../../content/site';
@@ -42,13 +45,15 @@ const logoHeight = variant === 'home' ? 40 : 34;
       </span>
     </a>
     <nav class="site-nav" aria-label="Główna">
-      <a
-        class:list={['site-nav__link', competencesActive && 'site-nav__link--active']}
-        href={nav.competences}
-        aria-current={competencesActive ? 'true' : undefined}
-      >
-        Kompetencje
-      </a>
+      {variant === 'page' && (
+        <a
+          class:list={['site-nav__link', competencesActive && 'site-nav__link--active']}
+          href={nav.competences}
+          aria-current={competencesActive ? 'true' : undefined}
+        >
+          Kompetencje
+        </a>
+      )}
       <Button href={nav.contact} size="sm">
         Umów konsultację
       </Button>
@@ -64,10 +69,44 @@ const logoHeight = variant === 'home' ? 40 : 34;
     background: var(--surface-card);
     border-bottom: 1px solid var(--border-subtle);
   }
+  /* Wysokość rzędu nagłówka home: logo 40 px i CTA 40 px w jednym rzędzie, a na wąskim ekranie
+     dwa rzędy z odstępem --space-4 (jak flex-wrap we wzorcu). Czyta ją HomeHero (padding-top). */
+  :global(:root) {
+    --site-header-home-h: 40px;
+  }
+  @media (max-width: 519.98px) {
+    :global(:root) {
+      --site-header-home-h: calc(80px + var(--space-4));
+    }
+  }
   .site-header--home {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    z-index: 1;
     padding-top: var(--space-10);
     padding-bottom: 0;
-    background: var(--gradient-wash);
+    background: transparent;
+  }
+  .site-header--home .site-header__inner {
+    flex-wrap: nowrap;
+    height: var(--site-header-home-h);
+  }
+  .site-header--home .brand {
+    height: 40px;
+  }
+  .site-header--home :global(.btn) {
+    height: 40px;
+    min-height: 40px;
+    padding: 0 1.15rem;
+    white-space: nowrap;
+  }
+  @media (max-width: 519.98px) {
+    .site-header--home .site-header__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
   }
   .site-header__inner {
     max-width: var(--container-max);

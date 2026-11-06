@@ -39,6 +39,22 @@ describe('SiteHeader', () => {
     expect(html).toContain('site-header--home');
   });
 
+  it('wariant home ma po prawej wyłącznie „Umów konsultację”, bez linku „Kompetencje”', async () => {
+    const html = await render('/', { variant: 'home' });
+    expect(html).not.toContain('href="/#kompetencje"');
+    expect(html).not.toContain('Kompetencje');
+    const nav = html.match(/<nav[^>]*>([\s\S]*?)<\/nav>/);
+    expect(nav?.[1].match(/<a\b/g)).toHaveLength(1);
+    expect(nav?.[1]).toMatch(/<a[^>]*href="\/#kontakt"[^>]*>\s*Umów konsultację\s*<\/a>/);
+  });
+
+  it('wariant page ma „Kompetencje” i CTA', async () => {
+    const html = await render('/polityka-prywatnosci/', { variant: 'page' });
+    competencesLink(html);
+    expect(html).toContain('site-header--page');
+    expect(html).toMatch(/<a[^>]*href="\/#kontakt"[^>]*>\s*Umów konsultację\s*<\/a>/);
+  });
+
   it('CTA „Umów konsultację” to pojedynczy <a> do /#kontakt, bez zagnieżdżonego <button>', async () => {
     const html = await render('/uslugi/esg/');
     expect(html).toMatch(/<a[^>]*href="\/#kontakt"[^>]*>\s*Umów konsultację\s*<\/a>/);

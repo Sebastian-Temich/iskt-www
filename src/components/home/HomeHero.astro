@@ -66,7 +66,10 @@ const widths = Array.from({ length: 21 }, (_, i) => 240 + i * 20);
   .hero {
     position: relative;
     overflow: hidden;
-    padding: var(--space-16) var(--container-pad) var(--space-20);
+    /* Nad treścią nagłówek home (SiteHeader, nałożony absolutnie): jak we wzorcu l. 54-66
+       padding --space-10, rząd nagłówka i odstęp --space-16 do siatki hero. */
+    padding: calc(var(--space-10) + var(--site-header-home-h, 40px) + var(--space-16))
+      var(--container-pad) var(--space-20);
     background: var(--gradient-wash);
     border-bottom: 1px solid var(--border-subtle);
   }
