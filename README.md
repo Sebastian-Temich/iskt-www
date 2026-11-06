@@ -126,6 +126,20 @@ przed pierwszym wydaniem zrób je na projekcie testowym.
 bats scripts/tests
 ```
 
+## Testy E2E
+
+`pnpm test:e2e` buduje stronę i uruchamia `astro preview` na porcie z `E2E_PORT` (domyślnie
+`55327`, port `preview` z bloku 55321-55329). Lokalnie Playwright używa już działającego serwera na
+tym porcie (`reuseExistingServer`), więc dwa worktree uruchamiające E2E w tym samym czasie muszą mieć
+różne porty, inaczej jeden testuje build drugiego:
+
+```bash
+E2E_PORT=55427 pnpm test:e2e
+```
+
+Wybierz wolny port spoza bloków innych projektów (`/Users/Shared/sh/porty.md`). W CI zmienna nie jest
+potrzebna: CI zawsze startuje własny serwer.
+
 ## Zawartość
 
 | Ścieżka | Zawartość |

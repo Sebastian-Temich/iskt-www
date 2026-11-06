@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import { findSeoEntry } from '../src/content/seo';
 import { nav, services } from '../src/content/site';
+import { POLICY_PAGE, W01_PAGES } from './cross/pages';
 
 // Strona Interim (W-01, W-03, W-07, W-11) według D/Interim.dc.html; komponenty z
 // src/components/service/ i RoleArticle (4 role).
@@ -249,8 +250,8 @@ test.describe('strona Interim', () => {
     const hrefs = await page
       .locator('a[href^="/"]')
       .evaluateAll((nodes) => nodes.map((n) => n.getAttribute('href') ?? ''));
-    // Strony usług z innych zadań M3 mogą jeszcze nie istnieć; sprawdzamy tylko istniejące adresy.
-    const built = ['/', PATH, '/startupy/', '/uslugi/esg/', '/polityka-prywatnosci/'];
+    // Wszystkie strony W-01 i polityka prywatności (e2e/cross/pages.ts).
+    const built: string[] = [...W01_PAGES, POLICY_PAGE];
     for (const href of new Set(hrefs.map((h) => h.split('#')[0] || '/'))) {
       if (!built.includes(href)) continue;
       expect((await request.get(href)).status(), href).toBe(200);

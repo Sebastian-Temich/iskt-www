@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 import { findSeoEntry } from '../src/content/seo';
 import { nav, services } from '../src/content/site';
+import { POLICY_PAGE, W01_PAGES } from './cross/pages';
 
 // Strona ESG (W-01, W-02, W-03, W-07, W-11) według D/ESG.dc.html; komponenty z src/components/service/.
 const PATH = '/uslugi/esg/';
@@ -189,8 +190,8 @@ test.describe('strona ESG', () => {
     const hrefs = await page
       .locator('a[href^="/"]')
       .evaluateAll((nodes) => nodes.map((n) => n.getAttribute('href') ?? ''));
-    // Strony usług T8–T10 powstają w kolejnych zadaniach; sprawdzamy tylko istniejące już adresy.
-    const built = ['/', PATH, '/polityka-prywatnosci/'];
+    // Wszystkie strony W-01 i polityka prywatności (e2e/cross/pages.ts).
+    const built: string[] = [...W01_PAGES, POLICY_PAGE];
     for (const href of new Set(hrefs.map((h) => h.split('#')[0] || '/'))) {
       if (!built.includes(href)) continue;
       expect((await request.get(href)).status(), href).toBe(200);
