@@ -32,6 +32,69 @@ test.describe('strona główna', () => {
     expect(ids).toEqual(['top', 'kompetencje', 'kontakt']);
   });
 
+  test('nagłówek home: logo i wyłącznie „Umów konsultację” → /#kontakt, bez „Kompetencje”', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    const header = page.locator('body > header');
+    await expect(header.getByRole('link', { name: 'Kompetencje' })).toHaveCount(0);
+    const nav = header.getByRole('navigation', { name: 'Główna' });
+    await expect(nav.getByRole('link')).toHaveCount(1);
+    await expect(nav.getByRole('link', { name: 'Umów konsultację' })).toHaveAttribute(
+      'href',
+      '/#kontakt',
+    );
+  });
+
+  // D/ISKT-standalone.dc.html:54-66: nagłówek leży na tle hero (bez własnego tła i krawędzi),
+  // 40 px od góry, a siatka hero zaczyna się 64 px pod nim.
+  for (const width of [375, 768, 1440]) {
+    test(`nagłówek home przy ${width} px: przezroczysty, nałożony na hero jak we wzorcu`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto('/');
+      const header = page.locator('body > header');
+      const style = await header.evaluate((el) => {
+        const s = getComputedStyle(el);
+        return {
+          bgColor: s.backgroundColor,
+          bgImage: s.backgroundImage,
+          border: s.borderBottomWidth,
+        };
+      });
+      expect(style.bgColor).toBe('rgba(0, 0, 0, 0)');
+      expect(style.bgImage).toBe('none');
+      expect(style.border).toBe('0px');
+
+      const hero = await page.locator('main #top').boundingBox();
+      const inner = await header.locator('.site-header__inner').boundingBox();
+      const grid = await page.locator('main #top .hero__inner').boundingBox();
+      const logo = await header.getByTestId('logo-link').boundingBox();
+      const cta = await header.getByRole('link', { name: 'Umów konsultację' }).boundingBox();
+      if (!hero || !inner || !grid || !logo || !cta) throw new Error('Brak elementu nagłówka');
+
+      // Hero zaczyna się na górze strony, a nagłówek mieści się w jego obszarze.
+      expect(hero.y).toBe(0);
+      expect(inner.y).toBe(40);
+      expect(inner.x).toBeCloseTo(grid.x, 0);
+      expect(inner.width).toBeCloseTo(grid.width, 0);
+      expect(grid.y - (inner.y + inner.height)).toBeCloseTo(64, 0);
+      expect(logo.height).toBe(40);
+      expect(cta.height).toBe(40);
+      expect(logo.x).toBeCloseTo(inner.x, 0);
+      if (width >= 520) {
+        // Jeden rząd: logo z lewej, CTA przy prawej krawędzi, oba na tej samej wysokości.
+        expect(cta.y).toBe(logo.y);
+        expect(cta.x + cta.width).toBeCloseTo(inner.x + inner.width, 0);
+      } else {
+        // Wąski ekran: CTA w drugim rzędzie pod logo, jak flex-wrap we wzorcu.
+        expect(cta.y).toBe(logo.y + logo.height + 16);
+        expect(cta.x).toBeCloseTo(inner.x, 0);
+      }
+    });
+  }
+
   test('hero: treść i przyciski jak w designie, logo przez astro:assets z wymiarami', async ({
     page,
   }) => {

@@ -33,10 +33,15 @@ async function expectLayout(page: Page) {
   const logo = header.getByRole('link', { name: 'ISKT Greennovation' });
   await expect(logo).toHaveAttribute('href', '/');
   await expect(logo.locator('img')).toHaveAttribute('src', /^\/_astro\/.+\.webp$/);
-  await expect(header.getByRole('link', { name: 'Kompetencje' })).toHaveAttribute(
-    'href',
-    '/#kompetencje',
-  );
+  // „Kompetencje” tylko w wariancie page; wariant home (/) ma wyłącznie CTA (#41).
+  if (new URL(page.url()).pathname === '/') {
+    await expect(header.getByRole('link', { name: 'Kompetencje' })).toHaveCount(0);
+  } else {
+    await expect(header.getByRole('link', { name: 'Kompetencje' })).toHaveAttribute(
+      'href',
+      '/#kompetencje',
+    );
+  }
   await expect(header.getByRole('link', { name: 'Umów konsultację' })).toHaveAttribute(
     'href',
     '/#kontakt',
