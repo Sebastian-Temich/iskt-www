@@ -12,13 +12,30 @@ interface Props {
   rows: string[][];
   /** Identyfikator podpisu; unikalny na stronie. */
   id?: string;
+  /**
+   * Tło sekcji: `page` (domyślne, D/ESG.dc.html:128) albo `subtle` z krawędzią górną
+   * (D/Oprogramowanie.dc.html:164).
+   */
+  background?: 'page' | 'subtle';
 }
 
-const { heading, intro, caption, columns, rows, id = 'porownanie' } = Astro.props;
+const {
+  heading,
+  intro,
+  caption,
+  columns,
+  rows,
+  id = 'porownanie',
+  background = 'page',
+} = Astro.props;
 const captionId = `${id}-podpis`;
 ---
 
-<section class="comparison" data-component="comparison-table">
+<section
+  class:list={['comparison', `comparison--${background}`]}
+  data-component="comparison-table"
+  data-background={background}
+>
   <div class="comparison__inner">
     <div class="comparison__head">
       <h2 class="comparison__heading">{heading}</h2>
@@ -62,7 +79,13 @@ const captionId = `${id}-podpis`;
 <style>
   .comparison {
     padding: var(--space-20) var(--container-pad);
+  }
+  .comparison--page {
     background: var(--surface-page);
+  }
+  .comparison--subtle {
+    background: var(--surface-subtle);
+    border-top: 1px solid var(--border-subtle);
   }
   .comparison__inner {
     max-width: var(--container-max);

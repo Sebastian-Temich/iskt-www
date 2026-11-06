@@ -15,6 +15,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const PATH = '/uslugi/esg/';
 // Nazwa bieżącej strony w okruszkach = BreadcrumbList w JSON-LD (seo.ts) = D/ESG.dc.html:67.
 const pageName = 'ESG i zrównoważony rozwój';
+// Pogrubienie w stałej: prettier łamie długi <strong> na wiersze, a biały znak przed „.” był widoczny
+// jako spacja („klimatyczne .”, #43).
+const boldTrigger =
+  'ankieta od dużego klienta, warunek w przetargu albo pytanie banku o ryzyka klimatyczne';
 ---
 
 <BaseLayout header="page" activeSection="kompetencje">
@@ -53,10 +57,8 @@ const pageName = 'ESG i zrównoważony rozwój';
     ]}
   >
     Moment, w którym trzeba działać, rzadko wyznacza ustawa — częściej{' '}
-    <strong>
-      ankieta od dużego klienta, warunek w przetargu albo pytanie banku o ryzyka klimatyczne
-    </strong>
-    . Wtedy liczy się nie deklaracja, tylko dane, które da się udokumentować.
+    <strong>{boldTrigger}</strong>. Wtedy liczy się nie deklaracja, tylko dane, które da się
+    udokumentować.
   </WhenIntro>
 
   <ScopeList

@@ -1,25 +1,32 @@
 ---
 // Hero strony głównej: D/ISKT-standalone.dc.html:54-86. Nagłówek z logo i „Umów konsultację”
 // renderuje SiteHeader (wariant home) poza <main>; tu zostaje treść hero pod nim.
-import { Picture } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import logo from '../../assets/iskt-logo.png';
 import { company } from '../../content/site';
 import Badge from '../ui/Badge.astro';
 import Button from '../ui/Button.astro';
 
-// Logo to element LCP na mobile (QA M1, #22). Szerokość na ekranie = min(320px, 78% kolumny):
-// - jedna kolumna (< 712 px): kolumna = 100vw − 2 × --container-pad;
-// - dwie kolumny (od 712 px, gdy wnętrze ≥ 2 × 300 px + --space-10): kolumna = połowa wnętrza bez
-//   odstępu, wnętrze najwyżej --container-max (1200 px), więc od ~1300 px logo ma zawsze 320 px.
+// Logo w hero tylko od 768 px (#43): poniżej CSS ukrywa .hero__visual, a pierwsze <source> z media
+// < 768 px wskazuje przezroczysty piksel w data: (CSP img-src 'self' data:), więc telefon nie pobiera
+// pliku logo. <picture> składany ręcznie z getImage, bo <Picture> nie przyjmuje własnego <source>.
+const MOBILE_MEDIA = '(max-width: 767.98px)';
+const EMPTY_PIXEL =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+// Szerokość na ekranie = min(320px, 78% kolumny). Od 768 px hero ma dwie kolumny (od 712 px, gdy
+// wnętrze ≥ 2 × 300 px + --space-10): kolumna = połowa wnętrza bez odstępu, wnętrze najwyżej
+// --container-max (1200 px), więc od ~1300 px logo ma zawsze 320 px.
 // Zmiana paddingu, odstępu albo siatki w .hero__inner wymaga aktualizacji `sizes`.
 const pad = 'clamp(1.25rem, 5vw, 3rem)';
-const sizes = [
-  `(min-width: 712px) min(320px, calc((100vw - 2 * ${pad} - 2.5rem) * 0.39))`,
-  `min(320px, calc((100vw - 2 * ${pad}) * 0.78))`,
-].join(', ');
+const sizes = `min(320px, calc((100vw - 2 * ${pad} - 2.5rem) * 0.39))`;
 // Drabinka co 20 px (240–640): najbliższy większy kandydat jest najwyżej ~8% szerszy niż miejsce na
 // ekranie, więc nadmiar w audycie uses-responsive-images < 10 KiB przy każdym DPR (test e2e QA-M1-1).
 const widths = Array.from({ length: 21 }, (_, i) => 240 + i * 20);
+const [avif, webp] = await Promise.all(
+  (['avif', 'webp'] as const).map((format) =>
+    getImage({ src: logo, width: 320, widths, sizes, format }),
+  ),
+);
 ---
 
 <section id="top" class="hero">
@@ -44,20 +51,23 @@ const widths = Array.from({ length: 21 }, (_, i) => 240 + i * 20);
       </div>
     </div>
     <div class="hero__visual">
-      <Picture
-        src={logo}
-        alt=""
-        width={320}
-        widths={widths}
-        sizes={sizes}
-        formats={['avif', 'webp']}
-        fallbackFormat="webp"
-        loading="eager"
-        decoding="async"
-        fetchpriority="high"
-        class="hero__logo"
-        pictureAttributes={{ class: 'hero__picture' }}
-      />
+      <picture class="hero__picture">
+        <source media={MOBILE_MEDIA} srcset={EMPTY_PIXEL} />
+        <source type="image/avif" srcset={avif.srcSet.attribute} sizes={sizes} />
+        <source type="image/webp" srcset={webp.srcSet.attribute} sizes={sizes} />
+        <img
+          src={webp.src}
+          srcset={webp.srcSet.attribute}
+          sizes={sizes}
+          width={webp.attributes.width}
+          height={webp.attributes.height}
+          alt=""
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+          class="hero__logo"
+        />
+      </picture>
     </div>
   </div>
 </section>
@@ -139,13 +149,11 @@ const widths = Array.from({ length: 21 }, (_, i) => 240 + i * 20);
     filter: drop-shadow(0 16px 40px rgba(30, 85, 29, 0.22));
   }
 
-  @media (max-width: 480px) {
-    .hero__actions {
-      width: 100%;
-    }
-    .hero__actions :global(.btn) {
-      width: 100%;
-      white-space: normal;
+  /* Telefon: bez dużego logo (#43). Próg zgodny z MOBILE_MEDIA w <source>. Przyciski hero przy
+     < 480 px mają szerokość treści jak we wzorcu D/ISKT-standalone.dc.html (bez rozciągania). */
+  @media (max-width: 767.98px) {
+    .hero__visual {
+      display: none;
     }
   }
 </style>
