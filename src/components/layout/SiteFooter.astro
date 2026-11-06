@@ -11,7 +11,7 @@ const { street, postalCode, city } = company.address;
 
 <footer class="site-footer">
   <div class="site-footer__inner">
-    <p class="site-footer__legal">
+    <p class="site-footer__legal text-meta">
       © {year}
       {company.name} · {street}, {postalCode}
       {city} · NIP {company.nip}
@@ -48,12 +48,18 @@ const { street, postalCode, city } = company.address;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-4);
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
     font-family: var(--font-mono);
-    font-size: var(--text-xs);
+    /* Tekst podstawowy ≥ 16 px na mobile (W-03); w designie 12 px. */
+    font-size: var(--text-base);
     color: var(--green-300);
   }
+  /* Obszar kliknięcia ≥ 24×24 px (W-03). */
   .site-footer__contact a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
     color: var(--green-300);
   }
   .site-footer__contact a:hover {

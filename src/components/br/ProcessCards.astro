@@ -26,7 +26,7 @@ const { id, eyebrow, heading, subtitle, steps } = Astro.props;
     <ol class="process-cards__grid">
       {steps.map((step, index) => (
         <li class="process-cards__card">
-          <span class="process-cards__label">
+          <span class="process-cards__label text-meta">
             {String(index + 1).padStart(2, '0')} · {step.duration}
           </span>
           <h3>{step.title}</h3>
@@ -83,7 +83,7 @@ const { id, eyebrow, heading, subtitle, steps } = Astro.props;
   }
   p {
     margin: 0;
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
     line-height: var(--lh-relaxed);
     color: var(--text-secondary);
   }
