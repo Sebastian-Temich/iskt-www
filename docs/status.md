@@ -21,23 +21,23 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `wydanie`: review
+(wszystkie etapy zamknięte)
 
 ## Punkt przekazania
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-06T10:50Z (M4 zakończony, wszystkie kamienie i QA zamknięte, przed odbiorem)
-- Kamień zakończony: M4 (#15, #16 zamknięte). QA M4 PR #38 scalony (9ff8137), review PASS, werdykt PASS, brak błędów; E2E 528 testów (526 pass, 2 skip), Lighthouse stagingu 7 stron mobile i desktop ≥ 97. Etap `08-qa`: done
-- Kamień bieżący: brak — plan zrealizowany (16 zadań, M1–M4, QA M1–M4)
+- Czas: 2026-11-06T13:40Z (zlecenie odebrane przez właściciela, wszystkie etapy done)
+- Kamień zakończony: M4 i odbiór. 07-realizacja done (PR #39), wydanie done (PR #40, review PASS fba6d7f, odbiór właściciela w `decyzje.md`). Poprawka z odbioru: #41 nagłówek strony głównej (PR #42, iteracja 2, PASS)
+- Kamień bieżący: brak — zlecenie zakończone (16 zadań: 12 planu, 3 QA, 1 z odbioru)
 - PR w toku: brak
 - Eskalacje: brak otwartych
 - Wstrzymania: brak
 - `shctl doctor` 2026-11-05T14:12Z: 0 błędów
-- Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md` (do odbioru zlecenia)
-- Zadania właściciela przed odbiorem: O-3 zrobione 2026-11-06 (Resend poprawiony, e-mail dotarł; `decyzje.md`), do sprawdzenia przy odbiorze `Reply-To`; O-6 potwierdzony w opengraph.xyz; O-10 podgląd strony usługi (opcjonalnie, meta sprawdzone w QA M3); chip Interim: zostaje jak w designie
-- Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia
-- Następny krok: „Odbiór” — PR `stage/07-realizacja` z polami `DoD.md` realizacji, potem `stage/wydanie`; review etapów, `shctl checkpoint wydanie`, akceptacja właściciela
+- Autoryzacja: „Autoryzacja planu PR #3” wygasła z odbiorem zlecenia; nowe prace tylko jako nowe zlecenie
+- Wysyłka formularza na stagingu: `formularz@iskt.pl` → `biuro@iskt.pl`, Reply-To klienta (decyzja właściciela 2026-11-06)
+- Worktree etapów usunięte
+- Następny krok: właściciel — przejście na iskt.pl i deploy prod według B9a (`docs/wydanie/techniczna/dokumentacja-techniczna.md`); drobne uwagi w `backlog-drobne.md` do ewentualnego zlecenia S
 
 ## Dziennik etapów
 
@@ -71,6 +71,7 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-06 `07-realizacja`: done
 - 2026-11-06 `wydanie`: in-progress
 - 2026-11-06 `wydanie`: review
+- 2026-11-06 `wydanie`: done
 
 ## Otwarte eskalacje
 

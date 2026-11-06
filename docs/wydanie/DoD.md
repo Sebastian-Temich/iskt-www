@@ -1,6 +1,6 @@
 ---
 etap: wydanie
-status: review
+status: done
 iteracja: 0
 akceptacja_wlasciciela: true
 ---
@@ -29,8 +29,8 @@ akceptacja_wlasciciela: true
 
 ## Checkpoint
 
-- [ ] Review etapu dało PASS (zaznacza reviewer, nie autor)
-- [ ] Właściciel odebrał projekt
+- [x] Review etapu dało PASS (zaznacza reviewer, nie autor) — komentarz PASS `shctl review run 40`, commit fba6d7f
+- [x] Właściciel odebrał projekt (wiersz `wlasciciel` w `decyzje.md`, 2026-11-06)
 <!-- tylko-tryb:L -->
 - [ ] Checkpoint 2 zaliczony
 <!-- /tylko-tryb -->
