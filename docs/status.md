@@ -21,23 +21,23 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `08-qa`: review
+- `07-realizacja`: todo (następny)
 
 ## Punkt przekazania
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-06T00:30Z (M3 zakończony, QA M3 scalone, start M4)
-- Kamień zakończony: M3 (#10, #12, #13, #14 zamknięte). QA M3 PR #35 scalony (e2905cc), review PASS, werdykt PASS, brak błędów 🔴/🟡; 1 drobna uwaga w `backlog-drobne.md` (B+R bez chipu Interim); O-10 podgląd w walidatorze OG do odbioru
-- Kamień bieżący: M4 (#15 dispatch, #16 zależy od #15)
+- Czas: 2026-11-06T10:50Z (M4 zakończony, wszystkie kamienie i QA zamknięte, przed odbiorem)
+- Kamień zakończony: M4 (#15, #16 zamknięte). QA M4 PR #38 scalony (9ff8137), review PASS, werdykt PASS, brak błędów; E2E 528 testów (526 pass, 2 skip), Lighthouse stagingu 7 stron mobile i desktop ≥ 97. Etap `08-qa`: done
+- Kamień bieżący: brak — plan zrealizowany (16 zadań, M1–M4, QA M1–M4)
 - PR w toku: brak
-- Eskalacje: brak otwartych (E-007 zamknięta: repo publiczne, decyzja właściciela)
+- Eskalacje: brak otwartych
 - Wstrzymania: brak
 - `shctl doctor` 2026-11-05T14:12Z: 0 błędów
-- Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md`
-- Zadania właściciela: poprawa `CONTACT_TO`/Resend przed odbiorem (E-006/C), potem O-3; O-6 i O-10 podgląd w walidatorze OG przy odbiorze
-- Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia po QA M4
-- Następny krok: monitoring #15 (`shctl task wait 15`), review, zamknięcie, dispatch #16; po M4: QA M4 (`sh-qa`), potem odbiór
+- Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md` (do odbioru zlecenia)
+- Zadania właściciela przed odbiorem: poprawa `CONTACT_TO`/Resend (E-006/C), potem O-3; podgląd w walidatorze OG (O-6, O-10); decyzja o chipie Interim na B+R (`backlog-drobne.md`)
+- Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia
+- Następny krok: „Odbiór” — PR `stage/07-realizacja` z polami `DoD.md` realizacji, potem `stage/wydanie`; review etapów, `shctl checkpoint wydanie`, akceptacja właściciela
 
 ## Dziennik etapów
 
@@ -65,6 +65,7 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-05 `08-qa`: in-progress, QA M2 scalone (PR #28); etap otwarty do QA ostatniego kamienia
 - 2026-11-06 `08-qa`: review
 - 2026-11-06 `08-qa`: in-progress
+- 2026-11-06 `08-qa`: done
 
 ## Otwarte eskalacje
 

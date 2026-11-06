@@ -1,6 +1,6 @@
 ---
 etap: 08-qa
-status: review
+status: done
 iteracja: 3
 akceptacja_wlasciciela: false
 ---
@@ -28,4 +28,5 @@ akceptacja_wlasciciela: false
 
 ## Checkpoint
 
-- [ ] Review etapu dało PASS (zaznacza reviewer, nie autor)
+- [x] Review etapu dało PASS (zaznacza reviewer, nie autor)
+  (PR #38, komentarz „Review Codex: PASS” dla ef91279)
