@@ -1,6 +1,6 @@
 ---
 etap: 07-realizacja
-status: in-progress
+status: review
 iteracja: 0
 akceptacja_wlasciciela: false
 ---
