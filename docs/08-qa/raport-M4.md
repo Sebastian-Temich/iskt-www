@@ -33,8 +33,8 @@ pomiar Lighthouse na stagingu nie może działać w CI (adres zewnętrzny). Pomi
 
 | Obszar | Wynik | Uwagi |
 |---|---|---|
-| E2E chromium | pass 273/273 | `pnpm exec playwright test --project=chromium --project=webkit --workers=1` (Playwright 1.61.1), razem 526 pass, 2 skip, 0 fail, 9,2 min |
-| E2E webkit | pass 271/273, 2 pominięte | jw.; pominięte testy produkcyjnego buildu w `seo.spec.ts` działają tylko w chromium (jak w M1–M3) |
+| E2E chromium | pass 264/264 | `pnpm exec playwright test --project=chromium --project=webkit --workers=1` (Playwright 1.61.1), razem 528 testów: 526 pass, 2 skip, 0 fail, 9,2 min |
+| E2E webkit | pass 262/264, 2 pominięte | jw.; pominięte testy produkcyjnego buildu w `seo.spec.ts` działają tylko w chromium (jak w M1–M3) |
 | Integracja | pass 129/129 | `pnpm test` (Vitest, 11 plików) |
 | Lint i typy | pass | `pnpm lint` (ESLint + Prettier), `pnpm typecheck` (0 błędów, 0 ostrzeżeń) |
 | Testy QA (`e2e/qa/`) | pass | w pełnym przebiegu jw.: `M1-scenariusze`, `QA-M1-1-wydajnosc`, `M3-scenariusze` w obu przeglądarkach |
