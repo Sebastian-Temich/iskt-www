@@ -21,7 +21,7 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `08-qa`: escalated
+- `08-qa`: review
 
 ## Punkt przekazania
 
@@ -67,5 +67,4 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 
 ## Otwarte eskalacje
 
-- E-007 (08-qa): GitHub Actions nie uruchamia jobów: 'recent account payments have failed or your spending limit needs to be increased'. Job e2e PR #35 (QA M3) nie wystartował po ponowieniu; pierwszy przebieg przerwał timeout instalacji przeglądarek. Bez zielonego CI nie ma review ani merge'a QA M3, więc M4 (#15, #16) nie startuje.
-
+(brak)
