@@ -2,7 +2,12 @@ import { execFileSync } from 'node:child_process';
 import { cpSync, existsSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { expect, test, type APIRequestContext, type Page } from '@playwright/test';
-import { findSeoEntry, sitemapPaths } from '../src/content/seo';
+import {
+  HOME_DESCRIPTION_MAX_LENGTH,
+  HOME_TITLE_MAX_LENGTH,
+  findSeoEntry,
+  sitemapPaths,
+} from '../src/content/seo';
 
 // SEO techniczne (W-07, W-08). Serwer testów to `astro build` + `astro preview` bez
 // PUBLIC_SITE_ENV, czyli staging (bezpieczna wartość domyślna z src/lib/env.ts), z adapterem Node
@@ -94,6 +99,12 @@ test('/: title, description, canonical, Open Graph i twitter:card z seo.ts', asy
   expect(meta.description).toBe(entry.description);
   expect(meta.ogTitle).toBe(entry.title);
   expect(meta.ogDescription).toBe(entry.description);
+  // Limity podglądu linku w X i LinkedIn (O-6, #44).
+  const length = (text: string | null) => [...(text ?? '')].length;
+  expect(length(meta.title), meta.title).toBeLessThanOrEqual(HOME_TITLE_MAX_LENGTH);
+  expect(length(meta.ogTitle)).toBeLessThanOrEqual(HOME_TITLE_MAX_LENGTH);
+  expect(length(meta.description)).toBeLessThanOrEqual(HOME_DESCRIPTION_MAX_LENGTH);
+  expect(length(meta.ogDescription)).toBeLessThanOrEqual(HOME_DESCRIPTION_MAX_LENGTH);
   expect(meta.ogLocale).toBe('pl_PL');
   expect(meta.twitterCard).toBe('summary_large_image');
 
