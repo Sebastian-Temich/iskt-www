@@ -39,3 +39,4 @@ Plik wspólny, aktualizuje orkiestrator. Zgłoszenia ⚪ z review i „Drobne uw
 | 2026-11-05 | T-12 | `ServiceHero` na Oprogramowaniu nie dostaje `note`, bo design go nie ma w hero tej strony. | otwarta |
 | 2026-11-05 | T-12 | `playwright.config.ts` ma stały port i `reuseExistingServer`; przy równoległych workerach na jednej maszynie testy mogą trafić w cudzy serwer. Warto czytać port ze zmiennej środowiskowej. | otwarta |
 | 2026-11-06 | T-14 | `e2e/esg.spec.ts`, `e2e/interim.spec.ts` i `e2e/startupy.spec.ts` w teście „linki wewnętrzne bez 404” mają stałą listę zbudowanych stron bez `/uslugi/projekty-br/`, więc nie sprawdzają tego linku. Można dopisać adres, ale to poza zakresem T-14. | otwarta |
+| 2026-11-06 | QA M3 | „Pozostałe kompetencje” na B+R (`ServiceChips`) bez chipu Interim, zgodnie z designem (`Projekty-BR.dc.html:246-250`); pozostałe strony usług linkują do wszystkich usług. Do decyzji przy odbiorze. | otwarta |

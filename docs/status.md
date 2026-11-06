@@ -21,23 +21,23 @@ Widok w Obsidianie: `docs/_dashboard.md`.
 
 ## Bieżący etap
 
-- `08-qa`: review
+- `08-qa`: in-progress
 
 ## Punkt przekazania
 
 Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wznów”.
 
-- Czas: 2026-11-05T23:55Z (M3 zakończony, QA M3 czeka na CI)
-- Kamień zakończony: M3 (#10, #12, #13, #14 zamknięte). QA M3: PR #35 (`stage/08-qa`), werdykt PASS, brak błędów 🔴/🟡, 1 drobna uwaga (B+R bez chipu Interim, zgodnie z designem); E2E lokalnie 332 pass, `e2e/qa/` 46/46, Lighthouse stagingu stron usług mobile ≥ 97, desktop 100
-- Kamień bieżący: M4 (#15 gotowe do dispatchu, #16 zależy od #15); start po merge'u QA M3
-- PR w toku: #35 (QA M3): CI czerwone — job e2e nie startuje (billing GitHub Actions), review etapu jeszcze nie uruchomione
-- Eskalacje: E-007 (billing GitHub Actions)
-- Wstrzymania: CI GitHub Actions do naprawy płatności/limitu przez właściciela
+- Czas: 2026-11-06T00:30Z (M3 zakończony, QA M3 scalone, start M4)
+- Kamień zakończony: M3 (#10, #12, #13, #14 zamknięte). QA M3 PR #35 scalony (e2905cc), review PASS, werdykt PASS, brak błędów 🔴/🟡; 1 drobna uwaga w `backlog-drobne.md` (B+R bez chipu Interim); O-10 podgląd w walidatorze OG do odbioru
+- Kamień bieżący: M4 (#15 dispatch, #16 zależy od #15)
+- PR w toku: brak
+- Eskalacje: brak otwartych (E-007 zamknięta: repo publiczne, decyzja właściciela)
+- Wstrzymania: brak
 - `shctl doctor` 2026-11-05T14:12Z: 0 błędów
 - Autoryzacja: „Autoryzacja planu PR #3” w `decyzje.md`
-- Zadania właściciela: E-007 (billing); poprawa `CONTACT_TO`/Resend przed odbiorem (E-006/C), potem O-3; O-6 i O-10 podgląd w walidatorze OG przy odbiorze
+- Zadania właściciela: poprawa `CONTACT_TO`/Resend przed odbiorem (E-006/C), potem O-3; O-6 i O-10 podgląd w walidatorze OG przy odbiorze
 - Worktree QA `/Users/Shared/sh/wt/iskt-www/stage-08-qa` założony ręcznie (brak komendy shctl); do usunięcia po QA M4
-- Następny krok: po E-007 ponowić job e2e PR #35, `shctl pr check 35 --czekaj`, `shctl review run 35`, merge, drobna uwaga do `backlog-drobne.md`, `shctl stage` dla 08-qa, dispatch #15
+- Następny krok: monitoring #15 (`shctl task wait 15`), review, zamknięcie, dispatch #16; po M4: QA M4 (`sh-qa`), potem odbiór
 
 ## Dziennik etapów
 
@@ -64,6 +64,7 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - 2026-11-05 `08-qa`: iteracja 3 (FAIL review PR #21)
 - 2026-11-05 `08-qa`: in-progress, QA M2 scalone (PR #28); etap otwarty do QA ostatniego kamienia
 - 2026-11-06 `08-qa`: review
+- 2026-11-06 `08-qa`: in-progress
 
 ## Otwarte eskalacje
 
