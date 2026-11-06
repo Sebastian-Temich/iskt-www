@@ -22,9 +22,23 @@ interface Props {
   note?: string;
   /** Link „Zobacz też: …” do innej usługi. */
   seeAlso?: HeroLink;
+  /**
+   * Maks. szerokość leadu: `default` 680 px (D/ESG.dc.html:70), `wide` 700 px (D/Interim.dc.html:70).
+   * Wariant klasą, nie stylem inline: CSP style-src 'self' bez 'unsafe-inline'.
+   */
+  leadWidth?: 'default' | 'wide';
 }
 
-const { titleBefore, titleHighlight, titleAfter, lead, cta, note, seeAlso } = Astro.props;
+const {
+  titleBefore,
+  titleHighlight,
+  titleAfter,
+  lead,
+  cta,
+  note,
+  seeAlso,
+  leadWidth = 'default',
+} = Astro.props;
 ---
 
 <section class="service-hero" data-component="service-hero">
@@ -36,7 +50,9 @@ const { titleBefore, titleHighlight, titleAfter, lead, cta, note, seeAlso } = As
       <span class="service-hero__highlight">{titleHighlight}</span>
       {titleAfter && <> {titleAfter}</>}
     </h1>
-    <p class="service-hero__lead">{lead}</p>
+    <p class:list={['service-hero__lead', leadWidth === 'wide' && 'service-hero__lead--wide']}>
+      {lead}
+    </p>
     <div class="service-hero__actions">
       <Button href={cta.href} class="service-hero__cta" iconRight="arrow-right">
         {cta.label}
@@ -44,7 +60,7 @@ const { titleBefore, titleHighlight, titleAfter, lead, cta, note, seeAlso } = As
       {note && <span class="service-hero__note text-meta">{note}</span>}
       {seeAlso && (
         <a class="service-hero__see-also" href={seeAlso.href}>
-          Zobacz też: {seeAlso.label} →
+          Zobacz też: {seeAlso.label} <span aria-hidden="true">→</span>
         </a>
       )}
     </div>
@@ -98,6 +114,9 @@ const { titleBefore, titleHighlight, titleAfter, lead, cta, note, seeAlso } = As
     line-height: var(--lh-relaxed);
     color: var(--text-secondary);
     text-wrap: pretty;
+  }
+  .service-hero__lead--wide {
+    max-width: 700px;
   }
   .service-hero__actions {
     display: flex;

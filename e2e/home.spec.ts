@@ -47,8 +47,9 @@ test.describe('strona główna', () => {
   });
 
   // D/ISKT-standalone.dc.html:54-66: nagłówek leży na tle hero (bez własnego tła i krawędzi),
-  // 40 px od góry, a siatka hero zaczyna się 64 px pod nim.
-  for (const width of [375, 768, 1440]) {
+  // 40 px od góry, a siatka hero zaczyna się 64 px pod nim. Odbiór właściciela #43: na każdej
+  // szerokości jeden rząd (logo z lewej, CTA z prawej), także poniżej 520 px, gdzie wzorzec zawija.
+  for (const width of [360, 375, 390, 440, 768, 1440]) {
     test(`nagłówek home przy ${width} px: przezroczysty, nałożony na hero jak we wzorcu`, async ({
       page,
     }) => {
@@ -83,15 +84,30 @@ test.describe('strona główna', () => {
       expect(logo.height).toBe(40);
       expect(cta.height).toBe(40);
       expect(logo.x).toBeCloseTo(inner.x, 0);
-      if (width >= 520) {
-        // Jeden rząd: logo z lewej, CTA przy prawej krawędzi, oba na tej samej wysokości.
-        expect(cta.y).toBe(logo.y);
-        expect(cta.x + cta.width).toBeCloseTo(inner.x + inner.width, 0);
-      } else {
-        // Wąski ekran: CTA w drugim rzędzie pod logo, jak flex-wrap we wzorcu.
-        expect(cta.y).toBe(logo.y + logo.height + 16);
-        expect(cta.x).toBeCloseTo(inner.x, 0);
-      }
+      // Jeden rząd: logo z lewej, CTA przy prawej krawędzi, oba na tej samej wysokości, bez
+      // nachodzenia na siebie i bez przewijania w poziomie.
+      expect(inner.height).toBe(40);
+      expect(cta.y).toBe(logo.y);
+      expect(cta.x + cta.width).toBeCloseTo(inner.x + inner.width, 0);
+      expect(cta.x).toBeGreaterThanOrEqual(logo.x + logo.width + 8);
+      const name = header.locator('.brand__name');
+      const nameBox = await name.boundingBox();
+      if (!nameBox) throw new Error('Brak nazwy marki');
+      expect(nameBox.x + nameBox.width).toBeLessThanOrEqual(cta.x);
+      expect(
+        await name.evaluate((el) => el.scrollWidth <= Math.ceil(el.getBoundingClientRect().width)),
+      ).toBe(true);
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+      expect(overflow).toBe(0);
+      // Nazwa dostępna linku logo zawsze pełna, także gdy „Greennovation” jest ukryte wizualnie.
+      await expect(header.getByTestId('logo-link')).toHaveAccessibleName('ISKT Greennovation');
+      // Pełna nazwa widoczna od 430 px (440 px i szerzej).
+      const accentVisible = await header
+        .locator('.brand__accent')
+        .evaluate((el) => el.getBoundingClientRect().width > 1);
+      expect(accentVisible).toBe(width >= 430);
     });
   }
 

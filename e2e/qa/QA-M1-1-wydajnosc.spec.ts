@@ -3,10 +3,12 @@ import { expect, type Locator, type Page, test } from '@playwright/test';
 // QA-M1-1 (#22): wydajność strony głównej na mobile (W-10). Logo w hero jest elementem LCP:
 // eager + fetchpriority=high, a kandydat z srcset pasuje do miejsca na ekranie (nadmiar jak w audycie
 // Lighthouse uses-responsive-images: bajty × (1 − powierzchnia wyświetlana / naturalna) < 10 KiB).
+// Od #43 logo hero jest tylko od 768 px (na telefonie bez logo, e2e/mobile-design.spec.ts), więc
+// pomiar obejmuje 768, 1024 i 1440 px.
 
 const VIEWPORTS = [
-  { width: 375, height: 812 },
   { width: 768, height: 1024 },
+  { width: 1024, height: 768 },
   { width: 1440, height: 900 },
 ];
 const MAX_WASTE_BYTES = 10 * 1024;
@@ -15,6 +17,7 @@ test.describe('QA-M1-1: wydajność strony głównej', () => {
   test('logo w hero ładowane jako obraz LCP: eager, fetchpriority=high, sizes', async ({
     page,
   }) => {
+    await page.setViewportSize(VIEWPORTS[2]);
     await page.goto('/');
     const logo = page.locator('main #top img.hero__logo');
     await expect(logo).toHaveAttribute('loading', 'eager');
@@ -73,7 +76,7 @@ test.describe('QA-M1-1: wydajność strony głównej', () => {
     });
   }
 
-  // Przypadek kontrolny: największy kandydat WebP (640w) na 375 px przy DPR 1 to nadmiar, który
+  // Przypadek kontrolny: największy kandydat WebP (640w) na 768 px przy DPR 1 to nadmiar, który
   // pomiar musi wykryć; inaczej test powyżej niczego nie sprawdza.
   test('kontrola: pomiar wykrywa nadmiar > 10 KiB dla za dużego kandydata', async ({ page }) => {
     await page.setViewportSize(VIEWPORTS[0]);

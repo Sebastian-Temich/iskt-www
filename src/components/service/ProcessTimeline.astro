@@ -11,12 +11,21 @@ export interface ProcessStep {
 interface Props {
   heading: string;
   steps: ProcessStep[];
+  /**
+   * Tło sekcji: `subtle` (domyślne, D/ESG.dc.html:175) albo `page` (D/Oprogramowanie.dc.html:211).
+   * Krawędź górna w obu wariantach.
+   */
+  background?: 'subtle' | 'page';
 }
 
-const { heading, steps } = Astro.props;
+const { heading, steps, background = 'subtle' } = Astro.props;
 ---
 
-<section class="timeline" data-component="process-timeline">
+<section
+  class:list={['timeline', `timeline--${background}`]}
+  data-component="process-timeline"
+  data-background={background}
+>
   <div class="timeline__inner">
     <h2 class="timeline__heading">{heading}</h2>
     <ol class="timeline__steps">
@@ -39,8 +48,13 @@ const { heading, steps } = Astro.props;
 <style>
   .timeline {
     padding: var(--space-20) var(--container-pad);
-    background: var(--surface-subtle);
     border-top: 1px solid var(--border-subtle);
+  }
+  .timeline--subtle {
+    background: var(--surface-subtle);
+  }
+  .timeline--page {
+    background: var(--surface-page);
   }
   .timeline__inner {
     max-width: var(--x-container-narrow);
