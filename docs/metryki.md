@@ -18,3 +18,4 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 | #12 Strony AI-transformacja i Oprogramowanie | M | 34min | 1 | 1 | 0 | PR #33 |
 | #14 Strona Projekty B+R z FAQ | M | 35min | 1 | 1 | 0 | PR #34 |
 | #15 Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | M | 2h 23min | 1 | 3 | 1 | PR #36 |
+| #16 Dokumentacja wydania (techniczna i produktowa) | M | 8min | 1 | 1 | 0 | PR #37 |

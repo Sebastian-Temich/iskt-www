@@ -43,3 +43,4 @@ Plik wspólny, aktualizuje orkiestrator. Zgłoszenia ⚪ z review i „Drobne uw
 | 2026-11-06 | T-15 | `e2e/qa/M3-scenariusze.spec.ts` używa przestarzałego `page.waitForNavigation()` (podpowiedź `astro check`); poza zakresem. | otwarta |
 | 2026-11-06 | T-15 | Komunikaty pól formularza (`Field`, `span.field__message`, 12 px) nie są objęte selektorem kryterium (`span`), więc zostały bez zmian; warto rozważyć 14–16 px. | otwarta |
 | 2026-11-06 | T-15 | Nagłówek `role__benefits-heading` i opis `other-services__description` (14 px) to elementy spoza listy selektorów kryterium; bez zmian. | otwarta |
+| 2026-11-06 | T-16 | Strona B+R ma w „Pozostałe kompetencje” 4 linki (brak chipu Interim, jak w designie); opisane w obu dokumentach. | otwarta |

@@ -1,16 +1,16 @@
 ---
-zadania_todo: 1
+zadania_todo: 0
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 14
+zadania_done: 15
 zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "Iteracja 2: minima z designu", "decyzja": "tylko elementy z selektora kryterium (`p` itd.), dla których pliki designu podają rozmiar > 16 px; tokeny designu nie mają wariantu mobile, więc minimum obowiązuje na 375 px. Polityka prywatności i 404 nie mają pliku designu, więc nie mają minimów ponad 16 px."}, {"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "Iteracja 2: pomiar Lighthouse wersji z PR", "decyzja": "build Vercel commita PR serwowany lokalnie (`npx serve` na porcie 55328 z bloku projektu), bo preview jest za Deployment Protection, a bypass to dostęp, o który worker nie prosi sam (eskalacja E-008)."}, {"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "`LH_BASE_URL`, `LH_PRESET`, `LH_ENV`, `LH_RUNS`, `CHROME_PATH` w `.env.example`?", "decyzja": "tak (review iter. 1), ale profil workera blokuje edycję pliku; wpisy czekają na E-008."}, {"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "-", "decyzja": "Lighthouse mierzy 7 stron W-01 (W-10); polityka i 404 są tylko w E2E."}, {"data": "2026-11-06", "zrodlo": "T-15", "pytanie": "`pnpm lh:staging`", "decyzja": "`node lighthouserc.cjs <adres>`: ten sam plik jest konfiguracją LHCI i skryptem uruchamiającym oba profile, bo LHCI przyjmuje jeden preset na przebieg, a `scripts/` jest poza „Zakresem”. Katalog roboczy `.lighthouseci/` w `test-results/lighthouse/` (ignorowany przez git, ESLint i Prettier)."}]
-ostatnia_synchronizacja: 2026-11-06T09:21:34Z
+ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `docs/decyzje.md`, `docs/08-qa/raport-M1.md`, `raport-M2.md`, `raport-M3.md`, `docs/07-realizacja/escalations/E-006.md`, ADR-001, ADR-003, ADR-004, `docs/wydanie/DoD.md`, `docs/konfiguracja.md`, `scripts/deploy-prod.sh`, `scripts/check-dod.sh`, `vercel.json`, `astro.config.mjs`, `package.json`, `.env.example`, `src/lib/env.ts`, `src/lib/mailer.ts`, `src/pages/api/contact.ts`, `src/pages/robots.txt.ts`, `src/content/seo.ts`, `src/content/site.ts`, `src/components/home/ContactForm.astro`, `src/components/layout/Breadcrumb.astro`."}, {"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "Kolumna „Uwagi” w scenariuszach odbioru", "decyzja": "stan z raportów QA M1–M3 i eskalacji E-003, E-006, żeby właściciel wiedział, co zostało do sprawdzenia przy odbiorze."}, {"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "Status polityki prywatności", "decyzja": "„zaakceptowana 2026-11-05” na podstawie `docs/decyzje.md` (PR #25), z otwartymi punktami T-9; klauzula, obraz OG i meta polityki → „do akceptacji”."}, {"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "`deploy-prod.sh` wymaga bazy (supabase, `PROD_DB_URL`), a projekt jej nie ma", "decyzja": "opisane w „Znanych ograniczeniach” z równoważną ścieżką ręczną (`vercel promote`, smoke test); zmiana skryptu jest poza zakresem (`scripts/`), zgłoszona w „Propozycjach”."}, {"data": "2026-11-06", "zrodlo": "T-16", "pytanie": "Przekierowanie `www.iskt.pl`", "decyzja": "`iskt.pl` w krokach B9a → dodane, bo endpoint odrzuca 403 żądania z `Origin` innym niż `PUBLIC_SITE_URL` (ADR-004), więc formularz pod `www` by nie działał."}]
+ostatnia_synchronizacja: 2026-11-06T09:30:28Z
 ---
 
 # Status projektu
