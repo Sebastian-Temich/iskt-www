@@ -1,6 +1,6 @@
 ---
 etap: 07-realizacja
-status: review
+status: done
 iteracja: 0
 akceptacja_wlasciciela: false
 ---
@@ -25,4 +25,4 @@ akceptacja_wlasciciela: false
 
 ## Checkpoint
 
-- [ ] Review etapu dało PASS (zaznacza reviewer, nie autor)
+- [x] Review etapu dało PASS (zaznacza reviewer, nie autor) — komentarz PASS `shctl review run 39`, commit 34a009f
