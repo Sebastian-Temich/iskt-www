@@ -27,9 +27,7 @@ const cards = otherServices(current);
           >
             <span class="other-services__title">{service.card.title}</span>
             <span class="other-services__description">{service.card.description}</span>
-            {service.external && (
-              <span class="other-services__hidden">(otwiera się w nowej karcie)</span>
-            )}
+            {service.external && <span class="visually-hidden">(otwiera się w nowej karcie)</span>}
           </a>
         </li>
       ))}
@@ -96,18 +94,6 @@ const cards = otherServices(current);
     line-height: var(--lh-relaxed);
     color: var(--text-secondary);
   }
-  .other-services__hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .other-services__card {
       transition: none;

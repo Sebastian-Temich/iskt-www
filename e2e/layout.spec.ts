@@ -139,7 +139,8 @@ test.describe('strona 404', () => {
     ).toBeVisible();
   });
 
-  test('/404 bez ukośnika przekierowuje na Vercel na /404/', () => {
+  // Sprawdza tylko konfigurację, nie samo przekierowanie HTTP (to robi Vercel po wdrożeniu).
+  test('Vercel ma włączony końcowy ukośnik (trailingSlash w vercel.json)', () => {
     const config = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
     expect(config.trailingSlash).toBe(true);
   });

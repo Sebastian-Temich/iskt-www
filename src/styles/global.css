@@ -64,6 +64,20 @@ a:hover {
    nagłówki kolumn tabel i linia copyright. Rozmiar ustala komponent; test e2e/cross/mobile.spec.ts
    wymaga ≥ 16 px od każdego p, li, td, dd, label, input i textarea bez tej klasy. */
 
+/* `.visually-hidden`: tekst tylko dla czytnika ekranu (nazwa dostępna bez śladu na ekranie), np.
+   „(otwiera się w nowej karcie)” w ServiceTile i OtherServices, podpis tabeli w ComparisonTable. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 :focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
