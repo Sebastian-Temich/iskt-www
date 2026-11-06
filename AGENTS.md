@@ -38,7 +38,7 @@ Stałe dla tego projektu, uzupełnia intake lub zadanie szkieletu:
 |---|---|
 | Typ projektu | Web: strona firmowa, strony statyczne (SSG) + jeden endpoint serverless formularza |
 | Framework | Astro 5 + TypeScript, adapter `@astrojs/vercel`, e-mail przez Resend (SDK `resend`); bez bazy danych |
-| Instalacja | `fnm use` (Node 26 LTS z `.nvmrc`), `pnpm install --frozen-lockfile` |
+| Instalacja | `fnm use` (Node 22 LTS z `.nvmrc`, jak runtime funkcji Vercel, ADR-005), `pnpm install --frozen-lockfile` |
 | Lint | `pnpm lint` (ESLint + `prettier --check .`) |
 | Typy | `pnpm typecheck` (`astro check`, TS strict) |
 | Testy | `pnpm test` (Vitest, `src/**/*.test.ts`) |
