@@ -20,7 +20,7 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | done | 2 | M1 Szkielet, layout i strona główna | #27 merged | pass |
 | #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | done | 2 | M1 Szkielet, layout i strona główna | #24 merged | pass |
 | #29 | QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main | done | 1 | M2 Formularz kontaktowy end-to-end | #30 merged | pass |
-| #41 | Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) | todo | 0 | M4 Jakość i wydanie | - | - |
+| #41 | Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) | done | 2 | M4 Jakość i wydanie | #42 merged | pass |
 <!-- sync-status:end -->
 
 ## Mapa zadań z planu

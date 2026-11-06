@@ -20,3 +20,4 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 | #15 Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | M | 2h 23min | 1 | 3 | 1 | PR #36 |
 | #16 Dokumentacja wydania (techniczna i produktowa) | M | 8min | 1 | 1 | 0 | PR #37 |
 | **Zlecenie iskt-www (całość: 00-intake → wydanie)** | M | ok. 23h 45min (2026-11-05T10:43Z – 2026-11-06T10:29Z) | 15 (12 planu + 3 QA) | 21 zadań; etapy: 00-intake 2, 04-architektura 3, 06-zadania 3, 08-qa 3+ | 8 (E-001…E-008, zamknięte) | 4 kamienie, QA M1–M4, PR #1–#39 |
+| #41 Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) | M | 1h 30min | 1 | 2 | 0 | PR #42 |

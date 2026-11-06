@@ -19,3 +19,4 @@ Plik wspólny. Aktualizuje go wyłącznie orkiestrator przez `shctl task close`.
 - #14: Strona Projekty B+R z FAQ (PR #34)
 - #15: Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu (PR #36)
 - #16: Dokumentacja wydania (techniczna i produktowa) (PR #37)
+- #41: Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) (PR #42)
