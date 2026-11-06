@@ -1,16 +1,16 @@
 ---
-zadania_todo: 3
+zadania_todo: 1
 zadania_in_progress: 0
-zadania_review: 0
+zadania_review: 1
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 16
+zadania_done: 17
 zadania_anulowane: 0
-pr_otwarte: 0
+pr_otwarte: 1
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "wlasciciel", "pytanie": "Odbiór zlecenia iskt-www (PR #40, etap wydanie)", "decyzja": "kto: właściciel w rozmowie 2026-11-06; na co: strona iskt-www na stagingu, scenariusze odbioru O-1–O-10 i poprawka nagłówka #41 (PR #42); zakres: zlecenie z planu PR #3, M1–M4; deploy prod i przejście na iskt.pl (B9a) wykonuje właściciel. Cofnięcie: polecenie właściciela: nowe zlecenie S z poprawkami"}, {"data": "2026-11-06", "zrodlo": "T-41", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `docs/02-design/zrodla/Strona firmowa ISKT/ISKT-standalone.dc.html` (wzorzec z issue), `src/layouts/BaseLayout.astro`, `src/components/ui/Button.astro`, `playwright.config.ts`, `lighthouserc.cjs`. Bez zmian."}, {"data": "2026-11-06", "zrodlo": "T-41", "pytanie": "Plik spoza „Zakresu”: zrzuty w `docs/07-realizacja/T-41/*.png`", "decyzja": "wymaga ich kryterium „zrzut porównawczy z wzorcem w raporcie”. Zrobiłem je skryptem tymczasowym (Playwright chromium, zbudowane `dist/client` serwowane statycznie), skryptu nie commituję."}, {"data": "2026-11-06", "zrodlo": "T-41", "pytanie": "Jak zarezerwować wysokość nagłówka bez JavaScriptu (CSP)?", "decyzja": "Wysokość jest stała w zmiennej `--site-header-home-h`: 40 px, a poniżej 520 px dwa rzędy po 40 px + 16 px. Rzędy mają stałą wysokość, a zawijanie CTA wymusza `flex-direction: column` poniżej progu. Próg 520 px to szerokość, przy której logo z nazwą i CTA mieszczą się w jednym rzędzie (≈430 px + marginesy). Wzorzec zawija przez `flex-wrap`, więc przy 430-520 px u nas CTA przechodzi do drugiego rzędu nieco wcześniej. Przy 375, 768 i 1440 px układ jest zgodny."}, {"data": "2026-11-06", "zrodlo": "T-41", "pytanie": "Jak nałożyć nagłówek na hero, skoro `<header>` musi być poza `<main>`, a hero jest w `<main>`?", "decyzja": "Wariant home ma `position: absolute`, a hero rezerwuje miejsce przez `padding-top`. Alternatywy odrzuciłem: `display: contents` na `<main>` ryzykuje utratę landmarku, a tło na `<body>` wymaga znajomości wysokości hero."}]
-ostatnia_synchronizacja: 2026-11-06T13:44:50Z
+ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "Zrzuty porównawcze w `docs/07-realizacja/T-43/` (obok raportu)", "decyzja": "kryterium wymaga ich w raporcie; zrobione tymczasowym specem Playwright, usuniętym przed commitem."}, {"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "Jak zmieścić nagłówek w jednym rzędzie od 360 px?", "decyzja": "mniejsza nazwa marki i padding CTA poniżej 768 px, a poniżej 430 px ukrycie wizualne słowa „Greennovation” (z dopuszczalnych opcji z kryterium). Font i wysokość CTA bez zmian, żeby przycisk był czytelny i miał obszar kliknięcia 40 px. Próg 430 px: przy 440 px pełna nazwa mieści się (zrzut), a przy 390 px wnętrze ma ok. 350 px, mniej niż szacowane ok. 385 px na logo, pełną nazwę i CTA."}, {"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "Zmiana pliku spoza listy „Zakres”", "decyzja": "`src/components/layout/SiteHeader.astro`, bo kryterium z odbioru właściciela (komentarz w #43) dotyczy nagłówka strony głównej; zmiany tylko w regułach wariantu `home`, wariant `page` bez zmian. `e2e/qa/QA-M1-1-wydajnosc.spec.ts` jest w `e2e/` (zakres): zmienione widoki pomiaru, bo na 375 px nie ma już logo."}, {"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "`ComparisonTable` w wariancie `subtle` dostaje też krawędź górną", "decyzja": "tak jest we wzorcu (l. 164); wariant domyślny bez zmian."}, {"data": "2026-11-06", "zrodlo": "T-43", "pytanie": "Szerokość leadu ServiceHero jako wariant klasy, nie liczba w stylu inline", "decyzja": "CSP `style-src 'self'` bez `'unsafe-inline'` blokuje atrybut `style`."}]
+ostatnia_synchronizacja: 2026-11-06T19:23:24Z
 ---
 
 # Status projektu

@@ -20,3 +20,4 @@ Plik wspólny. Aktualizuje go wyłącznie orkiestrator przez `shctl task close`.
 - #15: Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu (PR #36)
 - #16: Dokumentacja wydania (techniczna i produktowa) (PR #37)
 - #41: Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) (PR #42)
+- #43: Mobile i zgodność z designem: logo w hero, przyciski, formularz, drobne różnice stron usług (PR #47)

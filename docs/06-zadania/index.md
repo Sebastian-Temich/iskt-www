@@ -21,8 +21,8 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | done | 2 | M1 Szkielet, layout i strona główna | #24 merged | pass |
 | #29 | QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main | done | 1 | M2 Formularz kontaktowy end-to-end | #30 merged | pass |
 | #41 | Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) | done | 2 | M4 Jakość i wydanie | #42 merged | pass |
-| #43 | Mobile i zgodność z designem: logo w hero, przyciski, formularz, drobne różnice stron usług | todo | 0 | - | - | - |
-| #44 | SEO strony głównej i dokumentacja wydania po odbiorze | todo | 0 | - | - | - |
+| #43 | Mobile i zgodność z designem: logo w hero, przyciski, formularz, drobne różnice stron usług | done | 1 | - | #47 merged | pass |
+| #44 | SEO strony głównej i dokumentacja wydania po odbiorze | review | 2 | - | #46 open | pass |
 | #45 | Higiena kodu i testów: visually-hidden, nazwy testów, port Playwright | todo | 0 | - | - | - |
 <!-- sync-status:end -->
 
