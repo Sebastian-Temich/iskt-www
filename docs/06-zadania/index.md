@@ -23,7 +23,7 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 | #41 | Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) | done | 2 | M4 Jakość i wydanie | #42 merged | pass |
 | #43 | Mobile i zgodność z designem: logo w hero, przyciski, formularz, drobne różnice stron usług | done | 1 | - | #47 merged | pass |
 | #44 | SEO strony głównej i dokumentacja wydania po odbiorze | done | 2 | - | #46 merged | pass |
-| #45 | Higiena kodu i testów: visually-hidden, nazwy testów, port Playwright | todo | 0 | - | - | - |
+| #45 | Higiena kodu i testów: visually-hidden, nazwy testów, port Playwright | done | 2 | - | #48 merged | pass |
 <!-- sync-status:end -->
 
 ## Mapa zadań z planu

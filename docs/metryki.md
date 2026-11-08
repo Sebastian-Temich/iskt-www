@@ -23,3 +23,4 @@ Plik wspólny, aktualizuje orkiestrator. Pomiar poglądowy, służy też do por�
 | #41 Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) | M | 1h 30min | 1 | 2 | 0 | PR #42 |
 | #43 Mobile i zgodność z designem: logo w hero, przyciski, formularz, drobne różnice stron usług | S | 5h 37min | 1 | 1 | 0 | PR #47 |
 | #44 SEO strony głównej i dokumentacja wydania po odbiorze | S | 5h 38min | 1 | 2 | 0 | PR #46 |
+| #45 Higiena kodu i testów: visually-hidden, nazwy testów, port Playwright | S | 51h 43min | 1 | 2 | 0 | PR #48 |

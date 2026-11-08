@@ -1,16 +1,16 @@
 ---
-zadania_todo: 1
+zadania_todo: 0
 zadania_in_progress: 0
 zadania_review: 0
 zadania_blocked: 0
 zadania_escalated: 0
-zadania_done: 18
+zadania_done: 19
 zadania_anulowane: 0
 pr_otwarte: 0
 ci_fail: 0
 wstrzymania: []
-ostatnie_decyzje: [{"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "-", "decyzja": "Dodatkowo przeczytane źródła: `src/components/layout/Seo.astro`, `src/pages/index.astro`, `docs/decyzje.md` i `docs/status.md` (decyzja właściciela o wysyłce z 2026-11-06), kod `@astrojs/vercel` (`dist/index.js`) i pola `engines` zależności. Nic w nich nie zmieniałem."}, {"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "Pliki spoza „Zakresu” w iteracji 2: `docs/04-architektura/adr/ADR-005-node-22-zamiast-26.md` i `AGENTS.md` (wiersz „Instalacja”)", "decyzja": "wymaga ich zgłoszenie 🟡 z review (zmiana kontraktu wymaga ADR) i polecenie orkiestratora. Wiersz „Node” w tabeli kontraktu stałego („LTS przez fnm”) bez zmian, bo 22 to LTS."}, {"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "Plik spoza „Zakresu”: `docs/07-realizacja/T-44.md`", "decyzja": "raport wymagany przez proces."}, {"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "Plik spoza „Zakresu”: `src/content/seo.test.ts`", "decyzja": "test jednostkowy limitów wymaga kryterium „Testy SEO (unit/E2E)”, a testy unit leżą obok `seo.ts`."}, {"data": "2026-11-06", "zrodlo": "T-44", "pytanie": "Jak skrócić treść?", "decyzja": "Usunąłem słowa powtórzone albo najmniej istotne („i wdrożenia”, „raportowanie”, „dedykowane”, w tytule „dla firm”). Marki i „Żory” w tytule nie ruszałem. Treść czeka na akceptację właściciela (tabela w „Co zrobiono”)."}]
-ostatnia_synchronizacja: 2026-11-06T19:24:08Z
+ostatnie_decyzje: [{"data": "2026-11-09", "zrodlo": "T-45", "pytanie": "Test układu formularza w `home.spec.ts` też miał „bez wysyłki” w nazwie (założenie z M1)", "decyzja": "zmieniona nazwa na „bez action”, bo ten test sprawdza brak atrybutu `action`, a „bez wysyłki” sugerowało, że formularz nic nie wysyła."}, {"data": "2026-11-09", "zrodlo": "T-45", "pytanie": "Czy `E2E_PORT` trafia do `.env.example`?", "decyzja": "tak (iteracja 2, zgłoszenie 🟡 z review). Zakres zadania rozszerzył orkiestrator o `.env.example`. Wpis wykonał orkiestrator, bo profil workera odrzucał Edit tego pliku mimo `allow: Edit(.env.example)`. W iteracji 1 wpisu nie było, z tego samego powodu."}, {"data": "2026-11-09", "zrodlo": "T-45", "pytanie": "Nazwa zmiennej portu", "decyzja": "`E2E_PORT`, bo `PORT` czytają inne narzędzia (np. serwery Node) i mogłaby przypadkiem zmienić port testów."}, {"data": "2026-11-09", "zrodlo": "T-45", "pytanie": "Skąd lista stron w „linki wewnętrzne bez 404”?", "decyzja": "z `e2e/cross/pages.ts` (`W01_PAGES`, `POLICY_PAGE`), a nie dopisanie jednego adresu, bo wszystkie strony W-01 już istnieją i lista nie rozjedzie się ponownie."}, {"data": "2026-11-09", "zrodlo": "T-45", "pytanie": "Jak sprawdzić status strony po kliknięciu kafla bez `waitForNavigation`?", "decyzja": "`waitForURL` plus osobne `request.get(href)` z oczekiwanym 200. `waitForResponse` dla nawigacji mógłby zawisnąć w WebKit, gdy strona przyjdzie z pamięci podręcznej (stary komentarz wspominał 304), a osobne żądanie sprawdza status ściślej (200 zamiast < 400)."}]
+ostatnia_synchronizacja: 2026-11-08T23:08:23Z
 ---
 
 # Status projektu
