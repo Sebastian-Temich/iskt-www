@@ -37,7 +37,7 @@ Stan po ostatnim kamieniu milowym, potrzebny do wznowienia po `/clear` i „wzn�
 - Autoryzacja: „Autoryzacja planu PR #3” wygasła z odbiorem zlecenia; nowe prace tylko jako nowe zlecenie
 - Wysyłka formularza na stagingu: `formularz@iskt.pl` → `biuro@iskt.pl`, Reply-To klienta (decyzja właściciela 2026-11-06)
 - Worktree etapów usunięte
-- Następny krok: właściciel — przejście na iskt.pl i deploy prod według B9a (`docs/wydanie/techniczna/dokumentacja-techniczna.md`); drobne uwagi w `backlog-drobne.md` do ewentualnego zlecenia S
+- Następny krok: brak — produkcja odłożona przez właściciela 2026-11-09 (projekt na `main`); B9a i ewentualne zlecenie S na `deploy-prod.sh` dopiero na jego polecenie. Zlecenie S po odbiorze (#43–#45) zamknięte
 
 ## Dziennik etapów
 
