@@ -33,13 +33,13 @@ test.describe('QA M3', () => {
 
     for (const href of SERVICE_PAGES) {
       await page.goto('/');
-      const [response] = await Promise.all([
-        page.waitForNavigation(),
+      await Promise.all([
+        page.waitForURL((url) => url.pathname === href),
         page.locator(`#kompetencje .service-grid a[href="${href}"]`).click(),
       ]);
-      // WebKit może zwrócić 304 dla strony odwiedzonej wcześniej w tym teście (pamięć podręczna).
-      expect(response?.status() ?? 0, href).toBeLessThan(400);
       expect(new URL(page.url()).pathname).toBe(href);
+      // Status osobnym żądaniem: odpowiedź nawigacji w WebKit bywa 304 albo z pamięci podręcznej.
+      expect((await request.get(href)).status(), href).toBe(200);
 
       // Breadcrumb z bieżącą stroną.
       const crumb = page.locator('nav.breadcrumb');

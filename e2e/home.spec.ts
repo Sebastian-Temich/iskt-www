@@ -176,7 +176,9 @@ test.describe('strona główna', () => {
     });
   }
 
-  test('kontakt: treść, dane z site.ts i formularz z polami i etykietami, bez wysyłki', async ({
+  // Sam układ sekcji, bez wysyłania. Formularz nie ma atrybutu `action`: wysyła go skrypt (fetch
+  // POST /api/contact), co sprawdza test wysłania niżej.
+  test('kontakt: treść, dane z site.ts i formularz z polami i etykietami, bez action', async ({
     page,
   }) => {
     await page.goto('/');
@@ -219,7 +221,10 @@ test.describe('strona główna', () => {
     await expect(submit.locator('svg[data-icon="send"]')).toHaveCount(1);
   });
 
-  test('kontakt: wysłanie formularza nie zmienia adresu i nie przenosi danych do URL', async ({
+  // Prawdziwa wysyłka: skrypt formularza robi POST /api/contact, a serwer testów (playwright.config.ts)
+  // działa z MAIL_TRANSPORT=mock, więc żaden e-mail nie wychodzi. Test sprawdza, że wysłanie do mocka
+  // nie przeładowuje strony i nie przenosi danych do URL (jak przy wysyłce GET bez JS).
+  test('kontakt: wysłanie formularza do mocka nie zmienia adresu i nie przenosi danych do URL', async ({
     page,
   }) => {
     await page.goto('/');
