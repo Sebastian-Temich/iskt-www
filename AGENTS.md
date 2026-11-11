@@ -25,11 +25,11 @@ Stałe dla wszystkich projektów:
 | Obszar | Kontrakt |
 |---|---|
 | Node | LTS przez fnm |
-| Pakiety JS | Wyłącznie pnpm |
+| Pakiety JS | Wyłącznie pnpm; skrypty budowania zależności tylko z `allowBuilds` w `pnpm-workspace.yaml` |
 | Python | uv |
 | Baza lokalnie | Supabase CLI, blok portów z `/Users/Shared/sh/porty.md` |
 | Docker | Tylko dla usług (Supabase) |
-| Testy E2E | Playwright w wersji z `konfiguracja.md`, chromium + webkit, headless, `workers` z `konfiguracja.md` |
+| Testy E2E | Playwright w wersji z `konfiguracja.md`, chromium + webkit, headless, `workers` z `konfiguracja.md`. Uruchamia je wyłącznie CI: job `e2e` na PR i `qa-staging` (PR z `stage/08-qa`, na `staging_url`, z Lighthouse). `playwright.config` bierze `baseURL` z `BASE_URL`, a `webServer` tylko bez `BASE_URL` |
 | Hosting | Z pola `hosting` w `konfiguracja.md` |
 
 Stałe dla tego projektu, uzupełnia intake lub zadanie szkieletu:
@@ -42,12 +42,12 @@ Stałe dla tego projektu, uzupełnia intake lub zadanie szkieletu:
 | Lint | `pnpm lint` (ESLint + `prettier --check .`) |
 | Typy | `pnpm typecheck` (`astro check`, TS strict) |
 | Testy | `pnpm test` (Vitest, `src/**/*.test.ts`) |
-| E2E | `pnpm exec playwright install chromium webkit` (raz), `pnpm test:e2e` (Playwright 1.61.1 chromium + webkit, `workers: 1`, na `astro build` + `astro preview --port 55327`) |
+| E2E | Tylko CI (job `e2e`): `pnpm test:e2e` (Playwright 1.61.1 chromium + webkit, `workers: 1`, na `astro build` + `astro preview`, port `E2E_PORT`, domyślnie 55327); `MAIL_TRANSPORT=mock`. Odstępstwo od kontraktu: `playwright.config.ts` nie czyta jeszcze `BASE_URL`, więc `qa-staging` wymaga najpierw zadania dostosowującego config (backlog) |
 | Build | `pnpm build` (wynik dla Vercel w `.vercel/output/`) |
 | Uruchomienie lokalne | `pnpm dev --port 55326` (port `dev` z bloku 55321-55329); `.env.local` z kluczem testowym albo `MAIL_TRANSPORT=mock` |
 | Baza danych | Brak — odstępstwo od kontraktu stałego („Baza lokalnie”, „Docker”) wg ADR-002 |
 
-Zmiana kontraktu wymaga ADR w `docs/04-architektura/adr/`.
+Zmiana kontraktu wymaga ADR w `docs/04-plan/adr/`.
 
 Zależności projektowe instalujesz sam. Narzędzie z brew instalujesz sam i dopisujesz do
 `/Users/Shared/sh/Brewfile`. Sudo, ustawienia systemu i Docker Desktop zmienia wyłącznie właściciel.
@@ -55,7 +55,7 @@ Zależności projektowe instalujesz sam. Narzędzie z brew instalujesz sam i dop
 ## Gałęzie, commity, PR
 
 - Zadanie: `task/NR-slug`, gdzie `NR` to numer issue, np. `task/42-logowanie`.
-- Dokumenty etapu: `stage/ETAP`, np. `stage/04-architektura`.
+- Dokumenty etapu: `stage/ETAP`, np. `stage/04-plan`.
 - Nie commitujesz i nie pushujesz bezpośrednio na `main`. Wyjątek: orkiestrator i pliki wspólne.
 - Commit: krótko, w trybie rozkazującym, z numerem zadania, np. `#42: dodaj formularz logowania`.
 - Jeden PR na zadanie. Opis zawiera `Closes #NR` i wypełnioną checklistę z szablonu PR.
@@ -71,7 +71,8 @@ liście eskalacji.
 
 Worker NIE edytuje tych plików. Aktualizuje je wyłącznie orkiestrator, na `main`, po merge'u:
 
-- `docs/status.md`
+- `docs/Projekt.md` (generuje `scripts/sync-status.sh`)
+- `docs/historia.md` (punkt przekazania, dziennik etapów, lista zadań z `scripts/sync-status.sh`)
 - `docs/decyzje.md`
 - `docs/metryki.md`
 - `docs/backlog-drobne.md`
@@ -83,27 +84,56 @@ Worker pisze tylko kod, testy, docs obszaru swojego zadania i własny raport.
 ## Profil workera (Bash)
 
 Worker działa w trybie `dontAsk` z `.claude/roles/worker/settings.json`: polecenie spoza listy
-dozwolonych dostaje odmowę bez pytania. Claude Code sprawdza każdą część potoku, `&&` i `;`
-osobno, więc każda część musi być dozwolona.
+dozwolonych dostaje odmowę bez pytania. Jedno wywołanie Bash to jedna prosta komenda: bez `&&`, `;`,
+pętli, `$(...)`, heredoców, `cd` i przekierowań do pliku (szczegóły i przykłady: skill `sh-worker`).
 
-- Dozwolone: `pnpm`, `npx`, `node`, `bats`, `shellcheck`, `gitleaks`, `bash scripts/check-dod.sh`;
-  `rm`, `mv`, `cp`, `mkdir`, `touch` na ścieżkach względnych w worktree; pomocnicze `head`,
-  `tail`, `grep`, `wc`, `sort`, `cut`, `echo`; git na swojej gałęzi, push tylko
-  `git push [-u] [-q] origin task/*`; `gh pr view|checks|diff|list`, `gh run view|list|watch`.
-- Zablokowane: push na `main` i `production`, force push (poza `--force-with-lease` na `task/*`),
-  usuwanie gałęzi, `gh api`, `gh pr merge`, `rm`/`mv`/`cp` ze ścieżką bezwzględną, `~` lub `..`,
-  na plikach wspólnych, `.claude/` i `.env*`, wszystko z `.env.prod*`.
-- Do czytania plików używaj narzędzi Read, Grep i Glob, nie `cat`.
+- Dozwolone: `git`, `gh`, `pnpm`, `npm`, `npx`, `node`, `uv`, `fnm list|current|exec`, lokalne `supabase` (init, start, stop,
+  status, migration, db reset/diff, gen types, test db), `gitleaks`, `bats`, `shellcheck`,
+  `bash scripts/check-dod.sh`, `shctl escalate`; `rm`, `mv`, `cp`, `mkdir`, `touch` w worktree;
+  pomocnicze `cat`, `head`, `tail`, `grep`, `wc`, `sort`, `uniq`, `cut`, `diff`, `echo`, `which`.
+  Edycja `.env.example` jest dozwolona.
+- Zablokowane (krótka lista deny): sekrety i `.env*` poza `.env.example` (odczyt, edycja, komendy;
+  każdy wariant w każdym katalogu, np. `.env.ci`, `apps/web/.env`, pilnuje hook `env-hook.sh`);
+  pliki wspólne, `.claude/` i konfiguracja produkcji; push na `main` i `production`, `vercel`,
+  `supabase link|db push|secrets|functions deploy`; `git push --force|-f`, refspec z `+`, usuwanie
+  gałęzi; `gh api` z `-X`/`--method` albo polami (`-f`, `-F`, `--field`, `--raw-field`, `--input`);
+  `gh secret|variable|auth|alias|extension|workflow`, `gh repo delete|edit`, `gh pr merge|close`,
+  `gh issue close|edit|delete`, `gh gist`, `gh release upload`; `git -c`, `git -C`, `git config`,
+  `--no-index`, `--exec-path`; `sudo`; `rm` poza worktree; `~/Documents`, `~/Desktop`, `~/Downloads`
+  i iCloud (`~/Library/Mobile Documents`).
+- Sandbox: każde polecenie Bash poza `git push|fetch|pull`, `gh`, `shctl escalate` i `brew install` działa w sandboxie
+  Claude Code. Zapis tylko w worktree, `$TMPDIR` i cache narzędzi (`~/Library/pnpm`, `~/.npm`,
+  `~/.cache`, `~/Library/Caches`, katalogi blokad pnpm `/tmp/pnpm-*-502`), sieć tylko do GitHuba, rejestru npm i pobierania Playwrighta.
+  Odmowa sandboxa (`EPERM`, `403` z proxy) to granica roli: nie obchodzisz jej, opisujesz w „Ryzykach”
+  albo eskalujesz, gdy blokuje kryterium.
+- Gałąź zadania aktualizujesz o `main` przez `gh pr update-branch NR_PR` i `git pull` (bez PR:
+  `git pull --no-rebase origin main`), nie lokalnym `git merge`: ten działa w sandboxie, który nie
+  pozwala zapisać plików wspólnych, i pada w połowie, gdy `main` je zmienia.
+- E2E i Lighthouse nie działają lokalnie (przeglądarki nie startują w sandboxie). Lokalnie: lint, typy,
+  testy jednostkowe i build. Testy E2E piszesz, a uruchamia je CI; czerwony job `e2e` czytasz przez
+  `gh run view RUN --log-failed` i poprawiasz w zakresie zadania.
+- Do czytania plików używaj narzędzi Read, Grep i Glob, do zmian Edit i Write, nie `sed`, `cat >`
+  ani skryptów `python3 -`/`node -e`.
+
+## Profil reviewera
+
+`shctl review run` uruchamia reviewera Claude w świeżej sesji (`claude -p`) z
+`.claude/roles/reviewer/settings.json` wziętym z `main`, nie z gałęzi PR. Profil jest tylko do odczytu:
+bez Edit i Write, Bash tylko `git diff|log|show|status|ls-files|grep|merge-base|rev-parse`, `ls`,
+`wc`, sandbox bez sieci, te same hooki odczytu i `.env*` co u workera. Zmiana profilu to zmiana
+uprawnień: tylko przez PR szablonu z akceptacją właściciela.
 
 ## Raport zadania
 
 Każde zadanie kończy się raportem `docs/07-realizacja/T-NR.md`, szablon:
-`docs/_szablony/raport-zadania.md`. Bez raportu zadanie nie jest gotowe. Sekcje obowiązkowe:
+`docs/_szablony/raport-zadania.md`. Bez raportu zadanie nie jest gotowe. Linię `PR:` wpisuje
+`shctl task close` po merge'u, więc numer PR nie wymaga drugiego commita. Sekcje obowiązkowe:
 
 - **Decyzje** (orkiestrator przenosi do `decyzje.md`),
 - **Drobne uwagi** (orkiestrator przenosi do `backlog-drobne.md`),
 - **Ryzyka** (dla reviewera i orkiestratora),
-- **Propozycje dla systemu** (orkiestrator zbiera do `sh-system/docs/propozycje.md`).
+- **Propozycje dla systemu** (`shctl task close` dopisuje je jako komentarz do issue miesiąca
+  „Propozycje RRRR-MM” w `sh-system`).
 
 DoD zadania: kryteria z issue spełnione, testy zielone, raport `T-NR.md`, brak sekretów, migracje
 zgodne wstecz.
@@ -144,6 +174,10 @@ Eskalujesz tylko gdy:
 - decyzja jest nieodwracalna,
 - wymagania są sprzeczne,
 - jest ryzyko bezpieczeństwa lub prawne.
+
+Niejasności UX (stan ekranu, komunikat, przebieg) i reguły biznesowej worker nie zgaduje i nie
+rozstrzyga sam: `shctl escalate --typ pytanie` i dalej części niezależne. Pytanie nie jest iteracją ani
+porażką i nie zwalnia slotu. Szczegóły funkcji są w karcie `docs/00-intake/funkcje/W-NN.md`.
 
 Eskalacja to `shctl escalate`, który zakłada `docs/07-realizacja/escalations/E-NNN.md` i wysyła
 powiadomienie. Eskalacja nie zatrzymuje zadań niezależnych.

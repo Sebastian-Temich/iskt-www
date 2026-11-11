@@ -19,6 +19,10 @@
       "Bash(npx *)",
       "Bash(node *)",
       "Bash(uv *)",
+      "Bash(fnm list)",
+      "Bash(fnm list *)",
+      "Bash(fnm current)",
+      "Bash(fnm exec *)",
       "Bash(supabase init)",
       "Bash(supabase init *)",
       "Bash(supabase status *)",
@@ -64,6 +68,20 @@
       "Skill(tworca-wymagan)",
       "Skill(iskt-softwarehouse-tworca-wymagan)",
       "Skill(iskt-planista-realizacji)",
+      "Read(~/Documents/**)",
+      "Edit(~/Documents/**)",
+      "Read(~/Desktop/**)",
+      "Edit(~/Desktop/**)",
+      "Read(~/Downloads/**)",
+      "Edit(~/Downloads/**)",
+      "Read(~/Library/Mobile Documents/**)",
+      "Edit(~/Library/Mobile Documents/**)",
+      "Bash(gh gist *)",
+      "Bash(gh release upload *)",
+      "Bash(git * --no-index*)",
+      "Bash(git * --exec-path*)",
+      "Bash(git --exec-path*)",
+      "Bash(git blame *--contents*)",
       "Read(**/.env)",
       "Read(**/.env.local)",
       "Read(**/.env.*.local)",
@@ -85,7 +103,8 @@
       "Bash(*.env.test*)",
       "Bash(*.env.staging*)",
       "Bash(*.env.prod*)",
-      "Edit(docs/status.md)",
+      "Edit(docs/Projekt.md)",
+      "Edit(docs/historia.md)",
       "Edit(docs/decyzje.md)",
       "Edit(docs/metryki.md)",
       "Edit(docs/backlog-drobne.md)",
@@ -118,7 +137,6 @@
       "Bash(git push *+*)",
       "Bash(git push *--delete*)",
       "Bash(git push * -d *)",
-      "Bash(git push * :*)",
       "Bash(git push *--mirror*)",
       "Bash(gh api *-X*)",
       "Bash(gh api *--method*)",
@@ -171,7 +189,65 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/Shared/sh/bin/gh-plik-hook.sh || exit 2",
+            "timeout": 10
+          }
+        ]
       }
     ]
+  },
+  "sandbox": {
+    "enabled": true,
+    "allowUnsandboxedCommands": false,
+    "excludedCommands": [
+      "git push",
+      "git push *",
+      "git fetch",
+      "git fetch *",
+      "git pull",
+      "git pull *",
+      "gh *",
+      "shctl escalate *",
+      "/Users/Shared/sh/bin/shctl escalate *",
+      "brew install *"
+    ],
+    "network": {
+      "allowedDomains": [
+        "github.com",
+        "api.github.com",
+        "*.githubusercontent.com",
+        "codeload.github.com",
+        "registry.npmjs.org",
+        "cdn.playwright.dev",
+        "playwright.download.prss.microsoft.com",
+        "playwright.azureedge.net"
+      ],
+      "allowLocalBinding": true,
+      "allowUnixSockets": [
+        "~/.docker/run/docker.sock",
+        "/var/run/docker.sock"
+      ],
+      "allowMachLookup": [
+        "com.apple.trustd.agent"
+      ]
+    },
+    "filesystem": {
+      "allowWrite": [
+        "~/Library/pnpm",
+        "~/Library/Caches",
+        "~/.npm",
+        "~/.cache",
+        "/private/tmp/pnpm-store-operation-locks-502",
+        "/private/tmp/pnpm-dir-locks-502",
+        "/private/tmp/pnpm-modules-swaps-502",
+        "/private/tmp/pnpm-verify-deps-install-locks-502"
+      ]
+    }
   }
 }

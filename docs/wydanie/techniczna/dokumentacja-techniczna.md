@@ -9,8 +9,8 @@ zadanie: 16
 # Dokumentacja techniczna: iskt-www
 
 Strona firmowa ISKT Greennovation. Wymagania: `docs/00-intake/specyfikacja.md` (W-01 do W-12).
-Architektura: `docs/04-architektura/architektura.md` i ADR-001 do ADR-004. Plan i zadania właściciela:
-`docs/05-plan/plan.md`. Dokument nie zawiera wartości sekretów, tylko nazwy zmiennych.
+Architektura: `docs/04-plan/plan.md` („Architektura”) i ADR-001 do ADR-005. Plan i zadania właściciela:
+`docs/04-plan/plan.md`. Dokument nie zawiera wartości sekretów, tylko nazwy zmiennych.
 
 ## Architektura w skrócie
 
