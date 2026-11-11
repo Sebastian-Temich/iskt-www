@@ -149,10 +149,12 @@ potrzebna: CI zawsze startuje własny serwer.
 | `CHANGELOG.md` | Zmiany projektu, aktualizowane przez `shctl task close` |
 | `docs/` | Etapy z `DoD.md`, pliki wspólne, `konfiguracja.md` |
 | `docs/_szablony/` | Szablony dokumentów |
-| `docs/_dashboard.md` | Widok Dataview (tylko DQL) w Obsidianie: etapy, zadania, eskalacje, decyzje, wstrzymania, „Czeka na Ciebie” |
+| `docs/Projekt.md` | Widok stanu dla właściciela (etap, postęp, „Czeka na Ciebie”), generuje `scripts/sync-status.sh` |
+| `docs/historia.md` | Punkt przekazania, dziennik etapów i lista wszystkich zadań |
+| `docs/00-intake/funkcje/` | Karty funkcji `W-NN` (dla właściciela i dla wykonawcy) |
 | `scripts/check-dod.sh` | Walidacja DoD, zakaz hooków git i kodu wykonywalnego w `docs/`, działa w CI |
 | `scripts/setup-labels.sh` | Etykiety GitHub, idempotentnie |
-| `scripts/sync-status.sh` | Stan issue, PR i CI do `06-zadania/index.md` i `status.md`, wstrzymania z `/Users/Shared/sh/limity.md`, ostatnie decyzje |
+| `scripts/sync-status.sh` | Stan issue, PR i CI do `06-zadania/index.md`, `Projekt.md` i `historia.md`, wstrzymania z `/Users/Shared/sh/limity.md` |
 | `scripts/deploy-prod.sh` | Wdrożenie produkcyjne, tylko dla właściciela; testy w `scripts/tests/` |
 | `.claude/roles/` | Profile uprawnień, uruchamiane przez `claude --settings` |
 | `.github/` | Szablony issue i PR, CI, migracje staging, zablokowany workflow deploy produkcyjny |
@@ -160,9 +162,9 @@ potrzebna: CI zawsze startuje własny serwer.
 ## Tryby w DoD
 
 Każdy `DoD.md` zawiera checklistę trybu M. Punkty tylko dla trybu L stoją w bloku
-`<!-- tylko-tryb:L -->` i `check-dod.sh` liczy je wyłącznie w trybie L. Etapy `01-brief`,
-`02-design` i `03-wymagania` należą tylko do trybu L. Tryb S nie ma DoD etapów: jego DoD to issue i
-checklista PR.
+`<!-- tylko-tryb:L -->` i `check-dod.sh` liczy je wyłącznie w trybie L. Etapy procesu v2
+(`wersja_procesu: 2`): `00-intake`, `04-plan`, `06-zadania`, `08-qa`, `wydanie`. Tryb S nie ma DoD
+etapów: jego DoD to issue i checklista PR.
 
 Pole, które w projekcie nie ma zastosowania (np. E2E w bibliotece bez UI), zapisujemy jako
 `- [-] treść pola (nie dotyczy: powód)`. `check-dod.sh` liczy je jak zamknięte, a `[-]` bez powodu

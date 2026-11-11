@@ -84,7 +84,7 @@ Szczegóły prawne: polityka prywatności (`/polityka-prywatnosci/`). Decyzje: A
 
 ### Scenariusze odbioru
 
-Scenariusze z planu (`docs/05-plan/plan.md`, „Scenariusze odbioru”), do przejścia na stagingu
+Scenariusze z planu (`docs/04-plan/plan.md`, „Scenariusze odbioru”), do przejścia na stagingu
 https://iskt-www.vercel.app. Kolumna „Uwagi” mówi, co zostało do sprawdzenia przez właściciela.
 
 | Nr | Scenariusz | Kroki | Oczekiwany wynik | Uwagi |

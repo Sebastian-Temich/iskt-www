@@ -304,7 +304,7 @@ Usługi: Vercel Hobby/Pro i Resend Free wystarczają na v1; ewentualny płatny p
 |---|---|---|
 | Auth i RLS, role użytkowników | nie | Brak kont i panelu |
 | Płatności | nie | — |
-| Dane osobowe | tak | Formularz zbiera imię, e-mail i treść. Minimum M i ADR-001 `docs/04-architektura/adr/ADR-001-dane-osobowe-w-formularzu-kontaktowym.md` (decyzja właściciela E-001), powiązany z W-04, W-05 i W-06. Testy logów bez PII |
+| Dane osobowe | tak | Formularz zbiera imię, e-mail i treść. Minimum M i ADR-001 `docs/04-plan/adr/ADR-001-dane-osobowe-w-formularzu-kontaktowym.md` (decyzja właściciela E-001), powiązany z W-04, W-05 i W-06. Testy logów bez PII |
 | AI przetwarzające dane użytkowników | nie | — |
 | Migracje bazy produkcyjnej | nie | Brak bazy |
 | Upload plików, integracje zewnętrzne | tak | Integracja Resend: walidacja wejścia, timeout 10 s, obsługa błędów (W-04), rate limit i honeypot (W-05) |
@@ -313,7 +313,7 @@ Usługi: Vercel Hobby/Pro i Resend Free wystarczają na v1; ewentualny płatny p
 
 ### Ustalenia wejściowe do ADR: dane osobowe w formularzu (W-04, W-05, W-06)
 
-Decyzje zapisane w ADR-001 (`docs/04-architektura/adr/ADR-001-dane-osobowe-w-formularzu-kontaktowym.md`,
+Decyzje zapisane w ADR-001 (`docs/04-plan/adr/ADR-001-dane-osobowe-w-formularzu-kontaktowym.md`,
 status „proponowana”; napisany w intake na decyzję właściciela E-001, architekt przyjmuje go albo
 zastępuje nowym ADR):
 

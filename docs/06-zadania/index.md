@@ -5,25 +5,25 @@ Plik wspólny. Tabelę generuje `scripts/sync-status.sh`, nie edytuj jej ręczni
 <!-- sync-status:start -->
 | Zadanie | Tytuł | Status | Iteracja | Kamień milowy | PR | CI |
 |---|---|---|---|---|---|---|
-| #5 | Szkielet projektu Astro, CI, tokeny i czcionki | done | 1 | M1 Szkielet, layout i strona główna | #17 merged | pass |
-| #6 | Layout strony i prymitywy UI, strona 404 | done | 2 | M1 Szkielet, layout i strona główna | #18 merged | pass |
-| #7 | SEO techniczne - meta, Open Graph, sitemap, robots, favicony | done | 1 | M1 Szkielet, layout i strona główna | #20 merged | pass |
-| #8 | Strona główna - hero, kompetencje, sekcja kontaktu | done | 2 | M1 Szkielet, layout i strona główna | #19 merged | pass |
-| #9 | Strona polityki prywatności z roboczą treścią | done | 1 | M2 Formularz kontaktowy end-to-end | #25 merged | pass |
-| #10 | Komponenty stron usług i strona ESG | done | 1 | M3 Strony usług | #31 merged | pass |
-| #11 | Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | done | 1 | M2 Formularz kontaktowy end-to-end | #26 merged | pass |
-| #12 | Strony AI-transformacja i Oprogramowanie | done | 1 | M3 Strony usług | #33 merged | pass |
-| #13 | Strony Interim i Startupy | done | 1 | M3 Strony usług | #32 merged | pass |
-| #14 | Strona Projekty B+R z FAQ | done | 1 | M3 Strony usług | #34 merged | pass |
-| #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | done | 3 | M4 Jakość i wydanie | #36 merged | pass |
-| #16 | Dokumentacja wydania (techniczna i produktowa) | done | 1 | M4 Jakość i wydanie | #37 merged | pass |
-| #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | done | 2 | M1 Szkielet, layout i strona główna | #27 merged | pass |
-| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | done | 2 | M1 Szkielet, layout i strona główna | #24 merged | pass |
-| #29 | QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main | done | 1 | M2 Formularz kontaktowy end-to-end | #30 merged | pass |
-| #41 | Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) | done | 2 | M4 Jakość i wydanie | #42 merged | pass |
-| #43 | Mobile i zgodność z designem: logo w hero, przyciski, formularz, drobne różnice stron usług | done | 1 | - | #47 merged | pass |
-| #44 | SEO strony głównej i dokumentacja wydania po odbiorze | done | 2 | - | #46 merged | pass |
-| #45 | Higiena kodu i testów: visually-hidden, nazwy testów, port Playwright | done | 2 | - | #48 merged | pass |
+| #5 | Szkielet projektu Astro, CI, tokeny i czcionki | done | 1 | M1 Szkielet, layout i strona główna | #17 merged | - |
+| #6 | Layout strony i prymitywy UI, strona 404 | done | 2 | M1 Szkielet, layout i strona główna | #18 merged | - |
+| #7 | SEO techniczne - meta, Open Graph, sitemap, robots, favicony | done | 1 | M1 Szkielet, layout i strona główna | #20 merged | - |
+| #8 | Strona główna - hero, kompetencje, sekcja kontaktu | done | 2 | M1 Szkielet, layout i strona główna | #19 merged | - |
+| #9 | Strona polityki prywatności z roboczą treścią | done | 1 | M2 Formularz kontaktowy end-to-end | #25 merged | - |
+| #10 | Komponenty stron usług i strona ESG | done | 1 | M3 Strony usług | #31 merged | - |
+| #11 | Formularz kontaktowy end-to-end - walidacja, endpoint, Resend, rate limit | done | 1 | M2 Formularz kontaktowy end-to-end | #26 merged | - |
+| #12 | Strony AI-transformacja i Oprogramowanie | done | 1 | M3 Strony usług | #33 merged | - |
+| #13 | Strony Interim i Startupy | done | 1 | M3 Strony usług | #32 merged | - |
+| #14 | Strona Projekty B+R z FAQ | done | 1 | M3 Strony usług | #34 merged | - |
+| #15 | Jakość przekrojowa - E2E wszystkich stron i Lighthouse na stagingu | done | 3 | M4 Jakość i wydanie | #36 merged | - |
+| #16 | Dokumentacja wydania (techniczna i produktowa) | done | 1 | M4 Jakość i wydanie | #37 merged | - |
+| #22 | QA M1: Lighthouse mobile - wydajność strony głównej 87-89 (< 90) | done | 2 | M1 Szkielet, layout i strona główna | #27 merged | - |
+| #23 | QA M1: brak nagłówka Content-Security-Policy z architektury | done | 2 | M1 Szkielet, layout i strona główna | #24 merged | - |
+| #29 | QA M2: zdublowany klucz build w astro.config.mjs po #22 i #23 - lint, typecheck i E2E czerwone na main | done | 1 | M2 Formularz kontaktowy end-to-end | #30 merged | - |
+| #41 | Odbiór: nagłówek strony głównej niezgodny z designem (belka i link Kompetencje) | done | 2 | M4 Jakość i wydanie | #42 merged | - |
+| #43 | Mobile i zgodność z designem: logo w hero, przyciski, formularz, drobne różnice stron usług | done | 1 | - | #47 merged | - |
+| #44 | SEO strony głównej i dokumentacja wydania po odbiorze | done | 2 | - | #46 merged | - |
+| #45 | Higiena kodu i testów: visually-hidden, nazwy testów, port Playwright | done | 2 | - | #48 merged | - |
 <!-- sync-status:end -->
 
 ## Mapa zadań z planu
